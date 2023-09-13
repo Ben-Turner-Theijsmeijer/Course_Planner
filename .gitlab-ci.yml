@@ -11,6 +11,7 @@ stages:
 a11y:
   stage: accessibility
   image: python:latest
-  tag: docker
+  tags: 
+    - docker
   script:
     - python test/main.py
