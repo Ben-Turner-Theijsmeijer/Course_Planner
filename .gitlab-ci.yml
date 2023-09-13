@@ -8,6 +8,10 @@
 stages:
   - test
 
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "sprint1"
+
 test:
   stage: test
   image: python:latest
