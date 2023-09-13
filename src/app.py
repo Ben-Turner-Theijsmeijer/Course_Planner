@@ -3,7 +3,7 @@ def readCourse(file1):
     
     courseCode = "none"
     isCourseCode = 0
-    courseCodeLine = 0
+    courseCodeLine = -1
 
     titleDone = 0
     title = ""
@@ -15,7 +15,7 @@ def readCourse(file1):
     description = ""
     isDescription = 0
 
-    format = ""
+    format1 = ""
     isFormat = 0
 
     prerequisites = "none"
@@ -42,7 +42,7 @@ def readCourse(file1):
     semersters = ["Summer", "Summer,", "Fall", "Fall,", "Winter", "Winter,"]
 
     # Loop Through all Lines in Source File
-    for line in file1:
+    while line:= file1.readline():
 
         # Loop Through all Words in Source Line
         j=0
@@ -140,7 +140,7 @@ def readCourse(file1):
                         courseCodeLine = i
 
             #Check the line the course code is on and the next line for the title and semersters
-            if (i==courseCodeLine or i == courseCodeLine+1):
+            if (isCourseCode == 2 and (i==courseCodeLine or i == courseCodeLine+1)):
                 # Course Code
                 #if courseCode == "none": courseCode = word
 
@@ -176,12 +176,12 @@ def readCourse(file1):
 
                 # Formats
                 if isFormat == 1:
-                    if format == "": format = word
-                    else: format = format + " " + word
+                    if format1 == "": format1 = word
+                    else: format1 = format1 + " " + word
 
                 # Prerequisites
                 if isPrerequisites == 1:
-                    if "credits" == word:
+                    if "credits" == word or "credits." == word:
                         if "." in prevWord: prerequisiteCredits = prevWord
                     elif "." not in word:
                         if prerequisites == "none": prerequisites = word
@@ -225,20 +225,22 @@ def readCourse(file1):
         # iterate line tracker
         i = i + 1
 
-     
-    print(courseCode)
-    print(title)
-    print(offered)
-    print(creditWeight)
-    print(description)
-    print(format)
-    print(prerequisites)
-    print(prerequisiteCredits)
-    print(corequisites)
-    print(equates)
-    print(restrictions)
-    print(department)
-    print(location)
+    #If the course code was found. Otherwise junk at end of the file
+    if isCourseCode == 2:
+
+        print("Course Code:" + courseCode)
+        print("Title:" +title)
+        print("Offered:" + offered)
+        print("Credit Weight:" + creditWeight)
+        print("Description:" + description)
+        print("Format:" + format1)
+        print("Prerequisites:" + prerequisites)
+        print("Prerequisite Credits:" +prerequisiteCredits)
+        print("Corequisites:" +corequisites)
+        print("Equates:" +equates)
+        print("Restrictions:" +restrictions)
+        print("Department:" + department)
+        print("Location:" + location)
     
 # def addToCourses
         
@@ -248,10 +250,25 @@ def readCourse(file1):
 msg = "course selection assistant"
 print(msg)
 file1 = open("testCourse.txt", "r")
+
+while True:
+    linePosition = file1.tell()
+
+    #Read one line and see if its the end of the page
+    testEndofFile = file1.readline()
+    #If eof exit
+    if len(testEndofFile) == 0: break
+
+    #move the location back as its not over yet
+    file1.seek(linePosition)
+    #read course
+    print("\nnext Course:\n")
+    readCourse(file1)
+
 readCourse(file1)
 
-print("\nnext Course:\n")
-readCourse(file1)
+
+
 file1.close 
 #list_of_Courses
 
