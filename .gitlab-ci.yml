@@ -11,7 +11,5 @@ stages:
 test:
   stage: test
   image: python:latest
-  tags: 
-    - docker
   script:
     - python test/main.py
