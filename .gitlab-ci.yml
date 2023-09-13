@@ -8,8 +8,8 @@
 stages:
   - test
 
-a11y:
-  stage: accessibility
+test:
+  stage: test
   image: python:latest
   tags: 
     - docker
