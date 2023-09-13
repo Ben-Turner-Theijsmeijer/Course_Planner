@@ -12,4 +12,4 @@ test:
   stage: test
   image: python:latest
   script:
-    - python test/main.py
+    - python tests/main.py
