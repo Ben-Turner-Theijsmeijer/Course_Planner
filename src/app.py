@@ -1,7 +1,9 @@
-def readCourse():
+def readCourse(file1):
     # Set Up of Varables for Dictionary
-    file1 = open("testCourse.txt", "r")
+    
     courseCode = "none"
+    isCourseCode = 0
+    courseCodeLine = 0
 
     titleDone = 0
     title = ""
@@ -43,92 +45,104 @@ def readCourse():
     for line in file1:
 
         # Loop Through all Words in Source Line
+        j=0
         for word in line.split():
 
-            # ===================== determining what type of section currently on =====================
-            if "(s):" in word:
-                # 0 = not done yet
-                # 1 = starting/in progress
-                # 2 = completed/ommitted
-                if word == "Offering(s):":
-                    isDescription = 2
-                    isFormat = 1
-                    isPrerequisites = 0
-                    isCorequisites = 0
-                    isEquates = 0
-                    isRestriction = 0
-                    isDepartment = 0
-                    isLocation = 0
-                
-                elif word == "Prerequisite(s):":
-                    isDescription = 2
-                    isFormat = 2
-                    isPrerequisites = 1
-                    isCorequisites = 0
-                    isEquates = 0
-                    isRestriction = 0
-                    isDepartment = 0
-                    isLocation = 0
-                    prevWord = word
+            #The course code has to be found first
+            if isCourseCode == 2:
+                # ===================== determining what type of section currently on =====================
+                if "(s):" in word:
+                    # 0 = not done yet
+                    # 1 = starting/in progress
+                    # 2 = completed/ommitted
+                    if word == "Offering(s):":
+                        isDescription = 2
+                        isFormat = 1
+                        isPrerequisites = 0
+                        isCorequisites = 0
+                        isEquates = 0
+                        isRestriction = 0
+                        isDepartment = 0
+                        isLocation = 0
+                    
+                    elif word == "Prerequisite(s):":
+                        isDescription = 2
+                        isFormat = 2
+                        isPrerequisites = 1
+                        isCorequisites = 0
+                        isEquates = 0
+                        isRestriction = 0
+                        isDepartment = 0
+                        isLocation = 0
+                        prevWord = word
 
 
-                elif word == "Co-requisite(s):":
-                    isDescription = 2
-                    isFormat = 2
-                    isPrerequisites = 2
-                    isCorequisites = 1
-                    isEquates = 0
-                    isRestriction = 0
-                    isDepartment = 0
-                    isLocation = 0
+                    elif word == "Co-requisite(s):":
+                        isDescription = 2
+                        isFormat = 2
+                        isPrerequisites = 2
+                        isCorequisites = 1
+                        isEquates = 0
+                        isRestriction = 0
+                        isDepartment = 0
+                        isLocation = 0
 
-                elif word == "Equate(s):":
-                    isDescription = 2
-                    isFormat = 2
-                    isPrerequisites = 2
-                    isCorequisites = 2
-                    isEquates = 1
-                    isRestriction = 0
-                    isDepartment = 0
-                    isLocation = 0
+                    elif word == "Equate(s):":
+                        isDescription = 2
+                        isFormat = 2
+                        isPrerequisites = 2
+                        isCorequisites = 2
+                        isEquates = 1
+                        isRestriction = 0
+                        isDepartment = 0
+                        isLocation = 0
 
-                elif word == ('Restriction(s):'):
-                    isDescription = 2
-                    isFormat = 2
-                    isPrerequisites = 2
-                    isCorequisites = 2
-                    isEquates = 2
-                    isRestriction = 1
-                    isDepartment = 0
-                    isLocation = 0
+                    elif word == ('Restriction(s):'):
+                        isDescription = 2
+                        isFormat = 2
+                        isPrerequisites = 2
+                        isCorequisites = 2
+                        isEquates = 2
+                        isRestriction = 1
+                        isDepartment = 0
+                        isLocation = 0
 
-                elif word == "Department(s):":
-                    isDescription = 2
-                    isFormat = 2
-                    isPrerequisites = 2
-                    isCorequisites = 2
-                    isEquates = 2
-                    isRestriction = 2
-                    isDepartment = 1
-                    isLocation = 0
+                    elif word == "Department(s):":
+                        isDescription = 2
+                        isFormat = 2
+                        isPrerequisites = 2
+                        isCorequisites = 2
+                        isEquates = 2
+                        isRestriction = 2
+                        isDepartment = 1
+                        isLocation = 0
 
-                elif word == "Location(s):":
-                    isDescription = 2
-                    isFormat = 2
-                    isPrerequisites = 2
-                    isCorequisites = 2
-                    isEquates = 2
-                    isRestriction = 2
-                    isDepartment = 2
-                    isLocation = 1
+                    elif word == "Location(s):":
+                        isDescription = 2
+                        isFormat = 2
+                        isPrerequisites = 2
+                        isCorequisites = 2
+                        isEquates = 2
+                        isRestriction = 2
+                        isDepartment = 2
+                        isLocation = 1
 
             # ===================== Adding information to variables =====================
             
             # For only the first and second lines of a course's information
             # to ensure course code, title, and semester offerings are recorded correctly
-            if (i==0 or i == 1):
+
+            if isCourseCode == 0:
+                if j == 0:
+                    if "*" in word:
+                        courseCode = word
+                        isCourseCode = 2
+                        courseCodeLine = i
+
+            #Check the line the course code is on and the next line for the title and semersters
+            if (i==courseCodeLine or i == courseCodeLine+1):
                 # Course Code
-                if courseCode == "none": courseCode = word
+                #if courseCode == "none": courseCode = word
 
                 # Course Title
                 if titleDone == 0:
@@ -200,10 +214,18 @@ def readCourse():
                     if location == "none": location = word
                     else: location = location + " " + word
 
+        #Keep track of words in each line
+        j = j +1
+
+        #Location is always the last line if location is running its and the next line is starting end location and exit the loop
+        if isLocation == 1:
+            isLocations = 2
+            break;
+
         # iterate line tracker
         i = i + 1
 
-    file1.close  
+     
     print(courseCode)
     print(title)
     print(offered)
@@ -225,7 +247,12 @@ def readCourse():
 
 msg = "course selection assistant"
 print(msg)
-readCourse()
+file1 = open("testCourse.txt", "r")
+readCourse(file1)
+
+print("\nnext Course:\n")
+readCourse(file1)
+file1.close 
 #list_of_Courses
 
 # def readTextFile(filename)
