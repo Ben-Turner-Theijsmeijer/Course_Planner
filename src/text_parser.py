@@ -1,4 +1,4 @@
-def read_course(file1):
+def read_course(file1, course_list):
     # Set Up of Varables for Dictionary
     
     course_code = "none"
@@ -158,7 +158,7 @@ def read_course(file1):
                 # Semester Offerings
                 if word in semersters:
                     if offered == "": offered = word
-                    else: offered = offered + " " + word
+                    else: offered = offered + ", " + word
 
             # For all subsequent lines of a course's information
             # Description
@@ -219,7 +219,7 @@ def read_course(file1):
 
         #Location is always the last line if location is running its and the next line is starting end location and exit the loop
         if is_location == 1:
-            isLocations = 2
+            is_location = 2
             break;
 
         # iterate line tracker
@@ -228,16 +228,48 @@ def read_course(file1):
     #If the course code was found. Otherwise junk at end of the file
     if is_course_code == 2:
 
-        print("Course Code:" + course_code)
-        print("Title:" +title)
-        print("Offered:" + offered)
-        print("Credit Weight:" + credit_weight)
-        print("Description:" + description)
-        print("Format:" + delivery_format)
-        print("Prerequisites:" + prerequisites)
-        print("Prerequisite Credits:" +prerequisite_credits)
-        print("Corequisites:" +corequisites)
-        print("Equates:" +equates)
-        print("Restrictions:" +restrictions)
-        print("Department:" + department)
-        print("Location:" + location)
+        # strip any leading / trailing whitespace from variables
+        course_code = course_code.strip()
+        title = title.strip()
+        offered = offered.strip()
+        credit_weight = credit_weight.strip()
+        description = description.strip()
+        delivery_format = delivery_format.strip()
+        prerequisites = prerequisites.strip()
+        prerequisite_credits = prerequisite_credits.strip()
+        corequisites = corequisites.strip()
+        equates = equates.strip()
+        restrictions = restrictions.strip()
+        department = department.strip()
+        location = location.strip()
+
+        # print("Course Code:" + course_code)
+        # print("Title:" + title)
+        # print("Offered:" + offered)
+        # print("Credit Weight:" + credit_weight)
+        # print("Description:" + description)
+        # print("Format:" + delivery_format)
+        # print("Prerequisites:" + prerequisites)
+        # print("Prerequisite Credits:" + prerequisite_credits)
+        # print("Corequisites:" + corequisites)
+        # print("Equates:" +equates)
+        # print("Restrictions:" +restrictions)
+        # print("Department:" + department)
+        # print("Location:" + location)
+        
+        course_list[course_code] = {
+            "title": title,
+            "offered": offered,  
+            "credit_weight": credit_weight,
+            "description": description,
+            "delivery_format": delivery_format,
+            "prerequisites" : prerequisites,
+            "prerequisite_credits": prerequisite_credits,
+            "corequisites": corequisites,
+            "equates": equates,
+            "restrictions": restrictions,
+            "department": department,
+            "location": location
+        }
+        
+
