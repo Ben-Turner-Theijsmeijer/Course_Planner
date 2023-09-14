@@ -21,10 +21,7 @@ def save_course_list_to_csv(course_list, output_path):
         
         writer.writeheader()
         
-        for course in course_list:
-            course_code = list(course.keys())[0]
-            data = course[course_code]
-            
+        for course_code, data in course_list.items():
             writer.writerow({
                 'Course Code': course_code,
                 'Title': data['title'],
@@ -32,9 +29,9 @@ def save_course_list_to_csv(course_list, output_path):
                 'Credit Weight': data['credit_weight'],
                 'Description': data['description'],
                 'Format': data['format'],
-                'Prerequisites': ','.join(data['prerequisites']),
-                'Prerequisite Credits': data['prerequisite_credits'],
-                'Corequisites': ','.join(data['corequisites']),
+                'Prerequisites': ', '.join(data['preqrequisites']),
+                'Prerequisite Credits': data['preqrequisite_credits'],
+                'Corequisites': ', '.join(data['corequisites']),
                 'Department': data['department'],
                 'Location': data['location']
             })
