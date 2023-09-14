@@ -15,7 +15,7 @@ def read_course(file1, course_list):
     description = ""
     is_description = 0
 
-    delivery_format = ""
+    delivery_format = "unspecified"
     is_Format = 0
 
     prerequisites = "none"
@@ -176,7 +176,7 @@ def read_course(file1, course_list):
 
                 # Formats
                 if is_Format == 1:
-                    if delivery_format == "": delivery_format = word
+                    if delivery_format == "unspecified": delivery_format = word
                     else: delivery_format = delivery_format + " " + word
 
                 # Prerequisites
@@ -243,6 +243,7 @@ def read_course(file1, course_list):
         department = department.strip()
         location = location.strip()
 
+        # UNCOMMENT TO PRINT COURSE CONTENT
         # print("Course Code:" + course_code)
         # print("Title:" + title)
         # print("Offered:" + offered)
@@ -257,6 +258,7 @@ def read_course(file1, course_list):
         # print("Department:" + department)
         # print("Location:" + location)
         
+        # Populating course_list with new course
         course_list[course_code] = {
             "title": title,
             "offered": offered,  
