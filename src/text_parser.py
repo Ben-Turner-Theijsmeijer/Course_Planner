@@ -1,41 +1,41 @@
 def read_course(file1, course_list):
     # Set Up of Varables for Dictionary
     
-    course_code = "none"
+    course_code = "N/A"
     is_course_code = 0
     course_code_line = -1
 
     title_done = 0
-    title = ""
+    title = "N/A"
 
-    offered = ""
+    offered = "N/A"
 
-    credit_weight = ""
+    credit_weight = "N/A"
 
-    description = ""
+    description = "N/A"
     is_description = 0
 
-    delivery_format = "unspecified"
+    delivery_format = "N/A"
     is_Format = 0
 
-    prerequisites = "none"
+    prerequisites = "N/A"
     is_prerequisites = 0
-    prerequisite_credits = "none"
+    prerequisite_credits = "N/A"
     prev_word = ""
 
-    corequisites = "none"
+    corequisites = "N/A"
     is_corequisites = 0
 
-    equates = "none"
+    equates = "N/A"
     is_equates = 0
 
-    restrictions = "none"
+    restrictions = "N/A"
     is_restriction = 0
 
-    department = "none"
+    department = "N/A"
     is_department = 0
 
-    location = "none"
+    location = "N/A"
     is_location = 0
 
     i=0
@@ -132,6 +132,7 @@ def read_course(file1, course_list):
             # For only the first and second lines of a course's information
             # to ensure course code, title, and semester offerings are recorded correctly
 
+            # Course Code
             if is_course_code == 0:
                 if j == 0:
                     if "*" in word:
@@ -141,9 +142,6 @@ def read_course(file1, course_list):
 
             #Check the line the course code is on and the next line for the title and semersters
             if (is_course_code == 2 and (i==course_code_line or i == course_code_line+1)):
-                # Course Code
-                #if course_code == "none": course_code = word
-
                 # Course Title
                 if title_done == 0:
                     # Check for end of title
@@ -152,18 +150,18 @@ def read_course(file1, course_list):
                     
                     #adding to title if not name of course 
                     elif "*" not in word:
-                        if title == "": title = word
+                        if title == "N/A": title = word
                         else: title = title + " " + word
                 
                 # Semester Offerings
                 if word in semersters:
-                    if offered == "": offered = word
+                    if offered == "N/A": offered = word
                     else: offered = offered + ", " + word
 
             # For all subsequent lines of a course's information
             # Description
             if is_description == 1:
-                if description == "": description = word
+                if description == "N/A": description = word
                 else: description = description + " " + word
                 
             #Check for course weight
@@ -176,7 +174,7 @@ def read_course(file1, course_list):
 
                 # Formats
                 if is_Format == 1:
-                    if delivery_format == "unspecified": delivery_format = word
+                    if delivery_format == "N/A": delivery_format = word
                     else: delivery_format = delivery_format + " " + word
 
                 # Prerequisites
@@ -184,34 +182,34 @@ def read_course(file1, course_list):
                     if "credits" == word or "credits." == word:
                         if "." in prev_word: prerequisite_credits = prev_word
                     elif "." not in word:
-                        if prerequisites == "none": prerequisites = word
+                        if prerequisites == "N/A": prerequisites = word
                         else: prerequisites = prerequisites + " " + word
                     prev_word = word
 
                 # Co-Requisites
                 if is_corequisites == 1:
-                    if corequisites == "none": corequisites = word
+                    if corequisites == "N/A": corequisites = word
                     else: corequisites = corequisites + " " + word
 
                 # Equates
                 if is_equates == 1:
-                    if equates == "none": equates = word
+                    if equates == "N/A": equates = word
                     else: equates = equates + " " + word
 
                 # Restrictions
                 if is_restriction == 1:
                     if "*" in word:
-                        if restrictions == "none": restrictions = word
+                        if restrictions == "N/A": restrictions = word
                         else: restrictions = restrictions + " " + word
 
                 # Department
                 if is_department == 1:
-                    if department == "none": department = word
+                    if department == "N/A": department = word
                     else: department = department + " " + word
 
                 # Location
                 if is_location == 1:
-                    if location == "none": location = word
+                    if location == "N/A": location = word
                     else: location = location + " " + word
 
         #Keep track of words in each line
