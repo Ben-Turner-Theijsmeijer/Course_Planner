@@ -1,3 +1,5 @@
+from text_parser import read_course
+
 msg = "course selection assistant"
 print(msg)
 
