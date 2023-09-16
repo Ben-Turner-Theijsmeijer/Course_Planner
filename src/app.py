@@ -2,22 +2,18 @@ from text_parser import read_course
 from commandline_gui import selecton
 import json 
 
-msg = "course selection assistant"
-print(msg)
+
 
 from save_course_list_to_csv import save_course_list_to_csv
+from text_parser import read_course
+from preprocess_data import process_data
 from courses import course_type
 
-
-print(course_type.base_course)
+file_path = "../data/raw/f23_courses2.txt"
 
 course_list = {}
 
-course_list.update(course_type.base_course)
-course_list.update(course_type.coreq_course)
-course_list.update(course_type.restriction_course)
-course_list.update(course_type.offered_course)
-course_list.update(course_type.equates_course)
+process_data(file_path, 199) # preprocess the data and output to data.txt
 
 file1 = open("data.txt", "r")
 
@@ -37,9 +33,7 @@ while True:
     #read course
     read_course(file1, course_list) # parse the data and store in dictionary
  
-# print(json.dumps(course_list, indent = 6)) 
-
-
+print(json.dumps(course_list, indent = 6)) 
 save_course_list_to_csv(course_list, "course_output.csv") # output the course_list dict to a csv
 
 file1.close 
