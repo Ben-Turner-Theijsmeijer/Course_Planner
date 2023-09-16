@@ -9,7 +9,7 @@ def process_data(file_path, lines_to_skip):
                 next(file)
 
             for line in file:
-                print(line)
+                # print(line)
                 data.append(line)
             
             return '\n'.join(data) # returns the data as a single string
