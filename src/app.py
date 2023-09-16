@@ -1,13 +1,13 @@
-from text_parser import read_course
 import json 
+from utils.text_parser import read_course
+from utils.save_course_list_to_csv import save_course_list_to_csv
+from utils.text_parser import read_course
+from utils.preprocess_data import process_data
+from courses import course_type
 
 msg = "course selection assistant"
 print(msg)
 
-from save_course_list_to_csv import save_course_list_to_csv
-from text_parser import read_course
-from preprocess_data import process_data
-from courses import course_type
 
 file_path = "../data/raw/f23_courses2.txt"
 
