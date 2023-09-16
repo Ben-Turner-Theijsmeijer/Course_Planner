@@ -1,5 +1,5 @@
 def read_course(file1, course_list):
-    # Set Up of Varables for Dictionary
+    # Set Up of Variables for Dictionary
     
     course_code = "N/A"
     is_course_code = 0
@@ -54,7 +54,7 @@ def read_course(file1, course_list):
                 if "(s):" in word:
                     # 0 = not done yet
                     # 1 = starting/in progress
-                    # 2 = completed/ommitted
+                    # 2 = completed/omitted
                     if word == "Offering(s):":
                         is_description = 2
                         is_Format = 1
@@ -140,7 +140,7 @@ def read_course(file1, course_list):
                         is_course_code = 2
                         course_code_line = i
 
-            #Check the line the course code is on and the next line for the title and semersters
+            #Check the line the course code is on and the next line for the title and semesters
             if (is_course_code == 2 and (i==course_code_line or i == course_code_line+1)):
                 # Course Title
                 if title_done == 0:
