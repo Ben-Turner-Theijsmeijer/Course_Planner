@@ -33,7 +33,7 @@ while True:
     #read course
     read_course(file1, course_list) # parse the data and store in dictionary
  
-print(json.dumps(course_list, indent = 6)) 
+# print(json.dumps(course_list, indent = 6)) 
 save_course_list_to_csv(course_list, "course_output.csv") # output the course_list dict to a csv
 
 file1.close 
