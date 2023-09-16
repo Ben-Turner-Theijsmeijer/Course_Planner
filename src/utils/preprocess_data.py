@@ -9,7 +9,7 @@ def process_data(file_path, lines_to_skip):
                 next(file)
 
             for line in file:
-                print(line)
+                # print(line)
                 data.append(line)
             
             new_data = '\n'.join(data)
@@ -22,10 +22,10 @@ def process_data(file_path, lines_to_skip):
     except FileNotFoundError:
         print(f"File '{file_path}' was not found.")
     except Exception as e:
-        print(f"Error: {str(e)}")
+        print(f'Error: {str(e)}')
 
-if __name__ == "__main__":
-    file_path = "../data/raw/f23_courses2.txt"
+if __name__ == '__main__':
+    file_path = '../data/raw/f23_courses2.txt'
  
     data = process_data(file_path, 199) 
 
