@@ -12,7 +12,12 @@ def process_data(file_path, lines_to_skip):
                 # print(line)
                 data.append(line)
             
-            return '\n'.join(data) # returns the data as a single string
+            new_data = '\n'.join(data)
+            file = open("data.txt", "w")
+            file.write(new_data)
+
+            # return '\n'.join(data) # returns the data as a single string
+           
 
     except FileNotFoundError:
         print(f"File '{file_path}' was not found.")

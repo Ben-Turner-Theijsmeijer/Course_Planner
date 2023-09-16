@@ -18,15 +18,15 @@ def read_course(file1, course_list):
     delivery_format = "N/A"
     is_Format = 0
 
-    prerequisites = "N/A"
+    prerequisites = ["N/A"]
     is_prerequisites = 0
     prerequisite_credits = "N/A"
     prev_word = ""
 
-    corequisites = "N/A"
+    corequisites = ["N/A"]
     is_corequisites = 0
 
-    equates = "N/A"
+    equates = ["N/A"]
     is_equates = 0
 
     restrictions = "N/A"
@@ -182,19 +182,19 @@ def read_course(file1, course_list):
                     if "credits" == word or "credits." == word:
                         if "." in prev_word: prerequisite_credits = prev_word
                     elif "." not in word:
-                        if prerequisites == "N/A": prerequisites = word
-                        else: prerequisites = prerequisites + " " + word
+                        if prerequisites[0] == "N/A": prerequisites[0] = word
+                        else: prerequisites.append(word)
                     prev_word = word
 
                 # Co-Requisites
                 if is_corequisites == 1:
-                    if corequisites == "N/A": corequisites = word
-                    else: corequisites = corequisites + " " + word
+                    if corequisites[0] == "N/A": corequisites[0] = word
+                    else: corequisites.append(word)
 
                 # Equates
                 if is_equates == 1:
-                    if equates == "N/A": equates = word
-                    else: equates = equates + " " + word
+                    if equates[0] == "N/A": equates[0] = word
+                    else: equates.append(word)
 
                 # Restrictions
                 if is_restriction == 1:
@@ -233,10 +233,10 @@ def read_course(file1, course_list):
         credit_weight = credit_weight.strip()
         description = description.strip()
         delivery_format = delivery_format.strip()
-        prerequisites = prerequisites.strip()
+        # prerequisites = prerequisites.strip()
         prerequisite_credits = prerequisite_credits.strip()
-        corequisites = corequisites.strip()
-        equates = equates.strip()
+        # corequisites = corequisites.strip()
+        # equates = equates.strip()
         restrictions = restrictions.strip()
         department = department.strip()
         location = location.strip()
