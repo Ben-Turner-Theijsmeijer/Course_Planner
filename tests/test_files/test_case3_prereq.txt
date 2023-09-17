@@ -1,9 +1,0 @@
-CIS*2500  Intermediate Programming  Winter Only  (LEC: 3, LAB:
-2)  [0.50]  
-In this course students learn to interpret a program specification and
-implement it as reliable code, as they gain experience with pointers,
-complex data types, important algorithms, intermediate tools and
-techniques in problem solving, programming, and program testing.
-Prerequisite(s): CIS*1300  
-Department(s): School of Computer Science  
-Location(s): Guelph
