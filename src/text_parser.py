@@ -202,7 +202,8 @@ def read_course(file1, course_list):
                     # For Course Prerequisites
                     elif not re.search(prerequisite_credit_pattern, word) and word != "including":
                         if prerequisites[0] == "N/A": prerequisites[0] = word
-                        else: prerequisites.append(word)
+                        else: 
+                            prerequisites[0] = prerequisites[0] + " " + word
                     prev_word = word
 
                 # Co-Requisites
