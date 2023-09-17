@@ -16,4 +16,4 @@ test:
   stage: test
   image: python:latest
   script:
-    - python tests/main.py
+    - python src/run_tests.py
