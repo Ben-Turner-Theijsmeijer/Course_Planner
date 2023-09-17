@@ -5,8 +5,7 @@ from utils.text_parser import read_course
 from utils.preprocess_data import process_data
 from courses import course_type
 
-msg = "course selection assistant"
-print(msg)
+
 
 
 file_path = "../data/raw/f23_courses2.txt"
@@ -37,3 +36,5 @@ print(json.dumps(course_list, indent = 6))
 save_course_list_to_csv(course_list, "course_output.csv") # output the course_list dict to a csv
 
 file1.close 
+
+selecton(course_list)
