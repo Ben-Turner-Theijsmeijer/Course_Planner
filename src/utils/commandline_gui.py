@@ -3,6 +3,7 @@ def selecton ( course_list):
     print("*      Course Selection Tool         *")
     print("**************************************")
 
+    # loop until the user decides to quit
     leave = 0
     while leave == 0:
         response = input("*    Which course would you like to look at?\ntype \"COURSE\"    If you want to search by course code\ntype \"ALL\"       If you want so see all courses offered\ntype \"OFFERED\"   If you want to see all courses offered in a certain semester.\ntype \"EXIT\"      if you wish to exit the program input.\n\n\n")
@@ -14,6 +15,7 @@ def selecton ( course_list):
     print("*    Thank you for using the UoG Course Selection Tool.")
 
 def search(response, course_list):
+    # displays all courses with 10 per row
     if response.lower() == "all":
         j = 0
         for key in course_list:
@@ -27,6 +29,7 @@ def search(response, course_list):
         return 0
     elif response.lower() == "offered":
         i = 0
+        # displays courses offered each semester. Code only accomadates for selecting one semester at a time
         while i == 0:
             resp = input("*    What semsester offerings would you like to view?\n")
             if resp.lower() == "exit\n":
@@ -49,6 +52,7 @@ def search(response, course_list):
 
     elif response.lower() == "course":
         i = 0
+        # displays all course data found in the CSV file
         while i == 0:
             resp = input("*    Input course code\n")
             # print("--> \'", resp, "\'")
@@ -69,6 +73,7 @@ def search(response, course_list):
         print("*    Sorry, that was not an expected response. Please try again.\n\n")
         return 0
     
+# print courses in a standard format similar to how expressed in the csv file
 def course_info(key, data):
     print('*    Course Code:           ', key)
     print('*    Title:                 ',data['title'])
