@@ -1,0 +1,13 @@
+CIS*1300  Programming  Fall Only  (LEC: 3, LAB: 2)  [0.50]  
+This course examines the applied and conceptual aspects of
+programming. Topics may include data and control structures, program
+design, problem solving and algorithm design, operating systems
+concepts, and fundamental programming skills. This course is intended
+for students who plan to take later CIS courses. If your degree does
+not require further CIS courses consider CIS*1500 Introduction to
+Programming.
+Restriction(s): CIS*1500. This is a Priority Access Course. Enrolment may
+be restricted to particular programs or specializations. See department
+for more information.  
+Department(s): School of Computer Science  
+Location(s): Guelph
