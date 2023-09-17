@@ -303,5 +303,3 @@ def read_course(file1, course_list):
             "department": department,
             "location": location
         }
-        
-
