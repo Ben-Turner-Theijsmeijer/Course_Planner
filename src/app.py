@@ -3,7 +3,7 @@ from utils.text_parser import read_course
 from utils.save_course_list_to_csv import save_course_list_to_csv
 from utils.text_parser import read_course
 from utils.preprocess_data import process_data
-from commandline_gui import selecton
+from utils.commandline_gui import selecton
 
 file_path = "../data/raw/f23_courses2.txt"
 
