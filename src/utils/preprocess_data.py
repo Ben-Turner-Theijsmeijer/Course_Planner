@@ -12,7 +12,7 @@ def process_data(file_path, lines_to_skip):
                 # print(line)
                 data.append(line)
             
-            new_data = '\n'.join(data)
+            new_data = ''.join(data)
             file = open("data.txt", "w")
             file.write(new_data)
 

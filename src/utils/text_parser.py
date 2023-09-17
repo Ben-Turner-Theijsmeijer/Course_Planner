@@ -1,5 +1,7 @@
+import re
+
 def read_course(file1, course_list):
-    # Set Up of Variables for Dictionary
+    # Set Up of Varables for Dictionary
     
     course_code = "N/A"
     is_course_code = 0
@@ -11,6 +13,7 @@ def read_course(file1, course_list):
     offered = "N/A"
 
     credit_weight = "N/A"
+    is_credit_weight = 0
 
     description = "N/A"
     is_description = 0
@@ -21,6 +24,7 @@ def read_course(file1, course_list):
     prerequisites = ["N/A"]
     is_prerequisites = 0
     prerequisite_credits = "N/A"
+    is_prerequisite_credits = 0
     prev_word = ""
 
     corequisites = ["N/A"]
@@ -39,7 +43,12 @@ def read_course(file1, course_list):
     is_location = 0
 
     i=0
-    semesters = ["Summer", "Summer,", "Fall", "Fall,", "Winter", "Winter,"]
+    semersters = ["Summer", "Summer,", "Fall", "Fall,", "Winter", "Winter,", "Unspecified"]
+    
+    # RegEx patterns
+    credit_pattern = r"\[\d+\.\d{2}\]"
+    prerequisite_credit_pattern = r"\d+\.\d{2}"
+    course_pattern = r"\*\d{4}"
 
     # Loop Through all Lines in Source File
     while line:= file1.readline():
@@ -54,7 +63,7 @@ def read_course(file1, course_list):
                 if "(s):" in word:
                     # 0 = not done yet
                     # 1 = starting/in progress
-                    # 2 = completed/omitted
+                    # 2 = completed/ommitted
                     if word == "Offering(s):":
                         is_description = 2
                         is_Format = 1
@@ -86,6 +95,7 @@ def read_course(file1, course_list):
                         is_restriction = 0
                         is_department = 0
                         is_location = 0
+                        prev_word = word
 
                     elif word == "Equate(s):":
                         is_description = 2
@@ -135,28 +145,32 @@ def read_course(file1, course_list):
             # Course Code
             if is_course_code == 0:
                 if j == 0:
-                    if "*" in word:
+                    if re.search(course_pattern, word):
                         course_code = word
                         is_course_code = 2
                         course_code_line = i
 
-            #Check the line the course code is on and the next line for the title and semesters
+            #Check the line the course code is on and the next line for the title and semersters
             if (is_course_code == 2 and (i==course_code_line or i == course_code_line+1)):
                 # Course Title
                 if title_done == 0:
                     # Check for end of title
-                    if word in semesters:
+                    if word in semersters or re.search(credit_pattern, word) or word.startswith("(LEC:"):
                         title_done = 1
                     
                     #adding to title if not name of course 
-                    elif "*" not in word:
+                    elif not re.search(course_pattern, word):
                         if title == "N/A": title = word
                         else: title = title + " " + word
                 
                 # Semester Offerings
-                if word in semesters:
-                    if offered == "N/A": offered = word
-                    else: offered = offered + ", " + word
+                if word in semersters:
+                    if offered == "N/A": 
+                        if word.endswith(','): offered = word[:-1]
+                        else: offered = word
+                    else: 
+                        if word.endswith(','): offered = offered + ", " + word[:-1]
+                        else: offered = offered + ", " + word
 
             # For all subsequent lines of a course's information
             # Description
@@ -164,9 +178,10 @@ def read_course(file1, course_list):
                 if description == "N/A": description = word
                 else: description = description + " " + word
                 
-            #Check for course weight
-            if word[0]=="[":
+            #Check for course weight (only checks first occurence as to not overwrite)
+            if re.search(credit_pattern, word) and is_credit_weight == 0:
                 credit_weight = word[1:-1]
+                is_credit_weight = 2
                 if is_description != 2: is_description = 1
 
             # Skipping classification keyword
@@ -179,22 +194,57 @@ def read_course(file1, course_list):
 
                 # Prerequisites
                 if is_prerequisites == 1:
-                    if "credits" == word or "credits." == word:
-                        if "." in prev_word: prerequisite_credits = prev_word
-                    elif "." not in word:
+                    # For Credit Prerequisites
+                    if ("credits" == word or "credits." == word) and is_prerequisite_credits == 0:
+                        if re.search(prerequisite_credit_pattern, prev_word):
+                            prerequisite_credits = prev_word
+                            is_prerequisite_credits = 2
+                    # For Course Prerequisites
+                    elif not re.search(prerequisite_credit_pattern, word) and word != "including":
                         if prerequisites[0] == "N/A": prerequisites[0] = word
-                        else: prerequisites.append(word)
+                        else: 
+                            prerequisites[0] = prerequisites[0] + " " + word
                     prev_word = word
 
                 # Co-Requisites
                 if is_corequisites == 1:
-                    if corequisites[0] == "N/A": corequisites[0] = word
-                    else: corequisites.append(word)
+                    # All phase N courses edge case
+                    if "All Phase" in line:
+                        corequisites[0] = line[17:]
+                        is_corequisites = 2 
+                    # Can be taken as co-requisite edge case
+                    elif "can be taken as co-requisite" in line:
+                        corequisites[0] = line[17:]
+                        is_corequisites = 2
+                    # 1 of edge case
+                    elif "1 of" in line:
+                        corequisites[0] = line[17:]
+                        is_corequisites = 2
+                    # May be taken concurrently edge case
+                    elif "may be taken concurrently" in line:
+                        corequisites[0] = line[17:]
+                        is_corequisites = 2
+                    # Course A or Course B edge case
+                    elif "or" in line:
+                        corequisites[0] = line[17:]
+                        is_corequisites = 2
+                    # other cases
+                    elif corequisites[0] == "N/A": 
+                        if word.endswith(','): corequisites[0] = word[:-1]
+                        else: corequisites[0] = word
+                    else:
+                        if word.endswith(','): corequisites.append(word[:-1])
+                        else: corequisites.append(word)
+                    prev_word = word
 
                 # Equates
                 if is_equates == 1:
-                    if equates[0] == "N/A": equates[0] = word
-                    else: equates.append(word)
+                    if equates[0] == "N/A":
+                        if word.endswith(',') or word.endswith('.'): equates[0] = word[:-1]
+                        else: equates[0] = word
+                    else: 
+                        if word.endswith(',') or word.endswith('.'): equates.append(word[:-1])
+                        else: equates.append(word)
 
                 # Restrictions
                 if is_restriction == 1:
@@ -233,29 +283,11 @@ def read_course(file1, course_list):
         credit_weight = credit_weight.strip()
         description = description.strip()
         delivery_format = delivery_format.strip()
-        # prerequisites = prerequisites.strip()
         prerequisite_credits = prerequisite_credits.strip()
-        # corequisites = corequisites.strip()
-        # equates = equates.strip()
         restrictions = restrictions.strip()
         department = department.strip()
         location = location.strip()
 
-        # UNCOMMENT TO PRINT COURSE CONTENT
-        # print("Course Code:" + course_code)
-        # print("Title:" + title)
-        # print("Offered:" + offered)
-        # print("Credit Weight:" + credit_weight)
-        # print("Description:" + description)
-        # print("Format:" + delivery_format)
-        # print("Prerequisites:" + prerequisites)
-        # print("Prerequisite Credits:" + prerequisite_credits)
-        # print("Corequisites:" + corequisites)
-        # print("Equates:" +equates)
-        # print("Restrictions:" +restrictions)
-        # print("Department:" + department)
-        # print("Location:" + location)
-        
         # Populating course_list with new course
         course_list[course_code] = {
             "title": title,
@@ -271,5 +303,3 @@ def read_course(file1, course_list):
             "department": department,
             "location": location
         }
-        
-
