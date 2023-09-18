@@ -12,6 +12,15 @@
             "args": ["data/raw/f23_courses2.txt" , ">", "data/possible_cases.json"],
             "console": "integratedTerminal",
             "justMyCode": true
+        },
+        {
+            "name": "Course Selection",
+            "type": "python",
+            "request": "launch",
+            "program": "src/app.py",
+            "args": ["src/data.txt"],
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }

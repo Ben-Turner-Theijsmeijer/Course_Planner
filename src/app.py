@@ -4,6 +4,7 @@ from utils.save_course_list_to_csv import save_course_list_to_csv
 from utils.text_parser import read_course
 from utils.preprocess_data import process_data
 from utils.commandline_gui import selecton
+import sys
 
 file_path = "../data/raw/f23_courses2.txt"
 
@@ -11,7 +12,11 @@ course_list = {}
 
 process_data(file_path, 199) # preprocess the data and output to data.txt
 
-file1 = open("data.txt", "r")
+file_path = 'data.txt'
+if sys.argv and sys.argv[1]:
+    file_path = sys.argv[1]
+file1 = open(file_path, "r")
+
 
 course_list = {}
 course = {}
