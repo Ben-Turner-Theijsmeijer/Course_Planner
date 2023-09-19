@@ -3,7 +3,7 @@ from utils.text_parser import read_course
 def test_case1_base():
     # ARRANGE
     course_list = {}
-    test_file = open("src/tests/test_files/test_case1_base.txt")
+    test_file = open("../src/tests/test_files/test_case1_base.txt")
     expected_course = {
         "title": "Discrete Structures in Computing I",
         "offered": "Fall",  
@@ -34,7 +34,7 @@ def test_case1_base():
 def test_case2_restriction():
     # ARRANGE
     course_list = {}
-    test_file = open("src/tests/test_files/test_case2_restriction.txt")
+    test_file = open("../src/tests/test_files/test_case2_restriction.txt")
     expected_course = {
         "title": "Programming",
         "offered": "Fall",  
@@ -65,7 +65,7 @@ def test_case2_restriction():
 def test_case3_prereq():
     # ARRANGE
     course_list = {}
-    test_file = open("src/tests/test_files/test_case3_prereq.txt")
+    test_file = open("../src/tests/test_files/test_case3_prereq.txt")
     expected_course = {
         "title": "Intermediate Programming",
         "offered": "Winter",  
@@ -96,7 +96,7 @@ def test_case3_prereq():
 def test_case4_offered():
     # ARRANGE
     course_list = {}
-    test_file = open("src/tests/test_files/test_case4_offered.txt")
+    test_file = open("../src/tests/test_files/test_case4_offered.txt")
     expected_course = {
         "title": "Introduction to Programming",
         "offered": "Fall, Winter",  
@@ -127,7 +127,7 @@ def test_case4_offered():
 def test_case5_equates():
     # ARRANGE
     course_list = {}
-    test_file = open("src/tests/test_files/test_case5_equates.txt")
+    test_file = open("../src/tests/test_files/test_case5_equates.txt")
     expected_course = {
         "title": "Capstone Prose/Narrative Workshop",
         "offered": "Fall, Winter",  
@@ -158,7 +158,7 @@ def test_case5_equates():
 def test_case6_coreq():
     # ARRANGE
     course_list = {}
-    test_file = open("src/tests/test_files/test_case6_coreq.txt")
+    test_file = open("../src/tests/test_files/test_case6_coreq.txt")
     expected_course = {
         "title": "Introduction to Manufacturing Processes",
         "offered": "Winter",  
