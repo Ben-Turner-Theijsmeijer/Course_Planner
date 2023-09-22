@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\data",
+    "\\src",
+    "\\src\\vba"
   ],
-  "SelectedNode": "\\C:\\f23_cis3760_303",
+  "SelectedNode": "\\src\\vba\\sprint-2-course-tool.xlsm",
   "PreviewInSolutionExplorer": false
 }
