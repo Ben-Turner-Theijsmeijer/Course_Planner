@@ -11,24 +11,18 @@ def process_data(file_path, lines_to_skip):
             for line in file:
                 # print(line)
                 data.append(line)
-            
+
             new_data = ''.join(data)
             file = open("data.txt", "w")
             file.write(new_data)
-
-            # return '\n'.join(data) # returns the data as a single string
-           
 
     except FileNotFoundError:
         print(f"File '{file_path}' was not found.")
     except Exception as e:
         print(f'Error: {str(e)}')
 
+
 if __name__ == '__main__':
     file_path = '../data/raw/f23_courses2.txt'
- 
-    data = process_data(file_path, 199) 
 
-
-
-
+    data = process_data(file_path, 199)

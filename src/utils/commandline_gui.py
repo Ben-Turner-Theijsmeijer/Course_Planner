@@ -1,4 +1,4 @@
-def selecton ( course_list):
+def selecton(course_list):
     print("**************************************")
     print("*      Course Selection Tool         *")
     print("**************************************")
@@ -11,8 +11,8 @@ def selecton ( course_list):
             break
         leave = search(response, course_list)
 
-
     print("*    Thank you for using the UoG Course Selection Tool.")
+
 
 def search(response, course_list):
     # displays all courses with 10 per row
@@ -31,7 +31,8 @@ def search(response, course_list):
         i = 0
         # displays courses offered each semester. Code only accomadates for selecting one semester at a time
         while i == 0:
-            resp = input("*    What semsester offerings would you like to view?\n")
+            resp = input(
+                "*    What semsester offerings would you like to view?\n")
             if resp.lower() == "exit\n":
                 return 1
             j = 0
@@ -48,7 +49,6 @@ def search(response, course_list):
                 print("*    No courses found in that semester, please ensure your semester offering is one of the following: Fall, Winter, Summer.")
         print("\n\n")
         return 0
-        
 
     elif response.lower() == "course":
         i = 0
@@ -72,11 +72,13 @@ def search(response, course_list):
     else:
         print("*    Sorry, that was not an expected response. Please try again.\n\n")
         return 0
-    
+
 # print courses in a standard format similar to how expressed in the csv file
+
+
 def course_info(key, data):
     print('*    Course Code:           ', key)
-    print('*    Title:                 ',data['title'])
+    print('*    Title:                 ', data['title'])
     print('*    Offered:               ', data['offered'])
     print('*    Credit Weight:         ', data['credit_weight'])
     print('*    Description:           ', data['description'])
@@ -88,5 +90,3 @@ def course_info(key, data):
     print('*    Equates:               ', ', '.join(data['equates']))
     print('*    Department:            ', data['department'])
     print('*    Location:              ', data['location'])
-        
-
