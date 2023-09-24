@@ -20,3 +20,16 @@ This will run the main application logic
 
 ```python3 app.py```
 
+
+# SPRINT 2
+
+Goal: Please create an Excel spreadsheet where a person can write in their completed and in
+progress courses in different cells. One course per cell. Given the courses, use VBA to
+generate courses they can take next (have the pre-requisites for) and show them in the
+Excel spreadsheet.
+
+
+# Usage
+
+Refer to [wiki](https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/-/wikis/Microsoft-VBA-Handbook) for instructions on how to use the application
+
