@@ -1,9 +1,10 @@
 # Module that saves the course_list to a desired csv file
 import csv
 
+
 def save_course_list_to_csv(course_list, output_path):
     header = [
-        'Course Code', 
+        'Course Code',
         'Title',
         'Offered',
         'Credit Weight',
@@ -16,13 +17,13 @@ def save_course_list_to_csv(course_list, output_path):
         'Equates',
         'Department',
         'Location'
-        ]
-    
+    ]
+
     with open(output_path, 'w', encoding='UTF8', newline='') as file:
         writer = csv.DictWriter(file, fieldnames=header)
-        
+
         writer.writeheader()
-        
+
         for course_code, data in course_list.items():
             writer.writerow({
                 'Course Code': course_code,
