@@ -1,15 +1,17 @@
-from preprocess_data import process_data
-import json 
+import json
 import sys
+from utils.preprocess_data import process_data
 
-def find_cases(file_path = '../data/raw/f23_courses2.txt'):
+
+
+def find_cases(file_path='../data/raw/f23_courses2.txt'):
     cases = set()
 
     # FILE 2
     file1_str = process_data(file_path, 199)
     course_sections = file1_str.split(']')
 
-    for i in range (0, len(course_sections)):
+    for i in range(0, len(course_sections)):
         possible_case = []
         lines = course_sections[i].split('\n')
         for line in lines:
@@ -18,7 +20,7 @@ def find_cases(file_path = '../data/raw/f23_courses2.txt'):
                 possible_case.append(key)
         possible_case.sort()
         cases.add(tuple(possible_case))
-    
+
     print(json.dumps(list(cases)))
 
 
