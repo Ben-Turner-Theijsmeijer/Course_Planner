@@ -40,10 +40,8 @@
             </div>
         </div>
     </header>
-    <content class="flex flex-col mx-20 my-10 px-10 py-10 bg-hero bg-black bg-opacity-25 bg-no-repeat bg-cover bg-center bg-fixed">
-        BEANS <br>
-        BRANS <br>
-        AAAAAAAAAAAAAAAAAAAAAA
+    <content class="flex-1 flex-col mx-10 my-10 px-10 py-10 bg-hero bg-black bg-opacity-50 bg-no-repeat bg-cover bg-center bg-fixed">
+        <span class="font-sans font-bold text-white text-4xl underline decoration-yellow-400 decoration-4 underline-offset-4">Meet The Team</span>
     </content>
 </div>
 </body>
