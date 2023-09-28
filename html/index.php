@@ -52,66 +52,18 @@
 
     <body class="min-h-screen">
 
-        <h1 class="text-3xl font-bold text-black">
-            Main Content Page
-        </h1>
+        <!-- Content  -->
+        <section class="content">
+
+            <body>
+                <h1 class="text-3xl font-bold text-black">
+                    Main Content Page
+                </h1>
+
+            </body>
+        </section>
 
 
-</section>
-<!-- Contact Section-->
-<section class="contact">
-    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
-        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Have a question? Contact Us</h3>
-        <form action="https://formspree.io/f/meqnpqdw" method="POST" id="contactForm">
-            <div class="mb-4">
-                <label for="name" class="block text-gray-600 text-sm font-medium mb-2">Name</label>
-                <input type="text" id="name" name="name"
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400" required>
-            </div>
-            <div class="mb-4">
-                <label for="email" class="block text-gray-600 text-sm font-medium mb-2">Email</label>
-                <input type="email" id="email" name="email"
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400" required>
-            </div>
-            <div class="mb-6">
-                <label for="message" class="block text-gray-600 text-sm font-medium mb-2">Message</label>
-                <textarea id="message" name="message" rows="4"
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400"
-                    required></textarea>
-            </div>
-            <div class="flex items-center justify-center">
-                <button type="submit" id="submitButton"
-                    class="bg-blue-500 text-white py-2 px-6 rounded-lg hover:bg-blue-600 transition duration-300">Submit</button>
-            </div>
-
-        </form>
-    </div>
-</section>
-
-<!-- Footer Section -->
-<section class="footer">
-    <footer class="fixed bottom-0 w-full bg-black text-white py-6">
-        <div class="container mx-auto text-center">
-            <p>&copy; CIS 3760 Group 11</p>
-        </div>
-    </header>
-
-    <!-- Content  -->
-    <section class="content">
-        <body>
-            <h1 class="text-3xl font-bold underline text-red-500">
-                Hello world!
-            </h1>
-            <?php echo '<p>Hello Kids this is a new update from Andrew </p>'; ?>
-        </body>
-    </section>
-
-    <!-- Footer  -->
-    <section class="footer">
-
-        <h1 class="text-3xl font-bold text-black">
-            Main Content Page
-        </h1>
 
         <p><a href="/excel/course_selection_tool.xlsm" download="course_selection.xlsm">DOWNLOAD EXCEL FILE</p>
 
