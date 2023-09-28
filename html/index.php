@@ -23,26 +23,17 @@
                 Selector</span>
         </div>
         <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-            <?php
-            echo '
-                    <form method="post" action="src/meet_the_team.php">
-                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                            Meet The Team
-                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
-                        </button>
-                    </form>
-                    ';
-            ?>
-            <?php
-            echo '
-                    <form method="post" action="src/about.php">
-                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                            About
-                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
-                        </button>
-                    </form>
-                    ';
-            ?>
+            <a href="src/meet_the_team.php"
+                class="group font-sans font-bold text-white text-2xl transition duration-300">
+                Meet The Team
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+            </a>
+
+            <a href="src/about.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
+                About
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+            </a>
+
         </div>
     </div>
 </header>
