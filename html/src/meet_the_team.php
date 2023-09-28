@@ -10,7 +10,7 @@
 </head>
 <body class="bg-black">
 <!-- Header -->
-<div class="flex flex-col w-screen h-screen bg-hero bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
+<div class="flex flex-col w-screen h-fill bg-hero bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
     <header class="bg-black w-screen">
         <div class="flex flex-row">
             <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
@@ -40,8 +40,144 @@
             </div>
         </div>
     </header>
-    <content class="flex-1 flex-col mx-10 my-10 px-10 py-10 bg-hero bg-black bg-opacity-50 bg-no-repeat bg-cover bg-center bg-fixed">
+    <content class="flex w-fill h-fill flex-col mx-10 my-10 px-10 py-10 bg-hero bg-black bg-opacity-50 bg-no-repeat bg-cover bg-center bg-fixed rounded-md">
         <span class="font-sans font-bold text-white text-4xl underline decoration-yellow-400 decoration-4 underline-offset-4">Meet The Team</span>
+        <div class="flex w-fill h-fill flex-wrap justify-center">
+
+            <div class="p-4 max-w-sm">
+                <div class="flex rounded-lg h-full bg-red-500 p-8 flex-col">
+                    <div class="flex items-center mb-3">
+                        <h2 class="font-sans font-bold text-white text-2xl">Andrew</h2>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <p class="leading-relaxed text-base text-white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                        </p>
+                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                            More
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 max-w-sm">
+                <div class="flex rounded-lg h-full bg-red-500 p-8 flex-col">
+                    <div class="flex items-center mb-3">
+                        <h2 class="font-sans font-bold text-white text-2xl">Ben</h2>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <p class="leading-relaxed text-base text-white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                        </p>
+                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                            More
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 max-w-sm">
+                <div class="flex rounded-lg h-full bg-red-500 p-8 flex-col">
+                    <div class="flex items-center mb-3">
+                        <h2 class="font-sans font-bold text-white text-2xl">Darren</h2>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <p class="leading-relaxed text-base text-white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                        </p>
+                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                            More
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 max-w-sm">
+                <div class="flex rounded-lg h-full bg-red-500 p-8 flex-col">
+                    <div class="flex items-center mb-3">
+                        <h2 class="font-sans font-bold text-white text-2xl">Ethan</h2>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <p class="leading-relaxed text-base text-white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                        </p>
+                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                            More
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 max-w-sm">
+                <div class="flex rounded-lg h-full bg-red-500 p-8 flex-col">
+                    <div class="flex items-center mb-3">
+                        <h2 class="font-sans font-bold text-white text-2xl">Noureldeen</h2>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <p class="leading-relaxed text-base text-white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                        </p>
+                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                            More
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 max-w-sm">
+                <div class="flex rounded-lg h-full bg-red-500 p-8 flex-col">
+                    <div class="flex items-center mb-3">
+                        <h2 class="font-sans font-bold text-white text-2xl">Quinn</h2>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <p class="leading-relaxed text-base text-white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                        </p>
+                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                            More
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 max-w-sm">
+                <div class="flex rounded-lg h-full bg-red-500 p-8 flex-col">
+                    <div class="flex items-center mb-3">
+                        <h2 class="font-sans font-bold text-white text-2xl">Vrushang</h2>
+                    </div>
+                    <div class="flex flex-col justify-between flex-grow">
+                        <p class="leading-relaxed text-base text-white">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                        </p>
+                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                            More
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </content>
 </div>
 </body>
