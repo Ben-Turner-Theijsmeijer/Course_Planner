@@ -9,8 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black">
-<!-- Header -->
 <div class="flex flex-col w-screen h-full bg-hero bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
+
+    <!-- Header -->
     <header class="bg-black w-screen">
         <div class="flex flex-row">
             <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
