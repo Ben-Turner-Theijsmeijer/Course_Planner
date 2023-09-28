@@ -45,9 +45,20 @@
 
     <!-- Content  -->
         <section class="content">
-            
+            <form method="post" attribute="post" action="calculate.php">
+                <input type=number id="operand1" name="operand1">
+                <input type=number id="operand2" name="operand2">
+                <input type=radio name="operator" name="add" value="add">
+                <label for="add">+</label>
+                <input type=radio name="operator" name="subtract" value="subtract">
+                <label for="subtract">-</label>
+                <input type=radio name="operator" name="multiply" value="multiply">
+                <label for="multiply">*</label>
+                <input type=radio name="operator" name="divide" value="divide">
+                <label for="divide">/</label>
+                <button type="submit">Calculate</button>
+            </form>
         </section>
-
     </body>
 
     <footer>

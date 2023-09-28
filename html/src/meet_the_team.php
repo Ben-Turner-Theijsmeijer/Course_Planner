@@ -43,6 +43,7 @@
     <content class="flex flex-col mx-20 my-10 px-10 py-10 bg-hero bg-black bg-opacity-25 bg-no-repeat bg-cover bg-center bg-fixed">
         BEANS <br>
         BRANS <br>
+        AAAAAAAAAAAAAAAAAAAAAA
     </content>
 </div>
 </body>
