@@ -65,7 +65,11 @@
 
 
 
-        <p><a href="/excel/course_selection_tool.xlsm" download="course_selection.xlsm">DOWNLOAD EXCEL FILE</p>
+        <a href="/excel/course_selection_tool.xlsm" download="course_selection.xlsm">
+            <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                Download
+            </button>
+        </a>
 
 </section>
 <!-- Contact Section-->
