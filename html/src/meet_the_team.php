@@ -10,7 +10,7 @@
 </head>
 <body class="bg-black">
 <!-- Header -->
-<div class="flex flex-col w-screen h-full bg-hero bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
+<div class="flex flex-col w-screen h-fill bg-hero bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
     <header class="bg-black w-screen">
         <div class="flex flex-row">
             <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
@@ -84,10 +84,6 @@
 
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                    <div class="flex items-center mb-3">
-                        <h2 class="font-sans font-bold text-white text-2xl">Darren</h2>
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow">
                         <p class="leading-relaxed text-base text-white">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
                             Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
@@ -141,10 +137,6 @@
 
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                    <div class="flex items-center mb-3">
-                        <h2 class="font-sans font-bold text-white text-2xl">Quinn</h2>
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow">
                         <p class="leading-relaxed text-base text-white">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
                             Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
@@ -160,23 +152,18 @@
 
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                    <div class="flex items-center mb-3">
-                        <h2 class="font-sans font-bold text-white text-2xl">Vrushang</h2>
-                    </div>
-                    <div class="flex flex-col justify-between flex-grow">
-                        <p class="leading-relaxed text-base text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
-                            Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
-                            sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
-                        </p>
-                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                            More
-                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                        </button>
-                    </div>
+                    <p class="leading-relaxed text-base text-white">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio quis feugiat. 
+                        Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit, 
+                        sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu ultricies nibh. 
+                    </p>
+                    <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                        More
+                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
+                    </button>
+                
                 </div>
             </div>
-
         </div>
     </content>
 </div>
