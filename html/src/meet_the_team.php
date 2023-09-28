@@ -167,12 +167,5 @@
         </div>
     </content>
 </div>
-<section class="footer">
-    <footer class="fixed bottom-0 w-full bg-black text-white py-6">
-        <div class="container mx-auto text-center">
-            <p>&copy; CIS 3760 Group 11</p>
-        </div>
-    </footer>
-</section>
 </body>
 </html>
