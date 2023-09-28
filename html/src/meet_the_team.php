@@ -114,11 +114,12 @@
                         </p>
                         <button class="group font-sans font-bold text-white text-2xl transition duration-300">
                             More
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
+                        </button>
                     </div>
                 </div>
             </div>
-            
+
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center mb-3">
@@ -179,12 +180,5 @@
         </div>
     </content>
 </div>
-<section class="footer">
-    <footer class="fixed bottom-0 w-full bg-black text-white py-6">
-        <div class="container mx-auto text-center">
-            <p>&copy; CIS 3760 Group 11</p>
-        </div>
-    </footer>
-</section>
 </body>
 </html>
