@@ -43,160 +43,221 @@
         <content
             class="flex w-fill h-screen flex-col mx-10 my-10 px-10 py-10 bg-hero bg-black bg-opacity-50 bg-no-repeat bg-cover bg-center bg-fixed rounded-md mb-80">
             <span
-                class="font-sans font-bold text-white text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4">Meet
+                class="font-sans font-bold text-white text-center text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4 mb-8">Meet
                 The Team</span>
             <div class="flex w-fill h-full flex-wrap justify-center">
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Andrew</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Andrew Chow</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="../imgs/profiles/andrew_profile.png" alt="Andrew's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                👋 Hello! I'm Andrew, a 4th-year Software Engineering student at the University of
+                                Guelph.
+                                My interests include software development and product management. During my free time, I
+                                enjoy going to the gym 🏋️ and capturing moments with my camera 📷
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/andrew/andrew.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Ben</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Ben</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="https://placehold.co/400" alt="Ben's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum.
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/ben/ben.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Darren</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Darren</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="https://placehold.co/400" alt="Darren's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum.
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/darren/darren.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Ethan</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Ethan</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="https://placehold.co/400" alt="Ethan's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum.
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/ethan/ethan.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Noureldeen</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Nour</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="https://placehold.co/400" alt="Nour's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum.
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/nour/nour.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Quinn</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Quinn</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="https://placehold.co/400" alt="Quinn's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum.
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/quinn/quinn.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Vrushang</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Vrushang</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="https://placehold.co/400" alt="Vrushang's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum.
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/vrushang/vrushang.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
