@@ -18,9 +18,12 @@
 <header class="bg-black w-screen">
     <div class="flex flex-row">
         <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-            <span
-                class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] decoration-4 underline-offset-4">Quinn Meiszinger
-            </span>
+            <a href="../../meet_the_team.php">
+                <span
+                    class="font-sans font-bold text-white text-4xl leading-10 underline decoration-yellow-400 decoration-4 underline-offset-4">Quinn
+                    Meiszinger
+                </span>
+            </a>
         </div>
         <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
             <a href="../../meet_the_team.php"
@@ -48,15 +51,21 @@
         <form action="" method="post" class="mt-4">
             <div class="mb-4">
                 <label for="decoded_string" class="block font-sans font-bold text-white">Decoded String:</label>
-                <textarea rows=4 name="decoded_string" id="decoded_string" class="block w-full rounded px-2 py-1 border border-gray-400" placeholder="Type decoded string here..."><?php include("decode_64.php"); echo decode_64($_POST["encoded_string"] ?? '');?></textarea>
+                <textarea rows=4 name="decoded_string" id="decoded_string"
+                    class="block w-full rounded px-2 py-1 border border-gray-400"
+                    placeholder="Type decoded string here..."><?php include("decode_64.php");
+                    echo decode_64($_POST["encoded_string"] ?? ''); ?></textarea>
             </div>
-            
+
             <button type="submit"
                 class="bg-[#FFC72A] hover:bg-yellow-300 text-black px-8 py-2 mt-4 mb-6 rounded font-bold">Encode/Decode</button>
 
             <div class="mb-4">
                 <label for="encoded_string" class="block font-sans font-bold text-white">Encoded String:</label>
-                <textarea rows=4 name="encoded_string" id="encoded_string" class="block w-full rounded px-2 py-1 border border-gray-400" placeholder="Type encoded string here..."><?php include("encode_64.php"); echo encode_64($_POST["decoded_string"] ?? '');?></textarea>
+                <textarea rows=4 name="encoded_string" id="encoded_string"
+                    class="block w-full rounded px-2 py-1 border border-gray-400"
+                    placeholder="Type encoded string here..."><?php include("encode_64.php");
+                    echo encode_64($_POST["decoded_string"] ?? ''); ?></textarea>
             </div>
         </form>
     </div>
