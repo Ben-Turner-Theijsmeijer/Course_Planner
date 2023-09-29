@@ -54,17 +54,19 @@
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
                             <p class="leading-relaxed text-base text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam mollis sit amet odio
-                                quis feugiat.
-                                Cras vel vestibulum ipsum, id accumsan libero. Fusce imperdiet neque sed leo hendrerit,
-                                sit amet vulputate sem fermentum. Curabitur quis rhoncus nisl. Nunc sed congue nisl, eu
-                                ultricies nibh.
+                                Hello! I'm Andrew, a 4th-year Software Engineering student at the University of Guelph.
+                                My interests include software development and product management. During my free time, I
+                                enjoy going to the gym and capturing moments with my camera
                             </p>
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                More
-                                <span
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                            </button>
+                            <a href="/src/members/andrew/andrew.php">
+                                <button class="group font-sans font-bold text-white text-2xl transition duration-300">
+                                    Learn More
+                                    <div
+                                        class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
+                                    </div>
+                                </button>
+                            </a>
+
                         </div>
                     </div>
                 </div>
