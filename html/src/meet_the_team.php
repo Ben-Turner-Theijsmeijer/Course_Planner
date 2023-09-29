@@ -80,20 +80,24 @@
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                         <div class="flex items-center flex-col">
-                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Ben</h2>
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Ben Turner-Theijsmeijer</h2>
                             <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
-                                <img src="https://placehold.co/400" alt="Ben's Profile Picture"
+                                <img src="../imgs/profiles/ben_profile.JPG" alt="Ben's Profile Picture"
                                     class="w-full h-full object-cover" />
                             </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
                             <p class="leading-relaxed text-base text-white mb-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.
+                                Hello World! My name is Ben, Like several of my groupmates I am a 4th-year Software Engineering
+                                student at the University of Guelph. 
+                                <br><br>
+                                Accademically I find programming intriguing and fufilling but feel little to no interest in it outside of work/school 
+                                as I like to think of my profession and life as two separate aspects that don't overlap.
+                                In my free time I much pefer to spend my time outdoors, playing sports, 
+                                <a class="text-blue-500 font-bold" target="_blank"
+                                    href="https://www.instagram.com/phen.ori/">Working on my latest art project</a>
+                                , and spending time with my friends.
+                                
                             </p>
                             <a href="/src/members/ben/ben.php">
                                 <button class="group font-sans font-bold text-white text-2xl transition duration-300">
