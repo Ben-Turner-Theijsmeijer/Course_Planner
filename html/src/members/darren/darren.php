@@ -13,7 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="src/js/scripts.js"></script>
 </head>
-<body class = "bg-gray-900">
+<body class = "bg-gray-900 flex flex-col h-screen justify-between">
     <!-- Header Section -->
     <header class="bg-black w-screen">
         <div class="flex flex-row">
@@ -43,6 +43,16 @@
 
     <!-- Content Section -->
     <div class="flex flex-col w-screen h-full bg-hero bg-no-repeat bg-cover bg-top ">
+
+        <!-- Opening message -->
+        <section class="py-6">
+            <div class="w-9/12 mx-auto rounded bg-neutral-100 p-6 font-serif text-center">
+                <h2 class=" text-xl">Welcome to My PHP Page</h2> 
+                <p class="text-base">This is to show a fun feature of php. PHP is a server sided programing language meaning everthing ran in PHP run on the sever (not locally) <br/>This is safe as vistors can not see or change PHP code. But what happen if I give the users access to run terminal commands.
+                </br> Below you can enter BASH compands or run a program installed on the server and it'll output the output of the command  </p>
+            </div> 
+        </section>
+
 
         <!-- Contact Section-->
         <section class="contact  py-8 ">
@@ -79,7 +89,7 @@
 
     <!-- Footer Section -->
     <section class="footer bg-gray-900">
-        <footer class=" bottom-0 absolute inset-x-0 w-full bg-black text-white py-6">
+        <footer class="fixed bottom-0 absolute inset-x-0 w-full bg-black text-white py-6">
             <div class="container mx-auto text-center">
                 <p>&copy; CIS 3760 Group 11</p>
             </div>
