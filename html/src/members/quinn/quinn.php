@@ -19,19 +19,19 @@
     <div class="flex flex-row">
         <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
             <span
-                class="font-sans font-bold text-white text-4xl leading-10 underline decoration-yellow-400 decoration-4 underline-offset-4">Quinn Meiszinger
+                class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] decoration-4 underline-offset-4">Quinn Meiszinger
             </span>
         </div>
         <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
             <a href="../../meet_the_team.php"
                 class="group font-sans font-bold text-white text-2xl transition duration-300">
                 Meet The Team
-                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
             </a>
 
             <a href="../../about.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
                 About
-                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
             </a>
 
         </div>
@@ -52,7 +52,7 @@
             </div>
             
             <button type="submit"
-                class="bg-yellow-400 hover:bg-yellow-300 text-black px-8 py-2 mt-4 mb-6 rounded font-bold">Encode/Decode</button>
+                class="bg-[#FFC72A] hover:bg-yellow-300 text-black px-8 py-2 mt-4 mb-6 rounded font-bold">Encode/Decode</button>
 
             <div class="mb-4">
                 <label for="encoded_string" class="block font-sans font-bold text-white">Encoded String:</label>
