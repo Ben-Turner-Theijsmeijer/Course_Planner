@@ -24,7 +24,7 @@
             </span>
         </div>
         <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-            <a href="src/meet_the_team.php"
+            <a href="../../meet_the_team.php"
                 class="group font-sans font-bold text-white text-2xl transition duration-300">
                 Meet The Team
                 <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
