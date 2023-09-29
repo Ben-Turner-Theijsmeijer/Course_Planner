@@ -43,20 +43,24 @@
         <content
             class="flex w-fill h-screen flex-col mx-10 my-10 px-10 py-10 bg-hero bg-black bg-opacity-50 bg-no-repeat bg-cover bg-center bg-fixed rounded-md mb-80">
             <span
-                class="font-sans font-bold text-white text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4">Meet
+                class="font-sans font-bold text-white text-center text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4 mb-8">Meet
                 The Team</span>
             <div class="flex w-fill h-full flex-wrap justify-center">
 
                 <div class="p-4 max-w-md max-h-md">
                     <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
-                        <div class="flex items-center mb-3">
-                            <h2 class="font-sans font-bold text-white text-2xl">Andrew</h2>
+                        <div class="flex items-center flex-col">
+                            <h2 class="font-sans font-bold text-white text-2xl mb-4">Andrew Chow</h2>
+                            <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
+                                <img src="../imgs/profiles/andrew_profile.png" alt="Andrew's Profile Picture"
+                                    class="w-full h-full object-cover" />
+                            </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
-                            <p class="leading-relaxed text-base text-white">
-                                Hello! I'm Andrew, a 4th-year Software Engineering student at the University of Guelph.
+                            <p class="leading-relaxed text-base text-white mb-4">
+                                👋 Hello! I'm Andrew, a 4th-year Software Engineering student at the University of Guelph.
                                 My interests include software development and product management. During my free time, I
-                                enjoy going to the gym and capturing moments with my camera
+                                enjoy going to the gym 🏋️ and capturing moments with my camera 📷
                             </p>
                             <a href="/src/members/andrew/andrew.php">
                                 <button class="group font-sans font-bold text-white text-2xl transition duration-300">
