@@ -82,9 +82,9 @@
         <?php
 
         // Receive values
-        $amount = floatval($_POST["amount"]);
-        $from_currency = $_POST["from_currency"];
-        $to_currency = $_POST["to_currency"];
+        $amount = isset($_POST["amount"]) ? floatval($_POST["amount"]) : 0;
+        $from_currency = isset($_POST["from_currency"]) ? $_POST["from_currency"] : '';
+        $to_currency = isset($_POST["to_currency"]) ? $_POST["to_currency"] : '';
 
         // Stores conversion rates for currencies supported
         $conversion_rates = [
@@ -114,6 +114,7 @@
                 "EUR" => 1.15,
             ]
         ];
+
 
         // Output the converted amount
         if (isset($conversion_rates[$from_currency]) && isset($conversion_rates[$from_currency][$to_currency])) {
