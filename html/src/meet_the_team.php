@@ -18,9 +18,11 @@
         <header class="bg-black w-screen">
             <div class="flex flex-row">
                 <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-                    <span
-                        class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] decoration-4 underline-offset-4">Course
-                        Selector</span>
+                    <a href="../index.php">
+                        <span
+                            class="font-sans font-bold text-white text-4xl leading-10 underline decoration-yellow-400 decoration-4 underline-offset-4">Course
+                            Selector</span>
+                    </a>
                 </div>
                 <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
                     <a href="meet_the_team.php"
@@ -30,8 +32,7 @@
                             class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
                     </a>
 
-                    <a href="about.php"
-                        class="group font-sans font-bold text-white text-2xl transition duration-300">
+                    <a href="about.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
                         About
                         <span
                             class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
@@ -211,12 +212,17 @@
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
                             <p class="leading-relaxed text-base text-white mb-4">
-                                Hello everyone! I'm Quinn, a 4th-year Computer Science student at the University of Guelph.
-                                I love learning how things work, and computers are no exception. I seek to study and understand the
-                                mathematics and low-level operations behind computation. Recently, I've become fascinated by the 
-                                Transformer machine learning model, and you can see my very basic implementation 
-                                <a class="text-blue-500 font-bold" target="_blank" href="https://colab.research.google.com/drive/19j5w9zTgfO2KFeFYMnf_9azkbsN7dM8-?usp=sharing">here</a>.
-                                In my free time, you can find me experimenting with synthesizers and painting miniatures.
+                                Hello everyone! I'm Quinn, a 4th-year Computer Science student at the University of
+                                Guelph.
+                                I love learning how things work, and computers are no exception. I seek to study and
+                                understand the
+                                mathematics and low-level operations behind computation. Recently, I've become
+                                fascinated by the
+                                Transformer machine learning model, and you can see my very basic implementation
+                                <a class="text-blue-500 font-bold" target="_blank"
+                                    href="https://colab.research.google.com/drive/19j5w9zTgfO2KFeFYMnf_9azkbsN7dM8-?usp=sharing">here</a>.
+                                In my free time, you can find me experimenting with synthesizers and painting
+                                miniatures.
                             </p>
                             <a href="/src/members/quinn/quinn.php">
                                 <button class="group font-sans font-bold text-white text-2xl transition duration-300">
