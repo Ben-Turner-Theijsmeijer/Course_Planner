@@ -23,14 +23,14 @@
                         Selector</span>
                 </div>
                 <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-                    <a href="/meet_the_team.php"
+                    <a href="meet_the_team.php"
                         class="group font-sans font-bold text-white text-2xl transition duration-300">
                         Meet The Team
                         <span
                             class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
                     </a>
 
-                    <a href="src/about.php"
+                    <a href="about.php"
                         class="group font-sans font-bold text-white text-2xl transition duration-300">
                         About
                         <span
@@ -205,18 +205,18 @@
                         <div class="flex items-center flex-col">
                             <h2 class="font-sans font-bold text-white text-2xl mb-4">Quinn</h2>
                             <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
-                                <img src="https://placehold.co/400" alt="Quinn's Profile Picture"
+                                <img src="../imgs/profiles/quinn_profile.jpg" alt="Quinn's Profile Picture"
                                     class="w-full h-full object-cover" />
                             </div>
                         </div>
                         <div class="flex flex-col justify-between flex-grow">
                             <p class="leading-relaxed text-base text-white mb-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum.
+                                Hello everyone! I'm Quinn, a 4th-year Computer Science student at the University of Guelph.
+                                I love learning how things work, and computers are no exception. I seek to study and understand the
+                                mathematics and low-level operations behind computation. Recently, I've become fascinated by the 
+                                Transformer machine learning model, and you can see my very basic implementation 
+                                <a class="text-blue-500 font-bold" target="_blank" href="https://colab.research.google.com/drive/19j5w9zTgfO2KFeFYMnf_9azkbsN7dM8-?usp=sharing">here</a>.
+                                In my free time, you can find me experimenting with synthesizers and painting miniatures.
                             </p>
                             <a href="/src/members/quinn/quinn.php">
                                 <button class="group font-sans font-bold text-white text-2xl transition duration-300">
