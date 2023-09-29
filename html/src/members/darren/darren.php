@@ -13,7 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="src/js/scripts.js"></script>
 </head>
-<body class = "bg-gray-900 flex flex-col h-screen justify-between">
+<body class = "bg-gray-900 flex flex-col justify-between overflow-auto overflow-x-hidden ">
     <!-- Header Section -->
     <header class="bg-black w-screen">
         <div class="flex flex-row">
@@ -50,28 +50,23 @@
                 <h2 class=" text-xl">Welcome to My PHP Page</h2> 
                 <p class="text-base">This is to show a fun feature of php. PHP is a server sided programing language meaning everthing ran in PHP run on the sever (not locally) <br/>This is safe as vistors can not see or change PHP code. But what happen if I give the users access to run terminal commands.
                 </br> Below you can enter BASH compands or run a program installed on the server and it'll output the output of the command  </p>
+                </br> Everyone has read/write/execute access to test.txt try adding to with with echo "hello world" >> test.txt Then cat test.txt   
+                </br> Use whoami do find out what user the website is run as
+                </br> You can get the date and time with: date 
             </div> 
         </section>
+
+        
 
 
         <!-- Contact Section-->
         <section class="contact  py-8 ">
             <div class="max-w-md mx-auto rounded-lg shadow-md p-8 mb-32 bg-orange-300">
-                <h3 class="text-2xl font-semibold text-white mb-4">Have a question? Contact Us</h3>
-                <form action="https://formspree.io/f/meqnpqdw" method="POST" id="contactForm">
-                    <div class="mb-4">
-                        <label for="name" class="block text-white text-sm font-medium mb-2">Name</label>
-                        <input type="text" id="name" name="name"
-                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="email" class="block text-white text-sm font-medium mb-2">Email</label>
-                        <input type="email" id="email" name="email"
-                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400" required>
-                    </div>
+                <h3 class="text-2xl font-semibold text-white mb-4">Enter your termal command below</h3>
+                <form action="" method="POST" id="termal">
                     <div class="mb-6">
-                        <label for="message" class="block text-white text-sm font-medium mb-2">Message</label>
-                        <textarea id="message" name="message" rows="4"
+                        <label for="message" class="block text-white text-sm font-medium mb-2">Command</label>
+                        <input type="text" id="termComand" name="termComand" 
                             class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-400"
                             required></textarea>
                     </div>
@@ -83,13 +78,32 @@
                 </form>
             </div>
         </section>
+
+        <section class="py-6">
+            <div class="w-7/12 mx-auto rounded bg-neutral-100 p-6 font-serif text-center">
+                        <?php
+
+                        if (isset($_POST['termComand'])) {
+                            
+                            $comand = $_POST['termComand'];
+                            //echo $comand;
+                            $output = shell_exec($comand . " 2>&1");
+                            echo $output;
+                        }else{
+                            echo("No command entered");
+                            
+                        }
+                        
+                        ?>
+            </div> 
+        </section>
     </div>
 
 
 
     <!-- Footer Section -->
     <section class="footer bg-gray-900">
-        <footer class="fixed bottom-0 absolute inset-x-0 w-full bg-black text-white py-6">
+        <footer class="w-full bg-black text-white py-6">
             <div class="container mx-auto text-center">
                 <p>&copy; CIS 3760 Group 11</p>
             </div>
