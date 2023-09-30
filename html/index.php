@@ -44,7 +44,7 @@
             <div class="text-white w-1/2">
                 <span class="block font-sans font-bold text-2xl text-left whitespace-nowrap">Forget about course
                     planning hassle!</span>
-                <span class="block font-sans font-bold text-8xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-2">Course
+                <span class="block font-sans font-bold text-8xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-8">Course
                     Selector</span>
             </div>
 
@@ -53,7 +53,7 @@
                     <li class="font-sans font-bold text-xl">Add your courses</li>
                     <li class="font-sans font-bold text-xl whitespace-nowrap">Select your semester</li>
                     <li class="font-sans font-bold text-xl">Click Generate</li>
-                    <li class="font-sans font-bold text-xl">See all the courses you can
+                    <li class="font-sans font-bold text-xl whitespace-nowrap">See all the courses you can
                         take!</li>
                 </ul>
                 <a href="/excel/course_selection_tool.xlsm" class="self-center group bg-[#FFC72A] text-xl text-black font-bold mt-6 py-2 px-4 rounded" download="course_selection.xlsm">
