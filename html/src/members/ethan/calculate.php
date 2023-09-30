@@ -30,7 +30,7 @@
             ?>
             <?php
             echo '
-                    <form method="post" action="src/about.php">
+                    <form method="post" action="src/how_it_works.php">
                         <button class="group font-sans font-bold text-white text-2xl transition duration-300">
                             About
                             <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
