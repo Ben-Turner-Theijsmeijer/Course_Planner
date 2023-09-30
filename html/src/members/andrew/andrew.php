@@ -131,10 +131,39 @@
 </section>
 
 
+<section class="bg-white p-4 mt-12">
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-semibold mb-4 text-center">Photo Gallery</h1>
+        <p class="text-lg text-gray-600 mb-8 text-center">
+            Capturing the moments!
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-white rounded shadow-md">
+                <img src="/src/members/andrew/photos/lights.jpg" alt="Night Lights" class="w-full h-auto">
+            </div>
+            <div class="bg-white rounded shadow-md">
+                <img src="/src/members/andrew/photos/flower.jpg" alt="Flower" class="w-full h-auto">
+            </div>
+            <div class="bg-white rounded shadow-md">
+                <img src="/src/members/andrew/photos/squirrel.jpg" alt="Squirrel" class="w-full h-auto">
+            </div>
+            <div class="bg-white rounded shadow-md">
+                <img src="/src/members/andrew/photos/park.jpg" alt="Park" class="w-full h-auto">
+            </div>
+            <div class="bg-white rounded shadow-md">
+                <img src="/src/members/andrew/photos/leafs.jpg" alt="Leafs" class="w-full h-auto">
+            </div>
+            <div class="bg-white rounded shadow-md">
+                <img src="/src/members/andrew/photos/nyc.jpg" alt="NYC" class="w-full h-auto">
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!-- Footer Section -->
 <section class="footer">
-    <footer class="fixed bottom-0 w-full bg-black text-white py-6">
+    <footer class="w-full bg-black text-white py-6">
         <div class="container mx-auto text-center">
             <p>&copy; CIS 3760 Group 11</p>
         </div>
