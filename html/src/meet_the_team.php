@@ -90,7 +90,7 @@
                             <p class="leading-relaxed text-base text-white mb-4">
                                 Hello World! My name is Ben, Like several of my groupmates I am a 4th-year Software Engineering
                                 student at the University of Guelph. 
-                                <br><br>
+                                <br>
                                 Accademically I find programming intriguing and fufilling but feel little to no interest in it outside of work/school 
                                 as I like to think of my profession and life as two separate aspects that don't overlap.
                                 In my free time I much pefer to spend my time outdoors, playing sports, 
