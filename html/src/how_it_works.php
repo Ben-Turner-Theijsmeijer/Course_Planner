@@ -132,7 +132,7 @@
                                 <img src="../imgs/product/product_four.png" alt="How It Works" class="rounded-lg shadow-lg mb-4">
                             </div>
                             <div class="w-full md:w-1/2 md:pl-8 text-xl">
-                                <h2 class="text-xl text-[#C20430] font-semibold mb-2">Courses Without Prerequisites</h2>
+                                <h2 class="text-xl underline decoration-[#C20430] text-white font-semibold mb-2">Courses Without Prerequisites</h2>
                                 <p class="text-white">
                                     Lastly, these are the courses that do not have any prerequisites, which are great
                                     for students who need electives, or are looking to complete an area of application/minor.
