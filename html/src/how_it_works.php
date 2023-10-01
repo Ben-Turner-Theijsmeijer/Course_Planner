@@ -57,7 +57,7 @@
                     </p>
 
                     <p class="text-gray-600 mb-8">
-                        In just a <strong> one </strong>, users can enter their completed courses and semester to
+                        In just <strong> one </strong>step, users can enter their completed courses and semester to
                         determine which courses
                         they would like to take in the future!
                     </p>
