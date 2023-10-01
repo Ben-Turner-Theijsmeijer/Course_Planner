@@ -12,6 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="src/js/scripts.js"></script>
+    <link rel="icon" href="../src/favicon/favicon.png" type="image/png">
 </head>
 
 <!-- Header Section -->
