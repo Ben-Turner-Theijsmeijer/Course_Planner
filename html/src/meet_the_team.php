@@ -26,8 +26,8 @@
                         Meet The Team
                         <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
                     </a>
-                    <a href="" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                        About
+                    <a href="how_it_works.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
+                        How It Works
                         <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
                     </a>
                     <a href="/excel/course_selection_tool.xlsm" download="course_selection.xlsm" class="bg-[#FFC72A] rounded-sm py-1 text-2xl font-bold p-3.5 group">Download
