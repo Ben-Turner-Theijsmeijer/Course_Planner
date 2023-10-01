@@ -224,17 +224,16 @@
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Vrushang</h2>
                         <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
-                            <img src="https://placehold.co/400" alt="Vrushang's Profile Picture" class="w-full h-full object-cover" />
+                            <img src="../imgs/profiles/vrushang_profile.jpg" alt="Vrushang's Profile Picture" class="w-full h-full object-cover" />
                         </div>
                     </div>
                     <div class="flex flex-col justify-between flex-grow">
                         <p class="leading-relaxed text-base text-white mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum.
+                            Hi everyone, I'm Vrushang, I'm a 5th-year Computer Science student at the University
+                            of Guelph. In my free time I enjoy playing video games or learning about technologies 
+                            I'm not familiar with. In addition to coding and gaming, I have an interest in staying 
+                            updated on the latest tech trends, attending hackathons, and exploring indie 
+                            projects. 
                         </p>
                         <a href="/src/members/vrushang/vrushang.php">
                             <button class="group font-sans font-bold text-white text-2xl transition duration-300">
