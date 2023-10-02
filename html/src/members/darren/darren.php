@@ -20,7 +20,7 @@
         <header class="bg-black w-full">
             <div class="flex flex-row relative">
                 <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-                    <a href="https://cis3760f23-11.socs.uoguelph.ca/index.php">
+                    <a href="../../meet_the_team.php">
                         <span class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">Darren
                             </span>
                     </a>

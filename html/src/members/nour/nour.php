@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
     <header class="bg-black w-full sticky top-0 z-30">
         <div class="flex flex-row relative">
             <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-                <a href="../../../index.php">
+                <a href="../../meet_the_team.php">
                     <span class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">Noureldeen Ahmed</span>
                 </a>
             </div>
