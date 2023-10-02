@@ -11,7 +11,7 @@
     <link rel="icon" href="../src/favicon/favicon.png" type="image/png">
 </head>
 
-<body class="bg-black bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
+<body class="bg-black bg-no-repeat bg-cover bg-fixed bg-top bg-[url('../imgs/background.png')]">
     <!-- Header -->
     <div class="flex flex-col w-full h-full sticky top-0 z-30">
         <header class="bg-black w-full">
@@ -162,19 +162,14 @@
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
-                        <h2 class="font-sans font-bold text-white text-2xl mb-4">Nour</h2>
+                        <h2 class="font-sans font-bold text-white text-2xl mb-4">Noureldeen</h2>
                         <div class="rounded-full w-24 h-24 overflow-hidden mb-4">
-                            <img src="https://placehold.co/400" alt="Nour's Profile Picture" class="w-full h-full object-cover" />
+                            <img src="../imgs/profiles/nour_profile.jpg" alt="Nour's Profile Picture" class="w-full h-full object-cover" />
                         </div>
                     </div>
                     <div class="flex flex-col justify-between flex-grow">
                         <p class="leading-relaxed text-base text-white mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                            mollit anim id est laborum.
+                            Hi! I'm Noureldeen Ahmed, a 4th-year Software Engineering student at the University of Guelph. I'm passionate about building projects and connecting things that work. Checkout my script where I made an emotional seminment analysis app!
                         </p>
                         <a href="/src/members/nour/nour.php">
                             <button class="group font-sans font-bold text-white text-2xl transition duration-300">
@@ -232,10 +227,10 @@
                     <div class="flex flex-col justify-between flex-grow">
                         <p class="leading-relaxed text-base text-white mb-4">
                             Hi everyone, I'm Vrushang, I'm a 5th-year Computer Science student at the University
-                            of Guelph. In my free time I enjoy playing video games or learning about technologies 
-                            I'm not familiar with. In addition to coding and gaming, I have an interest in staying 
-                            updated on the latest tech trends, attending hackathons, and exploring indie 
-                            projects. 
+                            of Guelph. In my free time I enjoy playing video games or learning about technologies
+                            I'm not familiar with. In addition to coding and gaming, I have an interest in staying
+                            updated on the latest tech trends, attending hackathons, and exploring indie
+                            projects.
                         </p>
                         <a href="/src/members/vrushang/vrushang.php">
                             <button class="group font-sans font-bold text-white text-2xl transition duration-300">
