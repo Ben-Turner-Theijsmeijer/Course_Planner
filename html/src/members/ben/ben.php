@@ -20,8 +20,8 @@
         <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
             <a href="../../meet_the_team.php">
                 <span
-                    class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] decoration-4 underline-offset-4">Andrew
-                    Chow</span>
+                    class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] decoration-4 underline-offset-4">Ben
+                    Turner-Theijsmeijer</span>
             </a>
         </div>
         <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
