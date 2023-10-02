@@ -30,7 +30,7 @@
                     </a>
 
                     <a href="../../how_it_works.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                        About
+                        How It Works
                         <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
                     </a>
 
