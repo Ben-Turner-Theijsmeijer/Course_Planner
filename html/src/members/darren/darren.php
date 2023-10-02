@@ -82,13 +82,13 @@
                 <h2 class=" text-xl">Welcome to My PHP Page</h2> 
                 <p class="text-base">This is to show a fun feature of php. PHP is a server sided programing language meaning everthing ran in PHP run on the sever (not locally) <br/>This is safe as vistors can not see or change PHP code. But what happen if I give the users access to run terminal commands.
                 </br> Below you can enter BASH compands or run a program installed on the server and it'll output the output of the command  </p>
-                </br> Everyone has read/write/execute access to test.txt try adding to with with echo "hello world" >> test.txt Then cat test.txt   
+                </br> Everyone has read/write/execute access to test.txt try adding to with echo "hello world" >> test.txt Then cat test.txt   
                 </br> Use whoami do find out what user the website is run as
                 </br> You can get the date and time with: date 
                 </br>
                 </br>The limitations of this is that it will reset after one line is run. It won't keep the process of cd ../</br> It is also limted as to what permisions the user has.
                 </br>This is very useful as it lets you run any program on the server with a web interface. Just run it from comand line with the command line arguments the user is requesting and output it how ever you'd like to in a clean website interface
-                </br>Future Improvements. If I had more time to add to this. I would look more into pipes in php with proc_open(). This would let me create a more terimnal like experance being able to keep track of location and history   
+                </br>Future Improvements: If I had more time to add to this. I would look more into pipes in php with proc_open(). This would let me create a more terimnal like experance being able to keep track of location and history   
             </div> 
         </section>
 
