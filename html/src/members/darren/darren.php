@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Darren Awesome Page</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,33 +16,55 @@
 </head>
 <body class = "bg-gray-900 flex flex-col justify-between overflow-auto overflow-x-hidden ">
     <!-- Header Section -->
-    <header class="bg-black w-screen">
-        <div class="flex flex-row">
-            <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-                <a href="/">
-                    <span
-                        class="font-sans font-bold text-white text-4xl leading-10 underline decoration-yellow-400 decoration-4 underline-offset-4">Course
-                        Selector</span>
-                </a>
+    <div class="flex flex-col w-full h-full sticky top-0 z-30">
+        <header class="bg-black w-full">
+            <div class="flex flex-row relative">
+                <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
+                    <a href="https://cis3760f23-11.socs.uoguelph.ca/index.php">
+                        <span class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">Course
+                            Selector</span>
+                    </a>
+                </div>
+                <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
+                    <a href="https://cis3760f23-11.socs.uoguelph.ca/src/meet_the_team.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
+                        Meet The Team
+                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
+                    </a>
+                    <a href="https://cis3760f23-11.socs.uoguelph.ca/src/how_it_works.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
+                        How It Works
+                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
+                    </a>
+                    
+                </div>
 
             </div>
-            <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-                <a href="src/meet_the_team.php"
-                    class="group font-sans font-bold text-white text-2xl transition duration-300">
-                    Meet The Team
-                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
-                </a>
+        </header>
+    </div>
 
-                <a href="src/about.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                    About
-                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-yellow-400"></span>
-                </a>
-
+    <!-- Hero Section  -->
+    <section class="hero py-16 pt-10  w-11/12 mx-auto ">
+        <div class="container py-16 px-8 mx-auto flex items-center rounded-lg justify-center bg-cyan-500">
+            <div class="w-full md:w-1/3 flex items-center justify-center">
+                <div class="rounded-lg overflow-hidden">
+                    <img src="photo1.jpg" alt="Hero Picture"
+                        class="w-full h-full object-cover" />
+                </div>
             </div>
+            <div class="w-full md:w-1/3 px-4 font-sans font-bold text-white items-center">
+                <h1 class="text-4xl font-semibold mb-4">Hi, I'm Darren! </h1>
+                <h1 class="text-4xl font-semibold mb-4">And I like trees </h1>
+            </div>
+                
+            <div class="w-full md:w-1/3 flex items-center justify-center">
+                <div class="rounded-lg overflow-hidden">
+                    <img src="photo2.jpg" alt="Hero Picture"
+                        class="w-full h-full object-cover" />
+                </div>
+            </div>
+            
         </div>
-    </header>
-
-    
+        
+    </section>
    
 
     <!-- Content Section -->
@@ -78,7 +101,7 @@
         </div>
         <!-- Opening message -->
         <section class="py-6">
-            <div class="w-9/12 mx-auto rounded bg-neutral-100 p-6 font-serif text-center">
+            <div class=" w-9/12 mx-auto rounded bg-neutral-100 p-6 font-serif text-center">
                 <h2 class=" text-xl">Welcome to My PHP Page</h2> 
                 <p class="text-base">This is to show a fun feature of php. PHP is a server sided programing language meaning everthing ran in PHP run on the sever (not locally) <br/>This is safe as vistors can not see or change PHP code. But what happen if I give the users access to run terminal commands.
                 </br> Below you can enter BASH compands or run a program installed on the server and it'll output the output of the command  </p>
@@ -99,7 +122,7 @@
         <section class="contact  py-8 ">
             <div class="max-w-md mx-auto rounded-lg shadow-md p-8 mb-18 bg-orange-300">
                 <h3 class="text-2xl font-semibold text-white mb-4">Enter your termal command below</h3>
-                <form action="" method="POST" id="termal">
+                <form action="#termComand" method="POST" id="termal">
                     <div class="mb-6">
                         <label for="message" class="block text-white text-sm font-medium mb-2">Command</label>
                         <input type="text" id="termComand" name="termComand" 
