@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="src/js/scripts.js"></script>
-    <link rel="icon" href="src/favicon/favicon.png" type="image/png">
 </head>
 
 <!-- Header Section -->
@@ -28,8 +27,8 @@
                 <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
             </a>
 
-            <a href="src/how_it_works.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                How It Works
+            <a href="src/about.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
+                About
                 <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
             </a>
         </div>
@@ -45,7 +44,7 @@
             <div class="text-white w-1/2">
                 <span class="block font-sans font-bold text-2xl text-left whitespace-nowrap">Forget about course
                     planning hassle!</span>
-                <span class="block font-sans font-bold text-8xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-8">Course
+                <span class="block font-sans font-bold text-8xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-2">Course
                     Selector</span>
             </div>
 
@@ -54,7 +53,7 @@
                     <li class="font-sans font-bold text-xl">Add your courses</li>
                     <li class="font-sans font-bold text-xl whitespace-nowrap">Select your semester</li>
                     <li class="font-sans font-bold text-xl">Click Generate</li>
-                    <li class="font-sans font-bold text-xl whitespace-nowrap">See all the courses you can
+                    <li class="font-sans font-bold text-xl">See all the courses you can
                         take!</li>
                 </ul>
                 <a href="/excel/course_selection_tool.xlsm" class="self-center group bg-[#FFC72A] text-xl text-black font-bold mt-6 py-2 px-4 rounded" download="course_selection.xlsm">
