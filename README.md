@@ -33,3 +33,24 @@ Excel spreadsheet.
 
 Refer to [wiki](https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/-/wikis/Microsoft-VBA-Handbook) for instructions on how to use the application
 
+
+# SPRINT 3
+
+Goal: You have a team VM hosted on a SoCS server. The Debian Linux VM has NGINX, PHP,
+and MySQL installed. The web server is configured and is already running with HTTPS
+enabled. The website PHP directory is /var/www/html
+Please update the homepage to host and describe your Excel spreadsheet.
+
+# Usage
+
+[Website](https://cis3760f23-11.socs.uoguelph.ca/)
+
+Contains three main pages
+
+- Home: main landing page
+- How It Works: describes the product's functionality
+- Meet the team: Individual team's introductions
+    - PHP Scripts located within each team member's profile
+
+    
+
