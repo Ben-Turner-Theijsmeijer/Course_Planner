@@ -1,14 +1,7 @@
 <?php
-error_reporting(~0);
-ini_set('display_errors', 1);
+
 $data = file_get_contents("https://datasets-server.huggingface.co/rows?dataset=dair-ai%2Femotion&config=split&split=train&offset=0");
 $jsonObject = json_decode($data, JSON_NUMERIC_CHECK);
-
-if (ini_get('allow_url_fopen') == 1) {
-    echo '<p style="color: #0A0;">fopen is allowed on this host.</p>';
-} else {
-    echo '<p style="color: #A00;">fopen is not allowed on this host.</p>';
-}
 
 $newArray = [];
 foreach ($jsonObject['rows'] as $dict) {
