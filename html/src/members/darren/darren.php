@@ -41,9 +41,41 @@
         </div>
     </header>
 
-    <!-- Content Section -->
-    <div class="flex flex-col w-screen h-full bg-hero bg-no-repeat bg-cover bg-top ">
+    
+   
 
+    <!-- Content Section -->
+    <div class="flex flex-col relative w-screen h-full bg-hero bg-no-repeat bg-cover bg-top ">
+
+        <div class="absolute inset-y-2 right-5  h-10 bg-orange-300 rounded-lg shadow-md  p-2 opacity-90">System uptime: 
+            <?php
+                $output = shell_exec("uptime");
+                echo nl2br($output);
+                
+            ?>
+        
+        </div>
+        <div class="absolute inset-y-2 h-20 bg-orange-300 rounded-lg shadow-md p-1 opacity-90 "> 
+            <?php
+                
+                $output = shell_exec("head -n3 /proc/meminfo");
+                echo nl2br($output);
+
+                
+            ?>
+        
+        </div>
+        <div class="absolute bottom-10  h-96 bg-orange-300 rounded-lg shadow-md p-1 opacity-90 ">CPU Details:<br/>
+            <?php
+                
+                
+
+                $output = shell_exec("lscpu | grep -A 14 Architecture");
+                echo nl2br($output);
+
+            ?>
+        
+        </div>
         <!-- Opening message -->
         <section class="py-6">
             <div class="w-9/12 mx-auto rounded bg-neutral-100 p-6 font-serif text-center">
@@ -53,6 +85,10 @@
                 </br> Everyone has read/write/execute access to test.txt try adding to with with echo "hello world" >> test.txt Then cat test.txt   
                 </br> Use whoami do find out what user the website is run as
                 </br> You can get the date and time with: date 
+                </br>
+                </br>The limitations of this is that it will reset after one line is run. It won't keep the process of cd ../</br> It is also limted as to what permisions the user has.
+                </br>This is very useful as it lets you run any program on the server with a web interface. Just run it from comand line with the command line arguments the user is requesting and output it how ever you'd like to in a clean website interface
+                </br>Future Improvements. If I had more time to add to this. I would look more into pipes in php with proc_open(). This would let me create a more terimnal like experance being able to keep track of location and history   
             </div> 
         </section>
 
@@ -61,7 +97,7 @@
 
         <!-- Contact Section-->
         <section class="contact  py-8 ">
-            <div class="max-w-md mx-auto rounded-lg shadow-md p-8 mb-32 bg-orange-300">
+            <div class="max-w-md mx-auto rounded-lg shadow-md p-8 mb-18 bg-orange-300">
                 <h3 class="text-2xl font-semibold text-white mb-4">Enter your termal command below</h3>
                 <form action="" method="POST" id="termal">
                     <div class="mb-6">
@@ -88,7 +124,7 @@
                             $comand = $_POST['termComand'];
                             //echo $comand;
                             $output = shell_exec($comand . " 2>&1");
-                            echo $output;
+                            echo nl2br($output);
                         }else{
                             echo("No command entered");
                             
