@@ -10,3 +10,28 @@ tags:
   - name: course
     description: CRUD methods for course data
 paths:
+  /course/{courseCode}:
+    get:
+      tags:
+        - course
+      summary: Find course by course code
+      description: Returns a single course
+      operationId: getCourseByCode
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code of course to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'          
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
