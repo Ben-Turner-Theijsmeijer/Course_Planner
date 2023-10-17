@@ -58,4 +58,39 @@ paths:
                 $ref: '#/components/schemas/Course'          
         '405':
           description: Invalid input
+    put:
+      tags:
+        - course
+      summary: Update an existing course
+      description: Update an existing pet by course code
+      operationId: updateCourse
+      requestBody:
+        description: Update an existent course in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
+components:
+  schemas:
+    Course: # TO BE UPDATED
+      type: object
+      properties:
+        courseCode:
+          type: string
+          example: 'CIS2500'
   
