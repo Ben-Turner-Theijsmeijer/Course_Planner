@@ -35,3 +35,27 @@ paths:
           description: Invalid course code supplied
         '404':
           description: Course not found
+  /course:
+    post:
+      tags:
+        - course
+      summary: Add a new course
+      description: Add a new course to the database
+      operationId: createCourse
+      requestBody:
+        description: Create a new course in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'          
+        '405':
+          description: Invalid input
+  
