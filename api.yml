@@ -35,6 +35,22 @@ paths:
           description: Invalid course code supplied
         '404':
           description: Course not found
+    delete:
+      tags:
+        - course
+      summary: Deletes a course
+      description: delete a course
+      operationId: deleteCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid course code
   /course:
     post:
       tags:
