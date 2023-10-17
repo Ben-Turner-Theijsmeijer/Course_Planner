@@ -1,0 +1,12 @@
+openapi: 3.0.3
+info:
+  title: Course API
+  description: |-
+    This is a Course API based on the OpenAPI V3 specification.
+  version: "1.0"
+servers:
+  - url: https://cis3760f23-11.socs.uoguelph.ca/api
+tags:
+  - name: course
+    description: CRUD methods for course data
+paths:
