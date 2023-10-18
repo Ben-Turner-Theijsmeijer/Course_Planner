@@ -3,11 +3,11 @@ USE cis3760;
 
 -- Courses Table
 CREATE TABLE Courses (
-    CourseID INT PRIMARY KEY,
-    CourseCode VARCHAR(16),
+    CourseID INT PRIMARY KEY NOT NULL,
+    CourseCode VARCHAR(16) NOT NULL,
     CourseName VARCHAR(255) NOT NULL,
-    CourseWeight FLOAT,
-    CourseDescription TEXT,
+    CourseWeight FLOAT NOT NULL,
+    CourseDescription TEXT NOT NULL,
     CourseOffering VARCHAR(16),
     CourseFormat VARCHAR(16),
     Prerequisites VARCHAR(255),
