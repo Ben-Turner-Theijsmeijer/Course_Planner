@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `cis3760`;
+USE cis3760;
+
 -- Courses Table
 CREATE TABLE Courses (
     CourseID INT PRIMARY KEY,
