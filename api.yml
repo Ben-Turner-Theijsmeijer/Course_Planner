@@ -5,7 +5,7 @@ info:
     This is a Course API based on the OpenAPI V3 specification.
   version: "1.0"
 servers:
-  - url: https://cis3760f23-11.socs.uoguelph.ca/api
+  - url: https://cis3760f23-11.socs.uoguelph.ca/api/v1
 tags:
   - name: course
     description: CRUD methods for course data
@@ -78,7 +78,7 @@ paths:
       tags:
         - course
       summary: Update an existing course
-      description: Update an existing pet by course code
+      description: Update an existing course by course code
       operationId: updateCourse
       requestBody:
         description: Update an existent course in the database
@@ -103,10 +103,48 @@ paths:
           description: Course not found
 components:
   schemas:
-    Course: # TO BE UPDATED
+    Course:
       type: object
       properties:
         courseCode:
           type: string
-          example: 'CIS2500'
-  
+          example: 'CIS2750'
+        courseName:
+          type: string
+          example: 'Software Systems Development and Integration'
+        courseWeight:
+          type: number
+          example: 0.75
+        courseDescription:
+          type: string
+          example: 'Example desc'
+        courseOffering:
+          type: string
+          example: 'Winter'
+        prereqCourses:
+          type: string
+          example: 'CIS2430, CIS2520'
+        prereqCredits:
+          type: number
+          example: 5.0
+        coreqCourses:
+          type: string
+          example: 'CIS3750'
+        restrictions:
+          type: string
+          example: 'STAT2070'
+        equates:
+          type: string
+          example: 'CIS3760'
+        department:
+          type: string
+          example: 'School of Computer Science'
+        location:
+          type: string
+          example: 'TBD'
+      required:
+        - courseCode
+        - courseName
+        - courseWeight
+        - courseDescription
+        - courseOffering
