@@ -4,7 +4,7 @@
 // This file connects to the DB and inserts records upon landing on the page /import.php
 
 
-$csvFile = '../../excel/CourseList.csv';
+$csvFile = '../../excel/course_list.csv';
 
 $env = parse_ini_file('.env');
 
