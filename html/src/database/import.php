@@ -6,13 +6,15 @@
 
 $csvFile = '../../excel/CourseList.csv';
 
+$env = parse_ini_file('.env');
+
 // DB Credentials
 // maybe move these to a .ENV file later?
 // change these to your local credentials when working locally
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "cis3760";
+$server = $env['server'];
+$username = $env['username'];
+$password = $env['password'];
+$database = $env['database'];
 
 $numRecords = 0;
 
@@ -57,7 +59,7 @@ if (($handle = fopen($csvFile, 'r')) !== false) {
 
         // Inserts records into the table
         $query = "INSERT INTO $tableName (CourseCode, CourseName, CourseOffering, CourseWeight, CourseDescription, CourseFormat, Prerequisites, PrerequisiteCredits, Corequisites, Restrictions, Equates, Department, Location) VALUES ('$CourseCode', '$CourseName', '$CourseOffering', $CourseWeight, '$CourseDescription', '$CourseFormat', '$Prerequisites', '$PrerequisiteCredits', '$Corequisites', '$Restrictions', '$Equates', '$Department', '$Location')";
-        
+
         if ($conn->query($query) === true) {
             $numRecords++;
         }
@@ -75,4 +77,3 @@ if ($numRecords > 0) {
 }
 
 $conn->close();
-?>
