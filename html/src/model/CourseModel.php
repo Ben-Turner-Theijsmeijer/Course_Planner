@@ -1,5 +1,5 @@
 <?php
-require_once "Database.php";
+require_once($_SERVER['DOCUMENT_ROOT'].'/src/model/Database.php');
 class CourseModel extends Database
 {
     public function getCourse($courseCode)
