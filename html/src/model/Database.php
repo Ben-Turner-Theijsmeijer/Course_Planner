@@ -1,6 +1,5 @@
 <?php
 
-
 // DB Credentials
 // maybe move these to a .ENV file later?
 // change these to your local credentials when working locally
@@ -11,7 +10,7 @@ class Database
     public function __construct()
     {
         try {
-            $env = parse_ini_file('../.env');
+            $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/.env');
             $server = $env['server'];
             $username = $env['username'];
             $password = $env['password'];
