@@ -1,6 +1,6 @@
  <?php
- require_once($_SERVER['DOCUMENT_ROOT'].'/src/controller/api/BaseController.php');
- require_once($_SERVER['DOCUMENT_ROOT'].'/src/model/CourseModel.php');
+ require_once(__DIR__.'/BaseController.php');
+ require_once(__DIR__.'/../../model/CourseModel.php');
  class CourseController extends BaseController
  {
     private $courseModel = null;

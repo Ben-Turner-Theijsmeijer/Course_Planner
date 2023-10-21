@@ -10,7 +10,7 @@ class Database
     public function __construct()
     {
         try {
-            $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'].'/.env');
+            $env = parse_ini_file(__DIR__.'/../../.env');
             $server = $env['server'];
             $username = $env['username'];
             $password = $env['password'];

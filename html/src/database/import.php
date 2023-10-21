@@ -2,11 +2,9 @@
 // Reference: https://www.php.net/manual/en/function.fgetcsv.php
 
 // This file connects to the DB and inserts records upon landing on the page /import.php
+$csvFile = __DIR__.'/../../excel/CourseList.csv';
 
-
-$csvFile = '../../excel/course_list.csv';
-
-$env = parse_ini_file('../../.env');
+$env = parse_ini_file(__DIR__.'/../../.env');
 
 // DB Credentials
 // maybe move these to a .ENV file later?
