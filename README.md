@@ -52,5 +52,15 @@ Contains three main pages
 - Meet the team: Individual team's introductions
     - PHP Scripts located within each team member's profile
 
-    
+# SPRINT 4
+
+Goal: store your course data in the VM MySQL database. Create a server side REST
+API, 100% in PHP, to access and modify the course data in the database. Document
+how to use your API on the VM website, along with some examples showing it working.
+
+# Usage
+
+[Website](https://cis3760f23-11.socs.uoguelph.ca/)
+
+UNDER CONSTRUCTION
 
