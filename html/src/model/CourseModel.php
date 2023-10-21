@@ -4,6 +4,6 @@ class CourseModel extends Database
 {
     public function getCourse($courseCode)
     {
-        return $this->select("SELECT * FROM courses WHERE CourseCode = ?", ["s", $courseCode]);
+        return $this->select("SELECT * FROM Courses WHERE CourseCode = ?", ["s", $courseCode]);
     }
 }
