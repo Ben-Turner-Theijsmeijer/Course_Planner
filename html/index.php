@@ -1,3 +1,56 @@
+<?php
+require_once(__DIR__.'/src/controller/api/CourseController.php');
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cis3760";
+
+$conn = new mysqli($servername, $username, $password);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+//echo "Connected successfully to database: " . $dbname;
+
+# Route API requests to appropiate endpoint(s)
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = explode('/', $uri);
+
+if(isset($uri[1]) && $uri[1] == 'api')
+{
+    if(isset($uri[2]) && $uri[2] == 'v1')
+    {
+        if(isset($uri[3]) && $uri[3] == 'course')
+        {
+            $courseController = new CourseController();
+            $requestMethod = $_SERVER['REQUEST_METHOD'];
+            
+            switch ($requestMethod)
+            {
+                case 'GET':
+                    if(isset($uri[4]))
+                    {
+                        $courseController->getCourse($uri[4]);  
+                    }
+                    else
+                    {
+
+                    }
+                    break;
+            }
+        }
+    }
+}
+else
+{
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: text/html; charset=UTF-8");
+    header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+    header("Access-Control-Max-Age: 3600");
+    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+}
+?>
 <!DOCTYPE html>
 <html>
 <!-- Head Section -->
@@ -119,17 +172,3 @@
 </body>
 
 </html>
-
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cis3760";
-
-$conn = new mysqli($servername, $username, $password);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "Connected successfully to database: " . $dbname;
-?>
