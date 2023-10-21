@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/src/controller/api/CourseController.php');
+require_once(__DIR__.'/src/controller/api/CourseController.php');
 
 $servername = "localhost";
 $username = "root";
@@ -11,7 +11,7 @@ $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-// echo "Connected successfully to database: " . $dbname;
+//echo "Connected successfully to database: " . $dbname;
 
 # Route API requests to appropiate endpoint(s)
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
