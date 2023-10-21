@@ -6,7 +6,7 @@
 
 $csvFile = '../../excel/course_list.csv';
 
-$env = parse_ini_file('.env');
+$env = parse_ini_file('../../.env');
 
 // DB Credentials
 // maybe move these to a .ENV file later?
