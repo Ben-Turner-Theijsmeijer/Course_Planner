@@ -47,14 +47,7 @@
     
                 $jsonData = file_get_contents('php://input'); // receives the json input
 
-                $courseData = json_decode($jsonData, true);
-
-                var_dump($courseData);
-
-                echo $courseData[0]['CourseCode'];
-                echo $courseData[0]['CourseName'];
-                echo $courseData[0]['CourseDescription'];
-                echo $courseData[0]['CourseWeight'];
+                $courseData = json_decode($jsonData, true); // converts to a PHP Array
         
                 try {
                     $result = $this->courseModel->createCourse($courseData);
