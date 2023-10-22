@@ -32,15 +32,10 @@ CREATE TABLE Prerequisites (
     FOREIGN KEY (PrerequisiteCourseID) REFERENCES Courses(CourseID)
 );
 
--- Course Samples
--- INSERT INTO Courses (CourseID, CourseCode, CourseName, CourseDescription, CourseOffering, CourseWeight, CourseFormat, Prerequisites, PrerequisiteCredits, Corequisites, Restrictions, Equates, Department, Location)
--- VALUES
---     (1, 'CIS1300', 'Programming', 'This is a course description for CIS 1300', 'Fall', 0.5, NULL, NULL, NULL, NULL, NULL, NULL, 'Department of Computer Science', 'Guelph'),
---     (2, 'CIS2500', 'Intermediate Programming', 'This is the course description for CIS 2500', 'Winter', 0.5, NULL, NULL, NULL, NULL, NULL, NULL, 'Department of Computer Science', 'Guelph'),
---     (3, 'CIS2520', 'Data Structures', 'This is the course description for CIS 2520', 'Fall', 0.5, NULL, NULL, NULL, NULL, NULL, NULL, 'Department of Computer Science', 'Guelph');
-
--- -- Prerequisite Samples
--- INSERT INTO Prerequisites (PrerequisiteID, CourseID, PrerequisiteCourseID, PrerequisiteType, GPA, CreditsRequirement, Other)
--- VALUES
---     (1, 3, 2, NULL, NULL, NULL, NULL),  -- CIS2520 has CIS2500 as a prerequisite
---     (2, 2, 1, NULL, NULL, NULL, NULL);  -- CIS2500 has CIS1300 as a prerequisite
+-- User Courses Taken Table
+CREATE TABLE Courses_Taken (
+    CourseID INT AUTO_INCREMENT PRIMARY KEY,
+    CourseCode VARCHAR(64) NOT NULL,
+    CourseName VARCHAR(255) NOT NULL,
+    Prerequisites VARCHAR(255)
+);
