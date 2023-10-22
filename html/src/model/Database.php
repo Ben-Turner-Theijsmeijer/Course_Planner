@@ -10,7 +10,7 @@ class Database
     public function __construct()
     {
         try {
-            $env = parse_ini_file(__DIR__.'/../../.env');
+            $env = parse_ini_file(__DIR__ . '/../../.env');
             $server = $env['server'];
             $username = $env['username'];
             $password = $env['password'];
@@ -34,8 +34,66 @@ class Database
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-        return false;
     }
+    // Deletes a course given the course code
+    public function delete($query = "", $params = [])
+    {
+        try {
+            $courseExists = $this->checkCourseExists($params[1]);
+
+            if ($courseExists) {
+                $this->executeStatement($query, $params);
+                if (mysqli_errno($this->connection) === 0) {
+                    return "Course " . $params[1] . " has been deleted!";
+                } else {
+                    return "Unable to delete " . $params[1] . "!";
+                }
+            } else {
+                return "Course " . $params[1] . " not found";
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function create($query = "", $params = [])
+    {
+        try {
+            // Check if the course already exists
+            $courseExists = $this->checkCourseExists($params[1]);
+
+            if ($courseExists) {
+                return "Course " . $params[1] . " already exists";
+            } else {
+                $this->executeStatement($query, $params);
+                if (mysqli_errno($this->connection) === 0) {
+                    return "Course " . $params[1] . " has been created!";
+                } else {
+                    return "Unable to create " . $params[1] . "!";
+                }
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
+    // Checks if a course exists prior to deleting it
+    private function checkCourseExists($courseCode)
+    {
+        $query = "SELECT COUNT(*) FROM Courses WHERE CourseCode = ?";
+        $params = ["s", $courseCode];
+        $count = 0;
+
+        $stmt = $this->executeStatement($query, $params);
+
+        $stmt->bind_result($count);
+
+        $stmt->fetch();
+
+        return $count;
+    }
+
     private function executeStatement($query = "", $params = [])
     {
         try {
@@ -43,13 +101,25 @@ class Database
             if ($stmt === false) {
                 throw new Exception("Unable to do prepared statement: " . $query);
             }
-            if ($params) {
-                $stmt->bind_param($params[0], $params[1]);
+
+            // Prepares the parameters prior to executing the db statement
+            if (!empty($params)) {
+                $newParams = array();
+                for ($i = 0; $i < count($params); $i++) {
+                    $newParams[] = &$params[$i];
+                }
+
+                call_user_func_array(array($stmt, 'bind_param'), $newParams);
             }
+
             $stmt->execute();
             return $stmt;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
+
+
 }
+
+
