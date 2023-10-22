@@ -10,7 +10,7 @@ class Database
     public function __construct()
     {
         try {
-            $env = parse_ini_file(__DIR__.'/../../.env');
+            $env = parse_ini_file(__DIR__ . '/../../.env');
             $server = $env['server'];
             $username = $env['username'];
             $password = $env['password'];
@@ -30,6 +30,22 @@ class Database
             $stmt = $this->executeStatement($query, $params);
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
+            return $result;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+        return false;
+    }
+    public function delete($query = "", $params = [])
+    {
+        try {
+            $this->executeStatement($query, $params);
+            $result = '';
+            if (mysqli_affected_rows($this->connection) > 0) {
+                return "Course " . $params[1] . " deleted";
+            } else {
+                return "Course " . $params[1] . " not deleted";
+            }
             return $result;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
