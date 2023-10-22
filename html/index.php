@@ -21,6 +21,11 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                         $courseController->deleteCourse($uri[4]);
                     }
                     break;
+                case 'POST':
+                    if (isset($uri[4])) {
+                        $courseController->createCourse($uri[4]);
+                    }
+                    break;
             }
         }
     }

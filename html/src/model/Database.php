@@ -39,7 +39,7 @@ class Database
     public function delete($query = "", $params = [])
     {
         try {
-            $courseExists = $this->checkCourseExists($params[1]); 
+            $courseExists = $this->checkCourseExists($params[1]);
 
             if ($courseExists) {
                 $this->executeStatement($query, $params);
@@ -56,21 +56,44 @@ class Database
         }
     }
 
+    public function create($query = "", $params = [])
+    {
+        try {
+            // Check if the course already exists
+            $courseExists = $this->checkCourseExists($params[1]);
+
+            if ($courseExists) {
+                return "Course " . $params[1] . " already exists";
+            } else {
+                $this->executeStatement($query, $params);
+                if (mysqli_errno($this->connection) === 0) {
+                    return "Course " . $params[1] . " has been created!";
+                } else {
+                    return "Unable to create " . $params[1] . "!";
+                }
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
     // Checks if a course exists prior to deleting it
-    private function checkCourseExists($courseCode) {
+    private function checkCourseExists($courseCode)
+    {
         $query = "SELECT COUNT(*) FROM Courses WHERE CourseCode = ?";
         $params = ["s", $courseCode];
         $count = 0;
-        
+
         $stmt = $this->executeStatement($query, $params);
-        
+
         $stmt->bind_result($count);
-    
+
         $stmt->fetch();
-        
+
         return $count;
     }
-    
+
     private function executeStatement($query = "", $params = [])
     {
         try {
@@ -88,3 +111,5 @@ class Database
         }
     }
 }
+
+
