@@ -34,24 +34,43 @@ class Database
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-        return false;
     }
+    // Deletes a course given the course code
     public function delete($query = "", $params = [])
     {
         try {
-            $this->executeStatement($query, $params);
-            $result = '';
-            if (mysqli_affected_rows($this->connection) > 0) {
-                return "Course " . $params[1] . " deleted";
+            $courseExists = $this->checkCourseExists($params[1]); 
+
+            if ($courseExists) {
+                $this->executeStatement($query, $params);
+                if (mysqli_errno($this->connection) === 0) {
+                    return "Course " . $params[1] . " has been deleted!";
+                } else {
+                    return "Unable to delete " . $params[1] . "!";
+                }
             } else {
-                return "Course " . $params[1] . " not deleted";
+                return "Course " . $params[1] . " not found";
             }
-            return $result;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-        return false;
     }
+
+    // Checks if a course exists prior to deleting it
+    private function checkCourseExists($courseCode) {
+        $query = "SELECT COUNT(*) FROM Courses WHERE CourseCode = ?";
+        $params = ["s", $courseCode];
+        $count = 0;
+        
+        $stmt = $this->executeStatement($query, $params);
+        
+        $stmt->bind_result($count);
+    
+        $stmt->fetch();
+        
+        return $count;
+    }
+    
     private function executeStatement($query = "", $params = [])
     {
         try {
