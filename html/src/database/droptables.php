@@ -20,11 +20,21 @@ if ($conn->connect_error) {
 
 echo "<h1>Connected successfully to $database database!</h1>";
 
+echo("HELLO?");
 
-if($conn->query("DROP TABLE Courses")){
-    printf("Table Courses Dropped successfully");
-}
+
 if($conn->query("DROP TABLE Prerequisites")){
-    printf("Table Prerequisites Dropped successfully");
+    echo("Table Prerequisites Dropped successfully");
 }
+
+if ($conn->errno){
+    echo("Could not drop table: ". $conn->error);
+}
+if($conn->query("DROP TABLE Courses")){
+    echo("Table Courses Dropped successfully");
+}
+if ($conn->errno){
+    echo("Could not drop table: ". $conn->error);
+}
+$conn -> close();
 ?>
