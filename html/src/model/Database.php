@@ -101,15 +101,25 @@ class Database
             if ($stmt === false) {
                 throw new Exception("Unable to do prepared statement: " . $query);
             }
-            if ($params) {
-                $stmt->bind_param($params[0], $params[1]);
+
+            // Prepares the parameters prior to executing the db statement
+            if (!empty($params)) {
+                $newParams = array();
+                for ($i = 0; $i < count($params); $i++) {
+                    $newParams[] = &$params[$i];
+                }
+
+                call_user_func_array(array($stmt, 'bind_param'), $newParams);
             }
+
             $stmt->execute();
             return $stmt;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
+
+
 }
 
 
