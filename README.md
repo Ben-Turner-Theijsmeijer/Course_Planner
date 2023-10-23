@@ -62,5 +62,15 @@ how to use your API on the VM website, along with some examples showing it worki
 
 [Website](https://cis3760f23-11.socs.uoguelph.ca/)
 
-UNDER CONSTRUCTION
+
+refer to the [sprint 4 wiki](https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/-/wikis/Sprint-4) for to see documentation on sprint 4 activities
+refer to the [Wiki Handbook](https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/-/wikis/Team-Handbook/Using-Postman-for-REST-API-testing) for how to use postman for rest API testing
+
+Contains a new additional page & new functionallity
+
+- API Access: provides and interface to interact with the SQL database through GET PUT POST and DELETE
+    - (NOTE: currently only GET is working on the vm - DELETE & POST work on localhost)
+    - working methods also work by navigating to their URL
+- SQL database is running on the vm
+    - created a reset button for the sql database that will return it to its original state
 
