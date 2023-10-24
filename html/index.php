@@ -75,6 +75,11 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                 API Access
                 <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
             </a>
+
+            <a href="src/api_documentation.html" class="group font-sans font-bold text-white text-2xl transition duration-300">
+                API Documentation
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
         </div>
     </div>
     <div class="h-4 w-3/4 bg-[#C20430] absolute -bottom-6"></div>
