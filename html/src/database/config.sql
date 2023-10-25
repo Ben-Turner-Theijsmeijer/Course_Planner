@@ -37,5 +37,6 @@ CREATE TABLE Courses_Taken (
     CourseID INT AUTO_INCREMENT PRIMARY KEY,
     CourseCode VARCHAR(64) NOT NULL,
     CourseName VARCHAR(255) NOT NULL,
-    Prerequisites VARCHAR(255)
+    Prerequisites VARCHAR(255),
+    Grade INT
 );

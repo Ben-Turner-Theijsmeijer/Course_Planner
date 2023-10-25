@@ -56,11 +56,52 @@ class Database
         }
     }
 
+    public function deleteStudent($query = "", $params = [])
+    {
+        try {
+            $courseExists = $this->checkCourseExistsStudent($params[1]);
+
+            if ($courseExists) {
+                $this->executeStatement($query, $params);
+                if (mysqli_errno($this->connection) === 0) {
+                    return "Course " . $params[1] . " has been deleted!";
+                } else {
+                    return "Unable to delete " . $params[1] . "!";
+                }
+            } else {
+                return "Course " . $params[1] . " not found";
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function create($query = "", $params = [])
     {
         try {
             // Check if the course already exists
             $courseExists = $this->checkCourseExists($params[1]);
+
+            if ($courseExists) {
+                return "Course " . $params[1] . " already exists";
+            } else {
+                $this->executeStatement($query, $params);
+                if (mysqli_errno($this->connection) === 0) {
+                    return "Course " . $params[1] . " has been created!";
+                } else {
+                    return "Unable to create " . $params[1] . "!";
+                }
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function createStudent($query = "", $params = [])
+    {
+        try {
+            // Check if the course already exists
+            $courseExists = $this->checkCourseExistsStudent($params[1]);
 
             if ($courseExists) {
                 return "Course " . $params[1] . " already exists";
@@ -94,6 +135,42 @@ class Database
         return $count;
     }
 
+    private function checkCourseExistsStudent($courseCode)
+    {
+        $query = "SELECT COUNT(*) FROM Courses_Taken WHERE CourseCode = ?";
+        $params = ["s", $courseCode];
+        $count = 0;
+
+        $stmt = $this->executeStatement($query, $params);
+
+        $stmt->bind_result($count);
+
+        $stmt->fetch();
+
+        return $count;
+    }
+
+    public function updateStudent($query = "", $params = [])
+    {
+        try {
+            $courseExists = $this->checkCourseExists($params[2]);
+
+            if ($courseExists) {
+                $this->executeStatement($query, $params);
+                if (mysqli_errno($this->connection) === 0) {
+                    return "Course " . $params[2] . " has been updated!";
+                } else {
+                    return "Unable to update " . $params[2] . "!";
+                }
+            } else {
+                return "Course " . $params[2] . " not found";
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+
+    }
+
     private function executeStatement($query = "", $params = [])
     {
         try {
@@ -121,5 +198,3 @@ class Database
 
 
 }
-
-

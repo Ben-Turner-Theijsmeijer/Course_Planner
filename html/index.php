@@ -28,6 +28,33 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                     break;
             }
         }
+        if (isset($uri[3]) && $uri[3] == 'student') {
+            $courseController2 = new CourseController();
+            $requestMethod2 = $_SERVER['REQUEST_METHOD'];
+
+            switch ($requestMethod2) {
+                case 'GET':
+                    if (isset($uri[4])) {
+                        $courseController2->getCourse_table();
+                    }
+                    break;
+                case 'POST':
+                    if (isset($uri[4])) {
+                        $courseController2->postCourse_table($uri[4]);
+                    }
+                    break;
+                case 'DELETE':
+                    if (isset($uri[4])) {
+                        $courseController2->deleteCourse_table($uri[4]);
+                    }
+                    break;
+                case 'PUT':
+                    if (isset($uri[4])) {
+                        $courseController2->putCourse_table($uri[4], $uri[5]);
+                    }
+                    break;
+            }
+        }
     }
 } else {
     header("Access-Control-Allow-Origin: *");
