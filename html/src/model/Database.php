@@ -153,7 +153,7 @@ class Database
     public function updateStudent($query = "", $params = [])
     {
         try {
-            $courseExists = $this->checkCourseExists($params[2]);
+            $courseExists = $this->checkCourseExistsStudent($params[2]);
 
             if ($courseExists) {
                 $this->executeStatement($query, $params);
