@@ -12,7 +12,7 @@ class CourseModel extends Database
     }
     public function createCourse($courseData)
     {
-        return $this->create("INSERT INTO Courses (CourseCode, CourseName, CourseOffering, CourseWeight, CourseDescription, CourseFormat, Prerequisites, PrerequisiteCredits, Corequisites, Restrictions, Equates, Department, Location) 
+        return $this->create("INSERT INTO Courses (CourseCode, CourseName, CourseOffering, CourseWeight, CourseDescription, CourseFormat, Prerequisites, PrerequisiteCredits, Corequisites, Restrictions, Equates, Department, Location)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [
             "sssssssssssss",
             $courseData[0]['CourseCode'],
@@ -30,7 +30,29 @@ class CourseModel extends Database
             $courseData[0]['Location']
         ]);
     }
-    
+
+    public function getCourse_table()
+    {
+        return $this->select("SELECT * FROM Courses_Taken");
+    }
+
+    public function postCourse_table($courseCode)
+    {
+        return $this->createStudent("INSERT INTO Courses_Taken (CourseCode, CourseName, Prerequisites)
+            SELECT CourseCode, CourseName, Prerequisites
+            FROM Courses Where CourseCode = ?", ["s", $courseCode]);
+    }
+
+    public function putCourse_table($courseCode, $grade)
+    {
+        return $this->updateStudent("UPDATE Courses_Taken
+            SET Grade = ?
+            WHERE CourseCode = ?", ["ss", $grade, $courseCode]);
+    }
+
+    public function deleteCourse_table($courseCode)
+    {
+        return $this->deleteStudent("DELETE FROM Courses_Taken
+            WHERE CourseCode = ?", ["s", $courseCode]);
+    }
 }
-
-

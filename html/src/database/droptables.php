@@ -1,5 +1,5 @@
 <?php
-$env = parse_ini_file(__DIR__.'/../../.env');
+$env = parse_ini_file(__DIR__ . '/../../.env');
 
 // DB Credentials
 // maybe move these to a .ENV file later?
@@ -20,21 +20,25 @@ if ($conn->connect_error) {
 
 echo "<h1>Connected successfully to $database database!</h1>";
 
-echo("HELLO?");
+echo ("HELLO?");
 
 
-if($conn->query("DROP TABLE Prerequisites")){
-    echo("Table Prerequisites Dropped successfully");
+if ($conn->query("DROP TABLE Prerequisites")) {
+    echo ("Table Prerequisites Dropped successfully");
 }
 
-if ($conn->errno){
-    echo("Could not drop table: ". $conn->error);
+if ($conn->errno) {
+    echo ("Could not drop table: " . $conn->error);
 }
-if($conn->query("DROP TABLE Courses")){
-    echo("Table Courses Dropped successfully");
+if ($conn->query("DROP TABLE Courses")) {
+    echo ("Table Courses Dropped successfully");
 }
-if ($conn->errno){
-    echo("Could not drop table: ". $conn->error);
+if ($conn->query("DROP TABLE Courses_Taken")) {
+    echo ("Table Courses Dropped successfully");
 }
-$conn -> close();
+
+if ($conn->errno) {
+    echo ("Could not drop table: " . $conn->error);
+}
+$conn->close();
 ?>
