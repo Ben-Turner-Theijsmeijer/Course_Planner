@@ -71,10 +71,10 @@ class CourseModel extends Database
             ]);
     }
     // Retrieves all the courses for a given department
-    public function getDepartmentCourses($departmentCode)
+    public function getSubjectCourses($subjectCode)
     {
         return $this->select("SELECT CourseCode FROM Courses WHERE CourseCode LIKE ?",
-            ["s", "%" . $departmentCode . "%"]
+            ["s", "%" . $subjectCode . "%"]
         );
     }
 

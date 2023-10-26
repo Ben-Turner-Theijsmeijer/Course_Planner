@@ -35,14 +35,14 @@ if (isset($uri[1]) && $uri[1] == 'api') {
             }
         }
         // Department Endpoints
-        if (isset($uri[3]) && $uri[3] == 'dept') {
-            $courseController_department = new CourseController();
-            $requestMethodDept = $_SERVER['REQUEST_METHOD'];
+        if (isset($uri[3]) && $uri[3] == 'subject') {
+            $subjectController = new CourseController();
+            $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-            switch ($requestMethodDept) {
+            switch ($requestMethod) {
                 case 'GET':
                     if (isset($uri[4])) {
-                        $courseController_department->getDepartmentCourses($uri[4]);
+                        $subjectController->getSubjectCourses($uri[4]);
                     }
                     break;
             }

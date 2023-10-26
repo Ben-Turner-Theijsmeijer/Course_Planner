@@ -135,13 +135,13 @@ class CourseController extends BaseController
         }
     }
 
-    public function getDepartmentCourses($departmentCode) {
+    public function getSubjectCourses($subjectCode) {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
         if ($requestMethod == 'GET') {
             try {
-                $result = $this->courseModel->getDepartmentCourses($departmentCode);
+                $result = $this->courseModel->getSubjectCourses($subjectCode);
                 $responseData = json_encode($result);
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage();
