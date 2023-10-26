@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="flex flex-col md:flex-row">
                         <div class=" w-full md:w-1/2">
 
-                            <div class="max-w-md mx-auto rounded-lg p-8 mx-16 text-center">
+                            <div class="max-w-md mx-auto rounded-lg p-8 text-center">
                                 <h3 class="text-2xl font-semibold text-white mb-4">API Commands for Courses Table</h3>
                                 <!-- <form action="" method="POST" id="requestform"> -->
 
