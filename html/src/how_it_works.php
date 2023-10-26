@@ -18,29 +18,42 @@
 <!-- Header Section -->
     <body class="bg-black bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
 
-        <header class="bg-black w-full top-0">
-            <div class="flex flex-row relative">
-                <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-                    <a href="../index.php">
-                        <span class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">
-                            Course
-                            Selector
-                        </span>
-                    </a>
-                </div>
-                <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-                    <a href="meet_the_team.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                        Meet The Team
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
-                    </a>
+   <!-- Header -->
+   <header class="bg-black w-full">
+    <div class="flex flex-row relative">
+        <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
+            <a href="../index.php">
+                <span
+                    class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">Course
+                    Selector</span>
+            </a>
+        </div>
+        <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
+            <a href="meet_the_team.php"
+                class="group font-sans font-bold text-white text-xl transition duration-300">
+                Meet The Team
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
 
-                    <a href="how_it_works.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                        How It Works
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
-                    </a>
-                </div>
-            </div>
-        </header>
+            <a href="how_it_works.php"
+                class="group font-sans font-bold text-white text-xl transition duration-300">
+                How It Works
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
+
+            <a href="api_access.php" class="group font-sans font-bold text-white text-xl transition duration-300">
+                API Access
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
+
+            <a href="api_documentation.html"
+                class="group font-sans font-bold text-white text-xl transition duration-300">
+                API Documentation
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
+        </div>
+    </div>
+</header>
 
         <!-- Main Content Section -->
         <content class="flex w-auto flex-col md:my-20 md:mx-10 md:p-10 bg-hero box-content bg-black/60 backdrop-blur-sm bg-no-repeat bg-cover bg-center bg-fixed md:rounded-md">

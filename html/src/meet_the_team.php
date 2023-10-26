@@ -16,6 +16,7 @@
 <body class="bg-black bg-no-repeat bg-cover bg-fixed bg-top bg-[url('../imgs/background.png')]">
     <!-- Header -->
     <div class="flex flex-col w-full h-full sticky top-0 z-30">
+        <!-- Header -->
         <header class="bg-black w-full">
             <div class="flex flex-row relative">
                 <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
@@ -27,27 +28,39 @@
                 </div>
                 <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
                     <a href="meet_the_team.php"
-                        class="group font-sans font-bold text-white text-2xl transition duration-300">
+                        class="group font-sans font-bold text-white text-xl transition duration-300">
                         Meet The Team
                         <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
+                            class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
                     </a>
+
                     <a href="how_it_works.php"
-                        class="group font-sans font-bold text-white text-2xl transition duration-300">
+                        class="group font-sans font-bold text-white text-xl transition duration-300">
                         How It Works
                         <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
+                            class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
                     </a>
-                    <a href="/excel/course_selection_tool.xlsm" download="course_selection.xlsm"
-                        class="bg-[#FFC72A] rounded-sm py-1 text-2xl font-bold p-3.5 group">Download
+
+                    <a href="api_access.php"
+                        class="group font-sans font-bold text-white text-xl transition duration-300">
+                        API Access
                         <span
-                            class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                            class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+                    </a>
+
+                    <a href="api_documentation.html"
+                        class="group font-sans font-bold text-white text-xl transition duration-300">
+                        API Documentation
+                        <span
+                            class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
                     </a>
                 </div>
+
                 <div class="h-4 w-3/4 bg-[#C20430] absolute -bottom-6"></div>
                 <div class="h-4 w-1/3 bg-[#FFC72A] absolute -bottom-12"></div>
             </div>
         </header>
+
     </div>
     <content
         class="flex w-auto flex-col md:my-20 md:mx-10 md:p-10 bg-hero box-content bg-black/60 backdrop-blur-sm bg-no-repeat bg-cover bg-center bg-fixed md:rounded-md">
