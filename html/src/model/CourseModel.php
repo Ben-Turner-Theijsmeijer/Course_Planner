@@ -36,6 +36,41 @@ class CourseModel extends Database
             $courseData[0]['Location']
         ]);
     }
+    // Updates a Course's information with its given CourseCode
+    public function updateCourse($courseData)
+    {
+        return $this->update("UPDATE Courses 
+            SET 
+            CourseName = ?,
+            CourseOffering = ?,
+            CourseWeight = ?,
+            CourseDescription = ?,
+            CourseFormat = ?,
+            Prerequisites = ?,
+            PrerequisiteCredits = ?,
+            Corequisites = ?,
+            Restrictions = ?,
+            Equates = ?,
+            Department = ?,
+            Location = ?
+            WHERE CourseCode = ?", [
+                "sssssssssssss",
+                $courseData[0]['CourseName'],
+                $courseData[0]['CourseOffering'],
+                $courseData[0]['CourseWeight'],
+                $courseData[0]['CourseDescription'],
+                $courseData[0]['CourseFormat'],
+                $courseData[0]['Prerequisites'],
+                $courseData[0]['PrerequisiteCredits'],
+                $courseData[0]['Corequisites'],
+                $courseData[0]['Restrictions'],
+                $courseData[0]['Equates'],
+                $courseData[0]['Department'],
+                $courseData[0]['Location'],
+                $courseData[0]['CourseCode']
+            ]);
+    }
+    
 
     // Retrieves the values from the CoursesTaken Table
     public function getCourse_table()
