@@ -26,6 +26,10 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                         $courseController->createCourse($uri[4]);
                     }
                     break;
+                case 'PUT':
+                    if (isset($uri[4])) {
+                        $courseController->updateCourse($uri[4]);
+                    }
             }
         }
         if (isset($uri[3]) && $uri[3] == 'student') {

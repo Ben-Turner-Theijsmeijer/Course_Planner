@@ -97,6 +97,21 @@ class Database
         }
     }
 
+    public function update($query = "", $params = [])
+    {
+        // Check if the course already 
+        try {
+            $this->executeStatement($query, $params);
+            if (mysqli_errno($this->connection) === 0) {
+                return "Course " . $params[13] . " has been updated!"; // offset 13 for the last bind
+            } else {
+                return "Unable to update " . $params[1] . "!";
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function createStudent($query = "", $params = [])
     {
         try {
