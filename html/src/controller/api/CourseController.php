@@ -1,4 +1,7 @@
 <?php
+/*
+Module that holds the Course Controller for the HTTP Requests
+*/
 require_once(__DIR__ . '/BaseController.php');
 require_once(__DIR__ . '/../../model/CourseModel.php');
 class CourseController extends BaseController
