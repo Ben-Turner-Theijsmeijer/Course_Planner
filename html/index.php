@@ -6,6 +6,7 @@ $uri = explode('/', $uri);
 
 if (isset($uri[1]) && $uri[1] == 'api') {
     if (isset($uri[2]) && $uri[2] == 'v1') {
+        // Course Endpoint
         if (isset($uri[3]) && $uri[3] == 'course') {
             $courseController = new CourseController();
             $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -30,8 +31,23 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                     if (isset($uri[4])) {
                         $courseController->updateCourse($uri[4]);
                     }
+                    break;
             }
         }
+        // Department Endpoints
+        if (isset($uri[3]) && $uri[3] == 'dept') {
+            $courseController_department = new CourseController();
+            $requestMethodDept = $_SERVER['REQUEST_METHOD'];
+
+            switch ($requestMethodDept) {
+                case 'GET':
+                    if (isset($uri[4])) {
+                        $courseController_department->getDepartmentCourses($uri[4]);
+                    }
+                    break;
+            }
+        }
+        // Student Endpoint
         if (isset($uri[3]) && $uri[3] == 'student') {
             $courseController2 = new CourseController();
             $requestMethod2 = $_SERVER['REQUEST_METHOD'];
