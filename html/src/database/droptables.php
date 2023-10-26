@@ -1,9 +1,6 @@
 <?php
 $env = parse_ini_file(__DIR__ . '/../../.env');
 
-// DB Credentials
-// maybe move these to a .ENV file later?
-// change these to your local credentials when working locally
 $server = $env['server'];
 $username = $env['username'];
 $password = $env['password'];

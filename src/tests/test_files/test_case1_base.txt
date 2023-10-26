@@ -1,8 +1,0 @@
-CIS*1910  Discrete Structures in Computing I  Fall Only  (LEC: 3, LAB:
-2)  [0.50]  
-This course is an introduction to discrete structures and formal
-methodologies used in computer science, including Boolean algebra,
-propositional logic, predicate logic, proof techniques, set theory,
-equivalence relations, order relations, and functions.
-Department(s): School of Computer Science  
-Location(s): Guelph

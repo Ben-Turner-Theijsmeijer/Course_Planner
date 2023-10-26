@@ -135,6 +135,7 @@ class Database
         return $count;
     }
 
+    // Checks if a course exists from the CoursesTaken table
     private function checkCourseExistsStudent($courseCode)
     {
         $query = "SELECT COUNT(*) FROM Courses_Taken WHERE CourseCode = ?";
