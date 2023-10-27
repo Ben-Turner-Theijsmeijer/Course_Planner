@@ -34,6 +34,19 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                     break;
             }
         }
+        //  All Subjects Endpoint
+        if (isset($uri[3]) && $uri[3] == 'allsubjects') {
+            $subjectController = new CourseController();
+            $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+            switch ($requestMethod) {
+                case 'GET':
+                    if (isset($uri[4])) {
+                        $subjectController->getAllSubjectCourses();
+                    }
+                    break;
+            }
+        }
         // Department Endpoints
         if (isset($uri[3]) && $uri[3] == 'subject') {
             $subjectController = new CourseController();
