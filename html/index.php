@@ -94,9 +94,8 @@ if (isset($uri[1]) && $uri[1] == 'api') {
 
             switch ($requestMethod2) {
                 case 'GET':
-                    if (isset($uri[4])) {
                         $courseController2->getCourse_table();
-                    }
+                    
                     break;
                 case 'POST':
                     if (isset($uri[4])) {

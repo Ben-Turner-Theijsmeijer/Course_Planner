@@ -13,6 +13,8 @@ tags:
     description: methods for prereq information
   - name: subject
     description: methods for subjects
+  - name: student
+    description: methods for students
 paths:
   /course/{courseCode}:
     get:
@@ -139,7 +141,7 @@ paths:
       description: Find course that has prereqs
       operationId: getCourseByPrereqs
       parameters:
-        - name: courseCodes
+        - name: courseCode
           in: path
           description: Course code of prereqs to return
           required: true
@@ -197,51 +199,171 @@ paths:
         '400':
           description: Invalid subject code supplied
         '404':
-          description: Subject code not found  
+          description: Subject code not found
+  /student:
+    get:
+      tags:
+        - student
+      summary: Find all the courses and Grades
+      description: Get the whole table
+      operationId: allStudent
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Error
+  /student/{courseCode}:
+    post:
+      tags:
+        - student
+      summary: Find course by course code
+      description: Returns a single course
+      operationId: addStudentCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: course student has taken
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*2750 has been created!'
+                         
+        '400':
+          description: Already exists
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*2750 already exists'
+
+    delete:
+      tags:
+        - student
+      summary: Deletes a course
+      description: delete a course
+      operationId: deleteStudentCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid course code
+          
+  /student/{courseCode}/{grade}:
+    put:
+      tags:
+        - student
+      summary: Find course by course code
+      description: Returns a single course
+      operationId: addGradetoStudentCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: course student has taken
+          required: true
+          schema:
+            type: string
+        - name: grade
+          in: path
+          description: grade for the course
+          required: true
+          schema: 
+            type: number
+            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*2750 has been updated!'
+                         
+        '404':
+          description: Does not exist
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*1010 not found'
 components:
   schemas:
+    Student:
+        type: array
+        items:
+          properties:
+            CourseCode:
+              type: string
+            CourseName:
+              type: string
+            Prerequisites:
+              type: string
+            Grade:
+              type: number
+        example:
+          - CourseCode: 'CIS*2750'
+            CourseName: 'Software Systems Development and Integration'
+            Prerequisites: 'CIS2430, CIS2520'
+            Grade: 85
+          - CourseCode: 'CIS*1910'
+            CourseName: 'Discrete Structures in Computing I'
+            Prerequisites: 'N/A'
+            Grade: 98
+          
     Course:
-      type: object
-      properties:
-        courseCode:
-          type: string
-          example: 'CIS2750'
-        courseName:
-          type: string
-          example: 'Software Systems Development and Integration'
-        courseWeight:
-          type: number
-          example: 0.75
-        courseDescription:
-          type: string
-          example: 'Example desc'
-        courseOffering:
-          type: string
-          example: 'Winter'
-        prereqCourses:
-          type: string
-          example: 'CIS2430, CIS2520'
-        prereqCredits:
-          type: number
-          example: 5.0
-        coreqCourses:
-          type: string
-          example: 'CIS3750'
-        restrictions:
-          type: string
-          example: 'STAT2070'
-        equates:
-          type: string
-          example: 'CIS3760'
-        department:
-          type: string
-          example: 'School of Computer Science'
-        location:
-          type: string
-          example: 'TBD'
-      required:
-        - courseCode
-        - courseName
-        - courseWeight
-        - courseDescription
-        - courseOffering
+        type: array
+        items:
+          properties:
+            CourseCode:
+              type: string
+              example: 'CIS2750'
+            CourseName:
+              type: string
+              example: 'Software Systems Development and Integration'
+            CourseOffering:
+              type: string
+              example: 'Winter'
+            CourseWeight:
+              type: number
+              example: 0.75
+            CourseDescription:
+              type: string
+              example: 'Example desc'
+            Prerequisites:
+              type: string
+              example: 'CIS2430, CIS2520'
+            PrerequisiteCredits:
+              type: number
+              example: 5.0
+            Corequisites:
+              type: string
+              example: 'CIS3750'
+            Restrictions:
+              type: string
+              example: 'STAT2070'
+            Equates:
+              type: string
+              example: 'CIS3760'
+            Department:
+              type: string
+              example: 'School of Computer Science'
+            Location:
+              type: string
+              example: 'TBD'
+          required:
+            - courseCode
+            - courseName
+            - courseWeight
+            - courseDescription
+            - courseOffering
