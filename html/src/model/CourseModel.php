@@ -70,6 +70,12 @@ class CourseModel extends Database
                 $courseData[0]['CourseCode']
             ]);
     }
+
+    // Retrieves all subject courses for each department offered at the University of Guelph
+    public function getAllSubjectCourses()
+    {
+        return $this->select("SELECT CourseCode FROM Courses");
+    }
     // Retrieves all the courses for a given department
     public function getSubjectCourses($subjectCode)
     {
