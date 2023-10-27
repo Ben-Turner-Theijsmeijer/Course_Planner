@@ -1,4 +1,7 @@
 <?php
+/*
+Landing page which contains the API logic to fetch information from the database
+*/
 require_once(__DIR__ . '/src/controller/api/CourseController.php');
 require_once(__DIR__ . '/src/components/navbar.php');
 $navBar = generateNav('index');
@@ -6,48 +9,45 @@ $navBar = generateNav('index');
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
 
+// API endpoints located in /api/v1/
 if (isset($uri[1]) && $uri[1] == 'api') {
     if (isset($uri[2]) && $uri[2] == 'v1') {
+        $controller = new CourseController();
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
         // Course Endpoint
         if (isset($uri[3]) && $uri[3] == 'course') {
-            $courseController = new CourseController();
-            $requestMethod = $_SERVER['REQUEST_METHOD'];
             $uri[4] = urldecode($uri[4]);
             switch ($requestMethod) {
-                
                 case 'GET':
                     if (isset($uri[4])) {
-                        $courseController->getCourse($uri[4]);
+                        $controller->getCourse($uri[4]);
                     }
                     break;
                 case 'DELETE':
                     if (isset($uri[4])) {
-                        $courseController->deleteCourse($uri[4]);
+                        $controller->deleteCourse($uri[4]);
                     }
                     break;
                 case 'POST':
                     if (isset($uri[4])) {
-                        $courseController->createCourse($uri[4]);
+                        $controller->createCourse($uri[4]);
                     }
                     break;
                 case 'PUT':
                     if (isset($uri[4])) {
-                        $courseController->updateCourse($uri[4]);
+                        $controller->updateCourse($uri[4]);
                     }
                     break;
             }
         }
         //  Subject Endpoint
         if (isset($uri[3]) && $uri[3] == 'subject') {
-
-            $subjectController = new CourseController();
-            $requestMethod = $_SERVER['REQUEST_METHOD'];
             // All subjects
             if (isset($uri[4]) && $uri[4] == 'all') {
                 switch ($requestMethod) {
                     case 'GET':
                         if (isset($uri[5])) {
-                            $subjectController->getAllSubjectCourses();
+                            $controller->getAllSubjectCourses();
                         }
                         break;
                 }
@@ -57,22 +57,19 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                 case 'GET':
                     if (isset($uri[4])) {
                         $uri[4] = urldecode($uri[4]);
-                        $subjectController->getSubjectCourses($uri[4]);
+                        $controller->getSubjectCourses($uri[4]);
                     }
                     break;
             }
         }
         // Prereq Endpoints
         if (isset($uri[3]) && $uri[3] == 'prereq') {
-            $courseController = new CourseController();
-            $requestMethod = $_SERVER['REQUEST_METHOD'];
-
             if (isset($uri[4]) && $uri[4] == 'future') {
                 switch ($requestMethod) {
                     case 'GET':
                         if (isset($uri[5])) {
                             $uri[5] = urldecode($uri[5]);
-                            $courseController->getFuturePrereqs($uri[5]);
+                            $controller->getFuturePrereqs($uri[5]);
                         }
                         break;
                 }
@@ -81,7 +78,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                     case 'GET':
                         if (isset($uri[4])) {
                             $uri[4] = urldecode($uri[4]);
-                            $courseController->getPrereqs($uri[4]);
+                            $controller->getPrereqs($uri[4]);
                         }
                         break;
                 }
@@ -89,27 +86,24 @@ if (isset($uri[1]) && $uri[1] == 'api') {
         }
         // Student Endpoint
         if (isset($uri[3]) && $uri[3] == 'student') {
-            $courseController2 = new CourseController();
-            $requestMethod2 = $_SERVER['REQUEST_METHOD'];
-
-            switch ($requestMethod2) {
+            switch ($requestMethod) {
                 case 'GET':
-                        $courseController2->getCourse_table();
+                        $controller->getCourse_table();
                     
                     break;
                 case 'POST':
                     if (isset($uri[4])) {
-                        $courseController2->postCourse_table($uri[4]);
+                        $controller->postCourse_table($uri[4]);
                     }
                     break;
                 case 'DELETE':
                     if (isset($uri[4])) {
-                        $courseController2->deleteCourse_table($uri[4]);
+                        $controller->deleteCourse_table($uri[4]);
                     }
                     break;
                 case 'PUT':
                     if (isset($uri[4])) {
-                        $courseController2->putCourse_table($uri[4], $uri[5]);
+                        $controller->putCourse_table($uri[4], $uri[5]);
                     }
                     break;
             }

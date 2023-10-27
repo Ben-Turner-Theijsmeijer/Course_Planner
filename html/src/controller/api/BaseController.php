@@ -1,4 +1,8 @@
 <?php
+/* 
+Module that holds the helper functions
+to parse urls, headers, etc
+*/
 class BaseController
 {
     public function __call($name, $arguments)
