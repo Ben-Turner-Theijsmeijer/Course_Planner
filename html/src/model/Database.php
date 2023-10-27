@@ -1,8 +1,8 @@
 <?php
-
-// DB Credentials
-// maybe move these to a .ENV file later?
-// change these to your local credentials when working locally
+/*
+Module that interacts with the CourseModel to execute 
+database queries
+*/
 
 class Database
 {
@@ -217,6 +217,4 @@ class Database
             throw new Exception($e->getMessage());
         }
     }
-
-
 }

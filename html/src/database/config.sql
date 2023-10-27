@@ -1,3 +1,7 @@
+/*
+Script to create the database for the courses offered
+at the University of Guelph
+*/
 CREATE DATABASE IF NOT EXISTS `cis3760`;
 USE cis3760;
 
