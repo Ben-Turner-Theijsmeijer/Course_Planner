@@ -133,7 +133,6 @@ class Database
         }
     }
 
-
     // Checks if a course exists prior to deleting it
     private function checkCourseExists($courseCode)
     {
