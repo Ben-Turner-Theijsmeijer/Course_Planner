@@ -131,7 +131,7 @@ paths:
           description: Invalid course code supplied
         '404':
           description: Course not found
-  /prereq/future/{courseCodes}:
+  /prereq/future/{courseCode}:
     get:
       tags:
         - prereq

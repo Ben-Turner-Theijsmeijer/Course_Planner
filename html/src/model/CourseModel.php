@@ -84,6 +84,14 @@ class CourseModel extends Database
             ["s", "%" . $subjectCode . "%"]
         );
     }
+    // Retrieves all the prereqs for a given course code
+    public function getPrereqs($courseCode)
+    {
+        return $this->select(
+            "SELECT Prerequisites FROM Courses WHERE CourseCode = ?",
+            ["s", $courseCode]
+        );
+    }
 
     // Retrieves the values from the CoursesTaken Table
     public function getCourse_table()

@@ -192,6 +192,35 @@ class CourseController extends BaseController
         }
     }
 
+    public function getPrereqs($courseCode)
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+        if ($requestMethod == 'GET') {
+            try {
+                $result = $this->courseModel->getPrereqs($courseCode);
+                $responseData = json_encode($result);
+            } catch (Error $e) {
+                $strErrorDesc = $e->getMessage();
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+        }
+
+        if (!$strErrorDesc) {
+            $this->sendOutput(
+                $responseData,
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        }
+        else {
+            $this->sendOutput(
+                $responseData,
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+
     public function getCourse_table()
     {
         $strErrorDesc = '';
