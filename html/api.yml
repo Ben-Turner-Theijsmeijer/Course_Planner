@@ -157,7 +157,7 @@ paths:
           description: Invalid course code supplied
         '404':
           description: Course not found
-  /subject/allsubjects/:
+  /subject/all/:
     get:
       tags:
         - subject
@@ -172,7 +172,7 @@ paths:
               schema:
                 type: string
                 example: "ACCT, ANS, AGR ..."
-  /subject/subject/{subjectCode}:
+  /subject/{subjectCode}:
     get:
       tags:
         - subject

@@ -36,24 +36,22 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                     break;
             }
         }
-        //  All Subjects Endpoint
-        if (isset($uri[3]) && $uri[3] == 'allsubjects') {
-            $subjectController = new CourseController();
-            $requestMethod = $_SERVER['REQUEST_METHOD'];
-
-            switch ($requestMethod) {
-                case 'GET':
-                    if (isset($uri[4])) {
-                        $subjectController->getAllSubjectCourses();
-                    }
-                    break;
-            }
-        }
-        // Department Endpoints
+        //  Subject Endpoint
         if (isset($uri[3]) && $uri[3] == 'subject') {
+
             $subjectController = new CourseController();
             $requestMethod = $_SERVER['REQUEST_METHOD'];
-
+            // All subjects
+            if (isset($uri[4]) && $uri[4] == 'all') {
+                switch ($requestMethod) {
+                    case 'GET':
+                        if (isset($uri[5])) {
+                            $subjectController->getAllSubjectCourses();
+                        }
+                        break;
+                }
+            }
+            // Specific Subject
             switch ($requestMethod) {
                 case 'GET':
                     if (isset($uri[4])) {
@@ -67,7 +65,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
             $courseController = new CourseController();
             $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-            if(isset($uri[4]) && $uri[4] == 'future') {
+            if (isset($uri[4]) && $uri[4] == 'future') {
                 switch ($requestMethod) {
                     case 'GET':
                         if (isset($uri[5])) {
@@ -75,18 +73,15 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                         }
                         break;
                 }
-            }
-            else {
+            } else {
                 switch ($requestMethod) {
                     case 'GET':
                         if (isset($uri[4])) {
                             $courseController->getPrereqs($uri[4]);
                         }
-                        break; 
-                }  
+                        break;
+                }
             }
-
-             
         }
         // Student Endpoint
         if (isset($uri[3]) && $uri[3] == 'student') {
@@ -137,7 +132,9 @@ echo $navBar;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="src/js/scripts.js"></script>
 </head>
@@ -148,11 +145,13 @@ echo $navBar;
 <!-- Content Section -->
 <div class="relative flex flex-col w-full h-full bg-no-repeat bg-cover bg-top bg-[url('imgs/background.png')]">
     <content class="flex items-center justify-center h-screen">
-        <div class="py-[4rem] px-14 flex max-w-4xl gap-20 flex-col justify-between rounded-md backdrop-blur-sm bg-black/60 md:flex-row items-center">
+        <div
+            class="py-[4rem] px-14 flex max-w-4xl gap-20 flex-col justify-between rounded-md backdrop-blur-sm bg-black/60 md:flex-row items-center">
             <div class="text-white w-1/2">
                 <span class="block font-sans font-bold text-2xl text-left whitespace-nowrap">Forget about course
                     planning hassle!</span>
-                <span class="block font-sans font-bold text-8xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-2">Course
+                <span
+                    class="block font-sans font-bold text-8xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-2">Course
                     Selector</span>
             </div>
 
@@ -164,9 +163,12 @@ echo $navBar;
                     <li class="font-sans font-bold text-xl">See all the courses you can
                         take!</li>
                 </ul>
-                <a href="/excel/course_selection_tool.xlsm" class="self-center group bg-[#FFC72A] text-xl text-black font-bold mt-6 py-2 px-4 rounded" download="course_selection.xlsm">
+                <a href="/excel/course_selection_tool.xlsm"
+                    class="self-center group bg-[#FFC72A] text-xl text-black font-bold mt-6 py-2 px-4 rounded"
+                    download="course_selection.xlsm">
                     Download
-                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                    <span
+                        class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
                 </a>
             </div>
         </div>
@@ -178,19 +180,25 @@ echo $navBar;
             <form action="https://formspree.io/f/meqnpqdw" method="POST" id="contactForm">
                 <div class="mb-4">
                     <label for="name" class="block text-white text-sm font-medium mb-2">Name</label>
-                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#FFC72A]" required>
+                    <input type="text" id="name" name="name"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#FFC72A]" required>
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-white text-sm font-medium mb-2">Email</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#FFC72A]" required>
+                    <input type="email" id="email" name="email"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#FFC72A]" required>
                 </div>
                 <div class="mb-6">
                     <label for="message" class="block text-white text-sm font-medium mb-2">Message</label>
-                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#FFC72A]" required></textarea>
+                    <textarea id="message" name="message" rows="4"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#FFC72A]"
+                        required></textarea>
                 </div>
                 <div class="flex items-center justify-center">
-                    <button type="submit" id="submitButton" class="bg-[#FFC72A] py-2 px-6 font-bold rounded-md group transition duration-300">Submit
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                    <button type="submit" id="submitButton"
+                        class="bg-[#FFC72A] py-2 px-6 font-bold rounded-md group transition duration-300">Submit
+                        <span
+                            class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
                     </button>
                 </div>
 
