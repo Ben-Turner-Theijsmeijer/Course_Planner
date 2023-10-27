@@ -9,6 +9,10 @@ servers:
 tags:
   - name: course
     description: CRUD methods for course data
+  - name: prereq
+    description: methods for prereq information
+  - name: subject
+    description: methods for subjects
 paths:
   /course/{courseCode}:
     get:
@@ -101,6 +105,99 @@ paths:
           description: Invalid course code supplied
         '404':
           description: Course not found
+  /prereq/{courseCode}:
+    get:
+      tags:
+        - prereq
+      summary: Find prereqs for course
+      description: Find prereqs for course
+      operationId: getPrereqByCode
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code of prereqs to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "CIS*1300, CIS*1910"
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
+  /prereq/future/{courseCodes}:
+    get:
+      tags:
+        - prereq
+      summary: Find course that has prereqs
+      description: Find course that has prereqs
+      operationId: getCourseByPrereqs
+      parameters:
+        - name: courseCodes
+          in: path
+          description: Course code of prereqs to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "CIS*2910"
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
+  /subject/allsubjects:
+    get:
+      tags:
+        - subject
+      summary: Get all subjects
+      description: Find all subjects
+      operationId: getAllSubjects
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "ACCT, ANS, AGR ..."
+  /subject/coursesinsubject/{subjectCode}:
+    get:
+      tags:
+        - subject
+      summary: Find all courses in subject
+      description: Find all courses in subject
+      operationId: coursesInSubject
+      parameters:
+        - name: subjectCode
+          in: path
+          description: Subject code of prereqs to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "CIS*2910, CIS*1300..."
+        '400':
+          description: Invalid subject code supplied
+        '404':
+          description: Subject code not found  
 components:
   schemas:
     Course:
