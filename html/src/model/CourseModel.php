@@ -54,21 +54,21 @@ class CourseModel extends Database
             Department = ?,
             Location = ?
             WHERE CourseCode = ?", [
-                "sssssssssssss",
-                $courseData[0]['CourseName'],
-                $courseData[0]['CourseOffering'],
-                $courseData[0]['CourseWeight'],
-                $courseData[0]['CourseDescription'],
-                $courseData[0]['CourseFormat'],
-                $courseData[0]['Prerequisites'],
-                $courseData[0]['PrerequisiteCredits'],
-                $courseData[0]['Corequisites'],
-                $courseData[0]['Restrictions'],
-                $courseData[0]['Equates'],
-                $courseData[0]['Department'],
-                $courseData[0]['Location'],
-                $courseData[0]['CourseCode']
-            ]);
+            "sssssssssssss",
+            $courseData[0]['CourseName'],
+            $courseData[0]['CourseOffering'],
+            $courseData[0]['CourseWeight'],
+            $courseData[0]['CourseDescription'],
+            $courseData[0]['CourseFormat'],
+            $courseData[0]['Prerequisites'],
+            $courseData[0]['PrerequisiteCredits'],
+            $courseData[0]['Corequisites'],
+            $courseData[0]['Restrictions'],
+            $courseData[0]['Equates'],
+            $courseData[0]['Department'],
+            $courseData[0]['Location'],
+            $courseData[0]['CourseCode']
+        ]);
     }
 
     // Retrieves all subject courses for each department offered at the University of Guelph
@@ -79,7 +79,8 @@ class CourseModel extends Database
     // Retrieves all the courses for a given department
     public function getSubjectCourses($subjectCode)
     {
-        return $this->select("SELECT CourseCode FROM Courses WHERE CourseCode LIKE ?",
+        return $this->select(
+            "SELECT CourseCode FROM Courses WHERE CourseCode LIKE ?",
             ["s", "%" . $subjectCode . "%"]
         );
     }

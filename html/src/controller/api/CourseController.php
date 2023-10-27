@@ -135,7 +135,8 @@ class CourseController extends BaseController
         }
     }
 
-    public function getAllSubjectCourses() {
+    public function getAllSubjectCourses()
+    {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
@@ -163,7 +164,8 @@ class CourseController extends BaseController
 
     }
 
-    public function getSubjectCourses($subjectCode) {
+    public function getSubjectCourses($subjectCode)
+    {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 

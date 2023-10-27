@@ -2,9 +2,9 @@
 // Reference: https://www.php.net/manual/en/function.fgetcsv.php
 
 // This file connects to the DB and inserts records upon landing on the page /import.php
-$csvFile = __DIR__.'/../../excel/CourseList.csv';
+$csvFile = __DIR__ . '/../../excel/CourseList.csv';
 
-$env = parse_ini_file(__DIR__.'/../../.env');
+$env = parse_ini_file(__DIR__ . '/../../.env');
 
 $server = $env['server'];
 $username = $env['username'];
