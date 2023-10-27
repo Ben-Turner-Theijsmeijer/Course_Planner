@@ -93,6 +93,15 @@ class CourseModel extends Database
         );
     }
 
+    // Retrieves all courses that $courseCode is a prerequisite for
+    public function getFuturePrereqs($courseCode)
+    {
+        return $this->select(
+            "SELECT CourseCode FROM Courses WHERE Prerequisites LIKE ?",
+            ["s", "%".$courseCode."%"]
+        );
+    }
+
     // Retrieves the values from the CoursesTaken Table
     public function getCourse_table()
     {
