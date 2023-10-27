@@ -12,8 +12,9 @@ if (isset($uri[1]) && $uri[1] == 'api') {
         if (isset($uri[3]) && $uri[3] == 'course') {
             $courseController = new CourseController();
             $requestMethod = $_SERVER['REQUEST_METHOD'];
-
+            $uri[4] = urldecode($uri[4]);
             switch ($requestMethod) {
+                
                 case 'GET':
                     if (isset($uri[4])) {
                         $courseController->getCourse($uri[4]);
@@ -55,6 +56,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
             switch ($requestMethod) {
                 case 'GET':
                     if (isset($uri[4])) {
+                        $uri[4] = urldecode($uri[4]);
                         $subjectController->getSubjectCourses($uri[4]);
                     }
                     break;
@@ -69,6 +71,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                 switch ($requestMethod) {
                     case 'GET':
                         if (isset($uri[5])) {
+                            $uri[5] = urldecode($uri[5]);
                             $courseController->getFuturePrereqs($uri[5]);
                         }
                         break;
@@ -77,6 +80,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                 switch ($requestMethod) {
                     case 'GET':
                         if (isset($uri[4])) {
+                            $uri[4] = urldecode($uri[4]);
                             $courseController->getPrereqs($uri[4]);
                         }
                         break;
