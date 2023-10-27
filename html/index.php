@@ -42,7 +42,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
             switch ($requestMethod) {
                 case 'GET':
                     if (isset($uri[4])) {
-                        $subjectController->getAllSubjectCourses($uri[4]);
+                        $subjectController->getAllSubjectCourses();
                     }
                     break;
             }
