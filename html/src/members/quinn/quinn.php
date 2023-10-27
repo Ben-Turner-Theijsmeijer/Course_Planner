@@ -13,33 +13,15 @@
 </head>
 
 <!-- Header -->
-<header class="bg-black w-screen">
-    <div class="flex flex-row">
-        <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-            <a href="../../meet_the_team.php">
-                <span class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] decoration-4 underline-offset-4">Quinn
-                    Meiszinger
-                </span>
-            </a>
-        </div>
-        <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-            <a href="../../meet_the_team.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                Meet The Team
-                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-            </a>
 
-            <a href="../../how_it_works.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                How It Works
-                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-            </a>
-
-        </div>
-    </div>
-</header>
+<?php
+require_once('../../components/navbar.php');
+echo generateNav('member', 'Quinn');
+?>
 
 <!-- Content  -->
 <section class="content">
-    <div class="container mx-auto text-center max-width-md">
+    <div class="container mt-36 mx-auto text-center max-width-md">
         <h1 class="text-2xl font-bold mt-4">Base64 Encoder & Decoder</h1>
         <p class="mt-4">
             This is my PHP script to convert a string to and from base64

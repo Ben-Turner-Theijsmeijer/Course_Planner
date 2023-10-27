@@ -12,39 +12,14 @@
 </head>
 
 <!-- Header -->
-<header class="bg-black w-screen">
-    <div class="flex flex-row">
-        <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-            <span class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] decoration-4 underline-offset-4">Calculate</span>
-        </div>
-        <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-            <?php
-            echo '
-                    <form method="post" action="src/meet_the_team.php">
-                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                            Meet The Team
-                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                        </button>
-                    </form>
-                    ';
-            ?>
-            <?php
-            echo '
-                    <form method="post" action="src/how_it_works.php">
-                        <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                            About
-                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                        </button>
-                    </form>
-                    ';
-            ?>
-        </div>
-    </div>
-</header>
+<?php
+require_once('../../components/navbar.php');
+echo generateNav('member', 'Calculate');
+?>
 
 <body>
     <section class="content">
-        <div class="flex bg-white shadow-md rounded px-8">
+        <div class="mt-36 flex bg-white shadow-md rounded px-8">
             <div class="border-solid border-2 mb-4">
                 <?php
                 // get form variables

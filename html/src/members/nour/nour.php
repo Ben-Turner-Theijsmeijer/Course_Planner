@@ -67,30 +67,10 @@ if (isset($_POST['submit'])) {
 <!-- Header -->
 
 <body class=" bg-no-repeat bg-top bg-fixed bg-[url('../../../imgs/background.png')] bg-cover">
-    <header class="bg-black w-full sticky top-0 z-30">
-        <div class="flex flex-row relative">
-            <div class="flex flex-row w-1/2 bg-black h-20 items-center py-6 px-10">
-                <a href="../../meet_the_team.php">
-                    <span class="font-sans font-bold text-white text-4xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">Noureldeen Ahmed</span>
-                </a>
-            </div>
-            <div class="flex gap-x-6 flex-row-reverse w-1/2 bg-black h-20 items-center py-6 px-10">
-                <a href="../../meet_the_team.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                    Meet The Team
-                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                </a>
-                <a href="../../how_it_works.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
-                    How It Works
-                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]"></span>
-                </a>
-                <a href="/excel/course_selection_tool.xlsm" download="course_selection.xlsm" class="bg-[#FFC72A] rounded-sm py-1 text-2xl font-bold p-3.5 group">Download
-                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
-                </a>
-            </div>
-            <div class="h-4 w-3/4 bg-[#C20430] absolute -bottom-6"></div>
-            <div class="h-4 w-1/3 bg-[#FFC72A] absolute -bottom-12"></div>
-        </div>
-    </header>
+    <?php
+    require_once('../../components/navbar.php');
+    echo generateNav('member', 'Noureldeen Ahmed');
+    ?>
     <div class="flex flex-col h-screen items-center pt-36 w-full">
         <div class="py-[4rem] px-4 md:px-14 flex max-w-4xl w-full gap-20 justify-between rounded-md backdrop-blur-sm bg-black/60 flex-col items-center">
             <div class="flex flex-col w-full justify-between md:flex-row">
