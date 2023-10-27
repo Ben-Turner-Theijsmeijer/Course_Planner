@@ -67,12 +67,26 @@ if (isset($uri[1]) && $uri[1] == 'api') {
             $courseController = new CourseController();
             $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-            switch ($requestMethod) {
-                case 'GET':
-                    if (isset($uri[4])) {
-                        $courseController->getPrereqs($uri[4]);
-                    }
+            if(isset($uri[4]) && $uri[4] == 'future') {
+                switch ($requestMethod) {
+                    case 'GET':
+                        if (isset($uri[5])) {
+                            $courseController->getFuturePrereqs($uri[5]);
+                        }
+                        break;
+                }
             }
+            else {
+                switch ($requestMethod) {
+                    case 'GET':
+                        if (isset($uri[4])) {
+                            $courseController->getPrereqs($uri[4]);
+                        }
+                        break; 
+                }  
+            }
+
+             
         }
         // Student Endpoint
         if (isset($uri[3]) && $uri[3] == 'student') {
