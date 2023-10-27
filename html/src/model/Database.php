@@ -29,13 +29,20 @@ class Database
         try {
             $stmt = $this->executeStatement($query, $params);
             $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            // Checks if the response is valid
+            if (!empty($result)) {
+                return $result;
+            }
+            $result = "Cannot fetch " . $params[1] . "!";
             $stmt->close();
             return $result;
+
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
-    // Deletes a course given the course code
+    // Deletes a course given the course code`
     public function delete($query = "", $params = [])
     {
         try {
