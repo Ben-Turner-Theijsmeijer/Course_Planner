@@ -1,12 +1,12 @@
 $(document).ready(function () {
+    let serverRoot = $('#serverRoot').html()
     $("#sendRequest").click(function () {
         $command = jQuery("#command").val();
         console.log($('#method').val());
-        console.log('https://cis3760f23-11.socs.uoguelph.ca/api/v1/course/' + $command);
-        ;
+        console.log(serverRoot + '/api/v1/course/' + $command);;
 
         $.ajax({
-            url: 'https://cis3760f23-11.socs.uoguelph.ca/api/v1/course/' + $command,
+            url: serverRoot + '/api/v1/course/' + $command,
             method: $('#method').val(),
             success: function (stuff) {
                 //alert(JSON.stringify(stuff));
@@ -18,10 +18,10 @@ $(document).ready(function () {
         $command = jQuery("#command1").val();
         $grade = jQuery("#grade").val();
         console.log($('#requestType').val());
-        console.log('https://cis3760f23-11.socs.uoguelph.ca/api/v1/student/' + $command + '/' + $grade);
+        console.log(serverRoot + '/api/v1/student/' + $command + '/' + $grade);
 
         $.ajax({
-            url: 'https://cis3760f23-11.socs.uoguelph.ca/api/v1/student/' + $command + '/' + $grade,
+            url: serverRoot + '/api/v1/student/' + $command + '/' + $grade,
             method: $('#requestType').val(),
             success: function (stuff) {
                 //alert(JSON.stringify(stuff));
