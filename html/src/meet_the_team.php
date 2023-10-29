@@ -13,20 +13,29 @@
     <link rel="icon" href="../src/favicon/favicon.png" type="image/png">
 </head>
 
+<!-- BODY SECTION -->
 <body class="bg-black bg-no-repeat bg-cover bg-fixed bg-top bg-[url('../imgs/background.png')]">
     <!-- Header -->
-    <div class="flex flex-col w-full h-full sticky top-0 z-30">
         <?php
         require_once(__DIR__ . '/components/navbar.php');
         echo generateNav('content');
         ?>
+
+    <!-- spacer after header to give content space -->
+    <div class="mt-4 p-5">
     </div>
+
+    <!-- Main Content Section -->
     <content
         class="flex w-auto flex-col md:my-20 md:mx-10 md:p-10 bg-hero box-content bg-black/60 backdrop-blur-sm bg-no-repeat bg-cover bg-center bg-fixed md:rounded-md">
         <span
             class="font-sans font-bold text-white text-center text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4 mb-8">Meet
             The Team</span>
+
+        <!-- Team members section -->
         <div class="flex w-fill h-full flex-wrap justify-center">
+
+            <!-- Andrew -->
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
@@ -56,6 +65,7 @@
                 </div>
             </div>
 
+            <!-- Ben -->
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
@@ -93,6 +103,7 @@
                 </div>
             </div>
 
+            <!-- Darren -->
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
@@ -121,6 +132,7 @@
                 </div>
             </div>
 
+            <!-- Ethan -->
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
@@ -150,6 +162,7 @@
                 </div>
             </div>
 
+            <!-- Noureldeen -->
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
@@ -178,6 +191,7 @@
                 </div>
             </div>
 
+            <!-- Quin -->
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
@@ -214,6 +228,7 @@
                 </div>
             </div>
 
+            <!-- Vrushang -->
             <div class="p-4 max-w-md max-h-md">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
@@ -246,6 +261,8 @@
 
         </div>
     </content>
+
+    <!-- Footer Section -->
     <section class="footer">
         <footer class="w-full bg-black text-white py-6">
             <div class="container mx-auto text-center">

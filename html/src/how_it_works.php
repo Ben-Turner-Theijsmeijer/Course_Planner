@@ -15,12 +15,18 @@
     <link rel="icon" href="../src/favicon/favicon.png" type="image/png">
 </head>
 
+<!-- BODY SECTION -->
 <body class="bg-black bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
     <!-- Header Section -->
     <?php
     require_once(__DIR__ . '/components/navbar.php');
     echo generateNav('content');
     ?>
+
+    <!-- spacer after header to give content space -->
+    <div class="mt-4 p-5">
+    </div>
+
     <!-- Main Content Section -->
     <content
         class="flex w-auto flex-col md:my-20 md:mx-10 md:p-10 bg-hero box-content bg-black/60 backdrop-blur-sm bg-no-repeat bg-cover bg-center bg-fixed md:rounded-md">
