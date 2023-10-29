@@ -56,63 +56,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="content">
             <div class="container mx-auto py-8">
                 <div class="mb-8">
-                    <h2 class="text-4xl underline decoration-[#FFC72A] text-white font-bold mb-4">API Info</h2>
-                    <div class="flex flex-col md:flex-row">
+                    <div class="flex justify-between w-full">
+                        <h2 class="text-4xl underline decoration-[#FFC72A] text-white font-bold mb-4">API Info</h2>
+                        <!-- SQL Database Reset section -->
+                        <form action="" method="POST" id="">
+                            <input type="submit" name="reset" value="Hard Reset Database" onclick="return confirm('Are you sure you want to reset the database?');" class="cursor-pointer button border border-[#FFC72A] hover:border-[#C20430] transition duration-300 hover:bg-[#C20430] text-white  px-8 py-2 mb-2 rounded-md font-bold" />
+                        </form>
+                    </div>
+                    <div class="flex flex-col gap-14 md:flex-row">
 
                         <!-- course Table API commands section -->
-                        <div class=" w-full md:w-1/2">
+                        <div class="w-full md:w-1/2 text-xl pt-14">
                             <!-- command selection & submission section -->
-                            <div class="mx-auto text-xl p-8 text-center">
-                                <h3 class="text-2xl font-semibold underline decoration-[#C20430] text-white mb-4">API Commands for Courses Table</h3>
-                                <div class="mb-4 ">
-                                    <select name="method" id="method" class="rounded px-2 py-1 border border-gray-400" required>
-                                        <option value="" disabled selected>Request Method</option>
-                                        <option value="GET">GET</option>
-                                        <option value="PUT">PUT</option>
-                                        <option value="POST">POST</option>
-                                        <option value="DELETE">DELETE</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-4 ">
-                                    <label for="command" class="block text-white text-sm font-medium mb-2">Course
-                                        Name</label>
-                                    <input type="text" id="command" name="command" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
-                                </div>
-
-                                <div class="flex items-center justify-center">
-                                    <button id="sendRequest" name="sendRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
-                                        Submit
-                                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
-                                    </button>
-                                </div>
-
+                            <h3 class="text-2xl font-semibold whitespace-nowrap text-white mb-4">API Commands for Courses Table</h3>
+                            <div class="mb-4 ">
+                                <select name="method" id="method" class="rounded px-2 py-1 border border-gray-400" required>
+                                    <option value="" disabled selected>Request Method</option>
+                                    <option value="GET">GET</option>
+                                    <option value="PUT">PUT</option>
+                                    <option value="POST">POST</option>
+                                    <option value="DELETE">DELETE</option>
+                                </select>
                             </div>
 
-                            <!-- SQL Database Reset section -->
-                            <div class="max-w-md mx-auto text-center">
-                                <form action="" method="POST" id="">
-                                    <input type="submit" name="reset" value="Hard Reset Database" onclick="return confirm('Are you sure you want to reset the database?');" class="button border border-[#FFC72A] transition duration-300 hover:bg-[#FFC72A] text-white hover:text-black px-8 py-2 mb-2 rounded-md font-bold" />
-                                </form>
+                            <div class="mb-4 ">
+                                <label for="command" class="block text-white text-sm font-medium mb-2">Course
+                                    Name</label>
+                                <input type="text" id="command" name="command" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
                             </div>
 
+                            <button id="sendRequest" name="sendRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
+                                Submit
+                                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                            </button>
                         </div>
-                        <div class="w-full md:w-1/2 md:pl-8 text-xl pt-14">
-                            <div class="text-center">
-                                <a href="../api.yml" download class="bg-[#FFC72A] hover:bg-[#C20430] transition duration-300 text-black w-1/6 px-7 py-2 mt-4 mb-2 rounded font-bold">Download
-                                    api.yml file</a>
-                                <!-- <form action="" method="POST" id="">
-                                        <input type= "submit" name="reset" value="Hard Reset Database" class="button border border-[#FFC72A] hover:bg-[#FFC72A] text-black px-8 py-2 mt-4 mb-2 rounded font-bold">
-                                    </form> -->
-                            </div>
+                        <div class="w-full md:w-1/2 text-xl pt-14">
+                            <a href="../api.yml" download>
+                                <div class="text-center text-xl group w-3/4 m-auto bg-[#FFC72A] duration-300 text-black px-7 py-2 mt-4 mb-2 rounded font-bold">
+                                    Download api.yml file
+                                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                                </div>
+                            </a>
                             <p class="text-white mb-4">
                                 <br />
                                 This yml file has all the upto date details about our API based on the OpenAPI V3
                                 specification.
                             </p>
-
                         </div>
-                        <div class="w-full md:w-1/2 md:pl-8 text-xl pt-14">
+                        <div class="w-full md:w-1/2 text-xl pt-14">
                             <h3 class="text-2xl font-semibold text-white mb-4">API Commands for Student Table</h3>
 
                             <select name="requestType" id="requestType" class="rounded px-2 py-1 border border-gray-400" required>
@@ -135,18 +126,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="text" id="grade" name="grade" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
                             </div>
 
-                            <<<<<<< HEAD <button id="StudentRequest" name="StudentRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
-                                =======
-
-
-
-
-
-                                <button id="StudentRequest" name="StudentRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
-                                    >>>>>>> 3a95b99 (set up local config for API access)
-                                    Submit
-                                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
-                                </button>
+                            <button id="StudentRequest" name="StudentRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
+                                Submit
+                                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                            </button>
 
                         </div>
 
