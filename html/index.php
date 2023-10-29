@@ -1,3 +1,4 @@
+<!-- PHP SECTION -->
 <?php
 /*
 Landing page which contains the API logic to fetch information from the database
@@ -117,13 +118,12 @@ if (isset($uri[1]) && $uri[1] == 'api') {
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 }
 ?>
+
+<!-- HTML SECTION -->
 <!DOCTYPE html>
 <html>
-<!-- Head Section -->
-<?php
-echo $navBar;
-?>
 
+<!-- Head Section -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,7 +137,9 @@ echo $navBar;
 </head>
 
 <!-- Header Section -->
-
+<?php
+echo $navBar;
+?>
 
 <!-- Content Section -->
 <div class="relative flex flex-col w-full h-full bg-no-repeat bg-cover bg-top bg-[url('imgs/background.png')]">

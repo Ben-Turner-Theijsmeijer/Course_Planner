@@ -17,9 +17,6 @@ if ($conn->connect_error) {
 
 echo "<h1>Connected successfully to $database database!</h1>";
 
-echo ("HELLO?");
-
-
 if ($conn->query("DROP TABLE Prerequisites")) {
     echo ("Table Prerequisites Dropped successfully");
 }
