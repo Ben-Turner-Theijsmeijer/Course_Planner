@@ -74,3 +74,30 @@ Contains a new additional page & new functionallity
 - SQL database is running on the vm
     - created a reset button for the sql database that will return it to its original state
 
+# SPRINT 5
+
+Goal: A Continuation of the work in sprint 4, completing the implementation of the REST API using PHP
+to access and modify the course data in the database. Documenting how to use your API on the VM website,
+along with some examples showing it working.
+
+# Usage
+
+[Website](https://cis3760f23-11.socs.uoguelph.ca/)
+[API Documenation](https://cis3760f23-11.socs.uoguelph.ca/src/api_documentation.php)
+[API Access](https://cis3760f23-11.socs.uoguelph.ca/src/api_access.php)
+
+Contains a new additional page & new functionallity
+
+- API Documentation: a new page has been added to the vm detailing how to interact with the API through the http methods
+    - integrated the visual documentation of the yml file onto the vm instead of needing to rely on the external site [Swagger](https://editor.swagger.io/) for visualizing the documentation
+    - added documentation for the newly added methods for prerequisite information, subjects, and students.
+- Methods Calls: new method calls have been created and previously created method calls have been updated to work on the vm
+    - DELETE, POST, and PUT now work for courses
+    - added GET calls for course prerequisite information:
+        - call for returning the prerequisites for a specified course
+        - call for returning the courses that the specified course is a prerequisite for
+    - added GET calls for course subjects:
+        - call for returning a list of all courses run at the university
+        - call for returning a list of all courses in a specified subject such as CIS, ACCT, etc...
+    - added GET, DELETE, POST, and PUT calls for students
+
