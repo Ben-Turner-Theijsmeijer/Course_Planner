@@ -11,6 +11,7 @@ $numRecords = 0;
 // establish db connection
 $conn = new mysqli($server, $username, $password, $database);
 
+// error checking
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

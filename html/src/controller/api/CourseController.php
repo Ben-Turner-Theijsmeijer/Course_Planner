@@ -6,6 +6,7 @@ require_once(__DIR__ . '/BaseController.php');
 require_once(__DIR__ . '/../../model/CourseModel.php');
 class CourseController extends BaseController
 {
+    // setup module that holds the queries for interacting with the database tables
     private $courseModel = null;
 
     public function __construct()
@@ -13,11 +14,20 @@ class CourseController extends BaseController
         $this->courseModel = new CourseModel();
     }
 
+    /*
+    ======================================================================
+    ||                        Course Functions                          ||
+    ======================================================================
+    */
+
+    // Function: Retrieves a course from the Courses table
+    // uses: GET
     public function getCourse($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt GET
         if ($requestMethod == 'GET') {
             try {
                 $result = $this->courseModel->getCourse($courseCode);
@@ -28,12 +38,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -41,11 +52,14 @@ class CourseController extends BaseController
         }
     }
 
+    // Function: Creates an entry in the Courses table
+    // uses: POST
     public function createCourse($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt POST
         if ($requestMethod == 'POST') {
 
             $jsonData = file_get_contents('php://input'); // receives the json input
@@ -61,12 +75,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -74,11 +89,14 @@ class CourseController extends BaseController
         }
     }
 
+    // Function: Deletes a course from the Courses table
+    // uses: DELETE
     public function deleteCourse($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt DELETE
         if ($requestMethod == 'DELETE') {
             try {
                 $result = $this->courseModel->deleteCourse($courseCode);
@@ -89,12 +107,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -102,11 +121,14 @@ class CourseController extends BaseController
         }
     }
 
+    // Function: Updates a Course's information with its given CourseCode
+    // uses: PUT
     public function updateCourse($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt PUT
         if ($requestMethod == 'PUT') {
 
             $jsonData = file_get_contents('php://input'); // receives the json input
@@ -122,12 +144,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -135,11 +158,20 @@ class CourseController extends BaseController
         }
     }
 
+    /*
+    ======================================================================
+    ||                        Subject Functions                         ||
+    ======================================================================
+    */
+
+    // Function: Retrieves all courses for each subject offered at the University of Guelph
+    // uses: GET
     public function getAllSubjectCourses()
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt GET
         if ($requestMethod == 'GET') {
             try {
                 $result = $this->courseModel->getAllSubjectCourses();
@@ -150,12 +182,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -164,11 +197,14 @@ class CourseController extends BaseController
 
     }
 
+    // Function: Retrieve all courses for a specified subject
+    // uses: GET
     public function getSubjectCourses($subjectCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt GET
         if ($requestMethod == 'GET') {
             try {
                 $result = $this->courseModel->getSubjectCourses($subjectCode);
@@ -179,12 +215,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -192,11 +229,20 @@ class CourseController extends BaseController
         }
     }
 
+    /*
+    ======================================================================
+    ||                      Prerequisites Functions                     ||
+    ======================================================================
+    */
+
+    // Function: Retrieve all prerequisites for a specified course
+    // uses: GET
     public function getPrereqs($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+        // check method call & attempt GET
         if ($requestMethod == 'GET') {
             try {
                 $result = $this->courseModel->getPrereqs($courseCode);
@@ -207,13 +253,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        }
-        else {
+        } else { // operation failed
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', $strErrorHeader)
@@ -221,11 +267,14 @@ class CourseController extends BaseController
         }
     }
 
+    // Function: Retrieve all courses that a specified course is a prerequisite for
+    // uses: GET
     public function getFuturePrereqs($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+        // check method call & attempt GET
         if ($requestMethod == 'GET') {
             try {
                 $result = $this->courseModel->getFuturePrereqs($courseCode);
@@ -236,14 +285,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        }
-        else
-        {
+        } else { // operation failed
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', $strErrorHeader)
@@ -251,11 +299,20 @@ class CourseController extends BaseController
         }
     }
 
+    /*
+    ======================================================================
+    ||                  Student Course_Taken Functions                  ||
+    ======================================================================
+    */
+
+    // Function: Retrieves the values from the student's CoursesTaken Table
+    // uses: GET
     public function getCourse_table()
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt GET
         if ($requestMethod == 'GET') {
             try {
                 $result = $this->courseModel->getCourse_table();
@@ -266,12 +323,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -279,11 +337,14 @@ class CourseController extends BaseController
         }
     }
 
+    // Function: Creates a new entry in the student's CoursesTaken Table
+    // uses: POST
     public function postCourse_table($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt POST
         if ($requestMethod == 'POST') {
             try {
                 $result = $this->courseModel->postCourse_table($courseCode);
@@ -294,12 +355,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { // operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -307,11 +369,14 @@ class CourseController extends BaseController
         }
     }
 
+    // Function: Updates a student's grade for a given course in the CoursesTaken Table
+    // uses: PUT
     public function putCourse_table($courseCode, $grade)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call & attempt PUT
         if ($requestMethod == 'PUT') {
             try {
                 $result = $this->courseModel->putCourse_table($courseCode, $grade);
@@ -322,12 +387,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { //operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
@@ -335,11 +401,14 @@ class CourseController extends BaseController
         }
     }
 
+    // Function: Deletes a course from the student's CoursesTaken Table
+    // uses: DELETE
     public function deleteCourse_table($courseCode)
     {
         $strErrorDesc = '';
         $requestMethod = $_SERVER["REQUEST_METHOD"];
 
+        // check method call and attempt DELETE
         if ($requestMethod == 'DELETE') {
             try {
                 $result = $this->courseModel->deleteCourse_table($courseCode);
@@ -350,12 +419,13 @@ class CourseController extends BaseController
             }
         }
 
+        // operation succeeded
         if (!$strErrorDesc) {
             $this->sendOutput(
                 $responseData,
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
-        } else {
+        } else { //operation failed
             $this->sendOutput(
                 json_encode(array('error' => $strErrorDesc)),
                 array('Content-Type: application/json', $strErrorHeader)
