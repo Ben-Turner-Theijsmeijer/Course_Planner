@@ -5,16 +5,24 @@ Module that holds the queries for interacting with the database tables
 require_once(__DIR__ . '/Database.php');
 class CourseModel extends Database
 {
+    /*
+    ======================================================================
+    ||                        Course Functions                          ||
+    ======================================================================
+    */
+
     // Retrieves a course from the Courses table
     public function getCourse($courseCode)
     {
         return $this->select("SELECT * FROM Courses WHERE CourseCode = ?", ["s", $courseCode]);
     }
+
     // Deletes a course from the Courses table
     public function deleteCourse($courseCode)
     {
         return $this->delete("DELETE FROM Courses WHERE CourseCode = ?", ["s", $courseCode]);
     }
+
     // Creates an entry in the Courses table 
     public function createCourse($courseData)
     {
@@ -36,6 +44,7 @@ class CourseModel extends Database
             $courseData[0]['Location']
         ]);
     }
+
     // Updates a Course's information with its given CourseCode
     public function updateCourse($courseData)
     {
@@ -71,11 +80,18 @@ class CourseModel extends Database
         ]);
     }
 
+    /*
+    ======================================================================
+    ||                        Subject Functions                         ||
+    ======================================================================
+    */
+
     // Retrieves all subject courses for each department offered at the University of Guelph
     public function getAllSubjectCourses()
     {
         return $this->select("SELECT CourseCode FROM Courses");
     }
+
     // Retrieves all the courses for a given department
     public function getSubjectCourses($subjectCode)
     {
@@ -84,6 +100,13 @@ class CourseModel extends Database
             ["s", "%" . $subjectCode . "%"]
         );
     }
+
+    /*
+    ======================================================================
+    ||                      Prerequisites Functions                     ||
+    ======================================================================
+    */
+
     // Retrieves all the prereqs for a given course code
     public function getPrereqs($courseCode)
     {
@@ -102,10 +125,23 @@ class CourseModel extends Database
         );
     }
 
+    /*
+    ======================================================================
+    ||                  Student Course_Taken Functions                  ||
+    ======================================================================
+    */
+
     // Retrieves the values from the CoursesTaken Table
     public function getCourse_table()
     {
         return $this->select("SELECT * FROM Courses_Taken");
+    }
+
+    // Deletes a course from the CoursesTaken Table
+    public function deleteCourse_table($courseCode)
+    {
+        return $this->deleteStudent("DELETE FROM Courses_Taken
+            WHERE CourseCode = ?", ["s", $courseCode]);
     }
 
     // Creates a new entry in the CoursesTaken Table
@@ -122,12 +158,5 @@ class CourseModel extends Database
         return $this->updateStudent("UPDATE Courses_Taken
             SET Grade = ?
             WHERE CourseCode = ?", ["ss", $grade, $courseCode]);
-    }
-
-    // Deletes a course from the CoursesTaken Table
-    public function deleteCourse_table($courseCode)
-    {
-        return $this->deleteStudent("DELETE FROM Courses_Taken
-            WHERE CourseCode = ?", ["s", $courseCode]);
     }
 }

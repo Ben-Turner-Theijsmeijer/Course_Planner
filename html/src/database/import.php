@@ -65,12 +65,7 @@ if (($handle = fopen($csvFile, 'r')) !== false) {
     echo "Error opening Course List";
 }
 
-// if ($numRecords > 0) {
-//     echo "Inserted $numRecords course records successfully.<br>";
-// } else {
-//     echo "No course records were inserted.";
-// }
-
+// import error check
 if ($numRecords <= 0) {
     echo "No course records were inserted.<br>";
 } 
