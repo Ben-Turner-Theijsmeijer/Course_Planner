@@ -64,6 +64,7 @@ how to use your API on the VM website, along with some examples showing it worki
 
 
 refer to the [sprint 4 wiki](https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/-/wikis/Sprint-4) for to see documentation on sprint 4 activities
+
 refer to the [Wiki Handbook](https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/-/wikis/Team-Handbook/Using-Postman-for-REST-API-testing) for how to use postman for rest API testing
 
 Contains a new additional page & new functionallity
@@ -83,7 +84,9 @@ along with some examples showing it working.
 # Usage
 
 [Website](https://cis3760f23-11.socs.uoguelph.ca/)
+
 [API Documenation](https://cis3760f23-11.socs.uoguelph.ca/src/api_documentation.php)
+
 [API Access](https://cis3760f23-11.socs.uoguelph.ca/src/api_access.php)
 
 Contains a new additional page & new functionallity
