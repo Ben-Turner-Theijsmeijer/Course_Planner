@@ -29,6 +29,32 @@ $(document).ready(function () {
             }
         });
     });
+    $("#SubjectRequest").click(function () {
+        $endpoint = jQuery("#endpointType").val();
+        console.log("GET");
+
+        if($endpoint == "All") {
+            console.log(serverRoot + '/api/v1/subject/all/');
+            $.ajax({
+                url: serverRoot + '/api/v1/subject/all/',
+                method: 'GET',
+                success: function (stuff) {
+                    $('#results').text(JSON.stringify(stuff));
+                }
+            });
+        }
+        else if ($endpoint == "Specific") {
+            $subjectCode = jQuery("#subjectCode").val();
+            console.log(serverRoot + '/api/v1/subject/' + $subjectCode);
+            $.ajax({
+                url: serverRoot + '/api/v1/subject/' + $subjectCode,
+                method: 'GET',
+                success: function (stuff) {
+                    $('#results').text(JSON.stringify(stuff));
+                }
+            });
+        }
+    });
 });
 
 $(document).ready(function () {
@@ -41,4 +67,13 @@ $(document).ready(function () {
             $("#textbox").hide();
         }
     });
+    $("#requestType").trigger("change");
+    $("#endpointType").change(function() {
+        if($(this).val() == "Specific") {
+            $("#subjectCodeBox").show();        
+        } else {
+            $("#subjectCodeBox").hide();
+        }
+    });
+    $("#endpointType").trigger("change");
 });
