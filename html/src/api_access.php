@@ -130,6 +130,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         </div>
 
+                        <!-- Subject API commands section -->
+                        <div class="w-full md:w-1/2 text-xl pt-14 text-center">
+                            <!-- student command selection & submission section -->
+                            <h3 class="text-2xl font-semibold underline decoration-[#C20430] text-white mb-4">API Commands for Subjects</h3>
+                            <select name="endpointType" id="endpointType" class="rounded px-2 py-1 mb-4 border border-gray-400" selected="All" required>
+                                <option value="" disabled selected>Endpoint</option>
+                                <option value="Specific">Specific</option>
+                                <option value="All">All</option>
+                            </select>
+
+                            <!-- Subject specific textbox -->
+                            <div class="mb-4 " id="subjectCodeBox" style="display: none;">
+                                <label for="command" class="block text-white text-sm font-medium mb-2">Subject Code</label>
+                                <input type="text" id="subjectCode" name="subjectCode" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
+                            </div>
+
+                            <!-- student submit button -->
+                            <button id="SubjectRequest" name="SubjectRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
+                                Submit
+                                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                            </button>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -161,27 +185,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <p class="text-white mb-4">
                 <br />
-                This yml file contains all the upto date information regarding our API based on the OpenAPI V3
+                This yml file contains all the up to date information regarding our API based on the OpenAPI V3
                 specification.
             </p>
 
         </div>
-    </div>
+    </div> 
 
     <!-- spacer to give footer room at botom of page -->
-    <div class="container mx-auto text-center mt-8 p-10">
+    <div class="flex my-auto mx-auto text-center mt-8 p-10">
     </div>
 
-
     <!-- Footer Section -->
-    <section class="footer absolute w-full sticky-bottom">
-        <footer class=" bg-black text-white py-6">
+    <section class="footer absolute w-full mt-auto">
+        <footer class="bg-black text-white py-6">
             <div class="container mx-auto text-center">
                 <p>&copy; CIS 3760 Group 11</p>
             </div>
         </footer>
     </section>
-
 </body>
-
 </html>
