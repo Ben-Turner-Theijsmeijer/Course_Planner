@@ -1,4 +1,3 @@
-<!-- PHP SECTION -->
 <?php
 /*
 Landing page which contains the API logic to fetch information from the database
