@@ -104,3 +104,6 @@ Contains a new additional page & new functionallity
         - call for returning a list of all courses in a specified subject such as CIS, ACCT, etc...
     - added GET, DELETE, POST, and PUT calls for students
 
+
+# SPRINT 6
+
