@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>API Access</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="src/js/scripts.js"></script>
@@ -48,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
 
     <!-- spacer after header to give content space -->
-    <div class="mt-4 p-5">
+    <div class="p-1">
     </div>
 
     <!-- Main Content Section -->
@@ -56,57 +58,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="content">
             <div class="container mx-auto py-8">
                 <div class="mb-8">
+
+                    <!-- box header section -->
                     <div class="flex justify-between w-full">
                         <h2 class="text-4xl underline decoration-[#FFC72A] text-white font-bold mb-4">API Info</h2>
+                        
                         <!-- SQL Database Reset section -->
                         <form action="" method="POST" id="">
                             <input type="submit" name="reset" value="Hard Reset Database" onclick="return confirm('Are you sure you want to reset the database?');" class="cursor-pointer button border border-[#FFC72A] hover:border-[#C20430] transition duration-300 hover:bg-[#C20430] text-white  px-8 py-2 mb-2 rounded-md font-bold" />
                         </form>
                     </div>
+
+                    <!-- box content section -->
                     <div class="flex flex-col gap-14 md:flex-row">
 
                         <!-- course Table API commands section -->
-                        <div class="w-full md:w-1/2 text-xl pt-14">
+                        <div class="w-full md:w-1/2 text-xl pt-14 text-center">
                             <!-- command selection & submission section -->
-                            <h3 class="text-2xl font-semibold whitespace-nowrap text-white mb-4">API Commands for Courses Table</h3>
-                            <div class="mb-4 ">
-                                <select name="method" id="method" class="rounded px-2 py-1 border border-gray-400" required>
-                                    <option value="" disabled selected>Request Method</option>
-                                    <option value="GET">GET</option>
-                                    <option value="PUT">PUT</option>
-                                    <option value="POST">POST</option>
-                                    <option value="DELETE">DELETE</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-4 ">
-                                <label for="command" class="block text-white text-sm font-medium mb-2">Course
-                                    Name</label>
-                                <input type="text" id="command" name="command" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
-                            </div>
-
-                            <button id="sendRequest" name="sendRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
-                                Submit
-                                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
-                            </button>
-                        </div>
-                        <div class="w-full md:w-1/2 text-xl pt-14">
-                            <a href="../api.yml" download>
-                                <div class="text-center text-xl group w-3/4 m-auto bg-[#FFC72A] duration-300 text-black px-7 py-2 mt-4 mb-2 rounded font-bold">
-                                    Download api.yml file
-                                    <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
-                                </div>
-                            </a>
-                            <p class="text-white mb-4">
-                                <br />
-                                This yml file has all the upto date details about our API based on the OpenAPI V3
-                                specification.
-                            </p>
-                        </div>
-                        <div class="w-full md:w-1/2 text-xl pt-14">
-                            <h3 class="text-2xl font-semibold text-white mb-4">API Commands for Student Table</h3>
-
-                            <select name="requestType" id="requestType" class="rounded px-2 py-1 border border-gray-400" required>
+                            <h3 class="text-2xl font-semibold underline decoration-[#C20430] whitespace-nowrap text-white mb-4">API Commands for Courses Table</h3>
+                            <select name="method" id="method" class="rounded px-2 py-1 mb-4 border border-gray-400" required>
                                 <option value="" disabled selected>Request Method</option>
                                 <option value="GET">GET</option>
                                 <option value="PUT">PUT</option>
@@ -114,18 +84,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="DELETE">DELETE</option>
                             </select>
 
+                            <!-- command textbox -->
+                            <div class="mb-4 ">
+                                <label for="command" class="block text-white text-sm font-medium mb-2">Course Name</label>
+                                <input type="text" id="command" name="command" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
+                            </div>
 
+                            <!-- submit button -->
+                            <button id="sendRequest" name="sendRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
+                                Submit
+                                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
+                            </button>
+                        </div>
+
+                        <!-- Student Table API commands section -->
+                        <div class="w-full md:w-1/2 text-xl pt-14 text-center">
+                            <!-- student command selection & submission section -->
+                            <h3 class="text-2xl font-semibold underline decoration-[#C20430] text-white mb-4">API Commands for Student Table</h3>
+                            <select name="requestType" id="requestType" class="rounded px-2 py-1 mb-4 border border-gray-400" required>
+                                <option value="" disabled selected>Request Method</option>
+                                <option value="GET">GET</option>
+                                <option value="PUT">PUT</option>
+                                <option value="POST">POST</option>
+                                <option value="DELETE">DELETE</option>
+                            </select>
+
+                            <!-- student command textbox -->
                             <div class="mb-4 ">
                                 <label for="command" class="block text-white text-sm font-medium mb-2">Course
                                     Name</label>
                                 <input type="text" id="command1" name="command1" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
                             </div>
 
+                            <!-- Student PUT-specific textbox -->
                             <div class="mb-4 " id="textbox" style="display: none;">
                                 <label for="command" class="block text-white text-sm font-medium mb-2">Grade</label>
                                 <input type="text" id="grade" name="grade" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-[#FFC72A]" required />
                             </div>
 
+                            <!-- student submit button -->
                             <button id="StudentRequest" name="StudentRequest" class="bg-[#FFC72A] py-2 px-10 mt-2 font-bold rounded-md group transition duration-300">
                                 Submit
                                 <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
@@ -143,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div>
                 <h3 class="text-3xl text-white font-semibold mb-4">Output</h3>
                 <!-- output placeholder -->
-                <p class="text-white mb-4" id="results" name="results">method output will be displayed here</p>
+                <p class="text-white mb-4" id="results" name="results">output will be displayed here</p>
             </div>
 
         </section>
