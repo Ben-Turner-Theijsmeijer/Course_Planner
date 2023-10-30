@@ -36,6 +36,12 @@ function generateNav($pageType, $name = 'Course Selector')
                 API Access
                 <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
             </a>
+            
+
+            <a href="%scourse_finder.php" class="group font-sans font-bold text-white text-2xl transition duration-300">
+                Course Finder
+            <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
     
             <a href="%sapi_documentation.php"
                 class="group font-sans font-bold text-white text-2xl transition duration-300">
@@ -46,6 +52,6 @@ function generateNav($pageType, $name = 'Course Selector')
     </div>
     <div class="h-4 w-3/4 bg-[#C20430] absolute -bottom-6"></div>
     <div class="h-4 w-1/3 bg-[#FFC72A] absolute -bottom-12"></div>
-    </header>', $indexPrefix, $name, $pagesPrefix, $pagesPrefix, $pagesPrefix, $pagesPrefix);
+    </header>', $indexPrefix, $name, $pagesPrefix, $pagesPrefix, $pagesPrefix, $pagesPrefix, $pagesPrefix);
     return $nav;
 }
