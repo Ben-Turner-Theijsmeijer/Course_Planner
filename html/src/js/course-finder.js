@@ -6,55 +6,49 @@ $(document).ready(function () {
   let courseCounter = 1; // counter for generating unique IDs
   let studentCourses = []; // List of student courses they have taken
   let completedCredits = 0; // Keeps track of the number of credits a student has completed
- 
+  let noPreReqCourses = [{}]; // Keeps track of the courses with no prerequisites
+
   if (completedCredits === 0) {
     $("#credits_completed").text("No credits");
   }
-  
-let noPreReqCourses = [{}];
-  //Get all the noPreReqs
-  async function loadNoPreReqs(){
 
+  loadNoPreReqs(); // Loads courses with no prerequisites
+
+  //Get all the noPreReqs
+  async function loadNoPreReqs() {
     try {
       const response = await axios.get(
         `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses?prerequisites=none`
       );
       if (response.data) {
         noPreReqCourses = response.data.courses;
+
+        $("#no-prereq-courses").empty(); // Removes the initial empty element
+
+        // Iterates through the courses and creates the cards
         for (let index = 0; index < noPreReqCourses.length; index++) {
-          updatePageWithNoPreReqs(noPreReqCourses[index].code,noPreReqCourses[index].title);
-          
+          const courseCode = noPreReqCourses[index].code;
+          const courseTitle = noPreReqCourses[index].title;
+          courseCard(courseCode, courseTitle);
         }
-        
       }
-        
-      
     } catch (error) {
       console.error(error);
     }
-
   }
-  //Update the nopreReqs on the page
-  function updatePageWithNoPreReqs(code,title){
-    let div = document.createElement('div');
-    div.classList.add('bg-blue-300','p-5', 'rounded-lg');
-    let pCourseCode = document.createElement('p');
-    pCourseCode.classList.add('text-xl', 'font-semibold');
-    let pTitle = document.createElement('p');
-    textCourseCode = document.createTextNode(code);
-    textCourseTitle = document.createTextNode(title);
 
-    pCourseCode.appendChild(textCourseCode);
-    pTitle.appendChild(textCourseTitle);
-    div.appendChild(pCourseCode);
-    div.appendChild(textCourseTitle);
-    document.getElementById("noPreReqs").appendChild(div);
+  // Creates a course card to display a given course
+  function courseCard(courseCode, courseTitle) {
+    const $courseCard = $(
+      "<div class='bg-blue-300 p-4 rounded-lg course'></div>"
+    );
+    $courseCard.append(
+      $("<p class='text-xl font-semibold'></p>").text(courseCode)
+    );
+    $courseCard.append($("<p></p>").text(courseTitle));
+    $("#no-prereq-courses").append($courseCard);
   }
-  loadNoPreReqs();
-  //console.log(JSON.stringify(loadNoPreReqs()));
-  //updatePageWithNoPreReqs(noPreReqCourses[0].code,noPreReqCourses[0].code);
 
-  
   // Adds a new course to the course table
   async function addCourseToTable(courseCode) {
     const table = $("#my-courses tbody");
@@ -73,7 +67,7 @@ let noPreReqCourses = [{}];
 
       if (response.data) {
         const courseData = response.data.course[0];
-        
+
         // Handles duplicate courses
         if (!studentCourses.includes(courseData.code)) {
           newRow.append(
@@ -131,17 +125,17 @@ let noPreReqCourses = [{}];
   // Generates the courses a student can take
   $("#generate-courses").click(function () {
     if (studentCourses.length === 0) {
-      alert("No courses entered!")
+      alert("No courses entered!");
     }
     // Include logic here to output prerequisites when the button is clicked
     // will require an API call passing in the studentCourses array
-  })
+  });
 
   // Removes a course from the table
   $("#my-courses").on("click", ".delete", function () {
     const courseCode = $(this).closest("tr").find("td:first").text();
     const courseWeight = $(this).closest("tr").find("td:eq(2)").text(); // retrieves the 3rd row
-  
+
     $(this).closest("tr").remove();
 
     // Find the corresponding course index

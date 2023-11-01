@@ -120,13 +120,17 @@ echo generateNav('content');
     </div>
   </div>
 
-  <!-- Courses that have no prereqs -->
-  <button class="accordion text-2xl font-bold mb-4 ">Courses with no prereqs</button>
-  <div  class="panel" >
-    <div id="noPreReqs" class="grid grid-cols-3 gap-4">
-      
+    <!-- Courses with no prerequisites -->
+    <div class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8">
+    <h1 class="text-2xl font-bold mb-4">Courses with No Prerequisites</h1>
+    <div class="grid grid-cols-3 gap-4"  id="no-prereq-courses">
+      <div class="bg-blue-300 p-4 rounded-lg">
+        <p class="text-xl font-semibold" id="no-prereq-course-code"></p>
+        <p id="no-prereq-course-name"></p>
+      </div>
     </div>
   </div>
+
 
   <script>
     var acc = document.getElementsByClassName("accordion");
