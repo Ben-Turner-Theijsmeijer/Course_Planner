@@ -6,11 +6,55 @@ $(document).ready(function () {
   let courseCounter = 1; // counter for generating unique IDs
   let studentCourses = []; // List of student courses they have taken
   let completedCredits = 0; // Keeps track of the number of credits a student has completed
-
+ 
   if (completedCredits === 0) {
     $("#credits_completed").text("No credits");
   }
+  
+let noPreReqCourses = [{}];
+  //Get all the noPreReqs
+  async function loadNoPreReqs(){
 
+    try {
+      const response = await axios.get(
+        `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses?prerequisites=none`
+      );
+      if (response.data) {
+        noPreReqCourses = response.data.courses;
+        for (let index = 0; index < noPreReqCourses.length; index++) {
+          updatePageWithNoPreReqs(noPreReqCourses[index].code,noPreReqCourses[index].title);
+          
+        }
+        
+      }
+        
+      
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+  //Update the nopreReqs on the page
+  function updatePageWithNoPreReqs(code,title){
+    let div = document.createElement('div');
+    div.classList.add('bg-blue-300','p-5', 'rounded-lg');
+    let pCourseCode = document.createElement('p');
+    pCourseCode.classList.add('text-xl', 'font-semibold');
+    let pTitle = document.createElement('p');
+    textCourseCode = document.createTextNode(code);
+    textCourseTitle = document.createTextNode(title);
+
+    pCourseCode.appendChild(textCourseCode);
+    pTitle.appendChild(textCourseTitle);
+    div.appendChild(pCourseCode);
+    div.appendChild(textCourseTitle);
+    document.getElementById("noPreReqs").appendChild(div);
+  }
+  loadNoPreReqs();
+  //console.log(JSON.stringify(loadNoPreReqs()));
+  //updatePageWithNoPreReqs(noPreReqCourses[0].code,noPreReqCourses[0].code);
+
+  
   // Adds a new course to the course table
   async function addCourseToTable(courseCode) {
     const table = $("#my-courses tbody");
