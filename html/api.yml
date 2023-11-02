@@ -159,6 +159,62 @@ paths:
           description: Invalid course code supplied
         '404':
           description: Course not found
+  /prereq/future/:
+    post:
+      tags:
+        - prereq
+      summary: Find courses for a list of prereqs
+      description: Find courses for a list of prereqs
+      operationId: postFuturePrereqs
+      requestBody:
+        description: A list of prereqs as course codes
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrereqList'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    CourseCode:
+                      type: string
+                      example: 'CIS*3750'
+                required:
+                  - CourseCode
+                example:
+                  - CourseCode: "CIS*3150"
+                  - CourseCode: "CIS*3260"
+                  - CourseCode: "CIS*3700"
+                  - CourseCode: "CIS*3760"
+                  - CourseCode: "CIS*4020"
+                  - CourseCode: "CIS*4030"
+                  - CourseCode: "CIS*4150"
+                  - CourseCode: "CIS*4250"
+                  - CourseCode: "CIS*4300"
+                  - CourseCode: "CIS*4720"
+                  - CourseCode: "CIS*4780"
+                  - CourseCode: "CIS*4800"
+                  - CourseCode: "CIS*4820"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  properties:
+                    error:
+                      type: string
+                example: 
+                  - error: "Zero length array passed"
+        '500':
+          description: Internal Server Error
   /subject/all/:
     get:
       tags:
@@ -367,3 +423,16 @@ components:
             - courseWeight
             - courseDescription
             - courseOffering
+
+    PrereqList:
+      type: array
+      items:
+        properties:
+          CourseCode:
+            type: string
+            example: 'CIS*3750'
+      required:
+        - CourseCode
+      example:
+        - CourseCode: 'CIS*2750'
+        - CourseCode: 'CIS*3750'
