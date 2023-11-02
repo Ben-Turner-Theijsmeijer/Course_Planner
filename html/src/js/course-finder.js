@@ -27,9 +27,12 @@ $(document).ready(function () {
 
         // Iterates through the courses and creates the cards
         for (let index = 0; index < noPreReqCourses.length; index++) {
+          // Extracted values that are added to each course card
           const courseCode = noPreReqCourses[index].code;
           const courseTitle = noPreReqCourses[index].title;
-          courseCard(courseCode, courseTitle);
+          const courseOffering = noPreReqCourses[index].offered;
+
+          courseCard(courseCode, courseTitle, courseOffering);
         }
       }
     } catch (error) {
@@ -38,7 +41,7 @@ $(document).ready(function () {
   }
 
   // Creates a course card to display a given course
-  function courseCard(courseCode, courseTitle) {
+  function courseCard(courseCode, courseTitle, courseOffering) {
     const $courseCard = $(
       "<div class='bg-blue-300 p-4 rounded-lg course'></div>"
     );
@@ -46,6 +49,9 @@ $(document).ready(function () {
       $("<p class='text-xl font-semibold'></p>").text(courseCode)
     );
     $courseCard.append($("<p></p>").text(courseTitle));
+    $("#no-prereq-courses").append($courseCard);
+
+    $courseCard.append($("<p></p>").text(courseOffering));
     $("#no-prereq-courses").append($courseCard);
   }
 
@@ -148,5 +154,37 @@ $(document).ready(function () {
       completedCredits -= parseFloat(courseWeight);
       $("#credits_completed").text(completedCredits);
     }
+  });
+
+  var accordion = $(".accordion");
+
+  accordion.click(function () {
+    $(this).toggleClass("active");
+    var panel = $(this).next();
+
+    if (panel.css("max-height") === "0px") {
+      panel.css("max-height", panel.prop("scrollHeight") + "100px");
+      $("#course-filter").css("display", "block");
+    } else {
+      panel.css("max-height", "0");
+      $("#course-filter").css("display", "none");
+    }
+  });
+
+  // Filters courses based on the user input
+  function filterCourses(userInput) {
+    $("#no-prereq-courses").empty();
+
+    noPreReqCourses.forEach(function (course) {
+      if (course.code.toLowerCase().includes(userInput.toLowerCase())) {
+        courseCard(course.code, course.title);
+      }
+    });
+  }
+
+  // On input event when user enters in textbox
+  $("#course-filter").on("input", function () {
+    var filterValue = $(this).val();
+    filterCourses(filterValue);
   });
 });

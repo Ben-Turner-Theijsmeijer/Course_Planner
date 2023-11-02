@@ -16,47 +16,9 @@
   <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios -->
   <script src="./js/course-finder.js"></script>
+  <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3/swagger-ui.css" />
   <!-- Accordion https://www.w3schools.com/howto/howto_js_accordion.asp-->
-  
-  <style>
-    .accordion {
-      /* background-color: #eee; */
-      /* color: #444; */
-      cursor: pointer;
-      /* padding: 18px; */
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      /* font-size: 15px; */
-      transition: 0.4s;
-    }
-
-    .active, .accordion:hover {
-      background-color: #ccc;
-    }
-
-    .accordion:after {
-      content: '\002B';
-      color: #777;
-      font-weight: bold;
-      float: right;
-      margin-left: 5px;
-    }
-
-    .active:after {
-      content: "\2212";
-    }
-
-    .panel {
-      padding: 0 18px;
-      background-color: white;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-    }
-  </style>
 </head>
 
 <!-- Header -->
@@ -76,7 +38,7 @@ echo generateNav('content');
         class="w-1/3 p-2 rounded-lg border border-gray-300 mr-4" />
       <button type="button" id="add-course" class="w-1/3 bg-blue-500 text-white p-2 rounded-lg ml-4">Add
         Course</button>
-        <button type="button" id="generate-courses" class="w-1/3 bg-green-500 text-white p-2 rounded-lg ml-4">Generate
+      <button type="button" id="generate-courses" class="w-1/3 bg-green-500 text-white p-2 rounded-lg ml-4">Generate
         Courses</button>
     </form>
     <table id="my-courses" class="w-full border-collapse ">
@@ -108,14 +70,17 @@ echo generateNav('content');
       <div class="bg-blue-300 p-4 rounded-lg">
         <p class="text-xl font-semibold">CIS*1300</p>
         <p>Introduction to Programming</p>
+        <p>Fall</p>
       </div>
       <div class="bg-blue-300 p-4 rounded-lg">
         <p class="text-xl font-semibold">CIS*1910</p>
         <p>Discrete Structures I</p>
+        <p>Fall</p>
       </div>
       <div class="bg-blue-300 p-4 rounded-lg">
         <p class="text-xl font-semibold">CIS*2500</p>
         <p>Intermediate Programming</p>
+        <p>Winter</p>
         <!-- <button class="accordion w-28 " >More Details</button>
           <div  class="panel" >
             <p> offered: Fall, Winter. Credits: 0.5</p>
@@ -124,32 +89,17 @@ echo generateNav('content');
     </div>
   </div>
 
-  <!-- Courses that have no prereqs -->
   <div class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8">
     <button class="accordion text-2xl font-bold mb-4 py-2">Courses with No Prerequisites</button>
-    <div  class="panel" >
+    <div class="panel">
+      <input type="text" id="course-filter" placeholder="Search Courses (i.e CIS)"
+        class="mb-4 px-3 py-1 border rounded-md">
       <div id="no-prereq-courses" class="grid grid-cols-3 gap-4">
-        
+        <!-- No Prerequisite courses listed here -->
       </div>
     </div>
   </div>
 
-  <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null;
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        } 
-      });
-    }
-  </script>
 </body>
 
 
