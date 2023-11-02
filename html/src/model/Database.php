@@ -69,7 +69,7 @@ class Database
             if (!empty($result)) {
                 return $result;
             }
-            $result = "Cannot fetch " . $params[1] . "!";
+            $result = "No results found!";
             $stmt->close();
             return $result;
 

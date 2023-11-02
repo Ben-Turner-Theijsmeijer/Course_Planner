@@ -72,6 +72,9 @@ if (isset($uri[1]) && $uri[1] == 'api') {
                             $controller->getFuturePrereqs($uri[5]);
                         }
                         break;
+                    case 'POST':
+                        $controller->postFuturePrereqs();
+                        break;
                 }
             } else {
                 switch ($requestMethod) {

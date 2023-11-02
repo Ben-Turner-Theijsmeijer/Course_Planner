@@ -72,7 +72,7 @@ class CourseController extends BaseController
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage();
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
-            }
+            }   
         }
 
         // operation succeeded
@@ -296,6 +296,58 @@ class CourseController extends BaseController
                 $responseData,
                 array('Content-Type: application/json', $strErrorHeader)
             );
+        }
+    }
+
+    // Function: Retrieves all course codes that satisfy at least one of the requirements in the passed JSON list
+    // Uses: POST
+    public function postFuturePrereqs()
+    {
+        $strErrorDesc = '';
+        $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+        // check method call & attempt POST
+        if ($requestMethod == 'POST') {
+            try {
+
+                $jsonData = file_get_contents('php://input'); // receives the json input
+                
+                $courseData = json_decode($jsonData, associative:true, flags:JSON_THROW_ON_ERROR); // converts to a PHP Array
+                
+                if (count($courseData) <= 0) {
+                    throw new JsonException("Zero length array passed"); // Throw an exception if zero-length array passed
+                }
+
+                foreach ($courseData as $item) {
+                    if(!isset($item["CourseCode"])) {
+                         throw new JsonException("At least 1 object missing 'CourseCode' key"); // Throw an exception if 'CourseCode' key is missing from data
+                    }
+                }
+
+                $result = $this->courseModel->postFuturePrereqs($courseData);
+                $responseData = json_encode($result);
+            } 
+            catch(JsonException $e) {
+                $strErrorDesc = $e->getMessage();
+                $strErrorHeader = 'HTTP/1.1 400 Bad Request';
+            }
+            catch (Error $e) {
+                $strErrorDesc = $e->getMessage();
+                $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
+            }
+
+            // operation succeeded
+            if (!$strErrorDesc) {
+                $this->sendOutput(
+                    $responseData,
+                    array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                );
+            } else { // operation failed
+                $this->sendOutput(
+                    json_encode(array('error' => $strErrorDesc)),
+                    array('Content-Type: application/json', $strErrorHeader)
+                );
+            }
         }
     }
 
