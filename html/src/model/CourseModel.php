@@ -125,6 +125,35 @@ class CourseModel extends Database
         );
     }
 
+    public function postFuturePrereqs($courseData)
+    {
+        // Initialize query and parameters for further building
+        $query = "SELECT DISTINCT CourseCode FROM Courses WHERE ";
+        $params = array("");
+
+        // Get the length of the passed JSON array and create an iterable
+        $numItems = count($courseData);
+        $i = 0;
+
+        foreach($courseData as $item) {
+
+            // Append a new LIKE statement to the query for each course code in the list
+            $query .= "Prerequisites LIKE ?";
+            if(++$i !== $numItems) {
+                $query .= " OR "; // Add an or between each LIKE statement
+            }
+
+            // Append course code to params
+            $params[0] .= "s";
+            $params[] = "%".$item["CourseCode"]."%";
+        }
+
+        return $this->select(
+            $query,
+            $params
+        );
+    }
+
     /*
     ======================================================================
     ||                  Student Course_Taken Functions                  ||
