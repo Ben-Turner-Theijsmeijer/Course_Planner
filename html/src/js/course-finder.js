@@ -172,19 +172,30 @@ $(document).ready(function () {
   });
 
   // Filters courses based on the user input
-  function filterCourses(userInput) {
+  function filterCourses(courseInput, semesterInput) {
     $("#no-prereq-courses").empty();
 
     noPreReqCourses.forEach(function (course) {
-      if (course.code.toLowerCase().includes(userInput.toLowerCase())) {
-        courseCard(course.code, course.title);
+      if (
+        course.code.toLowerCase().includes(courseInput.toLowerCase()) &&
+        course.offered.toLowerCase().includes(semesterInput.toLowerCase())
+      ) {
+        courseCard(course.code, course.title, course.offered);
       }
     });
   }
 
-  // On input event when user enters in textbox
+  // Course filters
   $("#course-filter").on("input", function () {
-    var filterValue = $(this).val();
-    filterCourses(filterValue);
+    var courseFilterValue = $(this).val();
+    var semesterFilterValue = $("#semester-filter").val();
+    filterCourses(courseFilterValue, semesterFilterValue);
+  });
+
+  // Semester Filters
+  $("#semester-filter").on("input", function () {
+    var courseFilterValue = $("#course-filter").val();
+    var semesterFilterValue = $(this).val();
+    filterCourses(courseFilterValue, semesterFilterValue);
   });
 });
