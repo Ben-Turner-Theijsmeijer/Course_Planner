@@ -8,6 +8,10 @@ $(document).ready(function () {
   let completedCredits = 0; // Keeps track of the number of credits a student has completed
   let noPreReqCourses = [{}]; // Keeps track of the courses with no prerequisites
 
+  let noPreReqTable = '#no-prereq-courses'
+  let studentCoursesTable = '#my-courses'
+  let availableCoursesTable = '#available-courses'
+
   if (completedCredits === 0) {
     $("#credits_completed").text("No credits");
   }
@@ -23,7 +27,7 @@ $(document).ready(function () {
       if (response.data) {
         noPreReqCourses = response.data.courses;
 
-        $("#no-prereq-courses").empty(); // Removes the initial empty element
+        $(noPreReqTable).empty(); // Removes the initial empty element
 
         // Iterates through the courses and creates the cards
         for (let index = 0; index < noPreReqCourses.length; index++) {
@@ -32,7 +36,7 @@ $(document).ready(function () {
           const courseTitle = noPreReqCourses[index].title;
           const courseOffering = noPreReqCourses[index].offered;
 
-          courseCard(courseCode, courseTitle, courseOffering);
+          courseCard(noPreReqTable, courseCode, courseTitle, courseOffering);
         }
       }
     } catch (error) {
@@ -41,7 +45,7 @@ $(document).ready(function () {
   }
 
   // Creates a course card to display a given course
-  function courseCard(courseCode, courseTitle, courseOffering) {
+  function courseCard(tableID, courseCode, courseTitle, courseOffering) {
     const $courseCard = $(
       "<div class='bg-blue-300 p-4 rounded-lg course'></div>"
     );
@@ -49,22 +53,51 @@ $(document).ready(function () {
       $("<p class='text-xl font-semibold'></p>").text(courseCode)
     );
     $courseCard.append($("<p></p>").text(courseTitle));
-    $("#no-prereq-courses").append($courseCard);
+    $(tableID).append($courseCard);
 
     $courseCard.append($("<p></p>").text(courseOffering));
-    $("#no-prereq-courses").append($courseCard);
+    $(tableID).append($courseCard);
   }
 
-  // Adds a new course to the course table
-  async function addCourseToTable(courseCode) {
-    const table = $("#my-courses tbody");
+  function courseRow(tableID, courseData, rowIndex = 1) {
+    const table = $(tableID + " tbody");
     const newRow = $("<tr>");
-    const uniqueID = `course-${courseCounter++}`;
+    const uniqueID = `course-${rowIndex++}`;
     newRow.attr("data-course-id", uniqueID);
-
+    console.log("available-courses")
     // removes the star in the course code
-    courseCode = removeAsterisk(courseCode);
+    courseCode = removeAsterisk(courseData.code);
+    // Handles duplicate courses
+    newRow.append(
+      // Course Code
+      $("<td>")
+        .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
+        .text(courseData.code)
+    );
+    newRow.append(
+      // Course Name
+      $("<td>")
+        .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
+        .text(courseData.title)
+    );
+    newRow.append(
+      // Course Weight
+      $("<td>")
+        .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
+        .text(courseData.credits)
+    );
+    newRow.append(
+      // Delete button
+      $("<td>")
+        .addClass("px-6 py-3 text-left text-red-600 border-b-2")
+        .html("<button class='delete'>Delete</button>")
+    );
+    table.append(newRow);
+    console.log(studentCourses);
+  }
 
+  // Adds course that user took
+  async function addCourseToTable(courseCode) {
     try {
       // API Call to fetch course information from group 304's api
       const response = await axios.get(
@@ -73,41 +106,11 @@ $(document).ready(function () {
 
       if (response.data) {
         const courseData = response.data.course[0];
-
-        // Handles duplicate courses
         if (!studentCourses.includes(courseData.code)) {
-          newRow.append(
-            // Course Code
-            $("<td>")
-              .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
-              .text(courseData.code)
-          );
-          newRow.append(
-            // Course Name
-            $("<td>")
-              .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
-              .text(courseData.title)
-          );
-          newRow.append(
-            // Course Weight
-            $("<td>")
-              .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
-              .text(courseData.credits)
-          );
-          newRow.append(
-            // Delete button
-            $("<td>")
-              .addClass("px-6 py-3 text-left text-red-600 border-b-2")
-              .html("<button class='delete'>Delete</button>")
-          );
-          table.append(newRow);
-
           studentCourses.push(courseData.code); // Keeps track of the courses that are added to the student's schedule
+          courseRow(studentCoursesTable, courseData, courseCounter)
           completedCredits += courseData.credits; // Credit tracker
-
           $("#credits_completed").text(completedCredits);
-
-          console.log(studentCourses);
         } else {
           alert("Course already added!");
         }
@@ -129,12 +132,22 @@ $(document).ready(function () {
   });
 
   // Generates the courses a student can take
-  $("#generate-courses").click(function () {
+  $("#generate-courses").click(async function () {
     if (studentCourses.length === 0) {
       alert("No courses entered!");
     }
+    console.log('student courses: ' + studentCourses);
     // Include logic here to output prerequisites when the button is clicked
     // will require an API call passing in the studentCourses array
+    formattedCourses = studentCourses.map((course) => course + '_contains')
+    const response = await axios.get(
+      `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses?prerequisites=[${formattedCourses.toString()}]`
+    );
+    availableCourses = response.data['courses']
+    console.log(availableCourses);
+    // Iterates through the courses and creates the cards
+    $(availableCoursesTable + ' tbody').empty(); // Removes the existing courses
+    availableCourses.forEach(course => courseRow(availableCoursesTable, course))
   });
 
   // Removes a course from the table
@@ -173,7 +186,7 @@ $(document).ready(function () {
 
   // Filters courses based on the user input
   function filterCourses(courseInput, semesterInput) {
-    $("#no-prereq-courses").empty();
+    $(noPreReqTable).empty();
 
     noPreReqCourses.forEach(function (course) {
       if (
