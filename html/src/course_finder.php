@@ -38,16 +38,16 @@ echo generateNav('content');
       <button type="button" id="generate-courses" class="w-1/3 bg-green-500 text-white p-2 rounded-lg ml-4">Generate
         Courses</button>
     </form>
-    <table id="my-courses" class="w-full border-collapse ">
+    <table id="my-courses" class="w-full border-collapse">
       <thead>
-        <tr>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Course Code</th>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Course Name</th>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Credits</th>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Remove</th>
+        <tr class="px-6 w-full border-b-2 border-gray-300 justify-between">
+          <th class="px-6 text-left w-1/4 text-gray-600">Course Code</th>
+          <th class="px-6 text-left w-1/4 text-gray-600">Course Name</th>
+          <th class="px-6 text-left w-1/4 text-gray-600">Credits</th>
+          <th class="px-6 text-left w-1/4 text-gray-600">Remove</th>
         </tr>
       </thead>
-      <div class="flex justify-center borderpy-2 border-blue-300" id="credit_container">
+      <div class="flex justify-center py-4" id="credit_container">
         <h1 class="text-black px-2"> Total Credits: </h1>
         <p class="text-black px-2" id="credits_completed"></p>
       </div>
@@ -63,13 +63,13 @@ echo generateNav('content');
   <!-- Courses a student is able to take -->
   <div class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8">
     <h1 class="text-2xl font-bold mb-4">Available Courses</h1>
-    <table id="available-courses" class="w-full border-collapse ">
+    <table id="available-courses" class="w-full border-collapse table-auto">
       <thead>
-        <tr>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Course Code</th>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Course Name</th>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Credits</th>
-          <th class="px-6 py-3 text-left text-gray-600 border-b-2 border-gray-300">Remove</th>
+        <tr class="px-6 w-full border-b-2 border-gray-300 justify-between">
+          <th class="px-6 text-left w-1/4 text-gray-600">Course Code</th>
+          <th class="px-6 text-left w-1/4 text-gray-600">Course Name</th>
+          <th class="px-6 text-left w-1/4 text-gray-600">Credits</th>
+          <th class="px-6 text-left  w-1/4 text-gray-600">Add to Schedule</th>
         </tr>
       </thead>
       <tbody>
