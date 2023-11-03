@@ -94,6 +94,8 @@ echo generateNav('content');
     <div class="panel">
       <input type="text" id="course-filter" placeholder="Search Courses (i.e CIS)"
         class="mb-4 px-3 py-1 border rounded-md">
+        <input type="text" id="semester-filter" placeholder="Search Semester"
+        class="mb-4 px-3 py-1 border rounded-md">
       <div id="no-prereq-courses" class="grid grid-cols-3 gap-4">
         <!-- No Prerequisite courses listed here -->
       </div>
