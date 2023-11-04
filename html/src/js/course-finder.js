@@ -66,8 +66,7 @@ $(document).ready(function () {
     const uniqueID = `course-${rowIndex++}`
     newRow.attr("data-course-id", uniqueID)
     console.log("available-courses")
-    // removes the star in the course code
-    courseCode = removeAsterisk(courseData.code)
+
     // Handles duplicate courses
     newRow.append(
       // Course Code
@@ -99,6 +98,7 @@ $(document).ready(function () {
 
   // Adds course that user took
   async function addCourseToTable(courseCode) {
+    courseCode = removeAsterisk(courseCode) // cleanse input
     try {
       // API Call to fetch course information from group 304's api
       const response = await axios.get(
