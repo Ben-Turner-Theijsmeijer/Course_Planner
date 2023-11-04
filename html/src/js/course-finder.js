@@ -139,14 +139,28 @@ $(document).ready(function () {
       alert("No courses entered!")
     }
     console.log('student courses: ' + studentCourses)
+    possibleCourses = []
+    availableCourses = []
     // Include logic here to output prerequisites when the button is clicked
     // will require an API call passing in the studentCourses array
     formattedCourses = studentCourses.map((course) => course + '_contains')
-    const response = await axios.get(
-      `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses?prerequisites=[${formattedCourses.toString()}]`
-    )
-    availableCourses = response.data['courses']
-    console.log(availableCourses)
+
+    for (const course of formattedCourses) {
+      const response = await axios.get(
+        `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses?prerequisites=[${course}]`
+      )
+      possibleCourses.push(...response.data['courses'])
+    }
+    possibleCourses = [...new Map(possibleCourses.map(v => [v['code'], v])).values()]
+
+    for (const course of possibleCourses) {
+      compiled = compilePrerequisites(studentCourses, course['prerequisites'])
+      match = matchPrerequisites(compiled)
+
+      if(match === true) {
+        availableCourses.push(course)
+      }
+    }
     // Iterates through the courses and creates the cards
     $(availableCoursesTable + ' tbody').empty() // Removes the existing courses
     addButton = "<button class='add text-blue-600'>Add</button>"
@@ -207,6 +221,157 @@ $(document).ready(function () {
         courseCard(course.code, course.title, course.offered)
       }
     })
+  }
+
+  // Parses a string of prerequisites into an easily parsable nested array
+  function compilePrerequisites(studentCourses, prerequisites) {
+    compiled = []
+    temp = prerequisites
+
+    while(temp) {
+
+      // Match a course code
+      match = temp.match(/^[A-Z]{3,4}\*?[0-9]{4}\s*/g)
+      if(match) {
+        compiled.push({
+          'type': 'code',
+          'data': match[0].trim()
+        })
+        temp = temp.substring(match[0].length)
+        continue;
+      }
+
+      // Match open brackets
+      match = temp.match(/^[\(\[]\s*/g)
+      if(match) {
+        compiled.push({
+          'type': 'open_bracket',
+          'data': match[0].trim()
+        })
+        temp = temp.substring(match[0].length)
+        continue;
+      }
+
+      // Match closed brackets
+      match = temp.match(/^[\)\]]\s*/g)
+      if(match) {
+        compiled.push({
+          'type': 'close_bracket',
+          'data': match[0].trim()
+        })
+        temp = temp.substring(match[0].length)
+        continue;
+      }
+
+      // Match commas
+      match = temp.match(/^,\s*/g)
+      if(match) {
+        compiled.push({
+          'type': 'comma',
+          'data': match[0].trim()
+        })
+        temp = temp.substring(match[0].length)
+        continue;
+      }
+
+      // Match or
+      match = temp.match(/^or\s*/g)
+      if(match) {
+        compiled.push({
+          'type': 'or',
+          'data': match[0].trim()
+        })
+        temp = temp.substring(match[0].length)
+        continue;
+      }
+
+      // Match x of
+      match = temp.match(/^\d\s*of\s*/g)
+      if(match) {
+        compiled.push({
+          'type': 'x of',
+          'data': match[0][0]
+        })
+        temp = temp.substring(match[0].length)
+        continue;
+      }
+      
+      // Advance string if no character matched
+      temp = temp.substring(1)
+    }
+
+    // Convert course codes to 'true' or 'false' based on the passed list of courses taken
+    for(let i = 0; i < compiled.length; i++) {
+      if(compiled[i]['type'] === 'code') {
+        if(studentCourses.includes(compiled[i]['data'])) {
+          compiled[i]['type'] = true
+        } else {
+          compiled[i]['type'] = false
+        }
+      }
+    }
+
+    // Turn brackets into nested arrays
+    stack = []
+    list = []
+    for (element of compiled) {
+      if (element['type'] === 'open_bracket') {
+        stack.push(list)
+        list = []
+      } else if (element['type'] === 'close_bracket') {
+        temp = stack.pop()
+        temp.push(list)
+        list = temp
+      } else {
+        list.push(element)
+      }
+    }
+    
+    compiled = list
+    return compiled
+  }
+
+  // Recursively check to see if all course requirements are met
+  function matchPrerequisites(compiledPrerequisites) {
+
+    // Recursively parse nested arrays
+    if(Array.isArray(compiledPrerequisites[0])) {
+      matchPrerequisites(compiledPrerequisites[0])
+    }
+
+    // Count amount of matches in "x of" arrays, return true if condition is met
+    if(compiledPrerequisites[0] && compiledPrerequisites[0]['type'] === "x of") {
+      numOf = compiledPrerequisites[0]['data']
+      x = 0
+
+      for (const element of compiledPrerequisites.splice(1)) {
+        if(matchPrerequisites(element)) {
+          x++
+        }
+      }
+
+      if(x >= numOf) {
+        return true
+      }
+      else
+      {
+        return false
+      }
+    }
+    if(compiledPrerequisites[1] && compiledPrerequisites[1]['type'] === "comma") { // Treat commas as AND
+      return matchPrerequisites(compiledPrerequisites[0]) && matchPrerequisites(compiledPrerequisites.splice(2))
+    }
+    if(compiledPrerequisites[1] && compiledPrerequisites[1]['type'] === "or") { // Treat 'or' as OR
+      return matchPrerequisites(compiledPrerequisites[0]) || matchPrerequisites(compiledPrerequisites.splice(2))
+    }
+    if(compiledPrerequisites[0] && compiledPrerequisites[0]['type'] === true) { // If no more codes to parse, evaluate if passed code is met by the student courses
+      return true;
+    }
+    if(compiledPrerequisites && compiledPrerequisites['type'] === true) {
+      return true;
+    }
+
+    return false;
   }
 
   // Course filters
