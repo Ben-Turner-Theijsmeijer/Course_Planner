@@ -35,8 +35,9 @@ $(document).ready(function () {
           const courseCode = noPreReqCourses[index].code;
           const courseTitle = noPreReqCourses[index].title;
           const courseOffering = noPreReqCourses[index].offered;
+          const addButton = "<button class='add text-blue-600'>Add</button>";
 
-          courseCard(noPreReqTable, courseCode, courseTitle, courseOffering);
+          courseCard(noPreReqTable, courseCode, courseTitle, courseOffering, addButton);
         }
       }
     } catch (error) {
@@ -45,7 +46,7 @@ $(document).ready(function () {
   }
 
   // Creates a course card to display a given course
-  function courseCard(tableID, courseCode, courseTitle, courseOffering) {
+  function courseCard(tableID, courseCode, courseTitle, courseOffering, addButton) {
     const $courseCard = $(
       "<div class='bg-blue-300 p-4 rounded-lg course'></div>"
     );
@@ -57,6 +58,10 @@ $(document).ready(function () {
 
     $courseCard.append($("<p></p>").text(courseOffering));
     $(tableID).append($courseCard);
+
+    $courseCard.append($("<p></p>").html(addButton));
+    $(tableID).append($courseCard);
+
   }
 
   // Adds row to given table
@@ -201,6 +206,14 @@ $(document).ready(function () {
     const courseCode = tableRow.find("td:first").text();
     addCourseToTable(courseCode);
     tableRow.empty();
+  });
+
+  $(noPreReqTable).on("click", ".add", function () {
+    tableRow = $(this).closest("div")
+    const courseCode = tableRow.find("p:first").text()
+    addCourseToTable(courseCode)
+    console.log(courseCode)
+    tableRow.remove()
   });
 
   var accordion = $(".accordion");
