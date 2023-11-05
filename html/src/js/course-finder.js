@@ -34,9 +34,16 @@ $(document).ready(function () {
           // Extracted values that are added to each course card
           const courseCode = noPreReqCourses[index].code;
           const courseTitle = noPreReqCourses[index].title;
-          const addButton = "<button class='add text-blue-600'>Add</button>";
+          const courseOffering = noPreReqCourses[index].offered;
+          const addButton = "<button class='add text-blue-700'>Add</button>";
 
-          courseCard(noPreReqTable, courseCode, courseTitle, courseOffering, addButton);
+          courseCard(
+            noPreReqTable,
+            courseCode,
+            courseTitle,
+            courseOffering,
+            addButton
+          );
         }
       }
     } catch (error) {
@@ -45,9 +52,15 @@ $(document).ready(function () {
   }
 
   // Creates a course card to display a given course
-  function courseCard(tableID, courseCode, courseTitle, courseOffering, addButton) {
+  function courseCard(
+    tableID,
+    courseCode,
+    courseTitle,
+    courseOffering,
+    addButton
+  ) {
     const $courseCard = $(
-      "<div class='bg-blue-300 p-4 rounded-lg course'></div>"
+      "<div class='bg-blue-200 p-4 rounded-lg course'></div>"
     );
     $courseCard.append(
       $("<p class='text-xl font-semibold'></p>").text(courseCode)
@@ -58,7 +71,7 @@ $(document).ready(function () {
     $courseCard.append($("<p></p>").text(courseOffering));
     $(tableID).append($courseCard);
 
-    $courseCard.append($("<p></p>").html(addButton));
+    $courseCard.append($("<p class='mt-4'></p>").html(addButton));
     $(tableID).append($courseCard);
   }
 
@@ -207,10 +220,10 @@ $(document).ready(function () {
   });
 
   $(noPreReqTable).on("click", ".add", function () {
-    tableRow = $(this).closest("div")
-    const courseCode = tableRow.find("p:first").text()
-    addCourseToTable(courseCode)
-    tableRow.remove()
+    tableRow = $(this).closest("div");
+    const courseCode = tableRow.find("p:first").text();
+    addCourseToTable(courseCode);
+    tableRow.remove();
   });
 
   var accordion = $(".accordion");
