@@ -366,7 +366,7 @@ $(document).ready(function () {
   function matchPrerequisites(compiledPrerequisites) {
     // Recursively parse nested arrays
     if (Array.isArray(compiledPrerequisites[0])) {
-      matchPrerequisites(compiledPrerequisites[0]);
+      return matchPrerequisites(compiledPrerequisites[0]);
     }
 
     // Count amount of matches in "x of" arrays, return true if condition is met
