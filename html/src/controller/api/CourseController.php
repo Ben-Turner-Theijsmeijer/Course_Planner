@@ -72,7 +72,7 @@ class CourseController extends BaseController
             } catch (Error $e) {
                 $strErrorDesc = $e->getMessage();
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
-            }   
+            }
         }
 
         // operation succeeded
@@ -311,27 +311,25 @@ class CourseController extends BaseController
             try {
 
                 $jsonData = file_get_contents('php://input'); // receives the json input
-                
-                $courseData = json_decode($jsonData, associative:true, flags:JSON_THROW_ON_ERROR); // converts to a PHP Array
-                
+
+                $courseData = json_decode($jsonData, associative: true, flags: JSON_THROW_ON_ERROR); // converts to a PHP Array
+
                 if (count($courseData) <= 0) {
                     throw new JsonException("Zero length array passed"); // Throw an exception if zero-length array passed
                 }
 
                 foreach ($courseData as $item) {
-                    if(!isset($item["CourseCode"])) {
-                         throw new JsonException("At least 1 object missing 'CourseCode' key"); // Throw an exception if 'CourseCode' key is missing from data
+                    if (!isset($item["CourseCode"])) {
+                        throw new JsonException("At least 1 object missing 'CourseCode' key"); // Throw an exception if 'CourseCode' key is missing from data
                     }
                 }
 
                 $result = $this->courseModel->postFuturePrereqs($courseData);
                 $responseData = json_encode($result);
-            } 
-            catch(JsonException $e) {
+            } catch (JsonException $e) {
                 $strErrorDesc = $e->getMessage();
                 $strErrorHeader = 'HTTP/1.1 400 Bad Request';
-            }
-            catch (Error $e) {
+            } catch (Error $e) {
                 $strErrorDesc = $e->getMessage();
                 $strErrorHeader = 'HTTP/1.1 500 Internal Server Error';
             }

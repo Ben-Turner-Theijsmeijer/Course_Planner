@@ -41,11 +41,11 @@ if (($handle = fopen($csvFile, 'r')) !== false) {
         $CourseCode = $conn->real_escape_string($data[0]);
         $CourseName = $conn->real_escape_string($data[1]);
         $CourseOffering = $conn->real_escape_string($data[2]);
-        $CourseWeight = floatval($data[3]); 
+        $CourseWeight = floatval($data[3]);
         $CourseDescription = $conn->real_escape_string($data[4]);
         $CourseFormat = $conn->real_escape_string($data[5]);
         $Prerequisites = $conn->real_escape_string($data[6]);
-        $PrerequisiteCredits = floatval($data[7]); 
+        $PrerequisiteCredits = floatval($data[7]);
         $Corequisites = $conn->real_escape_string($data[8]);
         $Restrictions = $conn->real_escape_string($data[9]);
         $Equates = $conn->real_escape_string($data[10]);
@@ -68,6 +68,6 @@ if (($handle = fopen($csvFile, 'r')) !== false) {
 // import error check
 if ($numRecords <= 0) {
     echo "No course records were inserted.<br>";
-} 
+}
 
 $conn->close();
