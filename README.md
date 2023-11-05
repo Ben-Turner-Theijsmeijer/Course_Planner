@@ -107,3 +107,23 @@ Contains a new additional page & new functionallity
 
 # SPRINT 6
 
+Goal: Use another groups API to display courses available to a student given courses completed as an 
+input. Use the API to get courses that should be available to a student given the courses they've completed. 
+Use Javascript regex commands to check if prerequisite parameters are met and display all courses that build
+on courses a student has completed.
+
+# Usage
+
+[Website](https://cis3760f23-11.socs.uoguelph.ca/)
+
+[API Documenation](https://cis3760f23-11.socs.uoguelph.ca/src/api_documentation.php)
+
+[API Access](https://cis3760f23-11.socs.uoguelph.ca/src/api_access.php)
+
+Contains a new additional page & new functionallity
+
+-Course Finder: a new page which allows a student to input all courses they've completed thus far
+    -Generate Courses: given all courses taken, Generate Courses computes a regex command to proccess all the prerequisites of all courses which have one or more course completed and display 
+        all courses for which the user meets the prerequisite parameters
+    -Available Courses: all courses for which the prerequisite parameters will be displayed in the Available Courses field on the page.
+    -Courses with No Prerequisities: Displays all courses that have no prerequesities and allows you to filter by name or semester offering
