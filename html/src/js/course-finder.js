@@ -125,10 +125,12 @@ $(document).ready(function () {
 
   // Adds a course to the table
   $("#add-course").click(function () {
-    const courseCode = $("#course-code").val()
+    courseCode = $("#course-code").val()
 
     if (courseCode) {
-      addCourseToTable(courseCode)
+      courseCode = courseCode.split(',')
+      console.log(courseCode);
+      courseCode.forEach(course => addCourseToTable(course.trim()))
       $("#course-code").val("")
     }
   })
@@ -157,7 +159,7 @@ $(document).ready(function () {
       compiled = compilePrerequisites(studentCourses, course['prerequisites'])
       match = matchPrerequisites(compiled)
 
-      if(match === true) {
+      if (match === true) {
         availableCourses.push(course)
       }
     }
@@ -228,11 +230,11 @@ $(document).ready(function () {
     compiled = []
     temp = prerequisites
 
-    while(temp) {
+    while (temp) {
 
       // Match a course code
       match = temp.match(/^[A-Z]{3,4}\*?[0-9]{4}\s*/g)
-      if(match) {
+      if (match) {
         compiled.push({
           'type': 'code',
           'data': match[0].trim()
@@ -243,7 +245,7 @@ $(document).ready(function () {
 
       // Match open brackets
       match = temp.match(/^[\(\[]\s*/g)
-      if(match) {
+      if (match) {
         compiled.push({
           'type': 'open_bracket',
           'data': match[0].trim()
@@ -254,7 +256,7 @@ $(document).ready(function () {
 
       // Match closed brackets
       match = temp.match(/^[\)\]]\s*/g)
-      if(match) {
+      if (match) {
         compiled.push({
           'type': 'close_bracket',
           'data': match[0].trim()
@@ -265,7 +267,7 @@ $(document).ready(function () {
 
       // Match commas
       match = temp.match(/^,\s*/g)
-      if(match) {
+      if (match) {
         compiled.push({
           'type': 'comma',
           'data': match[0].trim()
@@ -276,7 +278,7 @@ $(document).ready(function () {
 
       // Match or
       match = temp.match(/^or\s*/g)
-      if(match) {
+      if (match) {
         compiled.push({
           'type': 'or',
           'data': match[0].trim()
@@ -287,7 +289,7 @@ $(document).ready(function () {
 
       // Match x of
       match = temp.match(/^\d\s*of\s*/g)
-      if(match) {
+      if (match) {
         compiled.push({
           'type': 'x of',
           'data': match[0][0]
@@ -295,15 +297,15 @@ $(document).ready(function () {
         temp = temp.substring(match[0].length)
         continue;
       }
-      
+
       // Advance string if no character matched
       temp = temp.substring(1)
     }
 
     // Convert course codes to 'true' or 'false' based on the passed list of courses taken
-    for(let i = 0; i < compiled.length; i++) {
-      if(compiled[i]['type'] === 'code') {
-        if(studentCourses.includes(compiled[i]['data'])) {
+    for (let i = 0; i < compiled.length; i++) {
+      if (compiled[i]['type'] === 'code') {
+        if (studentCourses.includes(compiled[i]['data'])) {
           compiled[i]['type'] = true
         } else {
           compiled[i]['type'] = false
@@ -326,7 +328,7 @@ $(document).ready(function () {
         list.push(element)
       }
     }
-    
+
     compiled = list
     return compiled
   }
@@ -335,39 +337,37 @@ $(document).ready(function () {
   function matchPrerequisites(compiledPrerequisites) {
 
     // Recursively parse nested arrays
-    if(Array.isArray(compiledPrerequisites[0])) {
+    if (Array.isArray(compiledPrerequisites[0])) {
       matchPrerequisites(compiledPrerequisites[0])
     }
 
     // Count amount of matches in "x of" arrays, return true if condition is met
-    if(compiledPrerequisites[0] && compiledPrerequisites[0]['type'] === "x of") {
+    if (compiledPrerequisites[0] && compiledPrerequisites[0]['type'] === "x of") {
       numOf = compiledPrerequisites[0]['data']
       x = 0
 
       for (const element of compiledPrerequisites.splice(1)) {
-        if(matchPrerequisites(element)) {
+        if (matchPrerequisites(element)) {
           x++
         }
       }
 
-      if(x >= numOf) {
+      if (x >= numOf) {
         return true
-      }
-      else
-      {
+      } else {
         return false
       }
     }
-    if(compiledPrerequisites[1] && compiledPrerequisites[1]['type'] === "comma") { // Treat commas as AND
+    if (compiledPrerequisites[1] && compiledPrerequisites[1]['type'] === "comma") { // Treat commas as AND
       return matchPrerequisites(compiledPrerequisites[0]) && matchPrerequisites(compiledPrerequisites.splice(2))
     }
-    if(compiledPrerequisites[1] && compiledPrerequisites[1]['type'] === "or") { // Treat 'or' as OR
+    if (compiledPrerequisites[1] && compiledPrerequisites[1]['type'] === "or") { // Treat 'or' as OR
       return matchPrerequisites(compiledPrerequisites[0]) || matchPrerequisites(compiledPrerequisites.splice(2))
     }
-    if(compiledPrerequisites[0] && compiledPrerequisites[0]['type'] === true) { // If no more codes to parse, evaluate if passed code is met by the student courses
+    if (compiledPrerequisites[0] && compiledPrerequisites[0]['type'] === true) { // If no more codes to parse, evaluate if passed code is met by the student courses
       return true;
     }
-    if(compiledPrerequisites && compiledPrerequisites['type'] === true) {
+    if (compiledPrerequisites && compiledPrerequisites['type'] === true) {
       return true;
     }
 
