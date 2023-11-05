@@ -252,13 +252,13 @@ $(document).ready(function () {
   // Filters courses based on the user input
   function filterCourses(courseInput, semesterInput) {
     $(noPreReqTable).empty();
-
+    const addButton = "<button class='add text-blue-700'>Add</button>";
     noPreReqCourses.forEach(function (course) {
       if (
         course.code.toLowerCase().includes(courseInput.toLowerCase()) &&
         course.offered.toLowerCase().includes(semesterInput.toLowerCase())
       ) {
-        courseCard(course.code, course.title, course.offered);
+        courseCard(noPreReqTable, course.code, course.title, course.offered, addButton);
       }
     });
   }
