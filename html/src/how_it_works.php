@@ -16,6 +16,7 @@
 </head>
 
 <!-- BODY SECTION -->
+
 <body class="bg-black bg-no-repeat bg-cover bg-top bg-[url('../imgs/background.png')]">
     <!-- Header Section -->
     <?php

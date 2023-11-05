@@ -14,12 +14,13 @@
 </head>
 
 <!-- BODY SECTION -->
+
 <body class="bg-black bg-no-repeat bg-cover bg-fixed bg-top bg-[url('../imgs/background.png')]">
     <!-- Header -->
-        <?php
-        require_once(__DIR__ . '/components/navbar.php');
-        echo generateNav('content');
-        ?>
+    <?php
+    require_once(__DIR__ . '/components/navbar.php');
+    echo generateNav('content');
+    ?>
 
     <!-- spacer after header to give content space -->
     <div class="mt-4 p-5">
