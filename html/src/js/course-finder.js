@@ -195,9 +195,14 @@ $(document).ready(function () {
     // Iterates through the courses and creates the cards
     $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
     addButton = "<button class='add text-blue-600'>Add</button>";
-    availableCourses.forEach((course) =>
-      courseRow(availableCoursesTable, course, addButton)
-    );
+    availableCourses.forEach(function(course) {
+        if (studentCourses.includes(course.code)) {
+            
+        } else {
+            courseRow(availableCoursesTable, course, addButton);
+        }
+      
+  });
   });
 
   // Removes a course from the table
