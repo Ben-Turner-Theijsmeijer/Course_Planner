@@ -372,10 +372,6 @@ $(document).ready(function () {
 
   // Recursively check to see if all course requirements are met
   function matchPrerequisites(compiledPrerequisites) {
-    // Recursively parse nested arrays
-    if (Array.isArray(compiledPrerequisites[0])) {
-      return matchPrerequisites(compiledPrerequisites[0]);
-    }
 
     // Count amount of matches in "x of" arrays, return true if condition is met
     if (
@@ -413,6 +409,10 @@ $(document).ready(function () {
         matchPrerequisites(compiledPrerequisites[0]) ||
         matchPrerequisites(compiledPrerequisites.splice(2))
       );
+    }
+    // Recursively parse nested arrays
+    if (Array.isArray(compiledPrerequisites[0])) {
+      return matchPrerequisites(compiledPrerequisites[0]);
     }
     if (compiledPrerequisites[0] && compiledPrerequisites[0]["type"] === true) {
       // If no more codes to parse, evaluate if passed code is met by the student courses
