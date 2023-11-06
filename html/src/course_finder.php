@@ -40,6 +40,8 @@ echo generateNav('content');
         Course</button>
       <button type="button" id="generate-courses" class="w-1/3 bg-green-500 text-white p-2 rounded-lg ml-4">Generate
         Courses</button>
+      <button type="submit" id="clear-courses" class="w-1/3 bg-red-500 text-white p-2 rounded-lg ml-4">Clear
+        Courses</button>
     </form>
     <table id="my-courses" class="w-full border-collapse">
       <thead>
