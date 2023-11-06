@@ -127,3 +127,5 @@ Contains a new additional page & new functionallity
         all courses for which the user meets the prerequisite parameters
     -Available Courses: all courses for which the prerequisite parameters will be displayed in the Available Courses field on the page.
     -Courses with No Prerequisities: Displays all courses that have no prerequesities and allows you to filter by name or semester offering
+
+# SPRINT 7
