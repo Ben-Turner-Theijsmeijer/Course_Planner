@@ -9,7 +9,7 @@ workflow:
 
 # Example job
 test:
-  stage: test
+  stage: example-test
   image: ubuntu:latest
   script:
     - echo "This should be updated to run tests"
