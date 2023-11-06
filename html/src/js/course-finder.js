@@ -185,7 +185,11 @@ $(document).ready(function () {
     ];
 
     for (const course of possibleCourses) {
+
       compiled = compilePrerequisites(studentCourses, course["prerequisites"]);
+      console.log(course);
+      console.log("the Compiled");
+      console.log(JSON.stringify(compiled));
       match = matchPrerequisites(compiled);
 
       if (match === true) {
@@ -354,6 +358,7 @@ $(document).ready(function () {
     stack = [];
     list = [];
     for (element of compiled) {
+      console.log("");
       if (element["type"] === "open_bracket") {
         stack.push(list);
         list = [];
@@ -372,6 +377,7 @@ $(document).ready(function () {
 
   // Recursively check to see if all course requirements are met
   function matchPrerequisites(compiledPrerequisites) {
+    //console.log(compiledPrerequisites);
     // Recursively parse nested arrays
     if (Array.isArray(compiledPrerequisites[0])) {
       return matchPrerequisites(compiledPrerequisites[0]);
@@ -385,12 +391,19 @@ $(document).ready(function () {
       numOf = compiledPrerequisites[0]["data"];
       x = 0;
 
-      for (const element of compiledPrerequisites.splice(1)) {
+      //testte = compiledPrerequisites;
+      testte =structuredClone(compiledPrerequisites);
+      testte.splice(1);
+      console.log(JSON.stringify(testte));
+      for (const element of testte) {
+
         if (matchPrerequisites(element)) {
           x++;
         }
       }
-
+      compiledPrerequisites.shift();
+      console.log("prereq after shift");
+      console.log(JSON.stringify(compiledPrerequisites));
       if (x >= numOf) {
         return true;
       } else {
@@ -402,6 +415,7 @@ $(document).ready(function () {
       compiledPrerequisites[1]["type"] === "comma"
     ) {
       // Treat commas as AND
+      console.log("and");
       return (
         matchPrerequisites(compiledPrerequisites[0]) &&
         matchPrerequisites(compiledPrerequisites.splice(2))
@@ -409,6 +423,7 @@ $(document).ready(function () {
     }
     if (compiledPrerequisites[1] && compiledPrerequisites[1]["type"] === "or") {
       // Treat 'or' as OR
+      console.log("or");
       return (
         matchPrerequisites(compiledPrerequisites[0]) ||
         matchPrerequisites(compiledPrerequisites.splice(2))
