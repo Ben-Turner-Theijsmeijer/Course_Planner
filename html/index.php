@@ -135,6 +135,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/src/js/scripts.js"></script>
 </head>
 
 <!-- Navbar -->
