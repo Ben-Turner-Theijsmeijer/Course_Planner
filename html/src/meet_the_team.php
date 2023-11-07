@@ -5,39 +5,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Selector</title>
+    <title>About</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../src/js/scripts.js"></script>
     <link rel="icon" href="../src/favicon/favicon.png" type="image/png">
 </head>
 
-<!-- BODY SECTION -->
-
+<!-- Body Section -->
 <body class="bg-black bg-no-repeat bg-cover bg-fixed bg-top bg-[url('../imgs/background.png')]">
-    <!-- Header -->
-    <?php
-    require_once(__DIR__ . '/components/navbar.php');
-    echo generateNav('content');
-    ?>
-
-    <!-- spacer after header to give content space -->
-    <div class="mt-4 p-5">
+    <!-- Nav Bar -->
+    <nav class="bg-black p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/">
+                <span
+                    class="font-sans font-bold text-white md:text-4xl text-2xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">CIS
+                    3760 Group 303</span>
+            </a>
+            <div class="hidden md:flex space-x-6 text-xl">
+                <a href="/src/api_documentation.php"
+                    class="group font-sans font-bold text-white text-2xl transition duration-300">
+                    API Docs
+                    <span
+                        class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+                </a>
+                <a href="/src/course_finder.php"
+                    class="group font-sans font-bold text-white text-2xl transition duration-300">
+                    Course Finder
+                    <span
+                        class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+                </a>
+                <a href="/src/meet_the_team.php"
+                    class="group font-sans font-bold text-white text-2xl transition duration-300">
+                    About
+                    <span
+                        class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div id="mobile-menu"
+        class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black text-white z-50 overflow-y-auto">
+        <div class="flex flex-col items-center justify-center h-full">
+            <button id="close-mobile-menu" class="text-white absolute top-4 right-4 text-3xl">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="/src/api_documentation.php" class="text-white text-2xl mb-4">API Docs</a>
+            <a href="/src/course_finder.php" class="text-white text-2xl mb-4">Course Finder</a>
+            <a href="/src/meet_the_team.php" class="text-white text-2xl mb-4">About</a>
+        </div>
     </div>
 
     <!-- Main Content Section -->
     <content
         class="flex w-auto flex-col md:my-20 md:mx-10 md:p-10 bg-hero box-content bg-black/60 backdrop-blur-sm bg-no-repeat bg-cover bg-center bg-fixed md:rounded-md">
         <span
-            class="font-sans font-bold text-white text-center text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4 mb-8">Meet
+            class="font-sans font-bold text-white text-center text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4 mb-4 mt-4">Meet
             The Team</span>
 
         <!-- Team members section -->
         <div class="flex w-fill h-full flex-wrap justify-center">
 
             <!-- Andrew -->
-            <div class="p-4 max-w-md max-h-md">
+            <div class="p-4 w-full md:w-1/2">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Andrew Chow</h2>
@@ -53,21 +98,13 @@
                             My interests include software development and product management. During my free time, I
                             enjoy going to the gym 🏋️ and capturing moments with my camera 📷
                         </p>
-                        <a href="/src/members/andrew/andrew.php">
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                Learn More
-                                <div
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
-                                </div>
-                            </button>
-                        </a>
 
                     </div>
                 </div>
             </div>
 
             <!-- Ben -->
-            <div class="p-4 max-w-md max-h-md">
+            <div class="p-4 w-full md:w-1/2">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Ben Turner-Theijsmeijer</h2>
@@ -91,21 +128,13 @@
                             , and spending time with my friends.
 
                         </p>
-                        <a href="/src/members/ben/ben.php">
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                Learn More
-                                <div
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
-                                </div>
-                            </button>
-                        </a>
 
                     </div>
                 </div>
             </div>
 
             <!-- Darren -->
-            <div class="p-4 max-w-md max-h-md">
+            <div class="p-4 w-full md:w-1/2">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Darren</h2>
@@ -120,21 +149,12 @@
                             switch it up! I'm and Xth-year(lost track) Computer Science student at the University of
                             Guelph. I work at the IT Help desk in my spare time, so come by if you need any help!
                         </p>
-                        <a href="/src/members/darren/darren.php">
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                Learn More
-                                <div
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
-                                </div>
-                            </button>
-                        </a>
-
                     </div>
                 </div>
             </div>
 
             <!-- Ethan -->
-            <div class="p-4 max-w-md max-h-md">
+            <div class="p-4 w-full md:w-1/2">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Ethan</h2>
@@ -150,21 +170,12 @@
                             between work and play. When I'm not diving into lines of code or solving complex algorithms,
                             you can catch me exploring the great outdoors and hiking through scenic trails.
                         </p>
-                        <a href="/src/members/ethan/ethan.php">
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                Learn More
-                                <div
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
-                                </div>
-                            </button>
-                        </a>
-
                     </div>
                 </div>
             </div>
 
             <!-- Noureldeen -->
-            <div class="p-4 max-w-md max-h-md">
+            <div class="p-4 w-full md:w-1/2">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Noureldeen</h2>
@@ -179,21 +190,13 @@
                             Guelph. I'm passionate about building projects and connecting things that work. Checkout my
                             script where I made an emotional seminment analysis app!
                         </p>
-                        <a href="/src/members/nour/nour.php">
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                Learn More
-                                <div
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
-                                </div>
-                            </button>
-                        </a>
 
                     </div>
                 </div>
             </div>
 
-            <!-- Quin -->
-            <div class="p-4 max-w-md max-h-md">
+            <!-- Quinn -->
+            <div class="p-4 w-full md:w-1/2">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Quinn</h2>
@@ -216,21 +219,12 @@
                             In my free time, you can find me experimenting with synthesizers and painting
                             miniatures.
                         </p>
-                        <a href="/src/members/quinn/quinn.php">
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                Learn More
-                                <div
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
-                                </div>
-                            </button>
-                        </a>
-
                     </div>
                 </div>
             </div>
 
             <!-- Vrushang -->
-            <div class="p-4 max-w-md max-h-md">
+            <div class="p-4 w-full md:w-1/2">
                 <div class="flex rounded-lg h-full bg-[#C20430] bg-opacity-75 p-8 flex-col">
                     <div class="flex items-center flex-col">
                         <h2 class="font-sans font-bold text-white text-2xl mb-4">Vrushang</h2>
@@ -247,15 +241,6 @@
                             updated on the latest tech trends, attending hackathons, and exploring indie
                             projects.
                         </p>
-                        <a href="/src/members/vrushang/vrushang.php">
-                            <button class="group font-sans font-bold text-white text-2xl transition duration-300">
-                                Learn More
-                                <div
-                                    class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-[#FFC72A]">
-                                </div>
-                            </button>
-                        </a>
-
                     </div>
                 </div>
             </div>
@@ -267,7 +252,7 @@
     <section class="footer">
         <footer class="w-full bg-black text-white py-6">
             <div class="container mx-auto text-center">
-                <p>&copy; CIS 3760 Group 11</p>
+                <p>&copy; CIS 3760 Group 303</p>
             </div>
         </footer>
     </section>

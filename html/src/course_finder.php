@@ -3,99 +3,136 @@
 <!-- Head Section -->
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Course Finder</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios -->
-  <script src="./js/course-finder.js"></script>
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3/swagger-ui.css" />
-  <!-- Accordion https://www.w3schools.com/howto/howto_js_accordion.asp-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Course Finder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios -->
+    <script src="./js/course-finder.js"></script>
+    <script src="../src/js/scripts.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3/swagger-ui.css" />
+    <!-- Accordion https://www.w3schools.com/howto/howto_js_accordion.asp-->
 </head>
 
 <!-- Header -->
-
-<?php
-require_once(__DIR__ . '/components/navbar.php');
-echo generateNav('content');
-?>
-
-
-
-<body class="bg-gray-100 py-8 pt-36">
-  <div class="container mx-auto p-4 bg-white shadow-lg rounded-lg">
-    <h1 class="text-2xl font-bold mb-4">Course Schedule</h1>
-    <form id="course-form" class="flex mb-4">
-      <input type="text" id="course-code" placeholder="Enter Course Code (i.e CIS*1300 or CIS1300)"
-        class="w-1/3 p-2 rounded-lg border border-gray-300 mr-4" />
-      <button type="button" id="add-course" class="w-1/3 bg-blue-500 text-white p-2 rounded-lg ml-4">Add
-        Course</button>
-      <button type="button" id="generate-courses" class="w-1/3 bg-green-500 text-white p-2 rounded-lg ml-4">Generate
-        Courses</button>
-      <button type="submit" id="clear-courses" class="w-1/3 bg-red-500 text-white p-2 rounded-lg ml-4">Clear
-        Courses</button>
-    </form>
-    <table id="my-courses" class="w-full border-collapse">
-      <thead>
-        <tr class="px-6 w-full border-b-2 border-gray-300 justify-between">
-          <th class="px-6 text-left w-1/4 text-gray-600">Course Code</th>
-          <th class="px-6 text-left w-1/4 text-gray-600">Course Name</th>
-          <th class="px-6 text-left w-1/4 text-gray-600">Credits</th>
-          <th class="px-6 text-left w-1/4 text-gray-600">Remove</th>
-        </tr>
-      </thead>
-      <div class="flex justify-center py-4" id="credit_container">
-        <h1 class="text-black px-2"> Total Credits: </h1>
-        <p class="text-black px-2" id="credits_completed"></p>
-      </div>
-      <tbody>
-        <!-- Courses are added here -->
-        <tr class="hover:bg-gray-100" data-course-id="course-">
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
-
-  <!-- Courses a student is able to take -->
-  <div class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8">
-    <h1 class="text-2xl font-bold mb-4">Available Courses</h1>
-    <table id="available-courses" class="w-full border-collapse table-auto">
-      <thead>
-        <tr class="px-6 w-full border-b-2 border-gray-300 justify-between">
-          <th class="px-6 text-left w-1/4 text-gray-600">Course Code</th>
-          <th class="px-6 text-left w-1/4 text-gray-600">Course Name</th>
-          <th class="px-6 text-left w-1/4 text-gray-600">Credits</th>
-          <th class="px-6 text-left  w-1/4 text-gray-600">Add to Schedule</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Courses are added here -->
-        <tr class="hover:bg-gray-100" data-course-id="course-">
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="container mx-auto p-4 bg-white shadow-lg rounded-lg mt-8">
-    <button class="accordion text-2xl font-bold mb-4 py-2">Courses with No Prerequisites</button>
-    <div class="panel">
-      <input type="text" id="course-filter" placeholder="Search Courses (i.e CIS)"
-        class="mb-4 px-3 py-1 border rounded-md">
-      <input type="text" id="semester-filter" placeholder="Search Semester" class="mb-4 px-3 py-1 border rounded-md">
-      <div id="no-prereq-courses" class="grid grid-cols-3 gap-4">
-        <!-- No Prerequisite courses listed here -->
-      </div>
+<nav class="bg-black p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/">
+            <span
+                class="font-sans font-bold text-white md:text-4xl text-2xl leading-10 underline decoration-[#FFC72A] hover:decoration-[#C20430] transition-all duration-300 decoration-4 underline-offset-4">CIS
+                3760 Group 303</span>
+        </a>
+        <div class="hidden md:flex space-x-6 text-xl">
+            <a href="/src/api_documentation.php"
+                class="group font-sans font-bold text-white text-2xl transition duration-300">
+                API Docs
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
+            <a href="/src/course_finder.php"
+                class="group font-sans font-bold text-white text-2xl transition duration-300">
+                Course Finder
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
+            <a href="/src/meet_the_team.php"
+                class="group font-sans font-bold text-white text-2xl transition duration-300">
+                About
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
+        </div>
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
     </div>
-  </div>
+</nav>
+<div id="mobile-menu"
+    class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black text-white z-50 overflow-y-auto">
+    <div class="flex flex-col items-center justify-center h-full">
+        <button id="close-mobile-menu" class="text-white absolute top-4 right-4 text-3xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <a href="/src/api_documentation.php" class="text-white text-2xl mb-4">API Docs</a>
+        <a href="/src/course_finder.php" class="text-white text-2xl mb-4">Course Finder</a>
+        <a href="/src/meet_the_team.php" class="text-white text-2xl mb-4">About</a>
+    </div>
+</div>
+
+
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg">
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Course Schedule</h1>
+        <form id="course-form" class="flex flex-col mb-2">
+            <input type="text" id="course-code" placeholder="Enter Course Code (i.e CIS*1300 or CIS1300)"
+                class="w-full p-2 sm:px-4 rounded-lg border border-gray-300 mb-2" />
+            <button type="button" id="add-course" class="btn bg-blue-500 text-white p-2 rounded-lg mb-2">Add
+                Course</button>
+            <button type="button" id="generate-courses" class="btn bg-green-500 text-white p-2 rounded-lg mb-2">Generate
+                Courses</button>
+            <button type="submit" id="clear-courses" class="btn bg-red-500 text-white p-2 rounded-lg">Clear
+                Courses</button>
+        </form>
+        <table id="my-courses" class="w-full text-center mt-4">
+            <thead>
+                <tr>
+                    <th class="w-1/4">Course Code</th>
+                    <th class="w-1/4">Course Name</th>
+                    <th class="w-1/4">Credits</th>
+                    <th class="w-1/4">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Courses are added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Available Courses -->
+    <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-2 md:mt-4">
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Available Courses</h1>
+        <table id="available-courses" class="w-full text-center">
+            <thead>
+                <tr>
+                    <th class="w-1/4">Course Code</th>
+                    <th class="w-1/4">Course Name</th>
+                    <th class="w-1/4">Credits</th>
+                    <th class="w-1/4">Add to Schedule</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Courses are added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-2 md:mt-4">
+        <button class="accordion text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 py-1">Courses with No
+            Prerequisites</button>
+        <div class="panel">
+            <input type="text" id="course-filter" placeholder="Search Courses (i.e CIS)"
+                class="mb-1 sm:mb-2 px-3 py-1 border rounded-lg" />
+            <input type="text" id="semester-filter" placeholder="Search Semester"
+                class="mb-1 sm:mb-2 px-3 py-1 border rounded-lg" />
+            <div id="no-prereq-courses" class="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
+                <!-- No Prerequisite courses listed here -->
+            </div>
+        </div>
+    </div>
 
 </body>
 
