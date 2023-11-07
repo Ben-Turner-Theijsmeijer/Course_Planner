@@ -3,14 +3,14 @@ $(document).ready(function () {
     return courseCode.replace("*", "");
   }
 
-  $("#course-code").on("keypress", function (event) { 
-    var keyPressed = event.keyCode || event.which; 
+  $("#course-code").on("keypress", function (event) {
+    var keyPressed = event.keyCode || event.which;
     if (keyPressed === 13) {
-        event.preventDefault();
-        $("#add-course").click();
-        return false; 
-    } 
-  }); 
+      event.preventDefault();
+      $("#add-course").click();
+      return false;
+    }
+  });
   let courseCounter = 1; // counter for generating unique IDs
   let studentCourses = []; // List of student courses they have taken
   let completedCredits = 0; // Keeps track of the number of credits a student has completed
@@ -95,26 +95,35 @@ $(document).ready(function () {
     newRow.append(
       // Course Code
       $("<td>")
-        .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
+        .addClass(
+          "px-3 py-2 sm:px-6 sm:py-3 text-gray-600 text-center border-b-2"
+        )
         .text(courseData.code)
     );
     newRow.append(
       // Course Name
       $("<td>")
-        .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
+        .addClass(
+          "px-3 py-2 sm:px-6 sm:py-3 text-gray-600 text-center border-b-2"
+        )
         .text(courseData.title)
     );
     newRow.append(
       // Course Weight
       $("<td>")
-        .addClass("px-6 py-3 text-left text-gray-600 border-b-2")
+        .addClass(
+          "px-3 py-2 sm:px-6 sm:py-3 text-gray-600 text-center border-b-2"
+        )
         .text(courseData.credits)
     );
     newRow.append(
       // Delete button
-      $("<td>").addClass("px-6 py-3 text-left border-b-2").html(rowFunction)
+      $("<td>")
+        .addClass("px-3 py-2 sm:px-6 sm:py-3 text-center border-b-2")
+        .html(rowFunction)
     );
     table.append(newRow);
+
     console.log(studentCourses);
   }
 
@@ -195,14 +204,12 @@ $(document).ready(function () {
     // Iterates through the courses and creates the cards
     $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
     addButton = "<button class='add text-blue-600'>Add</button>";
-    availableCourses.forEach(function(course) {
-        if (studentCourses.includes(course.code)) {
-            
-        } else {
-            courseRow(availableCoursesTable, course, addButton);
-        }
-      
-  });
+    availableCourses.forEach(function (course) {
+      if (studentCourses.includes(course.code)) {
+      } else {
+        courseRow(availableCoursesTable, course, addButton);
+      }
+    });
   });
 
   // Removes a course from the table
@@ -263,7 +270,13 @@ $(document).ready(function () {
         course.code.toLowerCase().includes(courseInput.toLowerCase()) &&
         course.offered.toLowerCase().includes(semesterInput.toLowerCase())
       ) {
-        courseCard(noPreReqTable, course.code, course.title, course.offered, addButton);
+        courseCard(
+          noPreReqTable,
+          course.code,
+          course.title,
+          course.offered,
+          addButton
+        );
       }
     });
   }
@@ -377,7 +390,6 @@ $(document).ready(function () {
 
   // Recursively check to see if all course requirements are met
   function matchPrerequisites(compiledPrerequisites) {
-
     // Count amount of matches in "x of" arrays, return true if condition is met
     if (
       compiledPrerequisites[0] &&

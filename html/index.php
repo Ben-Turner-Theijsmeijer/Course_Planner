@@ -3,8 +3,6 @@
 Landing page which contains the API logic to fetch information from the database
 */
 require_once(__DIR__ . '/src/controller/api/CourseController.php');
-require_once(__DIR__ . '/src/components/navbar.php');
-$navBar = generateNav('index');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $uri);
@@ -91,8 +89,8 @@ if (isset($uri[1]) && $uri[1] == 'api') {
         if (isset($uri[3]) && $uri[3] == 'student') {
             switch ($requestMethod) {
                 case 'GET':
-                        $controller->getCourse_table();
-                    
+                    $controller->getCourse_table();
+
                     break;
                 case 'POST':
                     if (isset($uri[4])) {
@@ -126,6 +124,7 @@ if (isset($uri[1]) && $uri[1] == 'api') {
 <html>
 
 <!-- Head Section -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -135,45 +134,44 @@ if (isset($uri[1]) && $uri[1] == 'api') {
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="src/js/scripts.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/src/js/scripts.js"></script>
 </head>
 
-<!-- Header Section -->
+<!-- Navbar -->
 <?php
-echo $navBar;
+include './src/components/navbar.php';
 ?>
 
 <!-- Content Section -->
-<div class="relative flex flex-col w-full h-full bg-no-repeat bg-cover bg-top bg-[url('imgs/background.png')]">
-    <content class="flex items-center justify-center h-screen">
+<div class="relative flex flex-col w-full min-h-screen bg-no-repeat bg-cover bg-top bg-[url('imgs/background.png')]">
+    <content class="flex items-center justify-center min-h-screen">
         <div
-            class="py-[4rem] px-14 flex max-w-4xl gap-20 flex-col justify-between rounded-md backdrop-blur-sm bg-black/60 md:flex-row items-center">
-            <div class="text-white w-1/2">
-                <span class="block font-sans font-bold text-2xl text-left whitespace-nowrap">Forget about course
+            class="p-4 md:py-6 md:px-14 flex flex-col justify-center bg-black/60 rounded-md backdrop-blur-sm text-white md:flex-row items-center gap-4 md:gap-20">
+            <div class="text-center md:text-left mb-4 md:mb-0">
+                <span class="block font-sans font-bold text-xl md:text-3xl whitespace-nowrap">Forget about course
                     planning hassle!</span>
                 <span
-                    class="block font-sans font-bold text-8xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-2">Course
-                    Selector</span>
+                    class="block font-sans font-bold text-4xl md:text-6xl text-left underline decoration-[#FFC72A] decoration-4 underline-offset-2">Course
+                    Finder</span>
             </div>
 
-            <div class="h-full flex flex-col text-white text-left">
+            <div class="h-full flex flex-col text-center md:text-left mt-4 md:mt-0">
                 <ul class="list-disc list-inside flex flex-col">
-                    <li class="font-sans font-bold text-xl">Add your courses</li>
-                    <li class="font-sans font-bold text-xl whitespace-nowrap">Select your semester</li>
-                    <li class="font-sans font-bold text-xl">Click Generate</li>
-                    <li class="font-sans font-bold text-xl">See all the courses you can
-                        take!</li>
+                    <li class="font-sans font-bold text-lg md:text-2xl">Add your courses</li>
+                    <li class="font-sans font-bold text-lg md:text-2xl">Click Generate</li>
+                    <li class="font-sans font-bold text-lg md:text-2xl">See all the courses you can take!</li>
                 </ul>
-                <a href="/excel/course_selection_tool.xlsm"
-                    class="self-center group bg-[#FFC72A] text-xl text-black font-bold mt-6 py-2 px-4 rounded"
-                    download="course_selection.xlsm">
-                    Download
+                <a href="/src/course_finder.php"
+                    class="self-center group bg-[#FFC72A] text-lg text-black font-bold mt-6 py-2 px-4 rounded">
+                    Get Started Today!
                     <span
                         class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#C20430]"></span>
                 </a>
             </div>
         </div>
     </content>
+
     <!-- Contact Section-->
     <section class="contact h-screen flex items-center bg-black/60 backdrop-blur-sm">
         <div class="max-w-md mx-auto rounded-lg p-8 m-16">
@@ -206,15 +204,12 @@ echo $navBar;
             </form>
         </div>
     </section>
-    <!-- Footer Section -->
-    <section class="footer absolute bottom-0 w-full">
-        <footer class=" bg-black text-white py-6">
-            <div class="container mx-auto text-center">
-                <p>&copy; CIS 3760 Group 11</p>
-            </div>
-        </footer>
-    </section>
+
+    <?php
+    include './src/components/footer.php';
+    ?>
 </div>
+
 
 </section>
 </body>
