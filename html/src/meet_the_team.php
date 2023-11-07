@@ -200,13 +200,9 @@
     </content>
 
     <!-- Footer Section -->
-    <section class="footer">
-        <footer class="w-full bg-black text-white py-6">
-            <div class="container mx-auto text-center">
-                <p>&copy; CIS 3760 Group 303</p>
-            </div>
-        </footer>
-    </section>
+    <?php
+    include '../src/components/footer.php';
+    ?>
 </body>
 
 </html>

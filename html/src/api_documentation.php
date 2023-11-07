@@ -30,12 +30,9 @@ include '../src/components/navbar.php';
 </body>
 
 <!-- Footer Section -->
-<section class="footer absolute w-full">
-    <footer class="bg-black text-white py-6">
-        <div class="container mx-auto text-center">
-            <p>&copy; CIS 3760 Group 11</p>
-        </div>
-    </footer>
+<?php
+include '../src/components/footer.php';
+?>
 </section>
 
 </html>
