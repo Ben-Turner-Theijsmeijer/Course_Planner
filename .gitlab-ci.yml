@@ -1,19 +1,16 @@
-# This file is a template, and might need editing before it works on your project.
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Verify/Accessibility.gitlab-ci.yml
-
-# Read more about the feature here: https://docs.gitlab.com/ee/user/project/merge_requests/accessibility_testing.html
+# Define stages
 stages:
-  - test
+  - example-test
 
+# Set pipeline to only trigger when merging to main branch
 workflow:
   rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "sprint1"
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
 
+# Example job
 test:
-  stage: test
-  image: python:latest
+  stage: example-test
+  image: ubuntu:latest
   script:
-    - python src/run_tests.py
+    - echo "This should be updated to run tests"
+    
