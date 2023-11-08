@@ -27,8 +27,6 @@
 include '../src/components/navbar.php';
 ?>
 
-
-
 <body class="bg-gray-100">
     <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg">
         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Course Schedule</h1>
@@ -91,8 +89,4 @@ include '../src/components/navbar.php';
 
 
 </body>
-
-
-
-
 </html>

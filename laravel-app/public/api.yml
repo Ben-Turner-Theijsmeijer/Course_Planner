@@ -1,0 +1,438 @@
+openapi: 3.0.3
+info:
+  title: Course API
+  description: |-
+    This is a Course API based on the OpenAPI V3 specification.
+  version: "1.0"
+servers:
+  - url: https://cis3760f23-11.socs.uoguelph.ca/api/v1
+tags:
+  - name: course
+    description: CRUD methods for course data
+  - name: prereq
+    description: methods for prereq information
+  - name: subject
+    description: methods for subjects
+  - name: student
+    description: methods for students
+paths:
+  /course/{courseCode}:
+    get:
+      tags:
+        - course
+      summary: Find course by course code
+      description: Returns a single course
+      operationId: getCourseByCode
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code of course to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'          
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
+    delete:
+      tags:
+        - course
+      summary: Deletes a course
+      description: delete a course
+      operationId: deleteCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid course code
+  /course:
+    post:
+      tags:
+        - course
+      summary: Add a new course
+      description: Add a new course to the database
+      operationId: createCourse
+      requestBody:
+        description: Create a new course in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'          
+        '405':
+          description: Invalid input
+    put:
+      tags:
+        - course
+      summary: Update an existing course
+      description: Update an existing course by course code
+      operationId: updateCourse
+      requestBody:
+        description: Update an existent course in the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Course'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Course'
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
+  /prereq/{courseCode}:
+    get:
+      tags:
+        - prereq
+      summary: Find prereqs for course
+      description: Find prereqs for course
+      operationId: getPrereqByCode
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code of prereqs to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "CIS*1300, CIS*1910"
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
+  /prereq/future/{courseCode}:
+    get:
+      tags:
+        - prereq
+      summary: Find course that has prereqs
+      description: Find course that has prereqs
+      operationId: getCourseByPrereqs
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code of prereqs to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "CIS*2910"
+        '400':
+          description: Invalid course code supplied
+        '404':
+          description: Course not found
+  /prereq/future/:
+    post:
+      tags:
+        - prereq
+      summary: Find courses for a list of prereqs
+      description: Find courses for a list of prereqs
+      operationId: postFuturePrereqs
+      requestBody:
+        description: A list of prereqs as course codes
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrereqList'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    CourseCode:
+                      type: string
+                      example: 'CIS*3750'
+                required:
+                  - CourseCode
+                example:
+                  - CourseCode: "CIS*3150"
+                  - CourseCode: "CIS*3260"
+                  - CourseCode: "CIS*3700"
+                  - CourseCode: "CIS*3760"
+                  - CourseCode: "CIS*4020"
+                  - CourseCode: "CIS*4030"
+                  - CourseCode: "CIS*4150"
+                  - CourseCode: "CIS*4250"
+                  - CourseCode: "CIS*4300"
+                  - CourseCode: "CIS*4720"
+                  - CourseCode: "CIS*4780"
+                  - CourseCode: "CIS*4800"
+                  - CourseCode: "CIS*4820"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  properties:
+                    error:
+                      type: string
+                example: 
+                  - error: "Zero length array passed"
+        '500':
+          description: Internal Server Error
+  /subject/all/:
+    get:
+      tags:
+        - subject
+      summary: Get all subjects
+      description: Find all subjects
+      operationId: getAllSubjects
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "ACCT, ANS, AGR ..."
+  /subject/{subjectCode}:
+    get:
+      tags:
+        - subject
+      summary: Find all courses in subject
+      description: Find all courses in subject
+      operationId: coursesInSubject
+      parameters:
+        - name: subjectCode
+          in: path
+          description: Subject code of prereqs to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "CIS*2910, CIS*1300..."
+        '400':
+          description: Invalid subject code supplied
+        '404':
+          description: Subject code not found
+  /student:
+    get:
+      tags:
+        - student
+      summary: Find all the courses and Grades
+      description: Get the whole table
+      operationId: allStudent
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Error
+  /student/{courseCode}:
+    post:
+      tags:
+        - student
+      summary: Find course by course code
+      description: Returns a single course
+      operationId: addStudentCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: course student has taken
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*2750 has been created!'
+                         
+        '400':
+          description: Already exists
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*2750 already exists'
+
+    delete:
+      tags:
+        - student
+      summary: Deletes a course
+      description: delete a course
+      operationId: deleteStudentCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: Course code to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid course code
+          
+  /student/{courseCode}/{grade}:
+    put:
+      tags:
+        - student
+      summary: Find course by course code
+      description: Returns a single course
+      operationId: addGradetoStudentCourse
+      parameters:
+        - name: courseCode
+          in: path
+          description: course student has taken
+          required: true
+          schema:
+            type: string
+        - name: grade
+          in: path
+          description: grade for the course
+          required: true
+          schema: 
+            type: number
+            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*2750 has been updated!'
+                         
+        '404':
+          description: Does not exist
+          content:
+            application/json:
+              schema:
+                example: 'Course CIS*1010 not found'
+components:
+  schemas:
+    Student:
+        type: array
+        items:
+          properties:
+            CourseCode:
+              type: string
+            CourseName:
+              type: string
+            Prerequisites:
+              type: string
+            Grade:
+              type: number
+        example:
+          - CourseCode: 'CIS*2750'
+            CourseName: 'Software Systems Development and Integration'
+            Prerequisites: 'CIS2430, CIS2520'
+            Grade: 85
+          - CourseCode: 'CIS*1910'
+            CourseName: 'Discrete Structures in Computing I'
+            Prerequisites: 'N/A'
+            Grade: 98
+          
+    Course:
+        type: array
+        items:
+          properties:
+            CourseCode:
+              type: string
+              example: 'CIS2750'
+            CourseName:
+              type: string
+              example: 'Software Systems Development and Integration'
+            CourseOffering:
+              type: string
+              example: 'Winter'
+            CourseWeight:
+              type: number
+              example: 0.75
+            CourseDescription:
+              type: string
+              example: 'Example desc'
+            Prerequisites:
+              type: string
+              example: 'CIS2430, CIS2520'
+            PrerequisiteCredits:
+              type: number
+              example: 5.0
+            Corequisites:
+              type: string
+              example: 'CIS3750'
+            Restrictions:
+              type: string
+              example: 'STAT2070'
+            Equates:
+              type: string
+              example: 'CIS3760'
+            Department:
+              type: string
+              example: 'School of Computer Science'
+            Location:
+              type: string
+              example: 'TBD'
+          required:
+            - courseCode
+            - courseName
+            - courseWeight
+            - courseDescription
+            - courseOffering
+
+    PrereqList:
+      type: array
+      items:
+        properties:
+          CourseCode:
+            type: string
+            example: 'CIS*3750'
+      required:
+        - CourseCode
+      example:
+        - CourseCode: 'CIS*2750'
+        - CourseCode: 'CIS*3750'
