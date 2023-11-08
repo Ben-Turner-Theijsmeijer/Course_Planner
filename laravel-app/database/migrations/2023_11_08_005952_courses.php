@@ -27,6 +27,35 @@ return new class extends Migration
             $table->text('Department');
             $table->string('Location', 64);
         });
+
+        $csvFile = public_path('excel/CourseList.csv');
+        $header = null;
+
+        if(($handle = fopen($csvFile, 'r')) !== false) {
+            while(($row = fgetcsv($handle)) !== false) {
+                if(!$header) {
+                    $header = $row;
+                } else {
+                    $data = [
+                        'CourseCode' => $row[0],
+                        'CourseName' => $row[1],
+                        'CourseOffering' => $row[2],
+                        'CourseWeight' => $row[3],
+                        'CourseDescription' => $row[4],
+                        'CourseFormat' => $row[5],
+                        'Prerequisites' => $row[6],
+                        'PrerequisiteCredits' => $row[7],
+                        'Corequisites' => $row[8],
+                        'Restrictions' => $row[9],
+                        'Equates' => $row[10],
+                        'Department' => $row[11],
+                        'Location' => $row[12]
+                    ];
+                    DB::table('courses')->insertOrIgnore($data);
+                }
+            }
+            fclose($handle);
+        }
     }
 
     /**
