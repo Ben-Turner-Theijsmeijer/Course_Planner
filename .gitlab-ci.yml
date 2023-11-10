@@ -3,14 +3,17 @@ stages:
   - example-test
 
 # Set pipeline to only trigger when merging to main branch
-workflow:
-  rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+#workflow:
+#  rules:
+#    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
 
 # Example job
 test:
   stage: example-test
-  image: ubuntu:latest
   script:
-    - echo "This should be updated to run tests"
+    - cp .env.example .env
+    - composer install
+    - php artisan key:generate
+    - php artisan migrate
+    - vendor/bin/phpunit
     
