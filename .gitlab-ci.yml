@@ -2,6 +2,10 @@ stages:
   - build
   - test
 
+variables:
+  COMPOSER_ALLOW_SUPERUSER: 1
+
+
 .build:
   stage: build
   image:
@@ -17,6 +21,7 @@ unit-test:
   stage: test
   image: registry.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303:latest
   script:
+    - composer install
     - php artisan key:generate
     - php artisan migrate
     - vendor/bin/phpunit
