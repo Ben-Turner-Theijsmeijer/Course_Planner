@@ -1,30 +1,14 @@
-# Define stages
 stages:
-  - example-test
+  - build
+  - test
 
-# Set pipeline to only trigger when merging to main branch
-#workflow:
-#  rules:
-#    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
-
-# Example job
-test:
-  stage: example-test
-  image: cylab/php74
-  before_script:
-    # use our custom .env file
-
-    # install the application
-    - COMPOSER_CACHE_DIR=composer-cache composer install
-    - php artisan key:generate
-    - php artisan migrate
-
-  # run the tests
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
+    entrypoint: [""]
   script:
-    - vendor/bin/phpunit
-
-  # what we want to store locally to speed up the next run of this job
-  cache:
-    paths:
-      - composer-cache/
-      - node_modules/
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
