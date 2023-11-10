@@ -6,7 +6,7 @@ variables:
   COMPOSER_ALLOW_SUPERUSER: 1
 
 
-build:
+.build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
@@ -21,6 +21,7 @@ unit-test:
   stage: test
   image: registry.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303:latest
   script:
+    - cp .env.example .env
     - composer install
     - php artisan key:generate
     - php artisan migrate
