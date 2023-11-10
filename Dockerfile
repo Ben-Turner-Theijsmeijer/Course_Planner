@@ -1,6 +1,8 @@
 # Set the base image for subsequent instructions
 FROM php:7.4
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 # Update packages
 RUN apt-get update
 
