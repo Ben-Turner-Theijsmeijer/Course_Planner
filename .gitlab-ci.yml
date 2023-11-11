@@ -6,7 +6,7 @@ variables:
   COMPOSER_ALLOW_SUPERUSER: 1
 
 
-.build:
+build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
@@ -15,11 +15,11 @@ variables:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}/laravel-app"
       --dockerfile "${CI_PROJECT_DIR}/laravel-app/Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG}"
+      --destination "${CI_REGISTRY_IMAGE}/laravel:1.0"
 
 unit-test:
   stage: test
-  image: registry.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303:latest
+  image: registry.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/laravel:1.0
   script:
     - cd laravel-app
     - composer install
