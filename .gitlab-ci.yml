@@ -1,16 +1,37 @@
 # Define stages
 stages:
-  - example-test
+  - build
+  - test
 
-# Set pipeline to only trigger when merging to main branch
-workflow:
-  rules:
-    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH
+# This allows composer install to run in unit test
+variables:
+  COMPOSER_ALLOW_SUPERUSER: 1
 
-# Example job
-test:
-  stage: example-test
-  image: ubuntu:latest
+# Docker image build
+#  "." before build means job doesn't run
+#  We don't need to run this every time as it does not depend on the code in the repo
+.docker-build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.14.0-debug
+    entrypoint: [""]
   script:
-    - echo "This should be updated to run tests"
-    
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/laravel-app"
+      --dockerfile "${CI_PROJECT_DIR}/laravel-app/Dockerfile"
+      --destination "${CI_REGISTRY_IMAGE}/laravel:1.0"
+
+# Run phpunit tests
+unit-test:
+  stage: test
+  image: registry.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/laravel:1.0
+  script:
+    - cd laravel-app
+    - composer install
+    - cp .env.example .env
+    - php artisan key:generate
+#    - php artisan migrate
+    - vendor/bin/phpunit
+  cache:
+    paths:
+      - laravel-app/vendor
