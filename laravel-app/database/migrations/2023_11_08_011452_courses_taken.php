@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('CourseCode', 64)->nullable(false);
             $table->string('CourseName', 255)->nullable(false);
             $table->string('Prerequisites', 255);
-            $table->integer('Grade');
+            $table->float('Grade')->default(0.0);
         });
     }
 

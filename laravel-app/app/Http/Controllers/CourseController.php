@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Courses;
 use App\Models\CoursesTaken;
+use App\Http\Requests\CourseRequest;
+use App\Http\Requests\PrereqRequest;
 
 class CourseController extends Controller
 {
@@ -15,23 +17,27 @@ class CourseController extends Controller
     ======================================================================
     */
 
-    public function getCourse(string $courseCode)
+    private function addAsterisk(string $courseCode) 
     {
-        $course = Courses::select('*')
-            ->where('CourseCode', $courseCode)
-            ->get();
-        return response()->json($course, 200);
+        $courseCodeLocal = $courseCode;
+        if (!str_contains($courseCodeLocal, '*')) {
+            $numPos = strcspn($courseCodeLocal , '0123456789' );
+            $courseCodeLocal = substr($courseCodeLocal, 0, $numPos) . '*' . substr($courseCodeLocal, $numPos);
+        }
+        return $courseCodeLocal;
     }
 
-    public function deleteCourse(string $courseCode)
+    public function getCourse(string $courseCode)
     {
-        if(Courses::where('CourseCode', $courseCode)->exists()) {
-            $course = Courses::find($courseCode);
-            $course->delete();
+        $courseCode = $this->addAsterisk($courseCode);
 
-            return response()->json([
-                'message' => "Record deleted."
-            ],  202);
+        if(Courses::where('CourseCode', $courseCode)->exists()) {
+            $course = Courses::select('*')
+                ->where('CourseCode', $courseCode)
+                ->get();
+            return response()->json(
+                $course,
+                200);
         } else {
             return response()->json([
                 'message' => 'Course not found.'
@@ -39,51 +45,100 @@ class CourseController extends Controller
         }
     }
 
-    public function createCourse(Request $request)
+    public function deleteCourse(string $courseCode)
     {
-        $courseData = $request::json()->all();
+        $courseCode = $this->addAsterisk($courseCode);
 
-        Courses::insert([
-            'CourseCode' => $courseData[0]['CourseCode'],
-            'CourseName' => $courseData[0]['CourseName'],
-            'CourseOffering' => $courseData[0]['CourseOffering'],
-            'CourseWeight' => $courseData[0]['CourseWeight'],
-            'CourseDescription' => $courseData[0]['CourseDescription'],
-            'CourseFormat' => $courseData[0]['CourseFormat'],
-            'Prerequisites' => $courseData[0]['Prerequisites'],
-            'PrerequisiteCredits' => $courseData[0]['PrerequisiteCredits'],
-            'Corequisites' => $courseData[0]['Corequisites'],
-            'Restrictions' => $courseData[0]['Restrictions'],
-            'Equates' => $courseData[0]['Equates'],
-            'Department' => $courseData[0]['Department'],
-            'Location' => $courseData[0]['Location']
-        ]);
+        if(Courses::where('CourseCode', $courseCode)->exists()) {
+            $course = Courses::where('CourseCode', $courseCode)->first();
+            if($course->delete()) {
+                return response()->json([
+                    'message' => "Record deleted."
+                ],  202);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Course not found.'
+            ],  404);
+        }
     }
 
-    public function updateCourse(Request $request)
+    public function createCourse(CourseRequest $request)
     {
-        $courseData = $request->json()->all();
+        $validated = $request->validated();
+        $courseCode = $this->addAsterisk($validated['CourseCode']);
+        
+        if(!Courses::where('CourseCode', $courseCode)->exists()) {
 
-        if(Courses::where('CourseCode', $courseData[0]['CourseCode'])->exists()) {
-            $course = Courses::find($courseData[0]['CourseCode']);
-            $course->update([
-                'CourseName' => $courseData[0]['CourseName'],
-                'CourseOffering' => $courseData[0]['CourseOffering'],
-                'CourseWeight' => $courseData[0]['CourseWeight'],
-                'CourseDescription' => $courseData[0]['CourseDescription'],
-                'CourseFormat' => $courseData[0]['CourseFormat'],
-                'Prerequisites' => $courseData[0]['Prerequisites'],
-                'PrerequisiteCredits' => $courseData[0]['PrerequisiteCredits'],
-                'Corequisites' => $courseData[0]['Corequisites'],
-                'Restrictions' => $courseData[0]['Restrictions'],
-                'Equates' => $courseData[0]['Equates'],
-                'Department' => $courseData[0]['Department'],
-                'Location' => $courseData[0]['Location']
-            ]);
+            $courses = new Courses;
 
+            $courses->CourseCode = $courseCode;
+            $courses->CourseName = $validated['CourseName'];
+            $courses->CourseOffering = $validated['CourseOffering'];
+            $courses->CourseWeight = $validated['CourseWeight'];
+            $courses->CourseDescription = $validated['CourseDescription'];
+            $courses->CourseFormat = $validated['CourseFormat'];
+            $courses->Prerequisites = $validated['Prerequisites'];
+            $courses->PrerequisiteCredits = $validated['PrerequisiteCredits'];
+            $courses->Corequisites = $validated['Corequisites'];
+            $courses->Restrictions = $validated['Restrictions'];
+            $courses->Equates = $validated['Equates'];
+            $courses->Department = $validated['Department'];
+            $courses->Location = $validated['Location'];
+
+            if($courses->save()) {
+                return response()->json([
+                    'message' => 'Course created.'
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }
+
+        } else {
             return response()->json([
-                'message' => 'Course updated.'
-            ],  202);
+                'message' => 'Conflict.'
+            ], 409);
+        }
+    }
+
+    public function updateCourse(CourseRequest $request)
+    {
+        $validated = $request->validated();
+        $courseCode = $this->addAsterisk($validated['CourseCode']);
+
+        if(Courses::where('CourseCode', $courseCode)->exists()) {
+
+            $course = Courses::where('CourseCode', $courseCode)->first();
+
+            $course->CourseName = $validated['CourseName'];
+            $course->CourseOffering = $validated['CourseOffering'];
+            $course->CourseWeight = $validated['CourseWeight'];
+            $course->CourseDescription = $validated['CourseDescription'];
+            $course->CourseFormat = $validated['CourseFormat'];
+            $course->Prerequisites = $validated['Prerequisites'];
+            $course->PrerequisiteCredits = $validated['PrerequisiteCredits'];
+            $course->Corequisites = $validated['Corequisites'];
+            $course->Restrictions = $validated['Restrictions'];
+            $course->Equates = $validated['Equates'];
+            $course->Department = $validated['Department'];
+            $course->Location = $validated['Location'];
+
+            if($course->save()) {
+                return response()->json([
+                    'message' => 'Course updated.'
+                ],  202);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }           
+
         } else {
             return response()->json([
                 'message' => 'Course not found.'
@@ -99,39 +154,86 @@ class CourseController extends Controller
 
     public function getPrereqs(string $courseCode)
     {
-        $prereqs = Courses::select('Prerequisites')
-            ->where('CourseCode', $courseCode)
-            ->get();
-        return response()->json([
-            $prereqs
-        ],  200);
+        $courseCode = $this->addAsterisk($courseCode);
+
+        if(Courses::where('CourseCode', $courseCode)->exists()) {
+            $course = Courses::select('Prerequisites')
+                ->where('CourseCode', $courseCode)
+                ->get();
+            return response()->json(
+                $course, 
+                200);
+        } else {
+            return response()->json([
+                'message' => 'Course not found.'
+            ],  404);
+        }
     }
 
     public function getFuturePrereqs(string $courseCode)
     {
-        $courses = Courses::select('*')
-            ->where('Prerequisites', 'like', '%'.$courseCode.'%')
-            ->get();
-        return response()->json([
-            $courses
-        ],  200);
+        $courseCode = $this->addAsterisk($courseCode);
+
+        if(Courses::where('Prerequisites', 'like', '%'.$courseCode.'%')->exists()) {
+            $courses = Courses::select('*')
+                ->where('Prerequisites', 'like', '%'.$courseCode.'%')
+                ->get();
+            if(!is_null($courses)) {
+                return response()->json(
+                    $courses, 
+                    200);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }
+        } else {
+            return response()->json([
+                'message' => 'No courses found.'
+            ],  404);
+        }
     }
 
-    public function postFuturePrereqs(Request $request)
+    public function postFuturePrereqs(PrereqRequest $request)
     {
-        $input = $request->input('*.CourseCode');
+        $validated = $request->safe()->only(['*.CourseCode']);
+        $validated = $validated['*']['CourseCode'];
 
-        $courses = Courses::select('*')
-            ->where(function($query) use ($input) {
-                for($i=0; $i < count($input); $i++) {
-                    $query->orWhere('Prerequisites', 'like', '%'.$input[$i].'%');
-                }
-            })
-            ->get();
+        if(empty($validated)) {
+            return response()->json([
+                'message' => "Bad request."
+            ], 400);
+        }
 
-        return response()->json([
-            $courses,
-        ],  200);
+        $result = Courses::where(function($query) use ($validated) {
+                                    for($i=0; $i < count($validated); $i++) {
+                                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
+                                    }})
+                                ->exists();
+
+        
+        if($result) {
+            $courses = Courses::select('*')
+                ->where(function($query) use ($validated) {
+                    for($i=0; $i < count($validated); $i++) {
+                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
+                    }
+                })
+                ->get();
+            if(!is_null($courses)) {
+                return response()->json(
+                    $courses,
+                    200);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error'
+                ], 500);
+            }
+        } else {
+            return response()->json([
+                'message' => 'No courses found.'
+            ], 404);
+        }
     }
 
     /*
@@ -142,19 +244,40 @@ class CourseController extends Controller
 
     public function getSubjectAll()
     {
-        $subjects = Courses::select('CourseCode');
-        return response()->json([
-            $subjects
-        ],  200);
+        $subjects = Courses::select('CourseCode')
+            ->get();
+        if(!is_null($subjects)) {
+            return response()->json(
+                $subjects,
+                200);
+        } else {
+            return response()->json([
+                'message' => 'Internal server error.'
+            ], 500);
+        }
     }
 
     public function getSubject(string $subjectCode) 
     {
-        $course = Courses::select('CourseCode')
-                            ->where('CourseCode', 'like', '%'.$subjectCode.'%s');
-        return response()->json([
-            $course
-        ],  200);
+        if(Courses::where('CourseCode', 'like', '%'.$subjectCode.'%')->exists()) {
+            $courses = Courses::select('*')
+                ->where('CourseCode', 'like', '%'.$subjectCode.'%')
+                ->get();
+            if(!is_null($courses)) {
+                return response()->json(
+                    $courses,
+                    200);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }
+            
+        } else {
+            return response()->json([
+                'message' => 'Subject code not found'
+            ], 404);
+        }
     }
 
     /*
@@ -167,20 +290,32 @@ class CourseController extends Controller
     {
         $courses = CoursesTaken::select('*')
             ->get();
-        return response()->json([
-            $courses
-        ],  200);
+        if(!is_null($courses)) {
+            return response()->json(
+                $courses,  
+                200);
+        } else {
+            return response()->json([
+                'message' => 'Internal server error.'
+            ], 500);
+        }
     }
 
     public function deleteCourseTable($courseCode)
     {
-        if(CoursesTaken::where('CourseCode', $courseCode)->exists()) {
-            $course = CoursesTaken::find($courseCode);
-            $course->delete();
+        $courseCode = $this->addAsterisk($courseCode);
 
-            return response()->json([
-                'message' => "Record deleted."
-            ],  202);
+        if(CoursesTaken::where('CourseCode', $courseCode)->exists()) {
+            $course = CoursesTaken::where('CourseCode', $courseCode)->first();
+            if($course->delete()) {
+                return response()->json([
+                    'message' => 'Record deleted.'
+                ], 202);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ], 500);
+            }
         } else {
             return response()->json([
                 'message' => 'Course not found.'
@@ -190,20 +325,37 @@ class CourseController extends Controller
 
     public function postCourseTable($courseCode)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(Courses::where('CourseCode', $courseCode)->exists()) {
             $course = Courses::select('*')
                 ->where('CourseCode', $courseCode)
-                ->get();
-            CoursesTaken::insertUsing([
-                'CourseCode',
-                'CourseName',
-                'Prerequisites'],
-                $course
-            );
+                ->first();
+           
 
-            return response()->json([
-                'message' => "Record created."
-            ],  202);
+            if(!CoursesTaken::where('CourseCode', $course->CourseCode)->exists()) {
+                $course_new = new CoursesTaken;
+
+                $course_new->CourseCode = $course->CourseCode;
+                $course_new->CourseName = $course->CourseName;
+                $course_new->Prerequisites = $course->Prerequisites;
+
+                if($course_new->save()) {
+                    return response()->json([
+                        'message' => "Record created."
+                    ],  202);
+                } else {
+                    return response()->json([
+                        'message' => 'Internal server error.'
+                    ], 500);
+                }   
+            }
+            else {
+                return response()->json([
+                    'message' => 'Conflict.'
+                ], 409);
+            }
+            
         } else {
             return response()->json([
                 'message' => 'Course not found.'
@@ -213,15 +365,35 @@ class CourseController extends Controller
 
     public function putCourseTable($courseCode, $grade)
     {
-        if(Courses::where('', $courseCode)->exists()) {
-            $course = Courses::find($courseCode);
-            $course->update([
-                'Grade' => $grade
-            ]);
+        $courseCode = $this->addAsterisk($courseCode);
+
+        if(CoursesTaken::where('CourseCode', $courseCode)->exists()) {
+            
+            if($grade >= 0.0 && $grade <= 100.0) {
+                $course = CoursesTaken::where('CourseCode', $courseCode)->first();
+
+                $course->Grade = $grade;
+
+                if($course->save()) {
+                    return response()->json([
+                        'message' => 'Grade updated.',
+                    ], 202);
+                } else {
+                    return response()->json([
+                        'message' => 'Internal server error.'
+                    ], 500);
+                }
+
+            } else {
+                return response()->json([
+                    'message' => 'Bad request.'
+                ], 400);
+            }
+
         } else {
             return response()->json([
                 'message' => 'Course not found.'
-            ],  404); 
+            ], 404);
         }
     }
 }
