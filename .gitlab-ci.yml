@@ -1,12 +1,16 @@
+# Define stages
 stages:
   - build
   - test
 
+# This allows composer install to run in unit test
 variables:
   COMPOSER_ALLOW_SUPERUSER: 1
 
-
-.build:
+# Docker image build
+#  "." before build means job doesn't run
+#  We don't need to run this every time as it does not depend on the code in the repo
+.docker-build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
@@ -17,6 +21,7 @@ variables:
       --dockerfile "${CI_PROJECT_DIR}/laravel-app/Dockerfile"
       --destination "${CI_REGISTRY_IMAGE}/laravel:1.0"
 
+# Run phpunit tests
 unit-test:
   stage: test
   image: registry.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/laravel:1.0
