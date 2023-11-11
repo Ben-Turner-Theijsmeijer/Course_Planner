@@ -41,7 +41,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <a href="/api-documentation" class="text-white text-2xl mb-4">API Docs</a>
+        <a href="/api-docs" class="text-white text-2xl mb-4">API Docs</a>
         <a href="/course-finder" class="text-white text-2xl mb-4">Course Finder</a>
         <a href="/about" class="text-white text-2xl mb-4">About</a>
     </div>
