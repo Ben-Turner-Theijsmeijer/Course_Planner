@@ -17,8 +17,20 @@ class CourseController extends Controller
     ======================================================================
     */
 
+    private function addAsterisk(string $courseCode) 
+    {
+        $courseCodeLocal = $courseCode;
+        if (!str_contains($courseCodeLocal, '*')) {
+            $numPos = strcspn($courseCodeLocal , '0123456789' );
+            $courseCodeLocal = substr($courseCodeLocal, 0, $numPos) . '*' . substr($courseCodeLocal, $numPos);
+        }
+        return $courseCodeLocal;
+    }
+
     public function getCourse(string $courseCode)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(Courses::where('CourseCode', $courseCode)->exists()) {
             $course = Courses::select('*')
                 ->where('CourseCode', $courseCode)
@@ -35,6 +47,8 @@ class CourseController extends Controller
 
     public function deleteCourse(string $courseCode)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(Courses::where('CourseCode', $courseCode)->exists()) {
             $course = Courses::where('CourseCode', $courseCode)->first();
             if($course->delete()) {
@@ -56,12 +70,13 @@ class CourseController extends Controller
     public function createCourse(CourseRequest $request)
     {
         $validated = $request->validated();
+        $courseCode = $this->addAsterisk($validated['CourseCode']);
         
-        if(!Courses::where('CourseCode', $validated['CourseCode'])->exists()) {
+        if(!Courses::where('CourseCode', $courseCode)->exists()) {
 
             $courses = new Courses;
 
-            $courses->CourseCode = $validated['CourseCode'];
+            $courses->CourseCode = $courseCode;
             $courses->CourseName = $validated['CourseName'];
             $courses->CourseOffering = $validated['CourseOffering'];
             $courses->CourseWeight = $validated['CourseWeight'];
@@ -95,10 +110,11 @@ class CourseController extends Controller
     public function updateCourse(CourseRequest $request)
     {
         $validated = $request->validated();
+        $courseCode = $this->addAsterisk($validated['CourseCode']);
 
-        if(Courses::where('CourseCode', $validated['CourseCode'])->exists()) {
+        if(Courses::where('CourseCode', $courseCode)->exists()) {
 
-            $course = Courses::where('CourseCode', $validated['CourseCode'])->first();
+            $course = Courses::where('CourseCode', $courseCode)->first();
 
             $course->CourseName = $validated['CourseName'];
             $course->CourseOffering = $validated['CourseOffering'];
@@ -138,6 +154,8 @@ class CourseController extends Controller
 
     public function getPrereqs(string $courseCode)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(Courses::where('CourseCode', $courseCode)->exists()) {
             $course = Courses::select('Prerequisites')
                 ->where('CourseCode', $courseCode)
@@ -154,6 +172,8 @@ class CourseController extends Controller
 
     public function getFuturePrereqs(string $courseCode)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(Courses::where('Prerequisites', 'like', '%'.$courseCode.'%')->exists()) {
             $courses = Courses::select('*')
                 ->where('Prerequisites', 'like', '%'.$courseCode.'%')
@@ -179,22 +199,24 @@ class CourseController extends Controller
         $validated = $request->safe()->only(['*.CourseCode']);
         $validated = $validated['*']['CourseCode'];
 
-        $result = Courses::where(function($query) use ($validated) {
-                                    for($i=0; $i < count($validated); $i++) {
-                                        $query->orWhere('Prerequisites', 'like', '%'.$validated[$i].'%');
-                                }})
-                                ->exists();
-
         if(empty($validated)) {
             return response()->json([
                 'message' => "Bad request."
             ], 400);
         }
-        else if($result) {
+
+        $result = Courses::where(function($query) use ($validated) {
+                                    for($i=0; $i < count($validated); $i++) {
+                                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
+                                    }})
+                                ->exists();
+
+        
+        if($result) {
             $courses = Courses::select('*')
                 ->where(function($query) use ($validated) {
                     for($i=0; $i < count($validated); $i++) {
-                        $query->orWhere('Prerequisites', 'like', '%'.$validated[$i].'%');
+                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
                     }
                 })
                 ->get();
@@ -281,6 +303,8 @@ class CourseController extends Controller
 
     public function deleteCourseTable($courseCode)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(CoursesTaken::where('CourseCode', $courseCode)->exists()) {
             $course = CoursesTaken::where('CourseCode', $courseCode)->first();
             if($course->delete()) {
@@ -301,6 +325,8 @@ class CourseController extends Controller
 
     public function postCourseTable($courseCode)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(Courses::where('CourseCode', $courseCode)->exists()) {
             $course = Courses::select('*')
                 ->where('CourseCode', $courseCode)
@@ -339,6 +365,8 @@ class CourseController extends Controller
 
     public function putCourseTable($courseCode, $grade)
     {
+        $courseCode = $this->addAsterisk($courseCode);
+
         if(CoursesTaken::where('CourseCode', $courseCode)->exists()) {
             
             if($grade >= 0.0 && $grade <= 100.0) {
