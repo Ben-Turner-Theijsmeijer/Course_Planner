@@ -1,5 +1,5 @@
 # Set the base image for subsequent instructions
-FROM php:8.1
+FROM php:8.1.0-fpm
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
