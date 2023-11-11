@@ -6,7 +6,7 @@ variables:
   COMPOSER_ALLOW_SUPERUSER: 1
 
 
-build:
+.build:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:v1.14.0-debug
@@ -24,6 +24,9 @@ unit-test:
     - cd laravel-app
     - composer install
     - cp .env.example .env
-    - php artisan key:generate
-    - php artisan migrate
+#    - php artisan key:generate
+#    - php artisan migrate
     - vendor/bin/phpunit
+  cache:
+    paths:
+      - laravel-app/vendor
