@@ -194,6 +194,22 @@ class CourseController extends Controller
         }
     }
 
+    public function getFuturePrereqsNone()
+    {
+        $courses = Courses::select('*')
+            ->where('Prerequisites', 'like', '%'.'N/A'.'%')
+            ->get();
+        if(!is_null($courses)) {
+            return response()->json(
+                $courses,
+                200);
+        } else {
+            return response()->json([
+                'message' => 'Internal server error.'
+            ], 500);
+        }
+    }
+
     public function postFuturePrereqs(PrereqRequest $request)
     {
         $validated = $request->safe()->only(['*.CourseCode']);

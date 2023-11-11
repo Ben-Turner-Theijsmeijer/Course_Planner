@@ -25,6 +25,7 @@ Route::post('v1/course', [CourseController::class, 'createCourse']);
 Route::put('v1/course', [CourseController::class, 'updateCourse']);
 
 Route::get('v1/prereq/{courseCode}', [CourseController::class, 'getPrereqs']);
+Route::get('v1/prereq/future/none', [CourseController::class, 'getFuturePrereqsNone']);
 Route::get('v1/prereq/future/{courseCode}', [CourseController::class, 'getFuturePrereqs']);
 Route::post('v1/prereq/future', [CourseController::class, 'postFuturePrereqs']);
 
