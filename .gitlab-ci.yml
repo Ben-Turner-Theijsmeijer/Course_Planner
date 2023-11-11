@@ -1,5 +1,5 @@
 # Select image from https://hub.docker.com/_/php/
-image: php:7
+image: php:7.4
 
 # Select what we should cache
 cache:
