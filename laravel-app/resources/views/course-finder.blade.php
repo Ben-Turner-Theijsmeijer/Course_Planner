@@ -39,8 +39,9 @@
                 Course
             </button>
             <button type="button" id="generate-courses" class="btn bg-green-500 text-white p-2 rounded-lg mb-2">
-                Generate
-                Courses
+                Explore
+                Course
+                Options
             </button>
             <button type="submit" id="clear-courses" class="btn bg-red-500 text-white p-2 rounded-lg">
                 Clear
