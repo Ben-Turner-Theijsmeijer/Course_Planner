@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <!-- Head Section -->
 
 <head>
@@ -13,11 +13,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="manifest" href="{{asset('manifest.json')}}">
     <script src="{{asset('js/swagger-ui.js')}}"></script>
     <script src="{{asset('js/course-finder.js')}}"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3/swagger-ui.css" />
-    <link rel="icon" href="{{asset('img/favicon.png')}}" type="image/png">
+    <link rel="icon" href="{{asset('img/favicon.webp')}}" type="image/webp" />
 </head>
 
 <!-- Nav Bar -->
