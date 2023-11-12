@@ -1,7 +1,5 @@
 $(document).ready(function () {
-  function removeAsterisk(courseCode) {
-    return courseCode.replace("*", "");
-  }
+  const API_ENDPOINT = 'https://cis3760f23-11.socs.uoguelph.ca/api/v1/';
 
   $("#course-code").on("keypress", function (event) {
     var keyPressed = event.keyCode || event.which;
@@ -30,19 +28,19 @@ $(document).ready(function () {
   async function loadNoPreReqs() {
     try {
       const response = await axios.get(
-        `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses?prerequisites=none`
+        `${API_ENDPOINT}prereq/future/none`,
       );
       if (response.data) {
-        noPreReqCourses = response.data.courses;
+        noPreReqCourses = response.data;
 
         $(noPreReqTable).empty(); // Removes the initial empty element
 
         // Iterates through the courses and creates the cards
         for (let index = 0; index < noPreReqCourses.length; index++) {
           // Extracted values that are added to each course card
-          const courseCode = noPreReqCourses[index].code;
-          const courseTitle = noPreReqCourses[index].title;
-          const courseOffering = noPreReqCourses[index].offered;
+          const courseCode = noPreReqCourses[index].CourseCode;
+          const courseTitle = noPreReqCourses[index].CourseName;
+          const courseOffering = noPreReqCourses[index].CourseOffering;
           const addButton = "<button class='add text-blue-700'>Add</button>";
 
           courseCard(
@@ -89,7 +87,6 @@ $(document).ready(function () {
     const newRow = $("<tr>");
     const uniqueID = `course-${rowIndex++}`;
     newRow.attr("data-course-id", uniqueID);
-    console.log("available-courses");
 
     // Handles duplicate courses
     newRow.append(
@@ -98,7 +95,7 @@ $(document).ready(function () {
         .addClass(
           "px-3 py-2 sm:px-6 sm:py-3 text-gray-600 text-center border-b-2"
         )
-        .text(courseData.code)
+        .text(courseData.CourseCode)
     );
     newRow.append(
       // Course Name
@@ -106,7 +103,7 @@ $(document).ready(function () {
         .addClass(
           "px-3 py-2 sm:px-6 sm:py-3 text-gray-600 text-center border-b-2"
         )
-        .text(courseData.title)
+        .text(courseData.CourseName)
     );
     newRow.append(
       // Course Weight
@@ -114,7 +111,7 @@ $(document).ready(function () {
         .addClass(
           "px-3 py-2 sm:px-6 sm:py-3 text-gray-600 text-center border-b-2"
         )
-        .text(courseData.credits)
+        .text(courseData.CourseWeight)
     );
     newRow.append(
       // Delete button
@@ -124,22 +121,22 @@ $(document).ready(function () {
     );
     table.append(newRow);
 
-    console.log(studentCourses);
+    // console.log(studentCourses);
   }
 
   // Adds course that user took
   async function addCourseToTable(courseCode) {
-    courseCode = removeAsterisk(courseCode); // cleanse input
     try {
       // API Call to fetch course information from group 304's api
       const response = await axios.get(
-        `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses/${courseCode}`
+        `${API_ENDPOINT}course/${courseCode}`
       );
 
       if (response.data) {
-        const courseData = response.data.course[0];
-        if (!studentCourses.includes(courseData.code)) {
-          studentCourses.push(courseData.code); // Keeps track of the courses that are added to the student's schedule
+        // console.log(response.data);
+        const courseData = response.data[0];
+        if (!studentCourses.includes(courseData.CourseCode)) {
+          studentCourses.push(courseData.CourseCode); // Keeps track of the courses that are added to the student's schedule
           deleteButton = "<button class='delete text-red-600'>Delete</button>";
           courseRow(
             studentCoursesTable,
@@ -147,7 +144,7 @@ $(document).ready(function () {
             deleteButton,
             courseCounter
           );
-          completedCredits += courseData.credits; // Credit tracker
+          completedCredits += courseData.CourseWeight; // Credit tracker
           $("#credits_completed").text(completedCredits);
         } else {
           alert("Course already added!");
@@ -165,7 +162,6 @@ $(document).ready(function () {
 
     if (courseCode) {
       courseCode = courseCode.split(",");
-      console.log(courseCode);
       courseCode.forEach((course) => addCourseToTable(course.trim()));
       $("#course-code").val("");
     }
@@ -181,32 +177,30 @@ $(document).ready(function () {
     availableCourses = [];
     // Include logic here to output prerequisites when the button is clicked
     // will require an API call passing in the studentCourses array
-    formattedCourses = studentCourses.map((course) => course + "_contains");
 
-    for (const course of formattedCourses) {
-      const response = await axios.get(
-        `https://cis3760f23-12.socs.uoguelph.ca/api/v1/courses?prerequisites=[${course}]`
-      );
-      possibleCourses.push(...response.data["courses"]);
-    }
-    possibleCourses = [
-      ...new Map(possibleCourses.map((v) => [v["code"], v])).values(),
-    ];
+    const response = await axios.post(
+      `${API_ENDPOINT}prereq/future`,
+      data = studentCourses.map(course => ({ 'CourseCode': course }))
+    );
+    console.log(response.data);
+    possibleCourses = response.data;
+    // possibleCourses = [
+    //   ...new Map(possibleCourses.map((v) => [v["code"], v])).values(),
+    // ];
 
-    for (const course of possibleCourses) {
-      compiled = compilePrerequisites(studentCourses, course["prerequisites"]);
-      match = matchPrerequisites(compiled);
+    // for (const course of possibleCourses) {
+    //   compiled = compilePrerequisites(studentCourses, course["prerequisites"]);
+    //   match = matchPrerequisites(compiled);
 
-      if (match === true) {
-        availableCourses.push(course);
-      }
-    }
+    //   if (match === true) {
+    //     availableCourses.push(course);
+    //   }
+    // }
     // Iterates through the courses and creates the cards
     $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
     addButton = "<button class='add text-blue-600'>Add</button>";
-    availableCourses.forEach(function (course) {
-      if (studentCourses.includes(course.code)) {
-      } else {
+    possibleCourses.forEach(function (course) {
+      if (studentCourses.includes(course.CourseCode)) { } else {
         courseRow(availableCoursesTable, course, addButton);
       }
     });
@@ -267,14 +261,14 @@ $(document).ready(function () {
     const addButton = "<button class='add text-blue-700'>Add</button>";
     noPreReqCourses.forEach(function (course) {
       if (
-        course.code.toLowerCase().includes(courseInput.toLowerCase()) &&
-        course.offered.toLowerCase().includes(semesterInput.toLowerCase())
+        course.CourseCode.toLowerCase().includes(courseInput.toLowerCase()) &&
+        course.CourseOffering.toLowerCase().includes(semesterInput.toLowerCase())
       ) {
         courseCard(
           noPreReqTable,
-          course.code,
-          course.title,
-          course.offered,
+          course.CourseCode,
+          course.CourseName,
+          course.CourseOffering,
           addButton
         );
       }
