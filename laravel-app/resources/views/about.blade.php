@@ -2,31 +2,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="manifest" href="{{asset('manifest.json')}}">
+    <link rel="icon" href="{{asset('img/favicon.webp')}}" type="image/webp" />
+    
     <script src="{{asset('js/scripts.js')}}"></script>
-    <link rel="icon" href="{{asset('img/favicon.png')}}" type="image/png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 
 <!-- Nav Bar -->
 @include('components.navbar')
 
 <!-- Body Section -->
-<body class="bg-black bg-no-repeat bg-cover bg-fixed bg-top bg-[url({{asset('img/background.png')}})]">
+<body class="bg-black bg-no-repeat bg-cover bg-fixed bg-top bg-[url({{asset('img/background.webp')}})]">
 
     <!-- Main Content Section -->
     <content
         class="flex w-auto flex-col md:my-20 md:mx-10 md:p-10 bg-hero box-content bg-black/60 backdrop-blur-sm bg-no-repeat bg-cover bg-center bg-fixed md:rounded-md">
         <span
-            class="font-sans font-bold text-white text-center text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4 mb-4 mt-4">Meet
-            The Team</span>
+            class="font-sans font-bold text-white text-center text-4xl underline decoration-[#FFC72A] decoration-4 underline-offset-4 mb-4 mt-4">
+            Meet
+            The Team
+        </span>
 
         <!-- Team members section -->
         <div class="flex w-fill h-full flex-wrap justify-center">
@@ -68,13 +73,15 @@
                             Hello World! My name is Ben, Like several of my groupmates I am a 4th-year Software
                             Engineering
                             student at the University of Guelph.
-                            <br>
+                            <br />
                             Accademically I find programming intriguing and fufilling but feel little to no interest in
                             it outside of work/school
                             as I like to think of my profession and life as two separate aspects that don't overlap.
                             In my free time I much pefer to spend my time outdoors, playing sports,
                             <a class="text-blue-500 font-bold" target="_blank"
-                                href="https://www.instagram.com/phen.ori/">Working on my latest art project</a>
+                                href="https://www.instagram.com/phen.ori/">
+                                Working on my latest art project
+                            </a>
                             , and spending time with my friends.
 
                         </p>
@@ -165,7 +172,10 @@
                             fascinated by the
                             Transformer machine learning model, and you can see my very basic implementation
                             <a class="text-blue-500 font-bold" target="_blank"
-                                href="https://colab.research.google.com/drive/19j5w9zTgfO2KFeFYMnf_9azkbsN7dM8-?usp=sharing">here</a>.
+                                href="https://colab.research.google.com/drive/19j5w9zTgfO2KFeFYMnf_9azkbsN7dM8-?usp=sharing">
+                                here
+                            </a>
+                            .
                             In my free time, you can find me experimenting with synthesizers and painting
                             miniatures.
                         </p>

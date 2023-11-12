@@ -23,11 +23,14 @@
             </a>
         </div>
         <div class="md:hidden">
-            <button id="mobile-menu-button" class="text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+            <button id="mobile-menu-button" class="text-white" aria-label="Open Menu">
+                <span aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </span>
+                <span class="visually-hidden">Open Menu</span>
             </button>
         </div>
     </div>
@@ -36,10 +39,13 @@
     class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-black text-white z-50 overflow-y-auto">
     <div class="flex flex-col items-center justify-center h-full">
         <button id="close-mobile-menu" class="text-white absolute top-4 right-4 text-3xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <span aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </span>
+            <span class="visually-hidden">Open Menu</span>
         </button>
         <a href="/api-docs" class="text-white text-2xl mb-4">API Docs</a>
         <a href="/course-finder" class="text-white text-2xl mb-4">Course Finder</a>
