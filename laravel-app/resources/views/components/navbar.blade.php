@@ -47,7 +47,7 @@
             </span>
             <span class="visually-hidden">Open Menu</span>
         </button>
-        <a href="/api-documentation" class="text-white text-2xl mb-4">API Docs</a>
+        <a href="/api-docs" class="text-white text-2xl mb-4">API Docs</a>
         <a href="/course-finder" class="text-white text-2xl mb-4">Course Finder</a>
         <a href="/about" class="text-white text-2xl mb-4">About</a>
     </div>

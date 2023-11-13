@@ -53,6 +53,7 @@ $(document).ready(function () {
         }
       }
     } catch (error) {
+      // Handle errors
       console.error(error);
     }
   }
@@ -127,7 +128,7 @@ $(document).ready(function () {
   // Adds course that user took
   async function addCourseToTable(courseCode) {
     try {
-      // API Call to fetch course information from group 304's api
+      // API Call to fetch course information from our API
       const response = await axios.get(
         `${API_ENDPOINT}course/${courseCode}`
       );
@@ -152,6 +153,7 @@ $(document).ready(function () {
       }
     } catch (error) {
       // Handle errors
+      alert("Warning:\nCourse not Found in Database");
       console.error(error);
     }
   }
@@ -277,108 +279,8 @@ $(document).ready(function () {
 
   // Parses a string of prerequisites into an easily parsable nested array
   function compilePrerequisites(studentCourses, prerequisites) {
+    // Functionality from sprint 6 removed, left stub for future recoding
     compiled = [];
-    temp = prerequisites;
-
-    while (temp) {
-      // Match a course code
-      match = temp.match(/^[A-Z]{3,4}\*?[0-9]{4}\s*/g);
-      if (match) {
-        compiled.push({
-          type: "code",
-          data: match[0].trim(),
-        });
-        temp = temp.substring(match[0].length);
-        continue;
-      }
-
-      // Match open brackets
-      match = temp.match(/^[\(\[]\s*/g);
-      if (match) {
-        compiled.push({
-          type: "open_bracket",
-          data: match[0].trim(),
-        });
-        temp = temp.substring(match[0].length);
-        continue;
-      }
-
-      // Match closed brackets
-      match = temp.match(/^[\)\]]\s*/g);
-      if (match) {
-        compiled.push({
-          type: "close_bracket",
-          data: match[0].trim(),
-        });
-        temp = temp.substring(match[0].length);
-        continue;
-      }
-
-      // Match commas
-      match = temp.match(/^,\s*/g);
-      if (match) {
-        compiled.push({
-          type: "comma",
-          data: match[0].trim(),
-        });
-        temp = temp.substring(match[0].length);
-        continue;
-      }
-
-      // Match or
-      match = temp.match(/^or\s*/g);
-      if (match) {
-        compiled.push({
-          type: "or",
-          data: match[0].trim(),
-        });
-        temp = temp.substring(match[0].length);
-        continue;
-      }
-
-      // Match x of
-      match = temp.match(/^\d\s*of\s*/g);
-      if (match) {
-        compiled.push({
-          type: "x of",
-          data: match[0][0],
-        });
-        temp = temp.substring(match[0].length);
-        continue;
-      }
-
-      // Advance string if no character matched
-      temp = temp.substring(1);
-    }
-
-    // Convert course codes to 'true' or 'false' based on the passed list of courses taken
-    for (let i = 0; i < compiled.length; i++) {
-      if (compiled[i]["type"] === "code") {
-        if (studentCourses.includes(compiled[i]["data"])) {
-          compiled[i]["type"] = true;
-        } else {
-          compiled[i]["type"] = false;
-        }
-      }
-    }
-
-    // Turn brackets into nested arrays
-    stack = [];
-    list = [];
-    for (element of compiled) {
-      if (element["type"] === "open_bracket") {
-        stack.push(list);
-        list = [];
-      } else if (element["type"] === "close_bracket") {
-        temp = stack.pop();
-        temp.push(list);
-        list = temp;
-      } else {
-        list.push(element);
-      }
-    }
-
-    compiled = list;
     return compiled;
   }
 
