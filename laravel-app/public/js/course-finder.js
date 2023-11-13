@@ -182,24 +182,24 @@ $(document).ready(function () {
       `${API_ENDPOINT}prereq/future`,
       data = studentCourses.map(course => ({ 'CourseCode': course }))
     );
-    console.log(response.data);
     possibleCourses = response.data;
-    // possibleCourses = [
-    //   ...new Map(possibleCourses.map((v) => [v["code"], v])).values(),
-    // ];
+    possibleCourses = [ //  Eliminate duplicate courses from the list
+      ...new Map(possibleCourses.map((v) => [v["CourseCode"], v])).values(),
+    ];
 
-    // for (const course of possibleCourses) {
-    //   compiled = compilePrerequisites(studentCourses, course["prerequisites"]);
-    //   match = matchPrerequisites(compiled);
+    for (const course of possibleCourses) {
+      compiled = compilePrerequisites(studentCourses, course["Prerequisites"]);
+      match = matchPrerequisites(compiled); 
 
-    //   if (match === true) {
-    //     availableCourses.push(course);
-    //   }
-    // }
+      if (match === true) {
+        availableCourses.push(course);
+      }
+    }
+
     // Iterates through the courses and creates the cards
     $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
     addButton = "<button class='add text-blue-600'>Add</button>";
-    possibleCourses.forEach(function (course) {
+    availableCourses.forEach(function (course) {
       if (studentCourses.includes(course.CourseCode)) { } else {
         courseRow(availableCoursesTable, course, addButton);
       }
@@ -388,11 +388,11 @@ $(document).ready(function () {
     if (
       compiledPrerequisites[0] &&
       compiledPrerequisites[0]["type"] === "x of"
-    ) {
+      ) {
       numOf = compiledPrerequisites[0]["data"];
       x = 0;
 
-      for (const element of compiledPrerequisites.splice(1)) {
+      for (const element of compiledPrerequisites.slice(1)) {
         if (matchPrerequisites(element)) {
           x++;
         }
@@ -407,18 +407,21 @@ $(document).ready(function () {
     if (
       compiledPrerequisites[1] &&
       compiledPrerequisites[1]["type"] === "comma"
-    ) {
+      ) {
       // Treat commas as AND
       return (
         matchPrerequisites(compiledPrerequisites[0]) &&
-        matchPrerequisites(compiledPrerequisites.splice(2))
+        matchPrerequisites(compiledPrerequisites.slice(2))
       );
     }
-    if (compiledPrerequisites[1] && compiledPrerequisites[1]["type"] === "or") {
+    if (
+      compiledPrerequisites[1] && 
+      compiledPrerequisites[1]["type"] === "or"
+      ) {
       // Treat 'or' as OR
       return (
         matchPrerequisites(compiledPrerequisites[0]) ||
-        matchPrerequisites(compiledPrerequisites.splice(2))
+        matchPrerequisites(compiledPrerequisites.slice(2))
       );
     }
     // Recursively parse nested arrays
