@@ -34,12 +34,19 @@
         <form id="course-form" class="flex flex-col mb-2">
             <input type="text" id="course-code" placeholder="Enter Course Code (i.e CIS*1300 or CIS1300)"
                 class="w-full p-2 sm:px-4 rounded-lg border border-gray-300 mb-2" />
-            <button type="button" id="add-course" class="btn bg-blue-500 text-white p-2 rounded-lg mb-2 transition duration-300 hover:bg-blue-600">Add
-                Course</button>
-            <button type="button" id="generate-courses" class="btn bg-green-500 text-white p-2 rounded-lg mb-2 transition duration-300 hover:bg-green-600">Show Possible Future
-                Courses</button>
-            <button type="submit" id="clear-courses" class="btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-700">Clear
-                Courses</button>
+            <button type="button" id="add-course" class="btn bg-blue-500 text-white p-2 rounded-lg mb-2">
+                Add
+                Course
+            </button>
+            <button type="button" id="generate-courses" class="btn bg-green-500 text-white p-2 rounded-lg mb-2">
+                Explore
+                Course
+                Options
+            </button>
+            <button type="submit" id="clear-courses" class="btn bg-red-500 text-white p-2 rounded-lg">
+                Clear
+                Courses
+            </button>
         </form>
         <table id="my-courses" class="w-full text-center mt-4">
             <thead>

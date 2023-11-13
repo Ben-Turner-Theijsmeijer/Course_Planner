@@ -174,49 +174,38 @@ $(document).ready(function () {
     if (studentCourses.length === 0) {
       alert("No courses entered!");
     }
-    else{
-      console.log("student courses: " + studentCourses);
-      possibleCourses = [];
-      availableCourses = [];
-      // Include logic here to output prerequisites when the button is clicked
-      // will require an API call passing in the studentCourses array
+    console.log("student courses: " + studentCourses);
+    possibleCourses = [];
+    availableCourses = [];
+    // Include logic here to output prerequisites when the button is clicked
+    // will require an API call passing in the studentCourses array
 
-      
-        try{
-          const response = await axios.post(
-            `${API_ENDPOINT}prereq/future`,
-            data = studentCourses.map(course => ({ 'CourseCode': course }))
-          );
-          console.log(response.data);
-          possibleCourses = response.data;
-        } catch (error) {
-          // Handle errors
-          alert("Warning:\nCourse not found");
-          console.error(error);
-        }
-      
-      
-      // possibleCourses = [
-      //   ...new Map(possibleCourses.map((v) => [v["code"], v])).values(),
-      // ];
+    const response = await axios.post(
+      `${API_ENDPOINT}prereq/future`,
+      data = studentCourses.map(course => ({ 'CourseCode': course }))
+    );
+    possibleCourses = response.data;
+    possibleCourses = [ //  Eliminate duplicate courses from the list
+      ...new Map(possibleCourses.map((v) => [v["CourseCode"], v])).values(),
+    ];
 
-      // for (const course of possibleCourses) {
-      //   compiled = compilePrerequisites(studentCourses, course["prerequisites"]);
-      //   match = matchPrerequisites(compiled);
+    for (const course of possibleCourses) {
+      compiled = compilePrerequisites(studentCourses, course["Prerequisites"]);
+      match = matchPrerequisites(compiled); 
 
-      //   if (match === true) {
-      //     availableCourses.push(course);
-      //   }
-      // }
-      // Iterates through the courses and creates the cards
-      $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
-      addButton = "<button class='add text-blue-600'>Add</button>";
-      possibleCourses.forEach(function (course) {
-        if (studentCourses.includes(course.CourseCode)) { } else {
-          courseRow(availableCoursesTable, course, addButton);
-        }
-      });
+      if (match === true) {
+        availableCourses.push(course);
+      }
     }
+
+    // Iterates through the courses and creates the cards
+    $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
+    addButton = "<button class='add text-blue-600'>Add</button>";
+    availableCourses.forEach(function (course) {
+      if (studentCourses.includes(course.CourseCode)) { } else {
+        courseRow(availableCoursesTable, course, addButton);
+      }
+    });
   });
 
   // Removes a course from the table
@@ -297,7 +286,58 @@ $(document).ready(function () {
 
   // Recursively check to see if all course requirements are met
   function matchPrerequisites(compiledPrerequisites) {
-    // Functionality from sprint 6 removed, left stub for future recoding
+    // Count amount of matches in "x of" arrays, return true if condition is met
+    if (
+      compiledPrerequisites[0] &&
+      compiledPrerequisites[0]["type"] === "x of"
+      ) {
+      numOf = compiledPrerequisites[0]["data"];
+      x = 0;
+
+      for (const element of compiledPrerequisites.slice(1)) {
+        if (matchPrerequisites(element)) {
+          x++;
+        }
+      }
+
+      if (x >= numOf) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (
+      compiledPrerequisites[1] &&
+      compiledPrerequisites[1]["type"] === "comma"
+      ) {
+      // Treat commas as AND
+      return (
+        matchPrerequisites(compiledPrerequisites[0]) &&
+        matchPrerequisites(compiledPrerequisites.slice(2))
+      );
+    }
+    if (
+      compiledPrerequisites[1] && 
+      compiledPrerequisites[1]["type"] === "or"
+      ) {
+      // Treat 'or' as OR
+      return (
+        matchPrerequisites(compiledPrerequisites[0]) ||
+        matchPrerequisites(compiledPrerequisites.slice(2))
+      );
+    }
+    // Recursively parse nested arrays
+    if (Array.isArray(compiledPrerequisites[0])) {
+      return matchPrerequisites(compiledPrerequisites[0]);
+    }
+    if (compiledPrerequisites[0] && compiledPrerequisites[0]["type"] === true) {
+      // If no more codes to parse, evaluate if passed code is met by the student courses
+      return true;
+    }
+    if (compiledPrerequisites && compiledPrerequisites["type"] === true) {
+      return true;
+    }
+
     return false;
   }
 
