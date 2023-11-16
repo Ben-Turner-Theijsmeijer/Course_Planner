@@ -16,6 +16,11 @@
                 Course Finder
                 <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
             </a>
+            <a href="/course-roadmap"
+                class="group font-sans font-bold text-white text-2xl transition duration-300">
+                Course Roadmap
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-300 h-1 bg-[#FFC72A]"></span>
+            </a>
             <a href="/about"
                 class="group font-sans font-bold text-white text-2xl transition duration-300">
                 About
@@ -49,6 +54,7 @@
         </button>
         <a href="/api-docs" class="text-white text-2xl mb-4">API Docs</a>
         <a href="/course-finder" class="text-white text-2xl mb-4">Course Finder</a>
+        <a href="/course-roadmap" class="text-white text-2xl mb-4">Course Roadmap</a>
         <a href="/about" class="text-white text-2xl mb-4">About</a>
     </div>
 </div>

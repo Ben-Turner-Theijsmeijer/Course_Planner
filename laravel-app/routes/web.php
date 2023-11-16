@@ -29,3 +29,7 @@ Route::get('/api-docs', function () {
 Route::get('/course-finder', function () {
     return view('course-finder');
 });
+
+Route::get('/course-roadmap', function () {
+    return view('course-roadmap');
+});
