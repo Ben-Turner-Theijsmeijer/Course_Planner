@@ -123,8 +123,6 @@ $(document).ready(function () {
                 .html(rowFunction)
         );
         table.append(newRow);
-
-        // console.log(studentCourses);
     }
 
     // Adds course that user took
@@ -177,7 +175,6 @@ $(document).ready(function () {
         if (studentCourses.length === 0) {
             alert("No courses entered!");
         }
-        console.log("student courses: " + studentCourses);
         possibleCourses = [];
         availableCourses = [];
         // Include logic here to output prerequisites when the button is clicked
@@ -196,10 +193,10 @@ $(document).ready(function () {
         ];
 
         for (const course of possibleCourses) {
-            compiled = compilePrerequisites(
-                studentCourses,
-                course["Prerequisites"]
-            );
+            compiled = compilePrerequisites(course["Prerequisites"]);
+            compiled = nestCompiled(compiled);
+            evaluateStudentCourses(compiled, studentCourses);
+
             match = matchPrerequisites(compiled);
 
             if (match === true) {
@@ -292,11 +289,9 @@ $(document).ready(function () {
     }
 
     // Parses a string of prerequisites into an easily parsable nested array
-    function compilePrerequisites(studentCourses, prerequisites) {
+    function compilePrerequisites(prerequisites) {
         let compiled = [];
         let temp = prerequisites;
-
-        console.log("Prerequisites: " + prerequisites);
 
         while (temp) {
             // Match a course code
@@ -369,21 +364,14 @@ $(document).ready(function () {
             temp = temp.substring(1);
         }
 
-        // Convert course codes to 'true' or 'false' based on the passed list of courses taken
-        for (let i = 0; i < compiled.length; i++) {
-            if (compiled[i]["type"] === "code") {
-                if (studentCourses.includes(compiled[i]["data"])) {
-                    compiled[i]["type"] = true;
-                } else {
-                    compiled[i]["type"] = false;
-                }
-            }
-        }
+        return compiled;
+    }
 
-        // Turn brackets into nested arrays
+    function nestCompiled(compiledPrerequisites) {
         let stack = [];
         let list = [];
-        for (element of compiled) {
+
+        for (element of compiledPrerequisites) {
             if (element["type"] === "open_bracket") {
                 stack.push(list);
                 list = [];
@@ -399,8 +387,25 @@ $(document).ready(function () {
             }
         }
 
-        compiled = list;
-        return compiled;
+        return list;
+    }
+
+    // Recursively evaluates each course in the compiled prerequisites, and marks if the student has completed that course
+    function evaluateStudentCourses(compiledPrerequisites, studentCourses) {
+        for (let i = 0; i < compiledPrerequisites.length; i++) {
+            if (Array.isArray(compiledPrerequisites[i])) {
+                evaluateStudentCourses(
+                    compiledPrerequisites[i],
+                    studentCourses
+                );
+            } else if (compiledPrerequisites[i]["type"] == "code") {
+                if (studentCourses.includes(compiledPrerequisites[i]["data"])) {
+                    compiledPrerequisites[i]["type"] = true;
+                } else {
+                    compiledPrerequisites[i]["type"] = false;
+                }
+            }
+        }
     }
 
     // Recursively check to see if all course requirements are met
@@ -475,20 +480,237 @@ $(document).ready(function () {
         var courseFilterValue = $("#course-filter").val();
         var semesterFilterValue = $(this).val();
         filterCourses(courseFilterValue, semesterFilterValue);
-
-        
     });
-
 
     // Course Roadmap Section
 
+    // function to generate a node
+    function GenerateNode(course_code, course_node_group = "") {
+        return {
+            id: course_code,
+            label: course_code,
+            group: course_node_group,
+        };
+    }
+
     // Function to generate the roadmap will require API Calls
-    $("#generateRoadmapBtn").click(function () {
-      var subject = $("#subjectText").val();
+    $("#generateRoadmapBtn").click(async function () {
+        // 1. User enters subject code (I.E CIS)
+        var subject = $("#subjectText").val();
 
-      $("#subjectText").val(""); 
+        $("#subjectText").val("");
 
-      $("#subjectTitle").text(subject + " Roadmap"); 
+        // Algorithm to generate subject road map here:
+        // 2. go to the subject end point to retrieve all course codes for the particular subject (i.e CIS 1300)
 
-  });
+        try {
+            // Retrieve all subject courses
+            const response = await axios.get(
+                `${API_ENDPOINT}subject/${subject}`
+            );
+            if (response.data) {
+                subjectCourses = response.data;
+            }
+        } catch {
+            alert(`Failed to retrieve ${subject} courses`);
+            console.log(error);
+        }
+        // 3. pass in the course code to the get course end point to retrieve pre-requisite data
+        // Parse the prerequisite data for the course - each course in prerequisites will represent a FROM course node to the course that is initially
+        // passed in the course end point
+        // 4. Create nodes for each course as well as the edges which represent the prerequisite to and from a particular course
+        let course_nodes = [];
+        let node_count = 0;
+        let course_edges = [];
+        let edge_count = 0;
+
+        for (let i = 0; i < subjectCourses.length; i++) {
+            let course_node_id = subjectCourses[i];
+            let course_node_label = subjectCourses[i];
+            let course_node_group = "";
+
+            if (
+                !course_nodes.some(
+                    (element) =>
+                        element["id"] === subjectCourses[i]["CourseCode"]
+                )
+            )
+                course_nodes.push(
+                    GenerateNode(subjectCourses[i]["CourseCode"])
+                ); // CIS*1050
+
+            compiled = compilePrerequisites(subjectCourses[i]["Prerequisites"]);
+            compiled.forEach((token) => {
+                if (token["type"] === "code") {
+                    if (
+                        !course_nodes.some(
+                            (element) => element["id"] === token["data"]
+                        )
+                    )
+                        course_nodes.push(GenerateNode(token["data"]));
+
+                    let course_edge_from = token["data"];
+                    let course_edge_to = subjectCourses[i]["CourseCode"];
+                    let course_edge_dash = false;
+                    let course_edge_arrow = "to";
+
+                    course_edges.push({
+                        from: course_edge_from,
+                        to: course_edge_to,
+                        dashes: course_edge_dash,
+                        arrows: course_edge_arrow,
+                        chosen: {color: "#FF0000"},
+                    });
+                }
+            });
+        }
+
+        // Show the road map on the webpage at the element subject-roadmap
+        var container = document.getElementById("subject-roadmap");
+        var data = {
+            nodes: new vis.DataSet(course_nodes),
+            edges: new vis.DataSet(course_edges)
+        };
+
+
+        // var options = {
+        //     interaction: {
+        //         hover: true,
+        //         hoverConnectedEdges: true
+        //     },
+        //     layout: {
+        //         hierarchical: {
+        //             nodeSpacing: 100,
+        //             treeSpacing: 30,
+        //             direction: "UD",
+        //             sortMethod: "directed",
+        //             shakeTowards: "roots"
+        //         }
+        //     },
+        //     nodes: {
+        //         //shape: 'dot',
+        //         scaling: {
+        //             customScalingFunction: function (min, max, total, value) {
+        //                 return value / total;
+        //             },
+        //             min: 20,
+        //             max: 100
+        //         },
+        //         color: {
+        //             color: "#848484",
+        //             hover: { background: "#7dd678", border: "#7dd678" },
+        //             highlight: { background: "#31cf28", border: "#31cf28" },
+        //             inherit: false
+        //         }
+        //     },
+        //     edges: {
+        //         hidden: false,
+        //         chosen: {hidden: true},
+        //         scaling: {
+        //             customScalingFunction: function (min, max, total, value) {
+        //                 return value / total;
+        //             },
+        //             min: 1,
+        //             max: 200,
+        //         },
+        //         color: {
+        //             color: "#848484",
+        //             hover: "#7dd678",
+        //             highlight: "#31cf28",
+        //             inherit: false
+        //         }
+        //     }
+        // };
+
+        var options = {
+            //chosen: true,
+            physics: {
+                enabled: true,
+                repulsion: {
+                    springLength: 10,
+                    nodeDistance: 20,
+                    centralGravity: 0,
+                    
+                },
+                maxVelocity: 10,
+             wind: {
+                    y: 0,
+                    x: 0
+                }
+            },
+            interaction: {
+                hover: true,
+                hoverConnectedEdges: true
+            },
+            layout: {
+                hierarchical: {
+                    nodeSpacing: 100,
+                    treeSpacing: 30,
+                    direction: "UD",
+                    sortMethod: "directed",
+                    shakeTowards: "roots"
+                }
+            },
+            nodes: {
+                //shape: 'dot',
+                scaling: {
+                    customScalingFunction: function (min,max,total,value) {
+                        return value/total;
+                    },
+                    min:20,
+                    max:100
+                },
+
+            }
+            ,
+            edges:{
+                hidden: true,
+                chosen: true,
+                selectionWidth: 2
+                // scaling: {
+                //     customScalingFunction: function (min,max,total,value) {
+                //         return value/total;
+                //     },
+                //     min:1,
+                //     max:200
+                // },
+                // color: {
+                //     color:'#848484',
+                //     highlight:'#848484',
+                //     hover: '#d3d2cd',
+                //     inherit: false,
+                //     opacity:1.0
+                // }
+            }
+        };
+        
+        //Create the network
+        var network = new vis.Network(container, data, options);
+
+        network.on('selectNode', function(event) {
+            console.log("Select");
+            console.log(event);
+
+            for (node of event["nodes"]) {
+                data["nodes"].update({id: node, color:"#FF0000"})
+            }
+
+            for (edge of event["edges"]) {
+                network.clustering.updateEdge(edge, {hidden: false});
+            }
+        });
+
+        network.on('deselectNode', function(event) {
+            console.log("Deselect")
+            console.log(event);
+
+            for (node of event["previousSelection"]["nodes"]) {
+                data["nodes"].update({id: node["id"], color:"#00FF00"})
+            }
+
+            for (edge of event["previousSelection"]["edges"]) {
+                network.clustering.updateEdge(edge["id"], {hidden: true});
+            }
+        });
+    });
 });

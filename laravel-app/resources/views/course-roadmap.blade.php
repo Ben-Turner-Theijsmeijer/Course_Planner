@@ -12,6 +12,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="manifest" href="{{asset('manifest.json')}}">
     <link rel="icon" href="{{asset('img/favicon.webp')}}" type="image/webp" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
     <script src="{{asset('js/course-finder.js')}}"></script>
@@ -24,7 +26,7 @@
 
 <body class="bg-gray-100">
 
-    <div class="container mx-auto mt-8 p-8 bg-white shadow-lg rounded-lg">
+    <div class="container mx-auto mt-8 p-8 bg-white shadow-lg rounded-lg h-full">
 
         <h1 class="text-3xl font-bold mb-6">Course Roadmap</h1>
 
@@ -34,16 +36,16 @@
                 placeholder="Enter a Subject">
             <button id="generateRoadmapBtn"
                 class="ml-2 py-2 btn bg-green-500 text-white p-2 rounded-lg transition duration-300 hover:bg-green-600">
-                Generate Roadmap
+                Visualize Department Courses
             </button>
         </div>
 
         <!-- Roadmap Section -->
-        <div class="mt-4 border-2 border-gray-300 p-4">
-            <div id="subject-roadmap">
-                <h1 id="subjectTitle" class="text-center"> </h1>
+        <div class="mt-4 border-2 border-gray-300 p-4 h-full" style="width: 1480px; height: 600px;">
+            <div id="subject-roadmap" class="h-full">
             </div>
         </div>
+
 
     </div>
 
