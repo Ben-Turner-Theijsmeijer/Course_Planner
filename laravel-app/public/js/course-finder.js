@@ -623,7 +623,7 @@ $(document).ready(function () {
             for (edge of event["edges"]) {
                 network.clustering.updateEdge(edge, 
                     {
-                        hidden: false
+                        hidden: isToggled ? false : true,
                     });
             }
         });
@@ -635,7 +635,7 @@ $(document).ready(function () {
             for (edge of event["previousSelection"]["edges"]) {
                 network.clustering.updateEdge(edge["id"], 
                     {
-                        hidden: true,
+                        hidden: isToggled ? false : true,
                     });
             }
         });
