@@ -49,8 +49,8 @@
         </div>
 
         <!-- Roadmap Section -->
-        <div class="mt-4 border-2 border-gray-300 p-4 h-full" style="width: 1480px; height: 600px;">
-            <div id="subject-roadmap" class="h-full">
+        <div class="mt-4 border-2 border-gray-300 p-4 h-full">
+        <div id="subject-roadmap" class="w-full h-screen">
             </div>
         </div>
 
