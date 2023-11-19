@@ -367,6 +367,7 @@ $(document).ready(function () {
         return compiled;
     }
 
+    // Turn a compiled prerequisite string into a nested array
     function nestCompiled(compiledPrerequisites) {
         let stack = [];
         let list = [];
@@ -520,46 +521,25 @@ $(document).ready(function () {
         // passed in the course end point
         // 4. Create nodes for each course as well as the edges which represent the prerequisite to and from a particular course
         let course_nodes = [];
-        let node_count = 0;
         let course_edges = [];
-        let edge_count = 0;
 
         for (let i = 0; i < subjectCourses.length; i++) {
-            let course_node_id = subjectCourses[i];
-            let course_node_label = subjectCourses[i];
-            let course_node_group = "";
 
-            if (
-                !course_nodes.some(
-                    (element) =>
-                        element["id"] === subjectCourses[i]["CourseCode"]
-                )
-            )
-                course_nodes.push(
-                    GenerateNode(subjectCourses[i]["CourseCode"])
-                ); // CIS*1050
-
+            if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
+                course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
+            
             compiled = compilePrerequisites(subjectCourses[i]["Prerequisites"]);
+
             compiled.forEach((token) => {
                 if (token["type"] === "code") {
-                    if (
-                        !course_nodes.some(
-                            (element) => element["id"] === token["data"]
-                        )
-                    )
-                        course_nodes.push(GenerateNode(token["data"]));
-
-                    let course_edge_from = token["data"];
-                    let course_edge_to = subjectCourses[i]["CourseCode"];
-                    let course_edge_dash = false;
-                    let course_edge_arrow = "to";
+                    if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
+                        course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
 
                     course_edges.push({
-                        from: course_edge_from,
-                        to: course_edge_to,
-                        dashes: course_edge_dash,
-                        arrows: course_edge_arrow,
-                        chosen: {color: "#FF0000"},
+                        from: token["data"],
+                        to: subjectCourses[i]["CourseCode"],
+                        dashes: false,
+                        arrows: "to"
                     });
                 }
             });
@@ -572,58 +552,7 @@ $(document).ready(function () {
             edges: new vis.DataSet(course_edges)
         };
 
-
-        // var options = {
-        //     interaction: {
-        //         hover: true,
-        //         hoverConnectedEdges: true
-        //     },
-        //     layout: {
-        //         hierarchical: {
-        //             nodeSpacing: 100,
-        //             treeSpacing: 30,
-        //             direction: "UD",
-        //             sortMethod: "directed",
-        //             shakeTowards: "roots"
-        //         }
-        //     },
-        //     nodes: {
-        //         //shape: 'dot',
-        //         scaling: {
-        //             customScalingFunction: function (min, max, total, value) {
-        //                 return value / total;
-        //             },
-        //             min: 20,
-        //             max: 100
-        //         },
-        //         color: {
-        //             color: "#848484",
-        //             hover: { background: "#7dd678", border: "#7dd678" },
-        //             highlight: { background: "#31cf28", border: "#31cf28" },
-        //             inherit: false
-        //         }
-        //     },
-        //     edges: {
-        //         hidden: false,
-        //         chosen: {hidden: true},
-        //         scaling: {
-        //             customScalingFunction: function (min, max, total, value) {
-        //                 return value / total;
-        //             },
-        //             min: 1,
-        //             max: 200,
-        //         },
-        //         color: {
-        //             color: "#848484",
-        //             hover: "#7dd678",
-        //             highlight: "#31cf28",
-        //             inherit: false
-        //         }
-        //     }
-        // };
-
         var options = {
-            //chosen: true,
             physics: {
                 enabled: true,
                 repulsion: {
@@ -633,10 +562,6 @@ $(document).ready(function () {
                     
                 },
                 maxVelocity: 10,
-             wind: {
-                    y: 0,
-                    x: 0
-                }
             },
             interaction: {
                 hover: true,
@@ -652,51 +577,42 @@ $(document).ready(function () {
                 }
             },
             nodes: {
-                //shape: 'dot',
-                scaling: {
-                    customScalingFunction: function (min,max,total,value) {
-                        return value/total;
-                    },
-                    min:20,
-                    max:100
+                shape: 'circle',
+                font: {
+                    color: "#FFFFFF"
                 },
-
-            }
-            ,
+                color: {
+                    border: "#000000",
+                    background: "#290f28",
+                    hover: {
+                        border: "#000000",
+                        background: "#6b2769"
+                    },
+                    highlight: {
+                        border: "#610218",
+                        background: "#C20430"
+                    }
+                }
+            },
             edges:{
                 hidden: true,
-                chosen: true,
-                selectionWidth: 2
-                // scaling: {
-                //     customScalingFunction: function (min,max,total,value) {
-                //         return value/total;
-                //     },
-                //     min:1,
-                //     max:200
-                // },
-                // color: {
-                //     color:'#848484',
-                //     highlight:'#848484',
-                //     hover: '#d3d2cd',
-                //     inherit: false,
-                //     opacity:1.0
-                // }
+                color: "#FFC72A"
             }
         };
         
         //Create the network
         var network = new vis.Network(container, data, options);
 
+        // Network on Node Select
         network.on('selectNode', function(event) {
             console.log("Select");
             console.log(event);
 
-            for (node of event["nodes"]) {
-                data["nodes"].update({id: node, color:"#FF0000"})
-            }
-
             for (edge of event["edges"]) {
-                network.clustering.updateEdge(edge, {hidden: false});
+                network.clustering.updateEdge(edge, 
+                    {
+                        hidden: false
+                    });
             }
         });
 
@@ -704,12 +620,11 @@ $(document).ready(function () {
             console.log("Deselect")
             console.log(event);
 
-            for (node of event["previousSelection"]["nodes"]) {
-                data["nodes"].update({id: node["id"], color:"#00FF00"})
-            }
-
             for (edge of event["previousSelection"]["edges"]) {
-                network.clustering.updateEdge(edge["id"], {hidden: true});
+                network.clustering.updateEdge(edge["id"], 
+                    {
+                        hidden: true,
+                    });
             }
         });
     });
