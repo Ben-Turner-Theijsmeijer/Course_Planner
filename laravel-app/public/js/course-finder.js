@@ -607,7 +607,7 @@ $(document).ready(function () {
                 }
             },
             edges:{
-                hidden: true,
+                hidden: isToggled ? false : true,
                 color: "#FFC72A"
             }
         };
