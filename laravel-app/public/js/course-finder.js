@@ -493,6 +493,19 @@ $(document).ready(function () {
             group: course_node_group,
         };
     }
+    const $toggleIcon = $("#toggleIcon");
+    let isToggled = false;
+
+    // Function to toggle the arrows on/off
+    $("#toggleArrowsBtn").on("click", function () {
+        isToggled = !isToggled;
+        $toggleIcon.attr(
+            "class",
+            isToggled
+                ? "fas fa-toggle-on text-green-500 text-4xl"
+                : "fas fa-toggle-off text-gray-500 text-4xl"
+        );
+    });
 
     // Function to generate the roadmap will require API Calls
     $("#generateRoadmapBtn").click(async function () {
@@ -549,7 +562,7 @@ $(document).ready(function () {
         var container = document.getElementById("subject-roadmap");
         var data = {
             nodes: new vis.DataSet(course_nodes),
-            edges: new vis.DataSet(course_edges)
+            edges: new vis.DataSet(course_edges),
         };
 
         var options = {
@@ -559,13 +572,12 @@ $(document).ready(function () {
                     springLength: 10,
                     nodeDistance: 20,
                     centralGravity: 0,
-                    
                 },
                 maxVelocity: 10,
             },
             interaction: {
                 hover: true,
-                hoverConnectedEdges: true
+                hoverConnectedEdges: true,
             },
             layout: {
                 hierarchical: {
@@ -573,8 +585,8 @@ $(document).ready(function () {
                     treeSpacing: 30,
                     direction: "UD",
                     sortMethod: "directed",
-                    shakeTowards: "roots"
-                }
+                    shakeTowards: "roots",
+                },
             },
             nodes: {
                 shape: 'circle',
@@ -599,7 +611,7 @@ $(document).ready(function () {
                 color: "#FFC72A"
             }
         };
-        
+
         //Create the network
         var network = new vis.Network(container, data, options);
 
@@ -616,8 +628,8 @@ $(document).ready(function () {
             }
         });
 
-        network.on('deselectNode', function(event) {
-            console.log("Deselect")
+        network.on("deselectNode", function (event) {
+            console.log("Deselect");
             console.log(event);
 
             for (edge of event["previousSelection"]["edges"]) {
