@@ -12,9 +12,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="manifest" href="{{asset('manifest.json')}}">
     <link rel="icon" href="{{asset('img/favicon.webp')}}" type="image/webp" />
-    
-    <script src="{{asset('js/scripts.js')}}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{asset('js/scripts.js')}}"></script>
+
 
 </head>
 
