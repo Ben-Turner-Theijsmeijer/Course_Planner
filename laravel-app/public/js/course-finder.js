@@ -535,6 +535,7 @@ $(document).ready(function () {
         // 4. Create nodes for each course as well as the edges which represent the prerequisite to and from a particular course
         let course_nodes = [];
         let course_edges = [];
+        let color_dict = {"and": "#e61919", "or": "#1953e6", "x of": "#f6ff00"}
 
         for (let i = 0; i < subjectCourses.length; i++) {
 
@@ -542,7 +543,60 @@ $(document).ready(function () {
                 course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
             
             compiled = compilePrerequisites(subjectCourses[i]["Prerequisites"]);
+            
+            // set default pre-req type to "and"
+            let curr_prereq_type = "and";
 
+            // initial scan for pre-req type
+            //  if there are no brackets to parse, then all pre-reqs for the course will use this type
+            for (let j = 0; j < compiled.length; j++) {
+                if (compiled[i]["type"] === "or"){
+                    curr_prereq_type = "or";
+                } else if (compiled[i]["type"] === "x of"){
+                    curr_prereq_type = "x of";
+                }
+            }
+            
+            // create edges for each pre-req
+            for (let j = 0; j < compiled.length; j++) {
+                token = compiled[i];
+                
+                // find type of pre-req inside bracket
+                if (token["type"] === "open_bracket"){
+                    let k = j;
+                    curr_prereq_type = "and";
+                    while (compiled[k][type] != "close_bracket"){
+                        if (compiled[k][type] === "x of"){
+                            curr_prereq_type = "x of"
+                            break;
+                        } else if (compiled[k][type] === "or"){
+                            curr_prereq_type = "or";
+                            break;
+                        }
+                    }
+                }
+                
+                // create course node
+                if (token["type"] === "code") {
+                    if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
+                        course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
+
+                    course_edges.push({
+                        from: token["data"],
+                        to: subjectCourses[i]["CourseCode"],
+                        dashes: false,
+                        arrows: "to",
+                        color: color_dict[curr_prereq_type] // set color to current pre-req type colour
+                    });
+                }
+                
+                // reset to "and" once outside bracket (this isn't totally correct but it's close enough)
+                if (token["type"] === "close_bracket"){
+                    curr_prereq_type = "and";
+                }
+            }
+
+            /*
             compiled.forEach((token) => {
                 if (token["type"] === "code") {
                     if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
@@ -556,6 +610,7 @@ $(document).ready(function () {
                     });
                 }
             });
+            */
         }
 
         // Show the road map on the webpage at the element subject-roadmap
@@ -608,7 +663,7 @@ $(document).ready(function () {
             },
             edges:{
                 hidden: isToggled ? false : true,
-                color: "#FFC72A"
+                //color: "#FFC72A"
             }
         };
 
