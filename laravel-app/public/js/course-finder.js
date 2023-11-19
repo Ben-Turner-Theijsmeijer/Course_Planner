@@ -492,6 +492,19 @@ $(document).ready(function () {
             group: course_node_group,
         };
     }
+    const $toggleIcon = $("#toggleIcon");
+    let isToggled = false;
+
+    // Function to toggle the arrows on/off
+    $("#toggleArrowsBtn").on("click", function () {
+        isToggled = !isToggled;
+        $toggleIcon.attr(
+            "class",
+            isToggled
+                ? "fas fa-toggle-on text-green-500 text-4xl"
+                : "fas fa-toggle-off text-gray-500 text-4xl"
+        );
+    });
 
     // Function to generate the roadmap will require API Calls
     $("#generateRoadmapBtn").click(async function () {
@@ -559,7 +572,7 @@ $(document).ready(function () {
                         to: course_edge_to,
                         dashes: course_edge_dash,
                         arrows: course_edge_arrow,
-                        chosen: {color: "#FF0000"},
+                        chosen: { color: "#FF0000" },
                     });
                 }
             });
@@ -569,9 +582,8 @@ $(document).ready(function () {
         var container = document.getElementById("subject-roadmap");
         var data = {
             nodes: new vis.DataSet(course_nodes),
-            edges: new vis.DataSet(course_edges)
+            edges: new vis.DataSet(course_edges),
         };
-
 
         // var options = {
         //     interaction: {
@@ -621,7 +633,6 @@ $(document).ready(function () {
         //         }
         //     }
         // };
-
         var options = {
             //chosen: true,
             physics: {
@@ -630,17 +641,16 @@ $(document).ready(function () {
                     springLength: 10,
                     nodeDistance: 20,
                     centralGravity: 0,
-                    
                 },
                 maxVelocity: 10,
-             wind: {
+                wind: {
                     y: 0,
-                    x: 0
-                }
+                    x: 0,
+                },
             },
             interaction: {
                 hover: true,
-                hoverConnectedEdges: true
+                hoverConnectedEdges: true,
             },
             layout: {
                 hierarchical: {
@@ -648,25 +658,23 @@ $(document).ready(function () {
                     treeSpacing: 30,
                     direction: "UD",
                     sortMethod: "directed",
-                    shakeTowards: "roots"
-                }
+                    shakeTowards: "roots",
+                },
             },
             nodes: {
                 //shape: 'dot',
                 scaling: {
-                    customScalingFunction: function (min,max,total,value) {
-                        return value/total;
+                    customScalingFunction: function (min, max, total, value) {
+                        return value / total;
                     },
-                    min:20,
-                    max:100
+                    min: 20,
+                    max: 100,
                 },
-
-            }
-            ,
-            edges:{
-                hidden: true,
+            },
+            edges: {
+                hidden: isToggled ? false : true,
                 chosen: true,
-                selectionWidth: 2
+                selectionWidth: 2,
                 // scaling: {
                 //     customScalingFunction: function (min,max,total,value) {
                 //         return value/total;
@@ -681,35 +689,35 @@ $(document).ready(function () {
                 //     inherit: false,
                 //     opacity:1.0
                 // }
-            }
+            },
         };
-        
+
         //Create the network
         var network = new vis.Network(container, data, options);
 
-        network.on('selectNode', function(event) {
+        network.on("selectNode", function (event) {
             console.log("Select");
             console.log(event);
 
             for (node of event["nodes"]) {
-                data["nodes"].update({id: node, color:"#FF0000"})
+                data["nodes"].update({ id: node, color: "#FF0000" });
             }
 
             for (edge of event["edges"]) {
-                network.clustering.updateEdge(edge, {hidden: false});
+                network.clustering.updateEdge(edge, { hidden: false });
             }
         });
 
-        network.on('deselectNode', function(event) {
-            console.log("Deselect")
+        network.on("deselectNode", function (event) {
+            console.log("Deselect");
             console.log(event);
 
             for (node of event["previousSelection"]["nodes"]) {
-                data["nodes"].update({id: node["id"], color:"#00FF00"})
+                data["nodes"].update({ id: node["id"], color: "#00FF00" });
             }
 
             for (edge of event["previousSelection"]["edges"]) {
-                network.clustering.updateEdge(edge["id"], {hidden: true});
+                network.clustering.updateEdge(edge["id"], { hidden: true });
             }
         });
     });
