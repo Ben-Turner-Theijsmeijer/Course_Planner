@@ -620,10 +620,18 @@ $(document).ready(function () {
             console.log("Select");
             console.log(event);
 
+            if (isToggled) {
+                for (edge of event["edges"]) {
+                    network.clustering.updateEdge(edge, 
+                        {
+                            hidden: true
+                        });
+                }
+            } 
             for (edge of event["edges"]) {
                 network.clustering.updateEdge(edge, 
                     {
-                        hidden: isToggled ? false : true,
+                        hidden: false,
                     });
             }
         });
@@ -632,12 +640,21 @@ $(document).ready(function () {
             console.log("Deselect");
             console.log(event);
 
+            if (isToggled) {
+                for (edge of event["previousSelection"]["edges"]) {
+                    network.clustering.updateEdge(edge["id"], 
+                        {
+                            hidden: true,
+                        });
+                }
+            }
             for (edge of event["previousSelection"]["edges"]) {
                 network.clustering.updateEdge(edge["id"], 
                     {
-                        hidden: isToggled ? false : true,
+                        hidden: false,
                     });
             }
+  
         });
     });
 });
