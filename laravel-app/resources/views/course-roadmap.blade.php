@@ -12,6 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="manifest" href="{{asset('manifest.json')}}">
     <link rel="icon" href="{{asset('img/favicon.webp')}}" type="image/webp" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -23,7 +24,6 @@
 @include('components.navbar')
 
 <!-- Body Section -->
-
 <body class="bg-gray-100">
 
     <div class="container mx-auto mt-8 p-8 bg-white shadow-lg rounded-lg h-full">
@@ -38,6 +38,14 @@
                 class="ml-2 py-2 btn bg-green-500 text-white p-2 rounded-lg transition duration-300 hover:bg-green-600">
                 Visualize Department Courses
             </button>
+
+      
+            <div class="ml-2 ml-auto flex items-center">
+                <span class="text-gray-600 mr-2">Show Arrows</span>
+                <div id="toggleArrowsBtn" class="cursor-pointer">
+                    <i id="toggleIcon" class="fas fa-toggle-off text-gray-500 text-4xl"></i>
+                </div>
+            </div>
         </div>
 
         <!-- Roadmap Section -->
@@ -46,10 +54,10 @@
             </div>
         </div>
 
-
     </div>
-
 </body>
+
+
 
 
 
