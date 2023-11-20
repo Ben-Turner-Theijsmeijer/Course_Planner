@@ -208,8 +208,7 @@ $(document).ready(function () {
         $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
         addButton = "<button class='add text-blue-600'>Add</button>";
         availableCourses.forEach(function (course) {
-            if (studentCourses.includes(course.CourseCode)) {
-            } else {
+            if (studentCourses.includes(course.CourseCode)) { } else {
                 courseRow(availableCoursesTable, course, addButton);
             }
         });
@@ -496,15 +495,69 @@ $(document).ready(function () {
     const $toggleIcon = $("#toggleIcon");
     let isToggled = false;
 
+    let network_options = {
+        physics: {
+            enabled: true,
+            repulsion: {
+                springLength: 10,
+                nodeDistance: 20,
+                centralGravity: 0,
+            },
+            maxVelocity: 10,
+        },
+        interaction: {
+            hover: true,
+            hoverConnectedEdges: true,
+        },
+        layout: {
+            hierarchical: {
+                nodeSpacing: 100,
+                treeSpacing: 30,
+                direction: "UD",
+                sortMethod: "directed",
+                shakeTowards: "roots",
+            },
+        },
+        nodes: {
+            shape: 'circle',
+            font: {
+                color: "#FFFFFF"
+            },
+            color: {
+                border: "#000000",
+                background: "#290f28",
+                hover: {
+                    border: "#000000",
+                    background: "#6b2769"
+                },
+                highlight: {
+                    border: "#610218",
+                    background: "#C20430"
+                }
+            }
+        },
+        edges: {
+            hidden: isToggled ? false : true,
+            //color: "#FFC72A"
+        }
+    };
+
+    let network = null;
+
     // Function to toggle the arrows on/off
     $("#toggleArrowsBtn").on("click", function () {
         isToggled = !isToggled;
         $toggleIcon.attr(
             "class",
-            isToggled
-                ? "fas fa-toggle-on text-green-500 text-4xl"
-                : "fas fa-toggle-off text-gray-500 text-4xl"
+            isToggled ?
+                "fas fa-toggle-on text-green-500 text-4xl" :
+                "fas fa-toggle-off text-gray-500 text-4xl"
         );
+        network_options.edges.hidden = isToggled ? false : true;
+        if (network !== null) {
+            network.setOptions(network_options)
+        }
+
     });
 
     // Function to generate the roadmap will require API Calls
@@ -535,13 +588,13 @@ $(document).ready(function () {
         // 4. Create nodes for each course as well as the edges which represent the prerequisite to and from a particular course
         let course_nodes = [];
         let course_edges = [];
-        let color_dict = {"and": "#e61919", "or": "#1953e6", "x of": "#f6ff00"}
+        let color_dict = { "and": "#e61919", "or": "#1953e6", "x of": "#f6ff00" }
 
         for (let i = 0; i < subjectCourses.length; i++) {
 
             if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
                 course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
-            
+
             compiled = compilePrerequisites(subjectCourses[i]["Prerequisites"]);
             console.log(compiled);
             // set default pre-req type to "and"
@@ -550,33 +603,33 @@ $(document).ready(function () {
             // initial scan for pre-req type
             //  if there are no brackets to parse, then all pre-reqs for the course will use this type
             for (let j = 0; j < compiled.length; j++) {
-                if (compiled[j]["type"] === "or"){
+                if (compiled[j]["type"] === "or") {
                     curr_prereq_type = "or";
-                } else if (compiled[j]["type"] === "x of"){
+                } else if (compiled[j]["type"] === "x of") {
                     curr_prereq_type = "x of";
                 }
             }
-            
+
             // create edges for each pre-req
             for (let j = 0; j < compiled.length; j++) {
-                
+
                 // find type of pre-req inside bracket
-                if (compiled[j]["type"] === "open_bracket"){
+                if (compiled[j]["type"] === "open_bracket") {
                     let k = j;
                     console.log("open");
                     curr_prereq_type = "and";
-                    while ((k < compiled.length) && (compiled[k]["type"] != "close_bracket")){
-                        if (compiled[k]["type"] === "x of"){
+                    while ((k < compiled.length) && (compiled[k]["type"] != "close_bracket")) {
+                        if (compiled[k]["type"] === "x of") {
                             curr_prereq_type = "x of"
                             break;
-                        } else if (compiled[k]["type"] === "or"){
+                        } else if (compiled[k]["type"] === "or") {
                             curr_prereq_type = "or";
                             break;
                         }
                         k++;
                     }
                 }
-                
+
                 // create course node
                 if (compiled[j]["type"] === "code") {
                     if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
@@ -587,12 +640,12 @@ $(document).ready(function () {
                         to: subjectCourses[i]["CourseCode"],
                         dashes: false,
                         arrows: "to",
-                        color:{color:color_dict[curr_prereq_type]} // set color to current pre-req type colour
+                        color: { color: color_dict[curr_prereq_type] } // set color to current pre-req type colour
                     });
                 }
-                
+
                 // reset to "and" once outside bracket (this isn't totally correct but it's close enough)
-                if (compiled[j]["type"] === "close_bracket"){
+                if (compiled[j]["type"] === "close_bracket") {
                     console.log("closed");
                     curr_prereq_type = "and";
                 }
@@ -622,74 +675,27 @@ $(document).ready(function () {
             edges: new vis.DataSet(course_edges),
         };
 
-        var options = {
-            physics: {
-                enabled: true,
-                repulsion: {
-                    springLength: 10,
-                    nodeDistance: 20,
-                    centralGravity: 0,
-                },
-                maxVelocity: 10,
-            },
-            interaction: {
-                hover: true,
-                hoverConnectedEdges: true,
-            },
-            layout: {
-                hierarchical: {
-                    nodeSpacing: 100,
-                    treeSpacing: 30,
-                    direction: "UD",
-                    sortMethod: "directed",
-                    shakeTowards: "roots",
-                },
-            },
-            nodes: {
-                shape: 'circle',
-                font: {
-                    color: "#FFFFFF"
-                },
-                color: {
-                    border: "#000000",
-                    background: "#290f28",
-                    hover: {
-                        border: "#000000",
-                        background: "#6b2769"
-                    },
-                    highlight: {
-                        border: "#610218",
-                        background: "#C20430"
-                    }
-                }
-            },
-            edges:{
-                hidden: isToggled ? false : true,
-                //color: "#FFC72A"
-            }
-        };
+
 
         //Create the network
-        var network = new vis.Network(container, data, options);
+        network = new vis.Network(container, data, network_options);
 
         // Network on Node Select
-        network.on('selectNode', function(event) {
+        network.on('selectNode', function (event) {
             console.log("Select");
             console.log(event);
 
             if (isToggled) {
                 for (edge of event["edges"]) {
-                    network.clustering.updateEdge(edge, 
-                        {
-                            hidden: true
-                        });
-                }
-            } 
-            for (edge of event["edges"]) {
-                network.clustering.updateEdge(edge, 
-                    {
-                        hidden: false,
+                    network.clustering.updateEdge(edge, {
+                        hidden: true
                     });
+                }
+            }
+            for (edge of event["edges"]) {
+                network.clustering.updateEdge(edge, {
+                    hidden: false,
+                });
             }
         });
 
@@ -699,19 +705,17 @@ $(document).ready(function () {
 
             if (isToggled) {
                 for (edge of event["previousSelection"]["edges"]) {
-                    network.clustering.updateEdge(edge["id"], 
-                        {
-                            hidden: true,
-                        });
+                    network.clustering.updateEdge(edge["id"], {
+                        hidden: true,
+                    });
                 }
             }
             for (edge of event["previousSelection"]["edges"]) {
-                network.clustering.updateEdge(edge["id"], 
-                    {
-                        hidden: false,
-                    });
+                network.clustering.updateEdge(edge["id"], {
+                    hidden: false,
+                });
             }
-  
+
         });
     });
 });
