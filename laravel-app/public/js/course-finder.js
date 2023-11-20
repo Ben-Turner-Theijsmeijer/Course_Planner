@@ -543,6 +543,9 @@ $(document).ready(function () {
     };
 
     let network = null;
+    let data = null;
+    let container = document.getElementById("subject-roadmap");
+
 
     // Function to toggle the arrows on/off
     $("#toggleArrowsBtn").on("click", function () {
@@ -557,8 +560,18 @@ $(document).ready(function () {
         if (network !== null) {
             network.setOptions(network_options)
         }
-
     });
+
+    // Function to reset the roadmap
+    $("#resetRoadmapBtn").click(async function () {
+        if (network !== null) {
+            $(container).empty()
+            network = new vis.Network(container, data, network_options);
+            setNetworkEvents()
+        } else {
+            alert("No network to reset!")
+        }
+    })
 
     // Function to generate the roadmap will require API Calls
     $("#generateRoadmapBtn").click(async function () {
@@ -667,8 +680,7 @@ $(document).ready(function () {
         }
 
         // Show the road map on the webpage at the element subject-roadmap
-        var container = document.getElementById("subject-roadmap");
-        var data = {
+        data = {
             nodes: new vis.DataSet(course_nodes),
             edges: new vis.DataSet(course_edges),
         };
@@ -677,7 +689,10 @@ $(document).ready(function () {
 
         //Create the network
         network = new vis.Network(container, data, network_options);
+        setNetworkEvents()
+    });
 
+    function setNetworkEvents() {
         // Network on Node Select
         network.on('selectNode', function (event) {
             console.log("Select");
@@ -715,5 +730,5 @@ $(document).ready(function () {
             }
 
         });
-    });
+    }
 });
