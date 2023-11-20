@@ -543,9 +543,9 @@ $(document).ready(function () {
                 course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
             
             compiled = compilePrerequisites(subjectCourses[i]["Prerequisites"]);
-            
+            console.log(compiled);
             // set default pre-req type to "and"
-            let curr_prereq_type = "and";
+            curr_prereq_type = "and";
 
             // initial scan for pre-req type
             //  if there are no brackets to parse, then all pre-reqs for the course will use this type
@@ -559,17 +559,17 @@ $(document).ready(function () {
             
             // create edges for each pre-req
             for (let j = 0; j < compiled.length; j++) {
-                token = compiled[j];
                 
                 // find type of pre-req inside bracket
-                if (token["type"] === "open_bracket"){
+                if (compiled[j]["type"] === "open_bracket"){
                     let k = j;
+                    console.log("open");
                     curr_prereq_type = "and";
-                    while (compiled[k][type] != "close_bracket"){
-                        if (compiled[k][type] === "x of"){
+                    while ((k < compiled.length) && (compiled[k]["type"] != "close_bracket")){
+                        if (compiled[k]["type"] === "x of"){
                             curr_prereq_type = "x of"
                             break;
-                        } else if (compiled[k][type] === "or"){
+                        } else if (compiled[k]["type"] === "or"){
                             curr_prereq_type = "or";
                             break;
                         }
@@ -578,21 +578,22 @@ $(document).ready(function () {
                 }
                 
                 // create course node
-                if (token["type"] === "code") {
+                if (compiled[j]["type"] === "code") {
                     if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
                         course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
-
+                    console.log(curr_prereq_type);
                     course_edges.push({
-                        from: token["data"],
+                        from: compiled[j]["data"],
                         to: subjectCourses[i]["CourseCode"],
                         dashes: false,
                         arrows: "to",
-                        color: color_dict[curr_prereq_type] // set color to current pre-req type colour
+                        color:{color:color_dict[curr_prereq_type]} // set color to current pre-req type colour
                     });
                 }
                 
                 // reset to "and" once outside bracket (this isn't totally correct but it's close enough)
-                if (token["type"] === "close_bracket"){
+                if (compiled[j]["type"] === "close_bracket"){
+                    console.log("closed");
                     curr_prereq_type = "and";
                 }
             }
