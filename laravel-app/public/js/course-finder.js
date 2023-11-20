@@ -543,7 +543,6 @@ $(document).ready(function () {
                 course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
             
             compiled = compilePrerequisites(subjectCourses[i]["Prerequisites"]);
-            console.log(compiled);
             // set default pre-req type to "and"
             curr_prereq_type = "and";
 
@@ -563,7 +562,6 @@ $(document).ready(function () {
                 // find type of pre-req inside bracket
                 if (compiled[j]["type"] === "open_bracket"){
                     let k = j;
-                    console.log("open");
                     curr_prereq_type = "and";
                     while ((k < compiled.length) && (compiled[k]["type"] != "close_bracket")){
                         if (compiled[k]["type"] === "x of"){
@@ -587,13 +585,12 @@ $(document).ready(function () {
                         to: subjectCourses[i]["CourseCode"],
                         dashes: false,
                         arrows: "to",
-                        color:{color:color_dict[curr_prereq_type]} // set color to current pre-req type colour
+                        color:{color:color_dict[curr_prereq_type], hover:color_dict[curr_prereq_type]} // set color to current pre-req type colour
                     });
                 }
                 
                 // reset to "and" once outside bracket (this isn't totally correct but it's close enough)
                 if (compiled[j]["type"] === "close_bracket"){
-                    console.log("closed");
                     curr_prereq_type = "and";
                 }
             }
