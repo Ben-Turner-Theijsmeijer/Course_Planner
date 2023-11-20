@@ -550,16 +550,16 @@ $(document).ready(function () {
             // initial scan for pre-req type
             //  if there are no brackets to parse, then all pre-reqs for the course will use this type
             for (let j = 0; j < compiled.length; j++) {
-                if (compiled[i]["type"] === "or"){
+                if (compiled[j]["type"] === "or"){
                     curr_prereq_type = "or";
-                } else if (compiled[i]["type"] === "x of"){
+                } else if (compiled[j]["type"] === "x of"){
                     curr_prereq_type = "x of";
                 }
             }
             
             // create edges for each pre-req
             for (let j = 0; j < compiled.length; j++) {
-                token = compiled[i];
+                token = compiled[j];
                 
                 // find type of pre-req inside bracket
                 if (token["type"] === "open_bracket"){
@@ -573,6 +573,7 @@ $(document).ready(function () {
                             curr_prereq_type = "or";
                             break;
                         }
+                        k++;
                     }
                 }
                 
