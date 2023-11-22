@@ -53,8 +53,22 @@
         </div>
 
         <!-- Roadmap Section -->
-        <div class="mt-4 border-2 border-gray-300 p-4 h-full">
+        <div class="mt-4 border-2 border-gray-300 p-4">
             <div id="subject-roadmap" class="w-full h-screen">
+                <!-- Your roadmap content goes here -->
+            </div>
+        </div>
+
+        <!-- Legend Section -->
+        <div class="mt-4 p-4 border-2 border-gray-300">
+            <h2 class="text-xl font-bold mb-2">Legend:</h2>
+            <div class="flex items-center">
+                <div class="w-4 h-4 bg-blue-500 mr-2 rounded-full"></div>
+                <span>Blue Arrows: OR</span>
+            </div>
+            <div class="flex items-center mt-2">
+                <div class="w-4 h-4 bg-red-500 mr-2 rounded-full"></div>
+                <span>Red Arrows: AND</span>
             </div>
         </div>
 
