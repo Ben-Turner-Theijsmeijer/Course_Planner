@@ -5,7 +5,21 @@ $(document).ready(function () {
         var keyPressed = event.keyCode || event.which;
         if (keyPressed === 13) {
             event.preventDefault();
+            
             $("#add-course").click();
+	        
+            console.log("testtttt");
+            return false;
+        }
+    });
+
+    $("#subjectText").on("keypress", function (event) {
+        var keyPressed = event.keyCode || event.which;
+        if (keyPressed === 13) {
+            event.preventDefault();
+            $("#generateRoadmapBtn").click();
+	        
+            
             return false;
         }
     });
