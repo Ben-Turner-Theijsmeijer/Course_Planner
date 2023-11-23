@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 enum TokenType: string {
-    case CODE = 'CODE';
-    case OPEN_BRACKET = 'OPEN_BRACKET';
-    case CLOSE_BRACKET = 'CLOSE_BRACKET';
-    case COMMA = 'COMMA';
-    case OR = 'OR';
-    case X_OF = 'X_OF';
-    case ARRAY = 'ARRAY';
+    case CODE = 'code';
+    case OPEN_BRACKET = 'open_bracket';
+    case CLOSE_BRACKET = 'close_bracket';
+    case COMMA = 'comma';
+    case OR = 'or';
+    case X_OF = 'x or';
+    case ARRAY = 'array';
 }
 
 
@@ -93,6 +93,11 @@ class Courses extends Model
             $temp = substr($temp, 1);
         }
 
+        return $compiled;
+    }
+
+    public static function nestCompiled(array $compiled): array
+    {
         $stack = array();
         $list = array();
 

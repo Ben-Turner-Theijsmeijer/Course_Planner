@@ -170,6 +170,73 @@ class CourseController extends Controller
         }
     }
 
+    public function getCompiledPrereq(string $courseCode)
+    {
+        $courseCode = $this->addAsterisk($courseCode);
+
+        if(Courses::where('CourseCode', $courseCode)->exists()) {
+            $course = Courses::select('Prerequisites')
+                ->where('CourseCode', $courseCode)
+                ->get();
+            return response()->json(
+                Courses::compilePrerequisites($course),
+                200);
+        } else {
+            return response()->json([
+                'message' => 'Course not found.'
+            ], 404);
+        }
+    }
+
+    public function postCompiledPrereq(PrereqRequest $request)
+    {
+        $validated = $request->safe()->only(['*.CourseCode']);
+        $validated = $validated['*']['CourseCode'   ];
+        $validated = array_map(function($value){return $this->addAsterisk($value);}, $validated);
+
+        if(empty($validated)) {
+            return response()->json([
+                'message' => 'Bad request.'
+            ], 400);
+        }
+
+        $result = Courses::where(function($query) use ($validated) {
+            for($i=0; $i < count($validated); $i++) {
+                $query->orWhere('CourseCode', $validated[$i]);
+            }})
+        ->exists();
+
+        if($result) {
+            $prerequisites = Courses::select('Prerequisites')
+                ->where(function($query) use ($validated) {
+                    for($i=0; $i < count($validated); $i++) {
+                        $query->orWhere('CourseCode', $validated[$i]);
+                    }
+                })
+                ->get();
+            
+            if(isset($prerequisites)) {
+                $compiled = array();
+
+                foreach($prerequisites as $prereq) {
+                    array_push($compiled, Courses::compilePrerequisites($prereq));
+                }
+
+                return response()->json(
+                    $compiled, 
+                    200);
+            } else {
+                return response()->json([
+                    'message' => 'Internal server error.'
+                ],  500);
+            }
+        } else {
+            return response()->json([
+                'message' => 'No prerequisites found.'
+            ], 404);
+        }
+    }
+
     public function getFuturePrereqs(string $courseCode)
     {
         $courseCode = $this->addAsterisk($courseCode);
@@ -242,6 +309,7 @@ class CourseController extends Controller
 
                 foreach($possible_courses as $course) {
                     $compiled = Courses::compilePrerequisites($course['Prerequisites']);
+                    $compiled = Courses::nestCompiled($compiled);
                     $match = Courses::matchPrerequisites($compiled, $validated);
 
                     if($match && !in_array($course['CourseCode'], $validated)) {

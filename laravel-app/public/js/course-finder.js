@@ -175,7 +175,6 @@ $(document).ready(function () {
         if (studentCourses.length === 0) {
             alert("No courses entered!");
         }
-        possibleCourses = [];
         availableCourses = [];
         // Include logic here to output prerequisites when the button is clicked
         // will require an API call passing in the studentCourses array
@@ -184,31 +183,15 @@ $(document).ready(function () {
             `${API_ENDPOINT}prereq/future`,
             (data = studentCourses.map((course) => ({ CourseCode: course })))
         );
-        possibleCourses = response.data;
-        possibleCourses = [
-            //  Eliminate duplicate courses from the list
-            ...new Map(
-                possibleCourses.map((v) => [v["CourseCode"], v])
-            ).values(),
-        ];
+        availableCourses = response.data;
 
-        for (const course of possibleCourses) {
-            compiled = compilePrerequisites(course["Prerequisites"]);
-            compiled = nestCompiled(compiled);
-            evaluateStudentCourses(compiled, studentCourses);
-
-            match = matchPrerequisites(compiled);
-
-            if (match === true) {
-                availableCourses.push(course);
-            }
-        }
+        console.log(response.data);
 
         // Iterates through the courses and creates the cards
         $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
         addButton = "<button class='add text-blue-600'>Add</button>";
         availableCourses.forEach(function (course) {
-            if (studentCourses.includes(course.CourseCode)) { } else {
+            if (!studentCourses.includes(course.CourseCode)) {
                 courseRow(availableCoursesTable, course, addButton);
             }
         });
@@ -285,187 +268,6 @@ $(document).ready(function () {
                 );
             }
         });
-    }
-
-    // Parses a string of prerequisites into an easily parsable nested array
-    function compilePrerequisites(prerequisites) {
-        let compiled = [];
-        let temp = prerequisites;
-
-        while (temp) {
-            // Match a course code
-            match = temp.match(/^[A-Z]{3,4}\*?[0-9]{4}\s*/g);
-            if (match) {
-                compiled.push({
-                    type: "code",
-                    data: match[0].trim(),
-                });
-                temp = temp.substring(match[0].length);
-                continue;
-            }
-
-            // Match open brackets
-            match = temp.match(/^[\(\[]\s*/g);
-            if (match) {
-                compiled.push({
-                    type: "open_bracket",
-                    data: match[0].trim(),
-                });
-                temp = temp.substring(match[0].length);
-                continue;
-            }
-
-            // Match closed brackets
-            match = temp.match(/^[\)\]]\s*/g);
-            if (match) {
-                compiled.push({
-                    type: "close_bracket",
-                    data: match[0].trim(),
-                });
-                temp = temp.substring(match[0].length);
-                continue;
-            }
-
-            // Match commas
-            match = temp.match(/^,\s*/g);
-            if (match) {
-                compiled.push({
-                    type: "comma",
-                    data: match[0].trim(),
-                });
-                temp = temp.substring(match[0].length);
-                continue;
-            }
-
-            // Match or
-            match = temp.match(/^or\s*/g);
-            if (match) {
-                compiled.push({
-                    type: "or",
-                    data: match[0].trim(),
-                });
-                temp = temp.substring(match[0].length);
-                continue;
-            }
-
-            // Match x of
-            match = temp.match(/^\d\s*of\s*/g);
-            if (match) {
-                compiled.push({
-                    type: "x of",
-                    data: match[0][0],
-                });
-                temp = temp.substring(match[0].length);
-                continue;
-            }
-
-            // Advance string if no character matched
-            temp = temp.substring(1);
-        }
-
-        return compiled;
-    }
-
-    // Turn a compiled prerequisite string into a nested array
-    function nestCompiled(compiledPrerequisites) {
-        let stack = [];
-        let list = [];
-
-        for (element of compiledPrerequisites) {
-            if (element["type"] === "open_bracket") {
-                stack.push(list);
-                list = [];
-            } else if (
-                element["type"] === "close_bracket" &&
-                stack.length > 0
-            ) {
-                temp = stack.pop();
-                temp.push(list);
-                list = temp;
-            } else {
-                list.push(element);
-            }
-        }
-
-        return list;
-    }
-
-    // Recursively evaluates each course in the compiled prerequisites, and marks if the student has completed that course
-    function evaluateStudentCourses(compiledPrerequisites, studentCourses) {
-        for (let i = 0; i < compiledPrerequisites.length; i++) {
-            if (Array.isArray(compiledPrerequisites[i])) {
-                evaluateStudentCourses(
-                    compiledPrerequisites[i],
-                    studentCourses
-                );
-            } else if (compiledPrerequisites[i]["type"] == "code") {
-                if (studentCourses.includes(compiledPrerequisites[i]["data"])) {
-                    compiledPrerequisites[i]["type"] = true;
-                } else {
-                    compiledPrerequisites[i]["type"] = false;
-                }
-            }
-        }
-    }
-
-    // Recursively check to see if all course requirements are met
-    function matchPrerequisites(compiledPrerequisites) {
-        // Count amount of matches in "x of" arrays, return true if condition is met
-        if (
-            compiledPrerequisites[0] &&
-            compiledPrerequisites[0]["type"] === "x of"
-        ) {
-            numOf = compiledPrerequisites[0]["data"];
-            x = 0;
-
-            for (const element of compiledPrerequisites.slice(1)) {
-                if (matchPrerequisites(element)) {
-                    x++;
-                }
-            }
-
-            if (x >= numOf) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-        if (
-            compiledPrerequisites[1] &&
-            compiledPrerequisites[1]["type"] === "comma"
-        ) {
-            // Treat commas as AND
-            return (
-                matchPrerequisites(compiledPrerequisites[0]) &&
-                matchPrerequisites(compiledPrerequisites.slice(2))
-            );
-        }
-        if (
-            compiledPrerequisites[1] &&
-            compiledPrerequisites[1]["type"] === "or"
-        ) {
-            // Treat 'or' as OR
-            return (
-                matchPrerequisites(compiledPrerequisites[0]) ||
-                matchPrerequisites(compiledPrerequisites.slice(2))
-            );
-        }
-        // Recursively parse nested arrays
-        if (Array.isArray(compiledPrerequisites[0])) {
-            return matchPrerequisites(compiledPrerequisites[0]);
-        }
-        if (
-            compiledPrerequisites[0] &&
-            compiledPrerequisites[0]["type"] === true
-        ) {
-            // If no more codes to parse, evaluate if passed code is met by the student courses
-            return true;
-        }
-        if (compiledPrerequisites && compiledPrerequisites["type"] === true) {
-            return true;
-        }
-
-        return false;
     }
 
     // Course filters
@@ -582,6 +384,8 @@ $(document).ready(function () {
 
         // Algorithm to generate subject road map here:
         // 2. go to the subject end point to retrieve all course codes for the particular subject (i.e CIS 1300)
+        let subjectCourses = [];
+        let compiledPrereqs = [];
 
         try {
             // Retrieve all subject courses
@@ -591,8 +395,21 @@ $(document).ready(function () {
             if (response.data) {
                 subjectCourses = response.data;
             }
-        } catch {
+        } catch(error) {
             alert(`Failed to retrieve ${subject} courses`);
+            console.log(error);
+        }
+
+        try {
+            const response = await axios.post(
+                `${API_ENDPOINT}prereq/compiled`,
+                (data = subjectCourses.map((course) => ({ CourseCode: course['CourseCode'] })))
+            );
+            if (response.data) {
+                compiledPrereqs = response.data;
+            }
+        } catch(error) {
+            alert(`Failed to compile ${subject} courses`);
             console.log(error);
         }
         // 3. pass in the course code to the get course end point to retrieve pre-requisite data
@@ -608,8 +425,8 @@ $(document).ready(function () {
             if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
                 course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
 
-            compiled = compilePrerequisites(subjectCourses[i]["Prerequisites"]);
             // set default pre-req type to "and"
+            compiled = compiledPrereqs[i];
             curr_prereq_type = "and";
 
             // initial scan for pre-req type

@@ -19,14 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('v1/course/test', [CourseController::class, 'prereqTest']);
-
 Route::get('v1/course/{courseCode}', [CourseController::class, 'getCourse']);
 Route::delete('v1/course/{courseCode}', [CourseController::class, 'deleteCourse']);
 Route::post('v1/course', [CourseController::class, 'createCourse']);
 Route::put('v1/course', [CourseController::class, 'updateCourse']);
 
 Route::get('v1/prereq/{courseCode}', [CourseController::class, 'getPrereqs']);
+Route::get('v1/prereq/compiled/{courseCode}', [CourseController::class, 'getCompiledPrereq']);
+Route::post('v1/prereq/compiled', [CourseController::class, 'postCompiledPrereq']);
 Route::get('v1/prereq/future/none', [CourseController::class, 'getFuturePrereqsNone']);
 Route::get('v1/prereq/future/{courseCode}', [CourseController::class, 'getFuturePrereqs']);
 Route::post('v1/prereq/future', [CourseController::class, 'postFuturePrereqs']);
