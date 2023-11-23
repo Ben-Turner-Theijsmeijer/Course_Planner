@@ -25,7 +25,7 @@
 
 <body class="bg-gray-100">
 
-    <div class="container mx-auto mt-8 p-4 md:p-8 bg-white shadow-lg rounded-lg">
+    <div class="container mx-auto mt-8 mb-8 p-4 md:p-8 bg-white shadow-lg rounded-lg">
 
         <h1 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Course Roadmap</h1>
 
@@ -53,14 +53,14 @@
         </div>
 
         <!-- Roadmap Section -->
-        <div class="mt-4 border-2 border-gray-300 p-4">
-            <div id="subject-roadmap" class="w-full h-screen">
+        <div class="mt-4 border-2 border-gray-300 p-4 rounded-lg" style="background-color: rgb(226 232 240); box-shadow: inset 0 0 6px #B4B4EA;">
+            <div id="subject-roadmap" class="w-full h-screen rounded-lg">
                 <!-- Your roadmap content goes here -->
             </div>
         </div>
 
         <!-- Legend Section -->
-        <div class="mt-4 p-4 border-2 border-gray-300">
+        <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
             <h2 class="text-xl font-bold mb-2">Legend:</h2>
             <div class="flex items-center">
                 <div class="w-4 h-4 bg-blue-500 mr-2 rounded-full"></div>
@@ -73,10 +73,11 @@
         </div>
 
     </div>
+    
 </body>
 
-
-
+<!-- Footer Section -->
+@include('components/footer')
 
 
 </html>

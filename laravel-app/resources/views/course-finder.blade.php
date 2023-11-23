@@ -99,5 +99,9 @@
     </div>
 
 </body>
+
+<!-- Footer Section -->
+@include('components.footer')
+
 </html>
 

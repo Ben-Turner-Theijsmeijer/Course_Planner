@@ -89,8 +89,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
-    @include('components/footer')
 </div>
 </section>
 </body>
+
+<!-- Footer Section -->
+@include('components/footer')
+
 </html>

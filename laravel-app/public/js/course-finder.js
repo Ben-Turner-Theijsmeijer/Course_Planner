@@ -482,7 +482,9 @@ $(document).ready(function () {
         filterCourses(courseFilterValue, semesterFilterValue);
     });
 
-    // Course Roadmap Section
+    /*==============================================================================
+                                Course Roadmap Section
+    ==============================================================================*/
 
     // function to generate a node
     function GenerateNode(course_code, course_node_group = "") {
@@ -520,6 +522,7 @@ $(document).ready(function () {
         },
         nodes: {
             shape: 'circle',
+            borderWidth: 0,
             font: {
                 color: "#FFFFFF"
             },
@@ -527,7 +530,7 @@ $(document).ready(function () {
                 border: "#000000",
                 background: "#290f28",
                 hover: {
-                    border: "#000000",
+                    border: "#6b2769",
                     background: "#6b2769"
                 },
                 highlight: {
@@ -538,7 +541,8 @@ $(document).ready(function () {
         },
         edges: {
             hidden: isToggled ? false : true,
-            //color: "#FFC72A"
+            color: "#FFC72A",
+            
         }
     };
 
@@ -601,7 +605,7 @@ $(document).ready(function () {
         // 4. Create nodes for each course as well as the edges which represent the prerequisite to and from a particular course
         let course_nodes = [];
         let course_edges = [];
-        let color_dict = { "and": "#e61919", "or": "#1953e6", "x of": "#f6ff00" }
+        let color_dict = { "and": "#e61919BF", "or": "#1953e6BF", "x of": "##77ff00BF" }
 
         for (let i = 0; i < subjectCourses.length; i++) {
 
@@ -712,6 +716,7 @@ $(document).ready(function () {
             }
         });
 
+        // Network on Node Deselect
         network.on("deselectNode", function (event) {
             console.log("Deselect");
             console.log(event);
