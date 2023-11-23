@@ -585,9 +585,10 @@ $(document).ready(function () {
     $("#resetRoadmapBtn").click(async function () {
         if (network !== null) {
             // reset tree
+            console.log("REsetting");
             $(container).empty()
-            network = new vis.Network(container, data, network_options);
-            setNetworkEvents()
+            // network = new vis.Network(container, data, network_options);
+            // setNetworkEvents()
 
             // reset course info container
             let displayedInfo = document.createElement('p');
