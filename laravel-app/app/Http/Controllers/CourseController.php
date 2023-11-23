@@ -210,44 +210,57 @@ class CourseController extends Controller
         }
     }
 
-    public function postFuturePrereqs(PrereqRequest $request)
+    public function postFuturePrereqs(PrereqRequest $request) 
     {
         $validated = $request->safe()->only(['*.CourseCode']);
-        $validated = $validated['*']['CourseCode'];
+        $validated = $validated['*']['CourseCode'   ];
+        $validated = array_map(function($value){return $this->addAsterisk($value);}, $validated);
 
         if(empty($validated)) {
             return response()->json([
-                'message' => "Bad request."
+                'message' => 'Bad request.'
             ], 400);
         }
 
         $result = Courses::where(function($query) use ($validated) {
-                                    for($i=0; $i < count($validated); $i++) {
-                                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
-                                    }})
-                                ->exists();
+            for($i=0; $i < count($validated); $i++) {
+                $query->orWhere('Prerequisites', 'like', '%'.$validated[$i].'%');
+            }})
+        ->exists();
 
-        
         if($result) {
-            $courses = Courses::select('*')
+            $possible_courses = Courses::select('*')
                 ->where(function($query) use ($validated) {
                     for($i=0; $i < count($validated); $i++) {
-                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
+                        $query->orWhere('Prerequisites', 'like', '%'.$validated[$i].'%');
                     }
                 })
                 ->get();
-            if(!is_null($courses)) {
+
+            if(isset($possible_courses)) {
+                $available_courses = array();
+
+                foreach($possible_courses as $course) {
+                    $compiled = Courses::compilePrerequisites($course['Prerequisites']);
+                    $match = Courses::matchPrerequisites($compiled, $validated);
+
+                    if($match && !in_array($course['CourseCode'], $validated)) {
+                        array_push($available_courses, $course);
+                    }
+                }
+
                 return response()->json(
-                    $courses,
+                    $available_courses,
                     200);
+
             } else {
                 return response()->json([
-                    'message' => 'Internal server error'
+                    'message' => 'Internal server error.'
                 ], 500);
             }
         } else {
             return response()->json([
-                'message' => 'No courses found.'
+                'message' => 'No prerequisites found.'
             ], 404);
         }
     }
@@ -409,65 +422,6 @@ class CourseController extends Controller
         } else {
             return response()->json([
                 'message' => 'Course not found.'
-            ], 404);
-        }
-    }
-
-    /*
-    ======================================================================
-    ||                         Private Functions                        ||
-    ======================================================================
-    */
-    public function prereqTest(PrereqRequest $request) 
-    {
-        $validated = $request->safe()->only(['*.CourseCode']);
-        $validated = $validated['*']['CourseCode'];
-
-        if(empty($validated)) {
-            return response()->json([
-                'message' => 'Bad request.'
-            ], 400);
-        }
-
-        $result = Courses::where(function($query) use ($validated) {
-            for($i=0; $i < count($validated); $i++) {
-                $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
-            }})
-        ->exists();
-
-        if($result) {
-            $possible_courses = Courses::select('*')
-                ->where(function($query) use ($validated) {
-                    for($i=0; $i < count($validated); $i++) {
-                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
-                    }
-                })
-                ->get();
-
-            if(isset($possible_courses)) {
-                $available_courses = array();
-
-                foreach($possible_courses as $course) {
-                    $compiled = Courses::compilePrerequisites($course['Prerequisites']);
-                    $match = Courses::matchPrerequisites($compiled, $validated);
-
-                    if($match && !in_array($course['CourseCode'], $validated)) {
-                        array_push($available_courses, $course);
-                    }
-                }
-
-                return response()->json(
-                    $available_courses,
-                    200);
-
-            } else {
-                return response()->json([
-                    'message' => 'Internal server error.'
-                ], 500);
-            }
-        } else {
-            return response()->json([
-                'message' => 'No prerequisites found.'
             ], 404);
         }
     }
