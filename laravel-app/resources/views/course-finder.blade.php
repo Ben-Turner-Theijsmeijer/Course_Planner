@@ -100,9 +100,5 @@
 
 </body>
 
-<!-- Footer Section -->
-<!-- <div class="mt-8"></div>
-@include('components.footer') -->
-
 </html>
 
