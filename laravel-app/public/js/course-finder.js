@@ -790,8 +790,11 @@ $(document).ready(function () {
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
+                newText.append($("<b></b>").text('Course Name'));
+                displayedInfo.append(newText);
+
                 // append course Name
-                newText = document.createTextNode('Course Name: ' + courseData.CourseName);
+                newText = document.createTextNode(courseData.CourseName);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
