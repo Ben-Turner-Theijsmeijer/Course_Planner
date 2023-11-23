@@ -436,30 +436,20 @@ class CourseController extends Controller
         ->exists();
 
         if($result) {
-            // $possible_courses = Courses::select('*')
-            //     ->where(function($query) use ($validated) {
-            //         for($i=0; $i < count($validated); $i++) {
-            //             $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
-            //         }
-            //     })
-            //     ->get();
-
             $possible_courses = Courses::select('*')
-                ->where('CourseCode', 'CIS*2520')
+                ->where(function($query) use ($validated) {
+                    for($i=0; $i < count($validated); $i++) {
+                        $query->orWhere('Prerequisites', 'like', '%'.$this->addAsterisk($validated[$i]).'%');
+                    }
+                })
                 ->get();
 
             if(isset($possible_courses)) {
                 $available_courses = array();
-                $available_courses['DEBUG'] = array();
 
                 foreach($possible_courses as $course) {
                     $compiled = Courses::compilePrerequisites($course['Prerequisites']);
                     $match = Courses::matchPrerequisites($compiled, $validated);
-
-                    array_push($available_courses['DEBUG'], array(
-                        "CourseCode" => $course['CourseCode'],
-                        "Data" => $compiled
-                    ));
 
                     if($match && !in_array($course['CourseCode'], $validated)) {
                         array_push($available_courses, $course);

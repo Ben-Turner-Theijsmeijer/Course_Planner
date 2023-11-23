@@ -147,10 +147,9 @@ class Courses extends Model
             return
                 self::matchPrerequisites($compiled['data'] ?? $compiled[0]['data'], $student_courses);
         }
-        if((isset($compiled['type']) && $compiled['type'] == TokenType::CODE) || (isset($compiled[0]) && $compiled[0]['type'] == TokenArray::ARRAY)) {
-            print_r($compiled);
+        if((isset($compiled['type']) && $compiled['type'] == TokenType::CODE) || (isset($compiled[0]) && $compiled[0]['type'] == TokenType::CODE)) {
             return
-                in_array($compiled['data'] ?? $compiled[0]['type'], $student_courses);
+                in_array($compiled['data'] ?? $compiled[0]['data'], $student_courses);
         }
 
         return false;
