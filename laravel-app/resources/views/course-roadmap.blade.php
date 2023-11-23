@@ -31,7 +31,7 @@
 
         <div class="flex flex-col md:flex-row items-stretch mb-4">
 
-            <label for="subjectText" class="mr-2 text-gray-600 mb-2 md:mb-0">Subject:</label>
+            <label for="subjectText" class="mr-2 text-gray-600 mb-2 md:mb-0 font-bold pt-2">Subject:</label>
             <input type="text" id="subjectText" class="p-2 border-2 border-gray-300 rounded-md mb-2 md:mb-0" placeholder="Enter a Subject">
 
             <div class="flex">
@@ -39,9 +39,17 @@
                     Visualize Department Courses
                 </button>
 
-                <button id="resetRoadmapBtn" class="py-2 btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-600">
-                    Reset
+
+                <button id="resetRoadmapBtn" class="py-2 btn bg-yellow-500 text-white p-2 rounded-lg transition duration-300 hover:bg-yellow-600 mr-2  " >
+                    Reset Arrows
                 </button>
+
+
+                
+                <button id="clearRoadmapBtn" class="py-2 btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-600   ">
+                    Clear Roadmap
+                </button>
+                
             </div>
 
             <div class="ml-2 md:ml-auto flex items-center">

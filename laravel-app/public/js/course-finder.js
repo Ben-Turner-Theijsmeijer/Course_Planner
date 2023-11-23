@@ -587,6 +587,26 @@ $(document).ready(function () {
             // reset tree
             console.log("REsetting");
             $(container).empty()
+            network = new vis.Network(container, data, network_options);
+            setNetworkEvents()
+
+            // reset course info container
+            let displayedInfo = document.createElement('p');
+            let newText = document.createTextNode('Course information will appear here once a node has been selected');
+            displayedInfo.classList.add('text-gray-400');
+            displayedInfo.appendChild(newText);
+            detailsContainer.innerHTML = "";
+            detailsContainer.appendChild(displayedInfo);
+        } else {
+            alert("No network to reset!")
+        }
+    })
+
+    $("#clearRoadmapBtn").click(async function () {
+        if (network !== null) {
+            // reset tree
+            console.log("REsetting");
+            $(container).empty()
             // network = new vis.Network(container, data, network_options);
             // setNetworkEvents()
 
@@ -783,53 +803,59 @@ $(document).ready(function () {
 
                 let displayedInfo = document.createElement('p');
                 displayedInfo.classList.add('p4');
-                let newText = document.createTextNode('Course Code: ' + courseCode);
+                displayedInfo.innerHTML +='<b>Course Code: </b>';
+                let newText = document.createTextNode( courseCode);
                 
                 // APENDING INFORMATION TO ELEMENT (LOOK INTO MORE EFICIENT/BETTER WAY TO DO THIS)
                 // append course ID
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
-                newText.append($("<b></b>").text('Course Name'));
-                displayedInfo.append(newText);
-
                 // append course Name
+                displayedInfo.innerHTML +='<b>Course Name: </b>';
                 newText = document.createTextNode(courseData.CourseName);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
                 // append course description
-                newText = document.createTextNode('Description: ' + courseData.CourseDescription);
+                displayedInfo.innerHTML +='<b>Description: </b>';
+                newText = document.createTextNode( courseData.CourseDescription);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
                 // append course department
-                newText = document.createTextNode('Department: ' + courseData.Department);
+                displayedInfo.innerHTML +='<b>Department: </b>';
+                newText = document.createTextNode(courseData.Department);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
                 // append course weight
-                newText = document.createTextNode('Course Weight: ' + courseData.CourseWeight);
+                displayedInfo.innerHTML +='<b>Course Weight: </b>';
+                newText = document.createTextNode(courseData.CourseWeight);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
                 // append course prerequisite credits
-                newText = document.createTextNode('Required Credits: ' + courseData.PrerequisiteCredits);
+                displayedInfo.innerHTML +='<b>Required Credits: </b>';
+                newText = document.createTextNode( courseData.PrerequisiteCredits);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
                 // append course prerequisites
-                newText = document.createTextNode('Required Courses: ' + courseData.Prerequisites);
+                displayedInfo.innerHTML +='<b>Required Courses: </b>';
+                newText = document.createTextNode( courseData.Prerequisites);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
                 // append course restrictions
-                newText = document.createTextNode('Restricted Courses: ' + courseData.Restrictions);
+                displayedInfo.innerHTML +='<b>Restricted Courses: </b>';
+                newText = document.createTextNode(courseData.Restrictions);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
 
                 // append course offering
-                newText = document.createTextNode('Offering: ' + courseData.CourseOffering);
+                displayedInfo.innerHTML +='<b>Offerings: </b>';
+                newText = document.createTextNode( courseData.CourseOffering);
                 displayedInfo.appendChild(newText);
                 displayedInfo.innerHTML +='<br>';
                 
