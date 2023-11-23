@@ -72,6 +72,14 @@
             </div>
         </div>
 
+        <!-- TEST SECTION -->
+        <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
+            <h2 class="text-xl font-bold mb-2">Selected Course Info:</h2>
+            <div id="course-details"> <p class="text-gray-400">Course information will appear here once a node has been selected</p>
+                <!-- DISPLAY COURSE DETAILS HERE -->
+            </div>
+        </div>
+
     </div>
     
 </body>

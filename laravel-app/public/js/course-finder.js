@@ -549,6 +549,7 @@ $(document).ready(function () {
     let network = null;
     let data = null;
     let container = document.getElementById("subject-roadmap");
+    let detailsContainer = document.getElementById("course-details");
 
 
     // Function to toggle the arrows on/off
@@ -569,9 +570,18 @@ $(document).ready(function () {
     // Function to reset the roadmap
     $("#resetRoadmapBtn").click(async function () {
         if (network !== null) {
+            // reset tree
             $(container).empty()
             network = new vis.Network(container, data, network_options);
             setNetworkEvents()
+
+            // reset course info container
+            let displayedInfo = document.createElement('p');
+            let newText = document.createTextNode('Course information will appear here once a node has been selected');
+            displayedInfo.classList.add('text-gray-400');
+            displayedInfo.appendChild(newText);
+            detailsContainer.innerHTML = "";
+            detailsContainer.appendChild(displayedInfo);
         } else {
             alert("No network to reset!")
         }
@@ -714,6 +724,11 @@ $(document).ready(function () {
                     hidden: false,
                 });
             }
+
+            //call function to display information for current node
+            let curNodeID = event["nodes"][0];
+            displaySelectNode(curNodeID)
+            
         });
 
         // Network on Node Deselect
@@ -735,5 +750,79 @@ $(document).ready(function () {
             }
 
         });
+    }
+
+    // function to display selected node's course information
+    async function displaySelectNode(courseCode){
+
+        try {
+            // API Call to fetch course information from our API
+            const response = await axios.get(
+                `${API_ENDPOINT}course/${courseCode}`
+            );
+
+            if (response.data) {
+                // console.log(response.data);
+                const courseData = response.data[0];
+
+
+                let displayedInfo = document.createElement('p');
+                displayedInfo.classList.add('p4');
+                let newText = document.createTextNode('Course Code: ' + courseCode);
+                
+                // APENDING INFORMATION TO ELEMENT (LOOK INTO MORE EFICIENT/BETTER WAY TO DO THIS)
+                // append course ID
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course Name
+                newText = document.createTextNode('Course Name: ' + courseData.CourseName);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course description
+                newText = document.createTextNode('Description: ' + courseData.CourseDescription);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course department
+                newText = document.createTextNode('Department: ' + courseData.Department);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course weight
+                newText = document.createTextNode('Course Weight: ' + courseData.CourseWeight);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course prerequisite credits
+                newText = document.createTextNode('Required Credits: ' + courseData.PrerequisiteCredits);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course prerequisites
+                newText = document.createTextNode('Required Courses: ' + courseData.Prerequisites);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course restrictions
+                newText = document.createTextNode('Restricted Courses: ' + courseData.Restrictions);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+
+                // append course offering
+                newText = document.createTextNode('Offering: ' + courseData.CourseOffering);
+                displayedInfo.appendChild(newText);
+                displayedInfo.innerHTML +='<br>';
+                
+                detailsContainer.innerHTML = "";
+                detailsContainer.appendChild(displayedInfo);
+            }
+        } catch (error) {
+            // Handle errors
+            alert("Warning:\nCourse not Found in Database");
+            console.error(error);
+        }
+
     }
 });
