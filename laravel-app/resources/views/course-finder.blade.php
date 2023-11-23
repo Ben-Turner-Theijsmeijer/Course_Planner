@@ -29,7 +29,7 @@
 @include('components.navbar')
 
 <body class="bg-gray-100">
-    <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg">
+    <div class="container mx-auto mt-8 p-2 sm:p-4 bg-white shadow-lg rounded-lg">
         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Course Schedule</h1>
         <form id="course-form" class="flex flex-col mb-2">
             <input type="text" id="course-code" placeholder="Enter Course Code (i.e CIS*1300 or CIS1300)"
@@ -99,5 +99,6 @@
     </div>
 
 </body>
+
 </html>
 
