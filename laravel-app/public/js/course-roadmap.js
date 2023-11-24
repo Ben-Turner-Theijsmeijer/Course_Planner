@@ -5,6 +5,16 @@ const API_ENDPOINT = "https://cis3760f23-11.socs.uoguelph.ca/api/v1/";
 
 $(document).ready(function () {
 
+    $("#subjectText").on("keypress", function (event) {
+        var keyPressed = event.keyCode || event.which;
+        if (keyPressed === 13) {
+            event.preventDefault();
+            $("#generateRoadmapBtn").click();
+
+
+            return false;
+        }
+    });
     // function to generate a node
     function GenerateNode(course_code, course_node_group = "") {
         return {

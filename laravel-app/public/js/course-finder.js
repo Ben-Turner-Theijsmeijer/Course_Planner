@@ -19,16 +19,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#subjectText").on("keypress", function (event) {
-        var keyPressed = event.keyCode || event.which;
-        if (keyPressed === 13) {
-            event.preventDefault();
-            $("#generateRoadmapBtn").click();
-
-
-            return false;
-        }
-    });
+    
     let courseCounter = 1; // counter for generating unique IDs
     let studentCourses = []; // List of student courses they have taken
     let completedCredits = 0; // Keeps track of the number of credits a student has completed
