@@ -161,7 +161,9 @@ $(document).ready(function () {
             }
         } catch (error) {
             alert(`Failed to retrieve ${subject} courses`);
+            loader.addClass('hidden');
             console.log(error);
+            return;
         }
 
         try {
@@ -174,7 +176,9 @@ $(document).ready(function () {
             }
         } catch (error) {
             alert(`Failed to compile ${subject} courses`);
+            loader.addClass('hidden');
             console.log(error);
+            return;
         }
         // 3. pass in the course code to the get course end point to retrieve pre-requisite data
         // Parse the prerequisite data for the course - each course in prerequisites will represent a FROM course node to the course that is initially
