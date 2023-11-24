@@ -436,6 +436,7 @@ class CourseController extends Controller
                 $course_new->CourseCode = $course->CourseCode;
                 $course_new->CourseName = $course->CourseName;
                 $course_new->Prerequisites = $course->Prerequisites;
+                $course_new->Grade = 0.0;
 
                 if($course_new->save()) {
                     return response()->json([
