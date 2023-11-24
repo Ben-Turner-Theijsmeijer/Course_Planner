@@ -81,6 +81,7 @@
         </table>
     </div>
 
+    <!-- Courses without Prerequisistes section -->
     <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-2 md:mt-4">
         <button class="accordion text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 py-1">
             No Prerequisites Courses
@@ -91,6 +92,38 @@
             <div id="no-prereq-courses" class="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
                 <!-- No Prerequisite courses listed here -->
             </div>
+        </div>
+    </div>
+
+    <!-- CourseFinder Information -->
+    <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-10 mb-8">
+        <button class="accordion text-2xl sm:text-3xl lg:text-2xl font-bold mb-2 py-1">
+            More Information
+        </button>
+        <div class="panel">
+            <h3 class="text-xl font-semibold mb-2 md:mb-4">Purpose</h3>
+            <p class="pl-4">
+                The purpose of the Course Finder is to search through all the courses at the University of Guelph
+                and show you what you can take based on the prerequisistes that you have fulfilled.
+            </p>
+            <h3 class="text-xl font-semibold mt-2 mb-2 md:mb-4">Usage</h3>
+            <ol class="list-inside pl-4" type="1">
+                <li>1. Enter all courses that have been completed the course schedule</li>
+                <li>2. Once all desired courses are entered click the <em>'Explore Future Course Options'</em> Button</li>
+                <li>3. Review the list of available courses based on your previously taken courses</li>
+                <li>4. Add any Additional courses you would like from the list or entere more course codes manually</li>
+                <li>5. Regenerate courses for an updated list of future available courses</li>
+                <li>6. when finished clear courses with the <em>'Clear Courses'</em> button</li>
+            </ol>
+            <h3 class="text-xl font-semibold mt-2 mb-2 md:mb-4">Additional Features</h3>
+            <ul class="list-inside pl-4" style="list-style-type:disc;">
+                <li>View and look through a catalog of all courses without prerequisites</li>
+                <ul class="list-inside pl-8" style="list-style-type:circle;">
+                    <li>Search for specific courses without prerequisites by course code</li>
+                    <li>Search for specific courses without prerequisites by semester offering</li>
+                </ul>
+                <li>Add courses directly to list of taken courses with <em>'add button'</em></li>
+            </ul>
         </div>
     </div>
 

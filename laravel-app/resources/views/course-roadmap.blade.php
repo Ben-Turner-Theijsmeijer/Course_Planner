@@ -18,6 +18,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/course-roadmap.js')}}"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
+<<<<<<< laravel-app/resources/views/course-roadmap.blade.php
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" />
+=======
+>>>>>>> laravel-app/resources/views/course-roadmap.blade.php
 </head>
 
 <!-- Include the navigation bar -->
@@ -29,6 +33,9 @@
 
     <div class="container mx-auto mt-8 mb-8 p-4 md:p-8 bg-white shadow-lg rounded-lg">
 
+<<<<<<< laravel-app/resources/views/course-roadmap.blade.php
+        <h1 class="text-2xl sm:text-3xl lg:text4xl font-bold mb-4 md:mb-6">Course Roadmap</h1>
+=======
         <!-- User Input Section -->
         <div class="relative inline-block">
             <h1 class="text-4xl md:text-4xl font-bold mb-4 md:mb-6">Course Roadmap
@@ -43,6 +50,7 @@
                 </div>
             </h1>
         </div>
+>>>>>>> laravel-app/resources/views/course-roadmap.blade.php
 
         <!-- Button/Toggle section -->
         <div class="flex flex-col md:flex-row items-stretch mb-4">
@@ -85,6 +93,14 @@
             </div>
         </div>
 
+        <!-- Selected Course Information -->
+        <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
+            <h2 class="text-xl font-bold mb-2">Selected Course Info:</h2>
+            <div id="course-details"> <p class="text-gray-400">Course information will appear here once a node has been selected</p>
+                <!-- DISPLAY COURSE DETAILS HERE -->
+            </div>
+        </div>
+
         <!-- Legend Section -->
         <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
             <h2 class="text-xl font-bold mb-2">Legend:</h2>
@@ -98,6 +114,9 @@
             </div>
         </div>
 
+<<<<<<< laravel-app/resources/views/course-roadmap.blade.php
+    </div>
+=======
         <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
             <h2 class="text-xl font-bold mb-2">Selected Course Info:</h2>
             <div id="course-details">
@@ -105,7 +124,33 @@
                 <!-- DISPLAY COURSE DETAILS HERE -->
             </div>
         </div>
+>>>>>>> laravel-app/resources/views/course-roadmap.blade.php
 
+    <!-- Roadmap Information -->
+    <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-2 md:mt-4 mb-8">
+        <button class="accordion text-2xl sm:text-3xl lg:text-2xl font-bold mb-2 py-1">
+            More Information
+        </button>
+        <div class="panel">
+            <h3 class="text-xl font-semibold mb-2 md:mb-4">Purpose</h3>
+            <p class="pl-4">
+                The purpose of this roadmap is to create a visual representation for courses offered at the 
+                University of Guelph and how they interconnect with one another. This is done to aid students
+                 in the course selection process and streamline scheduling. 
+            </p>
+            <h3 class="text-xl font-semibold mt-2 mb-2 md:mb-4">Usage</h3>
+            <ol class="list-inside pl-4" type="1">
+                <li>1. Enter a subject code into the search bar e.g. CIS</li>
+                <li>2. Click the <em>'Visualize Department Courses'</em> button or press enter</li>
+                <li>3. A map will be genreated showing all of the courses that match the provided subject code</li>
+            </ol>
+            <h3 class="text-xl font-semibold mt-2 mb-2 md:mb-4">Additional Features</h3>
+            <ul class="list-inside pl-4" style="list-style-type:circle;">
+                <li>To show all connections between courses toggle the show arrows slider</li>
+                <li>To reset all arrows present on roadmap use the <em>'Reset Arrows'</em> button</li>
+                <li>To clean all elements in the roadmap use the <em>'clean roadmap'</em> button</li>
+            </ul>
+        </div>
     </div>
 
 </body>
