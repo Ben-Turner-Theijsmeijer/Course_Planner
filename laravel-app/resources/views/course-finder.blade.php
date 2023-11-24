@@ -107,7 +107,8 @@
         <div class="panel">
             <h3 class="text-xl font-semibold mb-2 md:mb-4">Purpose</h3>
             <p class="pl-4">
-                The purpose of the Course Finder is to 
+                The purpose of the Course Finder is to search through all the courses at the University of Guelph
+                and show you what you can take based on the prerequisistes that you have fulfilled.
             </p>
             <h3 class="text-xl font-semibold mt-2 mb-2 md:mb-4">Usage</h3>
             <ol class="list-inside pl-4" type="1">
