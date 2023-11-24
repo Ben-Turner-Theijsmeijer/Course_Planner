@@ -18,10 +18,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/course-roadmap.js')}}"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
-<<<<<<< laravel-app/resources/views/course-roadmap.blade.php
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
-=======
->>>>>>> laravel-app/resources/views/course-roadmap.blade.php
+
+
 </head>
 
 <!-- Include the navigation bar -->
@@ -33,9 +32,6 @@
 
     <div class="container mx-auto mt-8 mb-8 p-4 md:p-8 bg-white shadow-lg rounded-lg">
 
-<<<<<<< laravel-app/resources/views/course-roadmap.blade.php
-        <h1 class="text-2xl sm:text-3xl lg:text4xl font-bold mb-4 md:mb-6">Course Roadmap</h1>
-=======
         <!-- User Input Section -->
         <div class="relative inline-block">
             <h1 class="text-4xl md:text-4xl font-bold mb-4 md:mb-6">Course Roadmap
@@ -50,7 +46,6 @@
                 </div>
             </h1>
         </div>
->>>>>>> laravel-app/resources/views/course-roadmap.blade.php
 
         <!-- Button/Toggle section -->
         <div class="flex flex-col md:flex-row items-stretch mb-4">
@@ -114,17 +109,7 @@
             </div>
         </div>
 
-<<<<<<< laravel-app/resources/views/course-roadmap.blade.php
     </div>
-=======
-        <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
-            <h2 class="text-xl font-bold mb-2">Selected Course Info:</h2>
-            <div id="course-details">
-                <p class="text-gray-400">Course information will appear here once a node has been selected</p>
-                <!-- DISPLAY COURSE DETAILS HERE -->
-            </div>
-        </div>
->>>>>>> laravel-app/resources/views/course-roadmap.blade.php
 
     <!-- Roadmap Information -->
     <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-2 md:mt-4 mb-8">
@@ -152,6 +137,7 @@
             </ul>
         </div>
     </div>
+    
 
 </body>
 

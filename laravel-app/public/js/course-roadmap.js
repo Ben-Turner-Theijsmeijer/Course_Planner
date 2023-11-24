@@ -15,6 +15,21 @@ $(document).ready(function () {
         }
     });
 
+    var accordion = $(".accordion");
+
+    accordion.click(function () {
+        $(this).toggleClass("active");
+        var panel = $(this).next();
+
+        if (panel.css("max-height") === "0px") {
+            panel.css("max-height", panel.prop("scrollHeight") + "100px");
+            $("#course-filter").css("display", "block");
+        } else {
+            panel.css("max-height", "0");
+            $("#course-filter").css("display", "none");
+        }
+    });
+
     // Tooltip showing information when a user hovers over the div
     $(".tooltip").hover(
         function () {
