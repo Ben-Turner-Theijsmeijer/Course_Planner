@@ -104,13 +104,6 @@ $(document).ready(function () {
     let container = document.getElementById("subject-roadmap");
     let detailsContainer = document.getElementById("course-details");
 
-    // Empty State for subject roadmap
-    if (network === null) {
-        $("#subject-roadmap")
-            .text("No Subject Code Entered")
-            .addClass("text-center text-gray-600");
-    }
-
     // Function to toggle the arrows on/off
     $("#toggleArrowsBtn").on("click", function () {
         isToggled = !isToggled;
@@ -153,9 +146,6 @@ $(document).ready(function () {
             // reset tree
             $(container).empty();
 
-            $("#subject-roadmap")
-                .text("No Subject Code Entered")
-                .addClass("text-center text-gray-600");
             // network = new vis.Network(container, data, network_options);
             // setNetworkEvents()
 
