@@ -4,17 +4,26 @@
 const API_ENDPOINT = "https://cis3760f23-11.socs.uoguelph.ca/api/v1/";
 
 $(document).ready(function () {
-
+    // Allows user to hit enter to submit a subject
     $("#subjectText").on("keypress", function (event) {
         var keyPressed = event.keyCode || event.which;
         if (keyPressed === 13) {
             event.preventDefault();
             $("#generateRoadmapBtn").click();
 
-
             return false;
         }
     });
+
+    // Tooltip showing information when a user hovers over the div
+    $(".tooltip").hover(
+        function () {
+            $(this).find(".tooltip-content").removeClass("hidden");
+        },
+        function () {
+            $(this).find(".tooltip-content").addClass("hidden");
+        }
+    );
     // function to generate a node
     function GenerateNode(course_code, course_node_group = "") {
         return {
@@ -26,6 +35,7 @@ $(document).ready(function () {
     const $toggleIcon = $("#toggleIcon");
     let isToggled = false;
 
+    // Tree Options
     let network_options = {
         physics: {
             enabled: true,
@@ -50,29 +60,28 @@ $(document).ready(function () {
             },
         },
         nodes: {
-            shape: 'circle',
+            shape: "circle",
             borderWidth: 0,
             font: {
-                color: "#FFFFFF"
+                color: "#FFFFFF",
             },
             color: {
                 border: "#000000",
                 background: "#290f28",
                 hover: {
                     border: "#6b2769",
-                    background: "#6b2769"
+                    background: "#6b2769",
                 },
                 highlight: {
                     border: "#610218",
-                    background: "#C20430"
-                }
-            }
+                    background: "#C20430",
+                },
+            },
         },
         edges: {
             hidden: isToggled ? false : true,
             color: "#FFC72A",
-
-        }
+        },
     };
 
     let network = null;
@@ -80,19 +89,25 @@ $(document).ready(function () {
     let container = document.getElementById("subject-roadmap");
     let detailsContainer = document.getElementById("course-details");
 
+    // Empty State for subject roadmap
+    if (network === null) {
+        $("#subject-roadmap")
+            .text("No Subject Code Entered")
+            .addClass("text-center text-gray-600");
+    }
 
     // Function to toggle the arrows on/off
     $("#toggleArrowsBtn").on("click", function () {
         isToggled = !isToggled;
         $toggleIcon.attr(
             "class",
-            isToggled ?
-                "fas fa-toggle-on text-green-500 text-4xl" :
-                "fas fa-toggle-off text-gray-500 text-4xl"
+            isToggled
+                ? "fas fa-toggle-on text-green-500 text-4xl"
+                : "fas fa-toggle-off text-gray-500 text-4xl"
         );
         network_options.edges.hidden = isToggled ? false : true;
         if (network !== null) {
-            network.setOptions(network_options)
+            network.setOptions(network_options);
         }
     });
 
@@ -100,42 +115,48 @@ $(document).ready(function () {
     $("#resetRoadmapBtn").click(async function () {
         if (network !== null) {
             // reset tree
-            console.log("REsetting");
-            $(container).empty()
+            $(container).empty();
             network = new vis.Network(container, data, network_options);
-            setNetworkEvents()
+            setNetworkEvents();
 
             // reset course info container
-            let displayedInfo = document.createElement('p');
-            let newText = document.createTextNode('Course information will appear here once a node has been selected');
-            displayedInfo.classList.add('text-gray-400');
+            let displayedInfo = document.createElement("p");
+            let newText = document.createTextNode(
+                "Course information will appear here once a node has been selected"
+            );
+            displayedInfo.classList.add("text-gray-400");
             displayedInfo.appendChild(newText);
             detailsContainer.innerHTML = "";
             detailsContainer.appendChild(displayedInfo);
         } else {
-            alert("No network to reset!")
+            alert("No network to reset!");
         }
-    })
+    });
 
     $("#clearRoadmapBtn").click(async function () {
         if (network !== null) {
             // reset tree
-            console.log("REsetting");
-            $(container).empty()
+            $(container).empty();
+
+            $("#subject-roadmap")
+                .text("No Subject Code Entered")
+                .addClass("text-center text-gray-600");
             // network = new vis.Network(container, data, network_options);
             // setNetworkEvents()
 
             // reset course info container
-            let displayedInfo = document.createElement('p');
-            let newText = document.createTextNode('Course information will appear here once a node has been selected');
-            displayedInfo.classList.add('text-gray-400');
+            let displayedInfo = document.createElement("p");
+            let newText = document.createTextNode(
+                "Course information will appear here once a node has been selected"
+            );
+            displayedInfo.classList.add("text-gray-400");
             displayedInfo.appendChild(newText);
             detailsContainer.innerHTML = "";
             detailsContainer.appendChild(displayedInfo);
         } else {
-            alert("No network to reset!")
+            alert("No network to reset!");
         }
-    })
+    });
 
     // Function to generate the roadmap will require API Calls
     $("#generateRoadmapBtn").click(async function () {
@@ -146,7 +167,6 @@ $(document).ready(function () {
 
         $("#subjectText").val("");
 
-        // Algorithm to generate subject road map here:
         // 2. go to the subject end point to retrieve all course codes for the particular subject (i.e CIS 1300)
         let subjectCourses = [];
         let compiledPrereqs = [];
@@ -169,7 +189,9 @@ $(document).ready(function () {
         try {
             const response = await axios.post(
                 `${API_ENDPOINT}prereq/compiled`,
-                (data = subjectCourses.map((course) => ({ CourseCode: course['CourseCode'] })))
+                (data = subjectCourses.map((course) => ({
+                    CourseCode: course["CourseCode"],
+                })))
             );
             if (response.data) {
                 compiledPrereqs = response.data;
@@ -186,12 +208,22 @@ $(document).ready(function () {
         // 4. Create nodes for each course as well as the edges which represent the prerequisite to and from a particular course
         let course_nodes = [];
         let course_edges = [];
-        let color_dict = { "and": "#e61919BF", "or": "#1953e6BF", "x of": "##77ff00BF" }
+        let color_dict = {
+            and: "#e61919BF",
+            or: "#1953e6BF",
+            "x of": "##77ff00BF",
+        };
 
         for (let i = 0; i < subjectCourses.length; i++) {
-
-            if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
-                course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
+            if (
+                !course_nodes.some(
+                    (element) =>
+                        element["id"] === subjectCourses[i]["CourseCode"]
+                )
+            )
+                course_nodes.push(
+                    GenerateNode(subjectCourses[i]["CourseCode"])
+                );
 
             // set default pre-req type to "and"
             compiled = compiledPrereqs[i];
@@ -209,14 +241,16 @@ $(document).ready(function () {
 
             // create edges for each pre-req
             for (let j = 0; j < compiled.length; j++) {
-
                 // find type of pre-req inside bracket
                 if (compiled[j]["type"] === "open_bracket") {
                     let k = j;
                     curr_prereq_type = "and";
-                    while ((k < compiled.length) && (compiled[k]["type"] != "close_bracket")) {
+                    while (
+                        k < compiled.length &&
+                        compiled[k]["type"] != "close_bracket"
+                    ) {
                         if (compiled[k]["type"] === "x of") {
-                            curr_prereq_type = "x of"
+                            curr_prereq_type = "x of";
                             break;
                         } else if (compiled[k]["type"] === "or") {
                             curr_prereq_type = "or";
@@ -228,15 +262,26 @@ $(document).ready(function () {
 
                 // create course node
                 if (compiled[j]["type"] === "code") {
-                    if (!course_nodes.some((element) => element["id"] === subjectCourses[i]["CourseCode"]))
-                        course_nodes.push(GenerateNode(subjectCourses[i]["CourseCode"]));
-                    console.log(curr_prereq_type);
+                    if (
+                        !course_nodes.some(
+                            (element) =>
+                                element["id"] ===
+                                subjectCourses[i]["CourseCode"]
+                        )
+                    )
+                        course_nodes.push(
+                            GenerateNode(subjectCourses[i]["CourseCode"])
+                        );
+
                     course_edges.push({
                         from: compiled[j]["data"],
                         to: subjectCourses[i]["CourseCode"],
                         dashes: false,
                         arrows: "to",
-                        color: { color: color_dict[curr_prereq_type], hover: color_dict[curr_prereq_type] } // set color to current pre-req type colour
+                        color: {
+                            color: color_dict[curr_prereq_type],
+                            hover: color_dict[curr_prereq_type],
+                        }, // set color to current pre-req type colour
                     });
                 }
 
@@ -259,19 +304,16 @@ $(document).ready(function () {
         loader.addClass('hidden');
         //Create the network
         network = new vis.Network(container, data, network_options);
-        setNetworkEvents()
+        setNetworkEvents();
     });
 
     function setNetworkEvents() {
         // Network on Node Select
-        network.on('selectNode', function (event) {
-            console.log("Select");
-            console.log(event);
-
+        network.on("selectNode", function (event) {
             if (isToggled) {
                 for (edge of event["edges"]) {
                     network.clustering.updateEdge(edge, {
-                        hidden: true
+                        hidden: true,
                     });
                 }
             }
@@ -281,17 +323,13 @@ $(document).ready(function () {
                 });
             }
 
-            //call function to display information for current node
+            // call function to display information for current node
             let curNodeID = event["nodes"][0];
-            displaySelectNode(curNodeID)
-
+            displaySelectNode(curNodeID);
         });
 
         // Network on Node Deselect
         network.on("deselectNode", function (event) {
-            console.log("Deselect");
-            console.log(event);
-
             if (isToggled) {
                 for (edge of event["previousSelection"]["edges"]) {
                     network.clustering.updateEdge(edge["id"], {
@@ -304,13 +342,11 @@ $(document).ready(function () {
                     hidden: false,
                 });
             }
-
         });
     }
 
     // function to display selected node's course information
     async function displaySelectNode(courseCode) {
-
         try {
             // API Call to fetch course information from our API
             const response = await axios.get(
@@ -318,76 +354,75 @@ $(document).ready(function () {
             );
 
             if (response.data) {
-                // console.log(response.data);
                 const courseData = response.data[0];
 
-
-                let displayedInfo = document.createElement('p');
-                displayedInfo.classList.add('p4');
-                displayedInfo.innerHTML += '<b>Course Code: </b>';
+                let displayedInfo = document.createElement("p");
+                displayedInfo.classList.add("p4");
+                displayedInfo.innerHTML += "<b>Course Code: </b>";
                 let newText = document.createTextNode(courseCode);
 
                 // APENDING INFORMATION TO ELEMENT (LOOK INTO MORE EFICIENT/BETTER WAY TO DO THIS)
                 // append course ID
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course Name
-                displayedInfo.innerHTML += '<b>Course Name: </b>';
+                displayedInfo.innerHTML += "<b>Course Name: </b>";
                 newText = document.createTextNode(courseData.CourseName);
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course description
-                displayedInfo.innerHTML += '<b>Description: </b>';
+                displayedInfo.innerHTML += "<b>Description: </b>";
                 newText = document.createTextNode(courseData.CourseDescription);
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course department
-                displayedInfo.innerHTML += '<b>Department: </b>';
+                displayedInfo.innerHTML += "<b>Department: </b>";
                 newText = document.createTextNode(courseData.Department);
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course weight
-                displayedInfo.innerHTML += '<b>Course Weight: </b>';
+                displayedInfo.innerHTML += "<b>Course Weight: </b>";
                 newText = document.createTextNode(courseData.CourseWeight);
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course prerequisite credits
-                displayedInfo.innerHTML += '<b>Required Credits: </b>';
-                newText = document.createTextNode(courseData.PrerequisiteCredits);
+                displayedInfo.innerHTML += "<b>Required Credits: </b>";
+                newText = document.createTextNode(
+                    courseData.PrerequisiteCredits
+                );
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course prerequisites
-                displayedInfo.innerHTML += '<b>Required Courses: </b>';
+                displayedInfo.innerHTML += "<b>Required Courses: </b>";
                 newText = document.createTextNode(courseData.Prerequisites);
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course restrictions
-                displayedInfo.innerHTML += '<b>Restricted Courses: </b>';
+                displayedInfo.innerHTML += "<b>Restricted Courses: </b>";
                 newText = document.createTextNode(courseData.Restrictions);
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 // append course offering
-                displayedInfo.innerHTML += '<b>Offerings: </b>';
+                displayedInfo.innerHTML += "<b>Offerings: </b>";
                 newText = document.createTextNode(courseData.CourseOffering);
                 displayedInfo.appendChild(newText);
-                displayedInfo.innerHTML += '<br>';
+                displayedInfo.innerHTML += "<br>";
 
                 detailsContainer.innerHTML = "";
                 detailsContainer.appendChild(displayedInfo);
             }
         } catch (error) {
             // Handle errors
-            alert("Warning:\nCourse not Found in Database");
+            alert("Warning:\nCourse not Found in Database!");
             console.error(error);
         }
-
     }
 });

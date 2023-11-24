@@ -19,7 +19,6 @@ $(document).ready(function () {
         }
     });
 
-    
     let courseCounter = 1; // counter for generating unique IDs
     let studentCourses = []; // List of student courses they have taken
     let completedCredits = 0; // Keeps track of the number of credits a student has completed
@@ -35,7 +34,7 @@ $(document).ready(function () {
 
     loadNoPreReqs(); // Loads courses with no prerequisites
 
-    //Get all the noPreReqs
+    // Retrieve all the noPreReqs
     async function loadNoPreReqs() {
         try {
             const response = await axios.get(

@@ -35,13 +35,15 @@
                 Add
                 Course
             </button>
-            <button type="button" id="generate-courses" class="btn bg-green-500 text-white p-2 rounded-lg mb-2 transition duration-300 hover:bg-green-600">
+            <button type="button" id="generate-courses"
+                class="btn bg-green-500 text-white p-2 rounded-lg mb-2 transition duration-300 hover:bg-green-600">
                 Explore
                 Future
                 Course
                 Options
             </button>
-            <button type="submit" id="clear-courses" class="btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-700">
+            <button type="submit" id="clear-courses"
+                class="btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-700">
                 Clear
                 Courses
             </button>
@@ -63,7 +65,7 @@
 
     <!-- Available Courses -->
     <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-2 md:mt-4">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2">Available Courses</h1>
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">Available Courses</h1>
         <table id="available-courses" class="w-full text-center">
             <thead>
                 <tr>
@@ -81,8 +83,7 @@
 
     <div class="container mx-auto p-2 sm:p-4 bg-white shadow-lg rounded-lg mt-2 md:mt-4">
         <button class="accordion text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 py-1">
-            Courses with No
-            Prerequisites
+            No Prerequisites Courses
         </button>
         <div class="panel">
             <input type="text" id="course-filter" placeholder="Search Courses (i.e CIS)" class="mb-1 sm:mb-2 px-3 py-1 border rounded-lg" />
