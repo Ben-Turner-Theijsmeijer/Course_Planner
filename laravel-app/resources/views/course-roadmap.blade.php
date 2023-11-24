@@ -15,7 +15,7 @@
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
-    <script src="{{asset('js/course-finder.js')}}"></script>
+    <script src="{{asset('js/course-roadmap.js')}}"></script>
 </head>
 
 <!-- Include the navigation bar -->
@@ -40,16 +40,16 @@
                 </button>
 
 
-                <button id="resetRoadmapBtn" class="py-2 btn bg-yellow-500 text-white p-2 rounded-lg transition duration-300 hover:bg-yellow-600 mr-2  " >
+                <button id="resetRoadmapBtn" class="py-2 btn bg-yellow-500 text-white p-2 rounded-lg transition duration-300 hover:bg-yellow-600 mr-2  ">
                     Reset Arrows
                 </button>
 
 
-                
+
                 <button id="clearRoadmapBtn" class="py-2 btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-600   ">
                     Clear Roadmap
                 </button>
-                
+
             </div>
 
             <div class="ml-2 md:ml-auto flex items-center">
@@ -83,13 +83,14 @@
         <!-- TEST SECTION -->
         <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
             <h2 class="text-xl font-bold mb-2">Selected Course Info:</h2>
-            <div id="course-details"> <p class="text-gray-400">Course information will appear here once a node has been selected</p>
+            <div id="course-details">
+                <p class="text-gray-400">Course information will appear here once a node has been selected</p>
                 <!-- DISPLAY COURSE DETAILS HERE -->
             </div>
         </div>
 
     </div>
-    
+
 </body>
 
 <!-- Footer Section -->
