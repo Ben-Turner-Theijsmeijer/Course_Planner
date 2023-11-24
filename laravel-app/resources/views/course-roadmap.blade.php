@@ -14,8 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{asset('js/scripts.js')}}"></script>
     <script src="{{asset('js/course-roadmap.js')}}"></script>
+    <script src="{{asset('js/scripts.js')}}"></script>
 </head>
 
 <!-- Include the navigation bar -->
@@ -61,9 +61,9 @@
         </div>
 
         <!-- Roadmap Section -->
-        <div class="mt-4 border-2 border-gray-300 p-4 rounded-lg" style="background-color: rgb(226 232 240); box-shadow: inset 0 0 6px #B4B4EA;">
-            <div id="subject-roadmap" class="w-full h-screen rounded-lg">
-                <!-- Your roadmap content goes here -->
+        <div class="mt-4 border-2 border-gray-300 p-4 rounded-lg bg-gray-100 shadow-inner">
+            <div id="subject-roadmap" class="w-full h-screen rounded-lg flex justify-center items-center">
+                @include('components/loader')
             </div>
         </div>
 
