@@ -50,7 +50,7 @@
         <!-- Button/Toggle section -->
         <div class="flex flex-col md:flex-row items-stretch mb-4">
 
-            <label for="subjectText" class="mr-2 text-gray-600 mb-2 md:mb-0 font-bold pt-2">Subject:</label>
+            <label for="subjectText" class="mr-2 text-gray-600 mb-2 md:mb-0 font-bold pt-3">Subject:</label>
             <input type="text" id="subjectText" class="p-2 border-2 border-gray-300 rounded-md mb-2 md:mb-0"
                 placeholder="Enter a Subject (i.e CIS)">
 
@@ -82,7 +82,7 @@
 
 
         <!-- Roadmap Section -->
-        <div class="mt-4 border-2 border-gray-300 p-4 rounded-lg bg-gray-100 shadow-inner">
+        <div class="mt-4 border-2 border-gray-300 p-4 rounded-lg" style="background-color: rgb(226 232 240); box-shadow: inset 0 0 6px #B4B4EA;">
             <div id="subject-roadmap" class="w-full h-screen rounded-lg flex justify-center items-center">
                 @include('components/loader')
             </div>
