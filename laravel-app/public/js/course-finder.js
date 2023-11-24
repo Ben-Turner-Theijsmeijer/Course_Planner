@@ -170,11 +170,13 @@ $(document).ready(function () {
                     completedCredits += courseData.CourseWeight; // Credit tracker
                     $("#credits_completed").text(completedCredits);
                 } else {
+                    $('#loader').remove()
                     alert("Course already added!");
                 }
             }
         } catch (error) {
             // Handle errors
+            $('#loader').remove()
             alert("Warning:\nCourse not Found in Database");
             console.error(error);
         }
@@ -192,6 +194,9 @@ $(document).ready(function () {
                 }, 500
             )
             $("#course-code").val("");
+        } else {
+            alert("No course code entered!");
+            $("#loader").remove()
         }
     });
 
