@@ -1,6 +1,12 @@
 const API_ENDPOINT = "https://cis3760f23-11.socs.uoguelph.ca/api/v1/";
 $(document).ready(function () {
 
+    let loading_row =
+        `<tr id='loader'>
+    <td colspan="4" class="px-3 py-2 sm:px-6 sm:py-3 animate-pulse w-full h-6 bg-gray-300 rounded-xl">
+    </td>
+</tr>`;
+
     $("#course-code").on("keypress", function (event) {
         var keyPressed = event.keyCode || event.which;
         if (keyPressed === 13) {
@@ -105,6 +111,7 @@ $(document).ready(function () {
         const uniqueID = `course-${rowIndex++}`;
         newRow.attr("data-course-id", uniqueID);
 
+        $('#loader').remove()
         // Handles duplicate courses
         newRow.append(
             // Course Code
@@ -176,10 +183,14 @@ $(document).ready(function () {
     // Adds a course to the table
     $("#add-course").click(function () {
         courseCode = $("#course-code").val();
-
+        $(studentCoursesTable).append(loading_row);
         if (courseCode) {
             courseCode = courseCode.split(",");
-            courseCode.forEach((course) => addCourseToTable(course.trim()));
+            setTimeout(
+                () => {
+                    courseCode.forEach((course) => addCourseToTable(course.trim()));
+                }, 500
+            )
             $("#course-code").val("");
         }
     });
@@ -189,6 +200,8 @@ $(document).ready(function () {
         if (studentCourses.length === 0) {
             alert("No courses entered!");
         }
+        $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
+        $(availableCoursesTable).append(loading_row);
         availableCourses = [];
         // Include logic here to output prerequisites when the button is clicked
         // will require an API call passing in the studentCourses array
@@ -202,11 +215,14 @@ $(document).ready(function () {
         console.log(response.data);
 
         // Iterates through the courses and creates the cards
-        $(availableCoursesTable + " tbody").empty(); // Removes the existing courses
         addButton = "<button class='add text-blue-600'>Add</button>";
         availableCourses.forEach(function (course) {
             if (!studentCourses.includes(course.CourseCode)) {
-                courseRow(availableCoursesTable, course, addButton);
+                setTimeout(
+                    () => {
+                        courseRow(availableCoursesTable, course, addButton);
+                    }, 500
+                )
             }
         });
     });

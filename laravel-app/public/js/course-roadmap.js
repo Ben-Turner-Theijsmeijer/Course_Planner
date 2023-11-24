@@ -131,6 +131,8 @@ $(document).ready(function () {
     $("#generateRoadmapBtn").click(async function () {
         // 1. User enters subject code (I.E CIS)
         var subject = $("#subjectText").val();
+        let loader = $("#loader");
+        loader.removeClass('hidden');
 
         $("#subjectText").val("");
 
@@ -240,6 +242,7 @@ $(document).ready(function () {
 
 
 
+        loader.addClass('hidden');
         //Create the network
         network = new vis.Network(container, data, network_options);
         setNetworkEvents()
