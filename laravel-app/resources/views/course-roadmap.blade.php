@@ -48,41 +48,39 @@
         </div>
 
         <!-- Button/Toggle section -->
-        <div class="flex flex-col md:flex-row items-stretch mb-4">
-
-            <label for="subjectText" class="mr-2 text-gray-600 mb-2 md:mb-0 font-bold pt-3">Subject:</label>
-            <input type="text" id="subjectText" class="p-2 border-2 border-gray-300 rounded-md mb-2 md:mb-0"
+        <div class="flex flex-col items-stretch mb-4">
+            <label for="subjectText" class="mr-2 text-gray-600 mb-2 font-bold pt-3">Subject:</label>
+            <input type="text" id="subjectText" class="p-2 border-2 border-gray-300 rounded-md mb-2"
                 placeholder="Enter a Subject (i.e CIS)">
 
-            <div class="flex">
-                <button id="generateRoadmapBtn"
-                    class="py-2 btn bg-green-500 text-white p-2 rounded-lg transition duration-300 hover:bg-green-600 ml-2 mr-2">
-                    Visualize Department Courses
-                </button>
+            <button id="generateRoadmapBtn"
+                class="py-2 btn bg-green-500 text-white p-2 rounded-lg transition duration-300 hover:bg-green-600 mb-2">
+                Visualize Department Courses
+            </button>
 
-                <button id="resetRoadmapBtn"
-                    class="py-2 btn bg-yellow-500 text-white p-2 rounded-lg transition duration-300 hover:bg-yellow-600 mr-2">
-                    Reset Arrows
-                </button>
+            <button id="resetRoadmapBtn"
+                class="py-2 btn bg-yellow-500 text-white p-2 rounded-lg transition duration-300 hover:bg-yellow-600 mb-2">
+                Reset Arrows
+            </button>
 
-                <button id="clearRoadmapBtn"
-                    class="py-2 btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-600">
-                    Clear Roadmap
-                </button>
-            </div>
+            <button id="clearRoadmapBtn"
+                class="py-2 btn bg-red-500 text-white p-2 rounded-lg transition duration-300 hover:bg-red-600 mb-2">
+                Clear Roadmap
+            </button>
 
-            <div class="ml-2 md:ml-auto flex items-center mt-4 md:mt-0">
+            <div class="flex items-center mt-2">
                 <span class="text-gray-600 mr-2">Show Arrows</span>
                 <div id="toggleArrowsBtn"
                     class="cursor-pointer bg-gray-100 rounded-full p-2 transition duration-300 hover:bg-gray-200">
-                    <i id="toggleIcon" class="fas fa-toggle-off text-gray-500 text-4xl md:text-4xl"></i>
+                    <i id="toggleIcon" class="fas fa-toggle-off text-gray-500 text-4xl"></i>
                 </div>
             </div>
         </div>
 
 
         <!-- Roadmap Section -->
-        <div class="mt-4 border-2 border-gray-300 p-4 rounded-lg" style="background-color: rgb(226 232 240); box-shadow: inset 0 0 6px #B4B4EA;">
+        <div class="mt-4 border-2 border-gray-300 p-4 rounded-lg"
+            style="background-color: rgb(226 232 240); box-shadow: inset 0 0 6px #B4B4EA;">
             <div id="subject-roadmap" class="w-full h-screen rounded-lg flex justify-center items-center">
                 @include('components/loader')
             </div>
@@ -91,7 +89,8 @@
         <!-- Selected Course Information -->
         <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
             <h2 class="text-xl font-bold mb-2">Selected Course Info:</h2>
-            <div id="course-details"> <p class="text-gray-400">Course information will appear here once a node has been selected</p>
+            <div id="course-details">
+                <p class="text-gray-400">Course information will appear here once a node has been selected</p>
                 <!-- DISPLAY COURSE DETAILS HERE -->
             </div>
         </div>
@@ -119,9 +118,9 @@
         <div class="panel">
             <h3 class="text-xl font-semibold mb-2 md:mb-4">Purpose</h3>
             <p class="pl-4">
-                The purpose of this roadmap is to create a visual representation for courses offered at the 
+                The purpose of this roadmap is to create a visual representation for courses offered at the
                 University of Guelph and how they interconnect with one another. This is done to aid students
-                 in the course selection process and streamline scheduling. 
+                in the course selection process and streamline scheduling.
             </p>
             <h3 class="text-xl font-semibold mt-2 mb-2 md:mb-4">Usage</h3>
             <ol class="list-inside pl-4" type="1">
@@ -137,7 +136,7 @@
             </ul>
         </div>
     </div>
-    
+
 
 </body>
 
