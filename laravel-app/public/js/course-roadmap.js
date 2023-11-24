@@ -90,7 +90,7 @@ $(document).ready(function () {
     let detailsContainer = document.getElementById("course-details");
 
     // Empty State for subject roadmap
-    if (container.innerHTML.trim() === "") {
+    if (network === null) {
         $("#subject-roadmap")
             .text("No Subject Code Entered")
             .addClass("text-center text-gray-600");
