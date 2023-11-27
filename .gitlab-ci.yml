@@ -1,3 +1,6 @@
+include:
+  - template: Jobs/SAST.gitlab-ci.yml
+
 # Define stages
 stages:
   - build
@@ -35,3 +38,5 @@ unit-test:
   cache:
     paths:
       - laravel-app/vendor
+
+
