@@ -54,7 +54,7 @@
                 placeholder="Enter a Subject (i.e CIS)">
 
             <button id="generateRoadmapBtn"
-                class="py-2 btn bg-green-500 text-white p-2 rounded-lg transition duration-300 hover:bg-green-600 mb-2">
+                class="py-2 btn bg-green-600 text-white p-2 rounded-lg transition duration-300 hover:bg-green-700 mb-2">
                 Visualize Department Courses
             </button>
 
