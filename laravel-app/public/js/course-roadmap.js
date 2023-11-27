@@ -16,6 +16,8 @@ $(document).ready(function () {
     });
 
     var accordion = $(".accordion");
+    var credit = 0;
+    const creditList = [];
 
     accordion.click(function () {
         $(this).toggleClass("active");
@@ -103,6 +105,8 @@ $(document).ready(function () {
     let data = null;
     let container = document.getElementById("subject-roadmap");
     let detailsContainer = document.getElementById("course-details");
+    let listContainer = document.getElementById("courses-list");
+
 
     // Function to toggle the arrows on/off
     $("#toggleArrowsBtn").on("click", function () {
@@ -158,6 +162,10 @@ $(document).ready(function () {
             displayedInfo.appendChild(newText);
             detailsContainer.innerHTML = "";
             detailsContainer.appendChild(displayedInfo);
+
+            var counterElement = document.getElementById('counter');
+            credit = 0;
+            counterElement.textContent  = credit;
         } else {
             alert("No network to reset!");
         }
@@ -331,6 +339,7 @@ $(document).ready(function () {
             // call function to display information for current node
             let curNodeID = event["nodes"][0];
             displaySelectNode(curNodeID);
+            displayCreditCount(curNodeID);
         });
 
         // Network on Node Deselect
@@ -348,6 +357,49 @@ $(document).ready(function () {
                 });
             }
         });
+    }
+
+    // funtion to display total credits of all selected courses
+    async function displayCreditCount(courseCode) {
+        try {
+            const response = await axios.get(
+                `${API_ENDPOINT}course/${courseCode}`
+            );
+            if (response.data) {
+                const courseData = response.data[0];
+
+                if (!creditList.includes(courseData.CourseName)) {
+                    creditList.push(courseData.CourseName);
+                    var counterElement = document.getElementById('counter');
+                    credit = credit + courseData.CourseWeight;
+
+                    counterElement.textContent  = credit;
+                    console.log(creditList);
+                    displayCreditList();
+                }
+            }
+        } catch (error) {
+            // Handle errors
+            alert("Warning:\nCourse not Found in Database!");
+            console.error(error);
+        }
+    }
+
+    function displayCreditList() {
+        let displayedInfo = document.createElement("p");
+        displayedInfo.classList.add("p4");
+
+        for (i = 0; i < creditList.length; i++) {
+            displayedInfo.innerHTML += "<b>Course Code: </b>";
+            let newText = document.createTextNode(creditList[i]);
+            displayedInfo.appendChild(newText);
+            displayedInfo.innerHTML += "<br>";
+            console.log(newText);
+        }
+
+
+        listContainer.innerHTML = "";
+        listContainer.appendChild(displayedInfo);
     }
 
     // function to display selected node's course information

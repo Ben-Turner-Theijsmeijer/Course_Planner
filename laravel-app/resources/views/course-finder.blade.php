@@ -36,7 +36,7 @@
                 Course
             </button>
             <button type="button" id="generate-courses"
-                class="btn bg-green-600 text-white p-2 rounded-lg mb-2 transition duration-300 hover:bg-green-700">
+                class="btn bg-green-500 text-white p-2 rounded-lg mb-2 transition duration-300 hover:bg-green-600">
                 Explore
                 Future
                 Course

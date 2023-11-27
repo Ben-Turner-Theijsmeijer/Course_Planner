@@ -17,7 +17,7 @@
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{asset('js/course-roadmap.js')}}"></script>
-    <script src="{{asset('js/scripts.js')}}"></script>
+    <!-- <script src="{{asset('js/scripts.js')}}"></script> -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
 
 
@@ -68,12 +68,21 @@
                 Clear Roadmap
             </button>
 
-            <div class="flex items-center mt-2">
-                <span class="text-gray-600 mr-2">Show Arrows</span>
-                <div id="toggleArrowsBtn"
-                    class="cursor-pointer bg-gray-100 rounded-full p-2 transition duration-300 hover:bg-gray-200">
-                    <i id="toggleIcon" class="fas fa-toggle-off text-gray-500 text-4xl"></i>
+            <div class="flex items-center justify-between mt-2">
+                <div>
+                    <span class="text-gray-600 mr-2">Show Arrows</span>
+                    <div id="toggleArrowsBtn"
+                        class="cursor-pointer bg-gray-100 rounded-full p-2 transition duration-300 hover:bg-gray-200">
+                        <i id="toggleIcon" class="fas fa-toggle-off text-gray-500 text-4xl"></i>
+                    </div>
                 </div>
+                <div class = "flex items-center">
+                    <div> 
+                        <span class="text-gray-600 mr-2 inset-y-0 right-0 ">Credit Counter:</span>
+                        <p id="counter">25</p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -105,6 +114,15 @@
             <div class="flex items-center mt-2">
                 <div class="w-4 h-4 bg-red-500 mr-2 rounded-full"></div>
                 <span>Red Arrows: AND</span>
+            </div>
+        </div>
+
+        <!-- Selected Course Roadmap -->
+        <div class="mt-4 p-4 border-2 border-gray-300 rounded-lg">
+            <h2 class="text-xl font-bold mb-2">Selected Course List:</h2>
+            <div id="courses-list">
+                <p class="text-gray-400">Courses selected will appear here once nodes have been selected</p>
+                <!-- DISPLAY COURSE DETAILS HERE -->
             </div>
         </div>
 
