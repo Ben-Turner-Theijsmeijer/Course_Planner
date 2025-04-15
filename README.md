@@ -1,92 +1,112 @@
 # F23_CIS3760_303
 
+<a name="readme-top"></a>
+
+# Contributors
+
+- Andrew Chow
+- Benjamin Turner-Theijsmeijer
+- Quinn Meiszinger
+- Darren Van Helden
+- Ethan Scruton
+- Noureldeen Ahmed
+- Vrushangkumar Patel
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
 
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Full-stack web app that allows users to plan and search for courses offered at the University of Guelph
 
-## Add your files
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
 
+
+### Built With
+
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue?logo=php)](https://www.php.net/)
+[![Laravel Version](https://img.shields.io/badge/Laravel-10.31x-orange?logo=laravel)](https://laravel.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+Follow these steps to get started with the course scheduler web-app
+
+### Prerequisites
+
+1. **Download PHP via Windows:**
+   - Visit the [official PHP downloads page](https://windows.php.net/download) on windows.php.net.
+2. **Verify Installation:**
+*   ```bash
+     php -v
+     ```
+
+1. **Download PHP via MacOS:**
+      ```bash
+     brew install php
+     ```
+2. **Verify Installation:**
+*   ```bash
+     php -v
+     ```
+To download Laravel you will need PHP and Composer installed. Composer is a dependency manager for PHP and can be downloaded and installed [here](https://getcomposer.org/). Once PHP and Composer are installed, simply run the command: `composer global require "laravel/installer"`. This will install Laravel globally on your system, and allow you to use the `laravel` command. Also, when you have the repo downloaded, navigate to `laravel-app` and run `composer install` to install all the required dependencies. If you encounter any issues, the documentation for installing Laravel can be found [here](https://laravel.com/docs/10.x#meet-laravel).
+
+### Installation
+
+
+1. Clone the repository: 
+```sh
+    git clone https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303.git
 ```
-cd existing_repo
-git remote add origin https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+2. When you pull the repo you should see the following file structure in `laravel-app`:  
+The first thing you should do is create a new `.env` file in the app root (lauravel-app directory), and copy everything from `.env.example` into it. You will have to go through the new `.env` file and configure your database settings. Here is an example of my local .env setup to use XAMPP MySQL: The most important file in the app is `artisan`. It is a PHP program that allows you to easily handle a lot of functions for the app. It can be used to create new controllers, start a local server, initialize the database, etc...
 
-- [ ] [Set up project integrations](https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303/-/settings/integrations)
+3. Laravel includes a way to easily initialize the database. If you navigate to `database/migrations/`, you will see a list of files that define each table in our database. Each file includes an `up()` and `down()` function that creates and drops the table respectively. 
 
-## Collaborate with your team
+To initialize the database, simply run `php artisan migrate:fresh` from the laravel-app directory. This will drop all existing tables in `cis3760` and recreate them. This command also re-initializes the database from CourseList.csv. To see more about database migration, the Laravel documentation is [here](https://laravel.com/docs/10.x/migrations)
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## Important Files:
 
-## Test and Deploy
+### `app`
+This folder contains the server logic for our app. For example, `Courses.php` and `CoursesTaken.php` are two models in the app directory that interact with their respective database tables. Additionally, under the `Http` folder, the various controllers and middleware is included.
+### `database`
+As mentioned previously, this folder contains the files used to migrate each table in the database
+### `public`
+This folder contains all the publicly available resources. It contains the excel spreadsheet, javascript, css, and images.
+### `resources`
+This folder contains various resources used by the server. Specifically, this folder contains all of the various pages under `views`. Laravel uses a template engine called Blade. All of our previous pages have been changed to `.blade.php` files. To read more about Blade Templates see the documentation [here](https://laravel.com/docs/10.x/blade#introduction).
+### `routes`
+This folder contains the files that define how routes are processed by our app. `web.php` defines the routes used when viewing our page from the web, and `api.php` defines the REST endpoints that our api uses. The api routes each define the type of request, and appropriate controller function to pass the request to.
+> Laravel uses a framework called Eloquent for interacting with the database. The models, controllers, and views are all defined using Eloquent standards. I recommend reading the documentation on Eloquent to familiarize yourself and see what it is capable of [here](https://laravel.com/docs/10.x/eloquent#generating-model-classes.)
 
-Use the built-in continuous integration in GitLab.
+# Running Local server with Laravel
+Ensure you have your sql server on (xxamp/mamp/etc..) 
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+To run the server locally use the command `php artisan serv` from the laravel-app directory
 
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
