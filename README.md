@@ -80,7 +80,7 @@ To download Laravel you will need PHP and Composer installed. Composer is a depe
 
 1. Clone the repository: 
 ```sh
-    git clone https://gitlab.socs.uoguelph.ca/cis3760_f23/f23_cis3760_303.git
+    git clone https://github.com/Ben-Turner-Theijsmeijer/Course_Planner.git
 ```
 
 2. When you pull the repo you should see the following file structure in `laravel-app`:  
